@@ -195,8 +195,8 @@ export default function KundliHubView({
           </div>
         </div>
 
-        {/* 5 Primary Thematic Category Cards */}
-        <div role="tablist" aria-label="Kundli Primary Hubs" className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+        {/* 5 Primary Thematic Category Cards (Swipeable ribbon on mobile, grid on desktop) */}
+        <div role="tablist" aria-label="Kundli Primary Hubs" className="flex overflow-x-auto no-scrollbar gap-2.5 pb-1 sm:pb-0 sm:grid sm:grid-cols-3 lg:grid-cols-5">
           {HUB_DEFINITIONS.map((hub) => {
             const Icon = hub.icon;
             const isHubActive = activeHub === hub.id;
@@ -213,19 +213,19 @@ export default function KundliHubView({
                     setActiveSubTool(hub.defaultTool);
                   }
                 }}
-                className={`flex flex-col items-start justify-between rounded-xl p-3.5 text-left transition-all duration-200 border relative focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] ${
+                className={`flex shrink-0 w-36 sm:w-auto flex-col items-start justify-between rounded-xl p-3 sm:p-3.5 text-left transition-all duration-200 border relative focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] ${
                   isHubActive
-                    ? 'glass-panel-accent border-[#b85d19] ring-2 ring-[#b85d19]/40 shadow-sm'
+                    ? 'glass-panel-accent border-[#b85d19] ring-2 ring-[#b85d19]/40 shadow-sm scale-[1.01]'
                     : 'glass-card hover:border-[#b85d19]/40 hover:bg-white/90'
                 }`}
               >
                 <div className="flex w-full items-center justify-between mb-2">
-                  <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${
+                  <div className={`flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg ${
                     isHubActive ? 'glass-button-dark text-[#e6a86c]' : 'bg-[#f5efe6] text-[#b85d19]'
                   }`}>
-                    <Icon className="h-4 w-4" aria-hidden="true" />
+                    <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
                   </div>
-                  <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold ${
+                  <span className={`rounded-full px-1.5 py-0.5 text-[8.5px] sm:text-[9px] font-bold ${
                     isHubActive ? 'glass-badge-gold text-[#8a6a12]' : 'bg-[#f5efe6] text-[#736a60]'
                   }`}>
                     {hub.badge}
@@ -233,10 +233,10 @@ export default function KundliHubView({
                 </div>
 
                 <div>
-                  <h3 className="font-serif text-sm font-bold text-[#2c2825]">
+                  <h3 className="font-serif text-xs sm:text-sm font-bold text-[#2c2825] leading-tight">
                     {hub.title[lang] || hub.title.gu}
                   </h3>
-                  <p className="text-[10px] text-[#736a60] line-clamp-1 mt-0.5">
+                  <p className="text-[9.5px] sm:text-[10px] text-[#736a60] line-clamp-1 mt-0.5">
                     {hub.subtitle[lang] || hub.subtitle.gu}
                   </p>
                 </div>

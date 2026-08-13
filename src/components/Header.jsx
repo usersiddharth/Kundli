@@ -21,8 +21,8 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
           </div>
         </div>
 
-        {/* Center Main 5-Portal Switcher */}
-        <nav aria-label="Portal Navigation">
+        {/* Center Main 5-Portal Switcher (Desktop Only) */}
+        <nav aria-label="Portal Navigation" className="hidden sm:block">
           <div role="tablist" aria-label="Portal Switcher" className="flex flex-wrap rounded-xl glass-pill p-1 shadow-inner print:hidden gap-1">
             <button
               role="tab"

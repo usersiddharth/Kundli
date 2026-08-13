@@ -14,6 +14,7 @@ import GujaratiCalendarView from './components/GujaratiCalendarView.jsx';
 import NumerologyView from './components/NumerologyView.jsx';
 import ChoghadiyaView from './components/ChoghadiyaView.jsx';
 import Matchmaking from './components/Matchmaking.jsx';
+import MobileBottomNav from './components/MobileBottomNav.jsx';
 
 export default function App() {
   const [lang, setLang] = useState('gu'); // Default Gujarati
@@ -65,7 +66,7 @@ export default function App() {
       />
 
       {/* 2. Main Responsive Content Canvas */}
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 space-y-6">
+      <main className="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-6 lg:px-8 pb-24 sm:pb-8 space-y-5 sm:space-y-6">
         {/* Sticky Cosmic Quick Summary Ribbon (Active in Kundli Portal) */}
         {mainSection === 'kundli' && (
           <QuickToolbar
@@ -146,6 +147,13 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* 3. Sticky Mobile Bottom Navigation Bar (Screens < 640px) */}
+      <MobileBottomNav
+        mainSection={mainSection}
+        setMainSection={setMainSection}
+        t={t}
+      />
     </div>
   );
 }

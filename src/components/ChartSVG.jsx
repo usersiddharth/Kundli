@@ -78,11 +78,11 @@ export default function ChartSVG({ kundliData, t, lang }) {
   const currentHouseInfo = houses.find(h => h.houseNum === activeHouse);
 
   return (
-    <div className="rounded-xl glass-panel p-6 shadow-sm space-y-4">
+    <div className="rounded-xl glass-panel p-3.5 sm:p-6 shadow-sm space-y-4">
       {/* Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6dfd3]/80 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-[#e6dfd3]/80 pb-4">
         <div>
-          <h2 className="text-xl font-medium text-[#2c2825] font-serif">{chartTitle}</h2>
+          <h2 className="text-lg sm:text-xl font-medium text-[#2c2825] font-serif">{chartTitle}</h2>
           <p className="text-xs text-[#736a60] flex items-center gap-1.5 mt-0.5">
             <span>{t.chartType} • Click any house to inspect</span>
             <button
@@ -95,9 +95,9 @@ export default function ChartSVG({ kundliData, t, lang }) {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
           {/* Chart Type Selector */}
-          <div className="flex flex-wrap rounded-lg glass-pill p-1 gap-1">
+          <div className="flex items-center overflow-x-auto no-scrollbar rounded-lg glass-pill p-1 gap-1 max-w-full">
             <button
               onClick={() => { setChartType('d1'); setActiveHouse(1); }}
               className={`rounded-md px-2.5 py-1 text-xs font-medium transition ${

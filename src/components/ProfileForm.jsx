@@ -103,17 +103,17 @@ export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
   };
 
   return (
-    <div className="rounded-xl glass-panel p-6 shadow-sm space-y-6">
+    <div className="rounded-xl glass-panel p-4 sm:p-6 shadow-sm space-y-5 sm:space-y-6">
       {/* Top Header & Presets */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6dfd3]/80 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-[#e6dfd3]/80 pb-4">
         <div>
-          <h2 className="text-xl font-medium text-[#2c2825] font-serif">{t.tabBirthDetails}</h2>
+          <h2 className="text-lg sm:text-xl font-medium text-[#2c2825] font-serif">{t.tabBirthDetails}</h2>
           <p className="text-xs text-[#736a60]">Enter exact birth parameters for precise planetary positions</p>
         </div>
 
-        {/* Sample Profile Presets */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-[#736a60] flex items-center gap-1">
+        {/* Sample Profile Presets (Scrollable on mobile) */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+          <span className="text-xs font-medium text-[#736a60] flex items-center gap-1 shrink-0">
             <Sparkles className="h-3.5 w-3.5 text-[#b85d19]" /> {t.sampleProfiles}:
           </span>
           {sampleProfiles.map((sp, idx) => (
@@ -121,7 +121,7 @@ export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
               key={idx}
               type="button"
               onClick={() => loadProfile(sp)}
-              className="rounded-lg glass-card px-2.5 py-1 text-xs font-medium text-[#544d44] transition hover:bg-[#2c2825] hover:text-[#f4ebd9] shadow-2xs"
+              className="shrink-0 rounded-lg glass-card px-2.5 py-1.5 text-xs font-medium text-[#544d44] transition hover:bg-[#2c2825] hover:text-[#f4ebd9] active:scale-95 shadow-2xs"
             >
               {sp.name}
             </button>

@@ -9,9 +9,9 @@ export default function QuickToolbar({ kundliData, formData, birthDateObj, t }) 
   const currentMicro = birthDateObj ? calculateCurrentMicroDasha(kundliData, birthDateObj, new Date()) : null;
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl glass-panel px-5 py-3 shadow-xs text-xs text-[#2c2825] border border-[#d4c8b8] print:hidden">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 rounded-2xl glass-panel px-3.5 py-2.5 sm:px-5 sm:py-3 shadow-xs text-xs text-[#2c2825] border border-[#d4c8b8] print:hidden">
       {/* Native Identity */}
-      <div className="flex items-center gap-2 font-medium">
+      <div className="flex items-center gap-2 font-medium shrink-0">
         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#b85d19] text-white font-serif font-bold text-xs shadow-2xs">
           {formData.name ? formData.name.charAt(0) : 'J'}
         </span>
@@ -26,17 +26,17 @@ export default function QuickToolbar({ kundliData, formData, birthDateObj, t }) 
         </div>
       </div>
 
-      {/* Cosmic Status Badges Ribbon */}
-      <div className="flex flex-wrap items-center gap-2">
+      {/* Cosmic Status Badges Ribbon (Scrollable on mobile) */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 w-full sm:w-auto shrink">
         {/* Lagna */}
-        <div className="flex items-center gap-1.5 rounded-xl glass-card px-3 py-1.5 font-medium border border-[#e6dfd3]">
+        <div className="flex items-center gap-1.5 rounded-xl glass-card px-2.5 py-1.5 font-medium border border-[#e6dfd3] shrink-0">
           <Compass className="h-3.5 w-3.5 text-[#b85d19]" />
           <span className="text-[#736a60]">લગ્ન:</span>
           <strong className="text-[#b85d19] font-serif">{t[panchang.ascendant] || panchang.ascendant}</strong>
         </div>
 
         {/* Moon Sign & Nakshatra */}
-        <div className="flex items-center gap-1.5 rounded-xl glass-card px-3 py-1.5 font-medium border border-[#e6dfd3]">
+        <div className="flex items-center gap-1.5 rounded-xl glass-card px-2.5 py-1.5 font-medium border border-[#e6dfd3] shrink-0">
           <Moon className="h-3.5 w-3.5 text-[#544d44]" />
           <span className="text-[#736a60]">ચંદ્ર:</span>
           <strong className="text-[#2c2825] font-serif">{t[panchang.moonSign] || panchang.moonSign}</strong>
@@ -44,7 +44,7 @@ export default function QuickToolbar({ kundliData, formData, birthDateObj, t }) 
         </div>
 
         {/* Sun Sign */}
-        <div className="hidden sm:flex items-center gap-1.5 rounded-xl glass-card px-3 py-1.5 font-medium border border-[#e6dfd3]">
+        <div className="flex items-center gap-1.5 rounded-xl glass-card px-2.5 py-1.5 font-medium border border-[#e6dfd3] shrink-0">
           <Sun className="h-3.5 w-3.5 text-[#964708]" />
           <span className="text-[#736a60]">સૂર્ય:</span>
           <strong className="text-[#2c2825] font-serif">{t[panchang.sunSign] || panchang.sunSign}</strong>
@@ -52,7 +52,7 @@ export default function QuickToolbar({ kundliData, formData, birthDateObj, t }) 
 
         {/* Live Active Dasha Rulers */}
         {currentMicro && (
-          <div className="flex items-center gap-1.5 rounded-xl glass-badge-warning px-3 py-1.5 font-medium border border-[#b85d19]/30">
+          <div className="flex items-center gap-1.5 rounded-xl glass-badge-warning px-2.5 py-1.5 font-medium border border-[#b85d19]/30 shrink-0">
             <Zap className="h-3.5 w-3.5 text-[#b85d19] animate-pulse" />
             <span className="text-[#736a60]">દશા:</span>
             <strong className="text-[#b85d19] font-serif">
@@ -60,13 +60,13 @@ export default function QuickToolbar({ kundliData, formData, birthDateObj, t }) 
             </strong>
             <span className="text-[#736a60]">/</span>
             <span className="text-[#802020] font-bold">
-              {t[currentMicro.pranaDasha.lord] || currentMicro.pranaDasha.lord} (PrD)
+              {t[currentMicro.pranaDasha.lord] || currentMicro.pranaDasha.lord}
             </span>
           </div>
         )}
 
         {/* Tithi & Vaar */}
-        <div className="hidden md:flex items-center gap-1 rounded-xl glass-card px-3 py-1.5 font-medium text-[#736a60] border border-[#e6dfd3]">
+        <div className="flex items-center gap-1 rounded-xl glass-card px-2.5 py-1.5 font-medium text-[#736a60] border border-[#e6dfd3] shrink-0">
           <span>{panchang.tithi}, {panchang.vaar}</span>
         </div>
       </div>
