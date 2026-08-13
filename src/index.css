@@ -1,0 +1,389 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-parchment-base: #faf8f4;
+    --color-parchment-surface: #fffdfa;
+    --color-parchment-glass: rgba(255, 253, 250, 0.78);
+    --color-terracotta: #b85d19;
+    --color-terracotta-dark: #91450c;
+    --color-gold: #c59b27;
+    --color-text-main: #24201d;
+    --color-text-muted: #6e645a;
+    --color-border-subtle: rgba(184, 148, 108, 0.25);
+  }
+
+  body {
+    font-family: 'Outfit', 'Noto Sans Gujarati', 'Noto Sans Devanagari', 'Inter', sans-serif;
+    background-color: #faf8f4;
+    color: #24201d;
+    min-height: 100vh;
+    letter-spacing: -0.01em;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(212, 110, 34, 0.1) 0px, transparent 45%),
+      radial-gradient(at 100% 0%, rgba(197, 155, 39, 0.08) 0px, transparent 45%),
+      radial-gradient(at 50% 40%, rgba(250, 245, 235, 0.6) 0px, transparent 80%),
+      radial-gradient(at 100% 100%, rgba(140, 116, 86, 0.09) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(212, 110, 34, 0.08) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .font-serif {
+    font-family: 'Cinzel', 'Cormorant Garamond', serif;
+  }
+
+  /* Custom Smooth Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #faf8f4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d8cebf;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b85d19;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(212, 110, 34, 0.15), 0 4px 15px -1px rgba(140, 116, 86, 0.04);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(212, 110, 34, 0.38), 0 6px 20px -2px rgba(184, 93, 25, 0.12);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Animation Utility Classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 35s linear infinite;
+}
+
+.animate-gentle-float {
+  animation: gentleFloat 3s ease-in-out infinite;
+}
+
+/* Luxury Glassmorphism & Surface Utilities */
+.glass-panel {
+  background: rgba(255, 253, 249, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 12px 35px -6px rgba(140, 116, 86, 0.07),
+    0 4px 10px -2px rgba(140, 116, 86, 0.03),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-panel-accent {
+  background: rgba(255, 250, 243, 0.86);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 110, 34, 0.35);
+  box-shadow: 
+    0 14px 38px -6px rgba(184, 93, 25, 0.09),
+    0 4px 10px -2px rgba(184, 93, 25, 0.04),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+}
+
+.glass-header {
+  background: rgba(253, 252, 248, 0.84);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-bottom: 1px solid rgba(216, 206, 191, 0.65);
+  box-shadow: 0 4px 24px -2px rgba(140, 116, 86, 0.06);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 4px 16px -1px rgba(140, 116, 86, 0.04),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 
+    0 14px 30px -4px rgba(140, 116, 86, 0.12),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+}
+
+.glass-pill {
+  background: rgba(246, 240, 230, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(216, 206, 191, 0.75);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #b85d19;
+  box-shadow: 0 0 0 3px rgba(184, 93, 25, 0.15);
+  transform: translateY(-0.5px);
+}
+
+.glass-button-dark {
+  background: linear-gradient(180deg, rgba(50, 45, 41, 0.96) 0%, rgba(33, 29, 26, 0.98) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(197, 155, 39, 0.35);
+  box-shadow: 
+    0 4px 14px -2px rgba(33, 29, 26, 0.25),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-button-dark:hover {
+  background: linear-gradient(180deg, rgba(65, 58, 53, 0.98) 0%, rgba(45, 40, 36, 1) 100%);
+  box-shadow: 0 6px 18px -2px rgba(33, 29, 26, 0.32);
+  transform: translateY(-1px);
+}
+
+.glass-button-primary {
+  background: linear-gradient(180deg, #c7671e 0%, #a95213 100%);
+  color: #fffdfa;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 14px -2px rgba(184, 93, 25, 0.3), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-button-primary:hover {
+  background: linear-gradient(180deg, #d67123 0%, #b85d19 100%);
+  box-shadow: 0 6px 18px -2px rgba(184, 93, 25, 0.4);
+  transform: translateY(-1px);
+}
+
+.glass-badge-success {
+  background: rgba(226, 240, 220, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(175, 212, 170, 0.85);
+  color: #1a571c;
+}
+
+.glass-badge-warning {
+  background: rgba(252, 235, 214, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(230, 168, 108, 0.55);
+  color: #a34e0e;
+}
+
+.glass-badge-danger {
+  background: rgba(245, 218, 218, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(228, 170, 170, 0.85);
+  color: #852222;
+}
+
+.glass-badge-gold {
+  background: rgba(252, 245, 222, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(223, 183, 74, 0.6);
+  color: #8a6a12;
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   PROFESSIONAL PUBLICATION-GRADE PRINT & PDF STYLESHEET
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 12mm 12mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #1a1715 !important;
+    background-image: none !important;
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Universal print resets */
+  header, footer, nav, button, select, input, .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:grid {
+    display: grid !important;
+  }
+
+  .print\:flex {
+    display: flex !important;
+  }
+
+  /* High-Contrast Crisp Borders and Surfaces */
+  .glass-panel, .glass-panel-accent, .glass-card, .glass-header, .glass-pill {
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: 1px solid #d4c8b8 !important;
+    border-radius: 6px !important;
+  }
+
+  .glass-badge-success, .glass-badge-warning, .glass-badge-danger, .glass-badge-gold {
+    background: #f7f5f0 !important;
+    border: 1px solid #c8beaf !important;
+    color: #1a1715 !important;
+    box-shadow: none !important;
+  }
+
+  /* Page Break Rules */
+  .page-break-before {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  .page-break-after {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  .avoid-page-break, .print\:avoid-break, .glass-card, table, tr, svg {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Publication Quality Table Typography */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 8px !important;
+  }
+
+  th {
+    background-color: #f3ece0 !important;
+    color: #2c2825 !important;
+    font-weight: 700 !important;
+    border: 1px solid #c8beaf !important;
+    padding: 4px 6px !important;
+    font-size: 8.5pt !important;
+  }
+
+  td {
+    border: 1px solid #e0d8cc !important;
+    padding: 4px 6px !important;
+    font-size: 8.5pt !important;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #faf8f5 !important;
+  }
+
+  /* Crisp Vector Chart Rendering */
+  svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Clean Astrological Letterhead & Footer */
+  .print-letterhead {
+    border-bottom: 2px solid #8c7456 !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 12px !important;
+    text-align: center !important;
+  }
+
+  .print-footer-signature {
+    border-top: 1px solid #d4c8b8 !important;
+    padding-top: 8px !important;
+    margin-top: 16px !important;
+    font-size: 8pt !important;
+  }
+}
