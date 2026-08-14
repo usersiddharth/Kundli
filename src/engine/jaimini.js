@@ -90,19 +90,22 @@ const SIGN_NAMES = [
  * Calculate Jaimini Karakas based on planetary degrees within sign (0° to 30°)
  */
 export function calculateJaiminiKarakas(kundliData) {
-  if (!kundliData || !kundliData.astro || !kundliData.astro.planets) return [];
+  if (!kundliData) return [];
 
-  const planets = kundliData.astro.planets;
+  const planets = kundliData.planets || kundliData.astro?.planets;
+  if (!planets) return [];
+
   // Jaimini considers 7 classical planets (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn)
   const candidateKeys = ['Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn'];
 
   const planetDegrees = candidateKeys.map((key) => {
     const p = planets[key];
-    const signDeg = (p ? p.lon : 0) % 30; // Degree inside the sign
+    const rawLon = p ? p.lon : 0;
+    const signDeg = (((rawLon % 360) + 360) % 360) % 30; // Degree inside the sign
     return {
       key,
       name: key,
-      lon: p ? p.lon : 0,
+      lon: rawLon,
       signDeg,
       formattedDeg: `${Math.floor(signDeg)}° ${Math.floor((signDeg % 1) * 60)}'`,
     };
@@ -128,17 +131,25 @@ export function calculateJaiminiKarakas(kundliData) {
 export function calculateKarakamsha(kundliData) {
   const karakas = calculateJaiminiKarakas(kundliData);
   const ak = karakas.find((k) => k.key === 'AK');
-  if (!ak || !kundliData.vargas || !kundliData.vargas.D9) {
+  if (!ak) {
     return { signIndex: 0, signName: SIGN_NAMES[0], akPlanet: 'Sun' };
   }
 
-  const d9Planets = kundliData.vargas.D9.planets;
-  const akInD9 = d9Planets ? d9Planets[ak.planetKey] : null;
-  const signIndex = akInD9 ? Math.floor((akInD9.lon || 0) / 30) % 12 : 0;
+  const planets = kundliData.planets || kundliData.astro?.planets || {};
+  const akPlanet = planets[ak.planetKey];
+
+  // Calculate Atmakaraka's Navamsha sign (each Navamsha is 3° 20' = 3.333333°)
+  let signIndex = 0;
+  if (akPlanet?.navSignIndex !== undefined) {
+    signIndex = akPlanet.navSignIndex % 12;
+  } else if (akPlanet?.lon !== undefined) {
+    const normLon = ((akPlanet.lon % 360) + 360) % 360;
+    signIndex = Math.floor(normLon / (30 / 9)) % 12;
+  }
 
   return {
     signIndex,
-    signName: SIGN_NAMES[signIndex],
+    signName: SIGN_NAMES[signIndex] || SIGN_NAMES[0],
     akPlanet: ak.planetKey,
   };
 }

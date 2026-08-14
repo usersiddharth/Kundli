@@ -123,9 +123,8 @@ export function calculateTridosha(kundliData) {
   let pittaPoints = 35;
   let kaphaPoints = 30;
 
-  if (kundliData && kundliData.astro && kundliData.astro.planets) {
-    const planets = kundliData.astro.planets;
-
+  const planets = kundliData?.planets || kundliData?.astro?.planets;
+  if (planets) {
     // Sun & Mars increase Pitta
     if (planets.Sun) pittaPoints += planets.Sun.lon % 30 > 15 ? 10 : 5;
     if (planets.Mars) pittaPoints += 12;

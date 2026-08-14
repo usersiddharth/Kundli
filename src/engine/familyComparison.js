@@ -34,8 +34,8 @@ export function compareFamilyProfiles(profiles = []) {
   ];
 
   const profileSummaries = profiles.map((p, idx) => {
-    const astro = p.astro || {};
-    const planets = astro.planets || {};
+    const astro = p.astro || p || {};
+    const planets = astro.planets || p.planets || {};
 
     const lagnaLon = planets.Lagna ? planets.Lagna.lon : 0;
     const moonLon = planets.Moon ? planets.Moon.lon : 0;

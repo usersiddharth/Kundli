@@ -37,6 +37,8 @@ const KpSignificatorsView = lazy(() => import('./KpSignificatorsView.jsx'));
 const DailyTransitFeedView = lazy(() => import('./DailyTransitFeedView.jsx'));
 const SocialStoryCardView = lazy(() => import('./SocialStoryCardView.jsx'));
 const PrintableReport = lazy(() => import('./PrintableReport.jsx'));
+const UpcomingEventsView = lazy(() => import('./UpcomingEventsView.jsx'));
+const RashifalView = lazy(() => import('./RashifalView.jsx'));
 
 import {
   Compass,
@@ -290,6 +292,24 @@ export default function KundliHubView({
               en: 'Real-Time Transits',
             },
             icon: Activity,
+          },
+          {
+            id: 'upcomingEvents',
+            label: {
+              gu: 'આગામી ગ્રહીય ઘટનાઓ & ગોચર',
+              hi: 'आगामी ग्रहीय घटनाएं एवं गोचर',
+              en: 'Upcoming Planetary Events',
+            },
+            icon: Orbit,
+          },
+          {
+            id: 'rashifal',
+            label: {
+              gu: 'રાશિ ભવિષ્ય (દૈનિક/સાપ્તાહિક/વાર્ષિક)',
+              hi: 'राशिफल (दैनिक/साप्ताहिक/वार्षिक)',
+              en: 'Rashifal (Daily/Weekly/Yearly)',
+            },
+            icon: Sparkles,
           },
           {
             id: 'varshphal',
@@ -719,6 +739,14 @@ export default function KundliHubView({
 
           {activeSubTool === 'transits' && (
             <TransitView kundliData={kundliData} t={t} lang={lang} />
+          )}
+
+          {activeSubTool === 'upcomingEvents' && (
+            <UpcomingEventsView kundliData={kundliData} t={t} lang={lang} />
+          )}
+
+          {activeSubTool === 'rashifal' && (
+            <RashifalView kundliData={kundliData} t={t} lang={lang} />
           )}
 
           {activeSubTool === 'varshphal' && (

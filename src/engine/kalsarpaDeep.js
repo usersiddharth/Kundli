@@ -82,10 +82,9 @@ export const KALSARPA_TYPES = [
 ];
 
 export function analyzeKalsarpaDeep(kundliData) {
-  const planets =
-    kundliData && kundliData.astro && kundliData.astro.planets ? kundliData.astro.planets : {};
+  const planets = kundliData?.planets || kundliData?.astro?.planets || {};
   const rahu = planets.Rahu;
-  const house = rahu ? Math.floor((rahu.lon % 360) / 30) + 1 : 1;
+  const house = rahu ? rahu.houseNum || Math.floor((((rahu.lon % 360) + 360) % 360) / 30) + 1 : 1;
 
   const typeIndex = (house - 1) % KALSARPA_TYPES.length;
   const activeType = KALSARPA_TYPES[typeIndex];

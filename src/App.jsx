@@ -20,10 +20,12 @@ const NumerologyView = lazy(() => import('./components/NumerologyView.jsx'));
 const ChoghadiyaView = lazy(() => import('./components/ChoghadiyaView.jsx'));
 const VedicClockView = lazy(() => import('./components/VedicClockView.jsx'));
 const Matchmaking = lazy(() => import('./components/Matchmaking.jsx'));
+const UpcomingEventsView = lazy(() => import('./components/UpcomingEventsView.jsx'));
+const RashifalView = lazy(() => import('./components/RashifalView.jsx'));
 
 export default function App() {
   const [lang, setLang] = useState('gu'); // Default Gujarati
-  const [mainSection, setMainSection] = useState('landing'); // 'landing' | 'kundli' | 'panchang' | 'vedicClock' | 'calendar' | 'numerology' | 'matchmaking'
+  const [mainSection, setMainSection] = useState('landing'); // 'landing' | 'kundli' | 'panchang' | 'vedicClock' | 'calendar' | 'numerology' | 'matchmaking' | 'upcomingEvents' | 'rashifal'
   const [isDark, setIsDark] = useState(true); // Default to Majestic Dark Royal Cosmic Sky
   const [externalPanchangDate, setExternalPanchangDate] = useState(null);
 
@@ -221,6 +223,36 @@ export default function App() {
           >
             <div className="space-y-6 animate-fade-in-up">
               <Matchmaking t={t} />
+            </div>
+          </Suspense>
+        )}
+
+        {/* -----------------------------------------------------------------
+            PORTAL 7: UPCOMING PLANETARY EVENTS & GOCHAR
+            ----------------------------------------------------------------- */}
+        {mainSection === 'upcomingEvents' && (
+          <Suspense
+            fallback={
+              <CosmicLoader message={t?.upcomingEventsTitle || 'ગ્રહીય ઘટનાઓ લોડ થઈ રહી છે...'} />
+            }
+          >
+            <div className="space-y-6 animate-fade-in-up">
+              <UpcomingEventsView kundliData={kundliData} t={t} lang={lang} />
+            </div>
+          </Suspense>
+        )}
+
+        {/* -----------------------------------------------------------------
+            PORTAL 8: RASHIFAL (DAILY, WEEKLY, MONTHLY, YEARLY)
+            ----------------------------------------------------------------- */}
+        {mainSection === 'rashifal' && (
+          <Suspense
+            fallback={
+              <CosmicLoader message={t?.rashifalTitle || 'રાશિ ભવિષ્ય લોડ થઈ રહ્યું છે...'} />
+            }
+          >
+            <div className="space-y-6 animate-fade-in-up">
+              <RashifalView kundliData={kundliData} t={t} lang={lang} />
             </div>
           </Suspense>
         )}

@@ -567,6 +567,7 @@ export function getFullKundli(astroData, year, month, day, hour, minute) {
   return {
     jd: astroData.jd,
     ayanamsha: astroData.ayanamsha,
+    astro: astroData,
     lagnaSignIndex,
     d1Houses,
     d9Houses,

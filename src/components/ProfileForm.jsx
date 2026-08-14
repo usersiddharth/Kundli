@@ -12,6 +12,7 @@ import {
   Trash2,
   CheckCircle2,
   X,
+  RotateCcw,
 } from 'lucide-react';
 
 export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
@@ -112,6 +113,20 @@ export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
     const updated = savedProfiles.filter((p) => p.id !== id);
     setSavedProfiles(updated);
     localStorage.setItem('kundli_saved_profiles', JSON.stringify(updated));
+  };
+
+  const handleClearForm = () => {
+    setSearchQuery('');
+    setFormData({
+      name: '',
+      gender: 'male',
+      dob: '',
+      tob: '',
+      city: '',
+      lat: '',
+      lng: '',
+      tz: 5.5,
+    });
   };
 
   return (
@@ -444,6 +459,16 @@ export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
           >
             <Bookmark className="h-4 w-4 text-[#b85d19]" aria-hidden="true" />
             <span>{t.saveProfile}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleClearForm}
+            title={t.clearForm || 'Clear Form'}
+            className="flex items-center gap-1.5 rounded-lg glass-card px-4 py-2.5 text-sm font-medium text-[#736a60] hover:text-[#802020] hover:bg-rose-50/50 dark:hover:bg-rose-950/30 transition shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-rose-400"
+          >
+            <RotateCcw className="h-4 w-4 text-[#736a60]" aria-hidden="true" />
+            <span>{t.clearForm || 'Clear Form'}</span>
           </button>
         </div>
 

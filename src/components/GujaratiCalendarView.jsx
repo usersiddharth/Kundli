@@ -129,7 +129,7 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
   };
 
   return (
-    <div className="rounded-xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white">
+    <div className="rounded-xl glass-panel p-3 sm:p-5 md:p-6 shadow-sm space-y-4 sm:space-y-6 print:border-none print:p-0 print:bg-white">
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
@@ -198,34 +198,36 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
       {activeTab === 'month' && (
         <div className="space-y-6">
           {/* Month Navigation Banner */}
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl glass-panel-accent p-4 shadow-xs">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-xl glass-panel-accent p-3 sm:p-4 shadow-xs">
+            <div className="flex items-center justify-between w-full sm:w-auto gap-1 sm:gap-2">
               <button
                 onClick={handlePrevMonth}
-                className="rounded-lg glass-card p-2 text-[#2c2825] hover:bg-[#2c2825] hover:text-[#f4ebd9] transition shadow-2xs"
+                aria-label="Previous Month"
+                className="rounded-lg glass-card p-1.5 sm:p-2 text-[#2c2825] hover:bg-[#2c2825] hover:text-[#f4ebd9] transition shadow-2xs"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
 
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#b85d19] px-2">
+              <h3 className="font-serif text-base sm:text-xl font-bold text-[#b85d19] px-2 text-center">
                 {MONTH_NAMES_GU[currentMonth - 1]} {currentYear}
               </h3>
 
               <button
                 onClick={handleNextMonth}
-                className="rounded-lg glass-card p-2 text-[#2c2825] hover:bg-[#2c2825] hover:text-[#f4ebd9] transition shadow-2xs"
+                aria-label="Next Month"
+                className="rounded-lg glass-card p-1.5 sm:p-2 text-[#2c2825] hover:bg-[#2c2825] hover:text-[#f4ebd9] transition shadow-2xs"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between w-full sm:w-auto gap-2">
               <button
                 onClick={handleToday}
-                className="flex items-center gap-1.5 rounded-lg glass-badge-warning px-3.5 py-1.5 text-xs font-bold hover:bg-[#fae8d4] shadow-2xs transition"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 rounded-lg glass-badge-warning px-3 py-1.5 text-xs font-bold hover:bg-[#fae8d4] shadow-2xs transition"
               >
                 <Sparkles className="h-3.5 w-3.5 text-[#b85d19]" />
-                <span>આજની તારીખ (Today)</span>
+                <span>આજ (Today)</span>
               </button>
 
               <select
@@ -243,13 +245,15 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
           </div>
 
           {/* 7-Column Wall Calendar Grid */}
-          <div className="rounded-xl border border-[#8c7456]/50 glass-panel shadow-sm overflow-hidden">
+          <div className="rounded-xl border border-[#8c7456]/40 glass-panel shadow-sm overflow-hidden">
             {/* Weekday Header */}
-            <div className="grid grid-cols-7 border-b border-[#8c7456]/40 glass-pill text-center text-xs font-bold text-[#544d44]">
+            <div className="grid grid-cols-7 border-b border-[#8c7456]/30 glass-pill text-center text-[11px] sm:text-xs font-bold text-[#544d44]">
               {WEEKDAYS_GU.map((day, idx) => (
                 <div
                   key={idx}
-                  className={`py-2.5 border-r border-[#e6dfd3]/60 last:border-r-0 ${idx === 0 ? 'text-[#802020]' : ''}`}
+                  className={`py-2 sm:py-2.5 border-r border-[#e6dfd3]/60 last:border-r-0 ${
+                    idx === 0 ? 'text-rose-600 dark:text-rose-400 font-bold' : ''
+                  }`}
                 >
                   <span className="hidden sm:inline">{day.full}</span>
                   <span className="sm:hidden">{day.short}</span>
@@ -257,8 +261,8 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
               ))}
             </div>
 
-            {/* Calendar Days */}
-            <div className="grid grid-cols-7 bg-[#dcd4c6]/60 gap-[1px]">
+            {/* Calendar Days Grid */}
+            <div className="grid grid-cols-7 bg-[#dcd4c6]/60 dark:bg-[#332e28] gap-[1px]">
               {calendarGrid.map((cell, idx) => {
                 const isSelected =
                   activeSelected &&
@@ -279,78 +283,99 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
                     onClick={() => setSelectedDayInfo(cell)}
                     aria-label={`Date ${cell.day} ${MONTH_NAMES_GU[cell.month - 1]} ${cell.year}, ${cell.fullTithiTitle}${festLabel ? ', ' + festLabel : ''}`}
                     aria-pressed={isSelected}
-                    className={`min-h-[96px] sm:min-h-[110px] p-2 flex flex-col justify-between text-left cursor-pointer transition select-none relative focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] focus-visible:z-30 ${
+                    className={`min-h-[76px] sm:min-h-[106px] p-1 sm:p-2 flex flex-col justify-start text-left cursor-pointer transition select-none relative focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] focus-visible:z-30 ${
                       cell.isCurrentMonth
                         ? isToday
                           ? isSelected
-                            ? 'bg-[#fae8d4] ring-2 ring-[#b85d19] shadow-sm z-20'
-                            : 'bg-[#fff8ee] ring-2 ring-[#b85d19]/80 shadow-2xs z-10'
+                            ? 'bg-[#fae8d4] dark:bg-[#3a2817] ring-2 ring-[#b85d19] shadow-sm z-20'
+                            : 'bg-[#fff8ee] dark:bg-[#2a1d12] ring-1.5 sm:ring-2 ring-[#b85d19]/80 shadow-2xs z-10'
                           : isSelected
-                            ? 'bg-[#fae8d4] ring-2 ring-[#8c7456] z-10'
-                            : 'bg-white/80 hover:bg-white'
-                        : 'bg-[#f7f5f0]/40 opacity-50'
+                            ? 'bg-[#fae8d4] dark:bg-[#33261a] ring-2 ring-[#8c7456] z-10'
+                            : 'bg-white/90 dark:bg-[#1c1b18] hover:bg-white dark:hover:bg-[#252420]'
+                        : 'bg-[#f7f5f0]/40 dark:bg-[#141412]/50 opacity-45'
                     }`}
                   >
-                    {/* Top Row: Date, Today Badge & Moon Phase */}
-                    <div className="flex justify-between items-start">
+                    {/* Top Row: Date Number & Moon Phase */}
+                    <div className="flex justify-between items-center h-5 sm:h-6 mb-0.5">
                       <div className="flex items-center gap-1">
                         <span
-                          className={`font-mono text-base sm:text-lg font-bold leading-none ${
+                          className={`font-mono font-bold leading-none ${
                             isToday
-                              ? 'flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-[#b85d19] text-white shadow-xs animate-pulse-glow'
+                              ? 'flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-[#b85d19] text-white text-xs sm:text-sm shadow-xs animate-pulse-glow'
                               : isSunday
-                                ? 'text-[#802020]'
-                                : 'text-[#2c2825]'
+                                ? 'text-xs sm:text-base text-rose-600 dark:text-rose-400'
+                                : 'text-xs sm:text-base text-[#2c2825] dark:text-[#f4ebd9]'
                           }`}
                         >
                           {cell.day}
                         </span>
 
                         {isToday && (
-                          <span className="rounded glass-badge-warning px-1.5 py-0.5 text-[8px] sm:text-[9px] font-bold animate-gentle-float shadow-2xs">
+                          <span className="rounded glass-badge-warning px-1 py-0.2 text-[8px] sm:text-[9px] font-bold hidden sm:inline-block">
                             આજ
                           </span>
                         )}
                       </div>
 
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-0.5">
                         {cell.isPurnima && (
-                          <span className="text-xs" title="પૂનમ (Full Moon)">
+                          <span
+                            className="text-[10px] sm:text-xs leading-none"
+                            title="પૂનમ (Full Moon)"
+                          >
                             🌕
                           </span>
                         )}
                         {cell.isAmavasya && (
-                          <span className="text-xs" title="અમાસ (New Moon)">
+                          <span
+                            className="text-[10px] sm:text-xs leading-none"
+                            title="અમાસ (New Moon)"
+                          >
                             🌑
                           </span>
                         )}
                       </div>
                     </div>
 
-                    {/* Middle: Gujarati Tithi */}
-                    <div className="mt-1">
+                    {/* Middle: Gujarati Tithi (Consistent baseline across all cells) */}
+                    <div className="min-h-[22px] sm:min-h-[28px] flex flex-col justify-start">
                       <span
-                        className={`text-[10px] sm:text-[11px] font-semibold block leading-tight ${
+                        className={`text-[8.5px] sm:text-[10.5px] font-semibold leading-tight line-clamp-2 block ${
                           isToday
                             ? 'text-[#b85d19] font-bold'
                             : cell.pakshaKey === 'sud'
-                              ? 'text-[#b85d19]'
-                              : 'text-[#544d44]'
+                              ? 'text-[#b85d19] dark:text-[#e6a86c]'
+                              : 'text-[#544d44] dark:text-[#a89e92]'
                         }`}
                       >
                         {cell.fullTithiTitle}
                       </span>
-                      <span className="text-[9px] text-[#736a60] hidden sm:block truncate">
+                      <span className="text-[8.5px] text-[#736a60] dark:text-[#8c8276] hidden sm:block truncate mt-0.5">
                         {cell.nakshatraName}
                       </span>
                     </div>
 
-                    {/* Bottom: Festival Pills */}
-                    <div className="mt-1 space-y-0.5">
+                    {/* Bottom: Festival Pills (Pinned consistently at bottom) */}
+                    <div className="mt-auto pt-0.5 space-y-0.5 min-h-[14px] sm:min-h-[20px] overflow-hidden">
+                      {/* Mobile view: Show first festival cleanly truncated */}
+                      {cell.festivals.slice(0, 1).map((f, fIdx) => (
+                        <span
+                          key={fIdx}
+                          className={`text-[7.5px] px-1 py-0.2 rounded block truncate font-medium sm:hidden ${
+                            f.type === 'major'
+                              ? 'glass-badge-danger font-bold'
+                              : 'glass-badge-success'
+                          }`}
+                        >
+                          {getFestivalName(f)}
+                        </span>
+                      ))}
+
+                      {/* Desktop view: Show up to 2 festivals */}
                       {cell.festivals.slice(0, 2).map((f, fIdx) => (
                         <span
                           key={fIdx}
-                          className={`text-[9px] px-1 py-0.5 rounded block truncate font-medium ${
+                          className={`text-[8.5px] px-1 py-0.5 rounded hidden sm:block truncate font-medium ${
                             f.type === 'major'
                               ? 'glass-badge-danger font-bold'
                               : 'glass-badge-success'

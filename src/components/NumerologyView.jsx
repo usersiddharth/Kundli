@@ -18,6 +18,7 @@ import {
   Wand2,
   Lightbulb,
   Star,
+  X,
 } from 'lucide-react';
 
 export default function NumerologyView({ formData, birthDate, t, lang }) {
@@ -90,10 +91,11 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
 
             <button
               onClick={handleClearFresh}
-              title="નવી એન્ટ્રી માટે ક્લિયર કરો"
-              className="flex items-center gap-1.5 rounded-lg glass-card px-3 py-1.5 text-xs font-medium text-[#544d44] hover:bg-[#802020] hover:text-white transition shadow-2xs"
+              title="ફોર્મ સાફ કરો (Clear Form)"
+              className="flex items-center gap-1.5 rounded-lg glass-card px-3 py-1.5 text-xs font-medium text-[#736a60] hover:text-[#802020] hover:bg-rose-50/50 dark:hover:bg-rose-950/30 transition shadow-2xs cursor-pointer"
             >
-              <span>નવી એન્ટ્રી (Clear)</span>
+              <RotateCcw className="h-3.5 w-3.5" />
+              <span>ફોર્મ સાફ કરો (Clear Form)</span>
             </button>
 
             <button
@@ -139,28 +141,21 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
           {/* Target Prediction Year */}
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-[#544d44] flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-[#b85d19]" /> વાર્ષિક આગાહી વર્ષ (Forecast
-              Year):
+              <Sparkles className="h-3.5 w-3.5 text-[#b85d19]" /> આગાહી વર્ષ (Target Forecast Year):
             </label>
-            <div className="flex gap-2">
-              <input
-                type="number"
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(Number(e.target.value))}
-                className="w-full rounded-lg glass-input px-3 py-2 text-xs font-mono text-[#2c2825] focus:outline-none"
-              />
-              <button
-                onClick={() => setSelectedYear(new Date().getFullYear())}
-                className="rounded-lg glass-card px-3 py-1.5 text-[11px] font-semibold text-[#544d44] hover:bg-white"
-              >
-                આ વર્ષ
-              </button>
-            </div>
+            <input
+              type="number"
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(Number(e.target.value) || 2026)}
+              min={1900}
+              max={2100}
+              className="w-full rounded-lg glass-input px-3 py-2 text-xs font-mono text-[#2c2825] focus:outline-none"
+            />
           </div>
         </div>
 
-        {/* Live Custom Spelling Tester */}
-        <div className="rounded-lg glass-pill p-3.5 space-y-2">
+        {/* Live Alternate Name Spelling Sandbox */}
+        <div className="rounded-xl border border-[#e6dfd3] glass-card p-4 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-bold text-[#2c2825] flex items-center gap-1.5">
               <Wand2 className="h-3.5 w-3.5 text-[#b85d19]" /> સ્પેલિંગ સુધારણા ટેસ્ટર (Live Name
@@ -172,13 +167,26 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <input
-              type="text"
-              value={testSpelling}
-              onChange={(e) => setTestSpelling(e.target.value)}
-              placeholder="અહીં વૈકલ્પિક સ્પેલિંગ લખો (e.g. Rahul S Sharma)..."
-              className="flex-1 min-w-[240px] rounded-lg glass-input px-3 py-1.5 text-xs text-[#2c2825] focus:outline-none"
-            />
+            <div className="relative flex-1 min-w-[240px]">
+              <input
+                type="text"
+                value={testSpelling}
+                onChange={(e) => setTestSpelling(e.target.value)}
+                placeholder="અહીં વૈકલ્પિક સ્પેલિંગ લખો (e.g. Rahul S Sharma)..."
+                className="w-full rounded-lg glass-input pl-3 pr-8 py-1.5 text-xs text-[#2c2825] focus:outline-none"
+              />
+              {testSpelling && (
+                <button
+                  type="button"
+                  onClick={() => setTestSpelling('')}
+                  title="Clear Spelling"
+                  aria-label="Clear Spelling"
+                  className="absolute right-2 top-1.5 h-5 w-5 flex items-center justify-center rounded-full text-[#736a60] hover:text-[#802020] transition"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              )}
+            </div>
             {testNameData && (
               <div className="flex items-center gap-3 text-xs glass-card px-3 py-1.5 rounded-lg">
                 <span>

@@ -28,6 +28,8 @@ import {
   ShieldAlert,
   Flame,
   X,
+  RotateCcw,
+  Orbit,
 } from 'lucide-react';
 
 export default function LandingPage({
@@ -103,6 +105,21 @@ export default function LandingPage({
       lat: null,
       lng: null,
     }));
+    setShowCityDropdown(false);
+  };
+
+  const handleClearBirthForm = () => {
+    setFormData({
+      name: '',
+      gender: 'male',
+      dob: '',
+      tob: '',
+      city: '',
+      lat: 23.0225,
+      lng: 72.5714,
+      tz: 5.5,
+    });
+    setCitySearch('');
     setShowCityDropdown(false);
   };
 
@@ -357,6 +374,82 @@ export default function LandingPage({
         },
       ],
       cta: { gu: 'ગુણ મિલન કરો', hi: 'मिलान करें', en: 'Check Compatibility' },
+    },
+    {
+      id: 'upcomingEvents',
+      title: {
+        gu: 'આગામી ગ્રહીય ઘટનાઓ & ગોચર',
+        hi: 'आगामी ग्रहीय घटनाएं एवं गोचर',
+        en: 'Upcoming Planetary Events & Transits',
+      },
+      subtitle: {
+        gu: 'રાશિ પરિવર્તન, વક્રી-માર્ગી ગ્રહો, સૂર્ય-ચંદ્ર ગ્રહણ અને વ્યક્તિગત પ્રભાવ',
+        hi: 'राशि परिवर्तन, वक्री/मार्गी ग्रह, ग्रहण व व्यक्तिगत प्रभाव',
+        en: 'Rashi Ingresses, Retrograde Stations, Eclipses & Natal Impact',
+      },
+      icon: Orbit,
+      badge: { gu: '૨૦૨૪ - ૨૦૩૦ પંચાંગ', hi: '२०२४ - २०३० पंचांग', en: '2024 - 2030 Ephemeris' },
+      features: [
+        {
+          gu: 'ગુરુ, શનિ, રાહુ-કેતુના મહા રાશિ પરિવર્તન',
+          hi: 'गुरु, शनि, राहु-केतु महागोचर',
+          en: 'Jupiter, Saturn & Rahu-Ketu Ingresses',
+        },
+        {
+          gu: 'સૂર્ય અને ચંદ્ર ગ્રહણ લાઈવ સમય & સૂતક કાળ',
+          hi: 'सूर्य-चंद्र ग्रहण समय व सूतक काल',
+          en: 'Solar & Lunar Eclipse Timings & Sutak',
+        },
+        {
+          gu: 'બુધ, ગુરુ અને શનિ વક્રી/માર્ગી કેલેન્ડર',
+          hi: 'बुध, गुरु व शनि वक्री-मार्गी कैलेंडर',
+          en: 'Mercury, Jupiter & Saturn Retrogrades',
+        },
+        {
+          gu: 'તમારી જન્મ રાશિ પર કસ્ટમ પ્રભાવ અને ઉપાય',
+          hi: 'आपकी जन्म कुंडली पर प्रभाव व उपाय',
+          en: 'Personalized Natal Chart Impact & Remedies',
+        },
+      ],
+      cta: { gu: 'ગ્રહીય ઘટનાઓ જુઓ', hi: 'घटनाएं देखें', en: 'View Planetary Events' },
+    },
+    {
+      id: 'rashifal',
+      title: {
+        gu: 'રાશિ ભવિષ્ય (Rashifal)',
+        hi: 'राशिफल (दैनिक, साप्ताहिक, वार्षिक)',
+        en: 'Vedic Rashifal & Horoscopes',
+      },
+      subtitle: {
+        gu: 'દૈનિક, સાપ્તાહિક, માસિક અને વાર્ષિક જ્યોતિષ ફળાદેશ, સાડાસાતી & શુભ અંક',
+        hi: 'दैनिक, साप्ताहिक, मासिक व वार्षिक राशिफल, साढ़ेसाती व उपाय',
+        en: 'Daily, Weekly, Monthly & Yearly Astrological Forecasts & Remedies',
+      },
+      icon: Sparkles,
+      badge: { gu: '૧૨ રાશિઓનું ભવિષ્ય', hi: '१२ राशियां', en: '12 Zodiac Signs' },
+      features: [
+        {
+          gu: 'દૈનિક કારકિર્દી, નાણાં, પ્રેમ & આરોગ્ય સ્કોર',
+          hi: 'दैनिक करियर, वित्त, प्रेम व स्वास्थ्य स्कोर',
+          en: 'Daily Career, Finance, Love & Health Scores',
+        },
+        {
+          gu: 'શુભ અંક, શુભ રંગ, શુભ દિશા & દૈનિક ઉપાય',
+          hi: 'शुभ अंक, रंग, दिशा व दैनिक वैदिक उपाय',
+          en: 'Lucky Numbers, Colors, Directions & Remedies',
+        },
+        {
+          gu: '૭-દિવસીય સાપ્તાહિક & માસિક પરિપ્રેક્ષ્ય',
+          hi: 'साप्ताहिक व मासिक विस्तृत विश्लेषण',
+          en: '7-Day Weekly & Monthly Sector Analysis',
+        },
+        {
+          gu: 'શનિ સાડાસાતી સ્થિતિ & ૪ ત્રિમાસિક વાર્ષિક યોજના',
+          hi: 'शनि साढ़ेसाती जांच व ४ त्रैमासिक भविष्य',
+          en: 'Saturn Sade Sati Status & 4 Quarters Breakdown',
+        },
+      ],
+      cta: { gu: 'રાશિફળ વાંચો', hi: 'राशिफल देखें', en: 'Read Rashifal' },
     },
   ];
 
@@ -669,13 +762,23 @@ export default function LandingPage({
                   )}
                 </div>
 
-                <div className="pt-2">
+                <div className="flex items-center gap-2 pt-2">
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 rounded-xl glass-button-primary py-2.5 text-xs font-bold shadow-md transition transform hover:-translate-y-0.5"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl glass-button-primary py-2.5 text-xs font-bold shadow-md transition transform hover:-translate-y-0.5 cursor-pointer"
                   >
                     <Sparkles className="h-4 w-4" />
-                    <span>સંપૂર્ણ કુંડળી ગણતરી કરો (Calculate Kundli)</span>
+                    <span>સંપૂર્ણ કુંડળી ગણતરી કરો (Calculate)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleClearBirthForm}
+                    title="ફોર્મ સાફ કરો (Clear Form)"
+                    className="flex items-center justify-center gap-1.5 rounded-xl glass-card px-3.5 py-2.5 text-xs font-medium text-[var(--text-secondary)] hover:text-[#802020] hover:bg-rose-50/50 dark:hover:bg-rose-950/30 transition shadow-xs cursor-pointer"
+                  >
+                    <RotateCcw className="h-3.5 w-3.5" />
+                    <span>સાફ કરો (Clear)</span>
                   </button>
                 </div>
               </form>

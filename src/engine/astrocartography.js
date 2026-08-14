@@ -50,8 +50,7 @@ export const GLOBAL_CITIES = [
 ];
 
 export function calculateAstrocartographyLines(kundliData) {
-  const planets =
-    kundliData && kundliData.astro && kundliData.astro.planets ? kundliData.astro.planets : {};
+  const planets = kundliData?.planets || kundliData?.astro?.planets || {};
 
   const lines = Object.keys(PLANET_COLOR_MAP).map((pKey) => {
     const p = planets[pKey];

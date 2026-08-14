@@ -12,6 +12,7 @@ import {
   Zap,
   HelpCircle,
   Share2,
+  X,
 } from 'lucide-react';
 
 export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
@@ -432,12 +433,23 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                 value={filterQuery}
                 onChange={(e) => setFilterQuery(e.target.value)}
                 placeholder="Search planet or year..."
-                className="rounded-lg glass-input pl-8 pr-3 py-1.5 text-xs text-[#2c2825] focus:outline-hidden focus:ring-2 focus:ring-[#b85d19]"
+                className="rounded-lg glass-input pl-8 pr-8 py-1.5 text-xs text-[#2c2825] focus:outline-hidden focus:ring-2 focus:ring-[#b85d19]"
               />
               <Search
                 className="absolute left-2.5 top-2 h-3.5 w-3.5 text-[#736a60]"
                 aria-hidden="true"
               />
+              {filterQuery && (
+                <button
+                  type="button"
+                  onClick={() => setFilterQuery('')}
+                  title="Clear Search"
+                  aria-label="Clear Search"
+                  className="absolute right-2 top-1.5 h-5 w-5 flex items-center justify-center rounded-full text-[#736a60] hover:text-[#2c2825] transition"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              )}
             </div>
           </div>
 

@@ -82,12 +82,11 @@ export const LAL_KITAB_REMEDIES_MAP = {
  * Generate Lal Kitab Planet House Remedies & Debt Audit
  */
 export function analyzeLalKitab(kundliData) {
-  const planets =
-    kundliData && kundliData.astro && kundliData.astro.planets ? kundliData.astro.planets : {};
+  const planets = kundliData?.planets || kundliData?.astro?.planets || {};
 
   const remediesList = Object.keys(planets).map((pKey) => {
     const p = planets[pKey];
-    const house = Math.floor(((p ? p.lon : 0) % 360) / 30) + 1;
+    const house = p?.houseNum || (p ? Math.floor((((p.lon % 360) + 360) % 360) / 30) + 1 : 1);
     return {
       planetKey: pKey,
       house,

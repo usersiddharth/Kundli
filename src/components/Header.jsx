@@ -12,6 +12,7 @@ import {
   Moon,
   Sun,
   Home,
+  Orbit,
 } from 'lucide-react';
 
 export default function Header({
@@ -171,6 +172,40 @@ export default function Header({
             >
               <Heart className="h-3.5 w-3.5" />
               <span>ગુણ મિલન (Matching)</span>
+            </button>
+
+            <button
+              role="tab"
+              aria-selected={mainSection === 'upcomingEvents'}
+              onClick={() => {
+                setMainSection('upcomingEvents');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] ${
+                mainSection === 'upcomingEvents'
+                  ? 'glass-button-primary shadow-xs'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
+            >
+              <Orbit className="h-3.5 w-3.5 text-[var(--text-gold)]" />
+              <span>ગ્રહીય ઘટનાઓ (Events)</span>
+            </button>
+
+            <button
+              role="tab"
+              aria-selected={mainSection === 'rashifal'}
+              onClick={() => {
+                setMainSection('rashifal');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] ${
+                mainSection === 'rashifal'
+                  ? 'glass-button-primary shadow-xs'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
+            >
+              <Sparkles className="h-3.5 w-3.5 text-[var(--text-gold)]" />
+              <span>રાશિ ભવિષ્ય (Horoscope)</span>
             </button>
           </div>
         </nav>

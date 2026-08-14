@@ -16,6 +16,7 @@ import {
   ShieldCheck,
   Printer,
   X,
+  RotateCcw,
 } from 'lucide-react';
 
 function CitySearchInput({ label, value, onSelectCity, onChangeCustom }) {
@@ -160,7 +161,38 @@ export default function Matchmaking({ t }) {
 
   const [milanResult, setMilanResult] = useState(null);
 
+  const handleClearBride = () => {
+    setBrideForm({
+      name: '',
+      dob: '',
+      tob: '',
+      city: '',
+      lat: 21.1702,
+      lng: 72.8311,
+      tz: 5.5,
+    });
+  };
+
+  const handleClearGroom = () => {
+    setGroomForm({
+      name: '',
+      dob: '',
+      tob: '',
+      city: '',
+      lat: 23.0225,
+      lng: 72.5714,
+      tz: 5.5,
+    });
+  };
+
+  const handleClearBoth = () => {
+    handleClearBride();
+    handleClearGroom();
+    setMilanResult(null);
+  };
+
   const handleMatch = () => {
+    if (!brideForm.dob || !brideForm.tob || !groomForm.dob || !groomForm.tob) return;
     const [bYear, bMonth, bDay] = brideForm.dob.split('-').map(Number);
     const [bHour, bMinute] = brideForm.tob.split(':').map(Number);
 
@@ -226,25 +258,47 @@ export default function Matchmaking({ t }) {
           </p>
         </div>
 
-        {milanResult && (
+        <div className="flex items-center gap-2">
           <button
-            onClick={handlePrint}
-            title="Save Matchmaking as PDF"
-            className="flex items-center gap-1.5 rounded-lg glass-card px-3.5 py-1.5 text-xs font-medium text-[#544d44] hover:bg-white transition shadow-xs"
+            onClick={handleClearBoth}
+            title={t.clearForm || 'Clear Forms'}
+            className="flex items-center gap-1.5 rounded-lg glass-card px-3.5 py-1.5 text-xs font-medium text-[#736a60] hover:text-[#802020] hover:bg-rose-50/50 dark:hover:bg-rose-950/30 transition shadow-xs cursor-pointer"
           >
-            <Printer className="h-3.5 w-3.5 text-[#b85d19]" />
-            <span>Save as PDF</span>
+            <RotateCcw className="h-3.5 w-3.5" />
+            <span>{t.clearForm || 'Clear Both Forms'}</span>
           </button>
-        )}
+
+          {milanResult && (
+            <button
+              onClick={handlePrint}
+              title="Save Matchmaking as PDF"
+              className="flex items-center gap-1.5 rounded-lg glass-card px-3.5 py-1.5 text-xs font-medium text-[#544d44] hover:bg-white transition shadow-xs"
+            >
+              <Printer className="h-3.5 w-3.5 text-[#b85d19]" />
+              <span>Save as PDF</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Dual Profile Forms (Hidden in Print) */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 print:hidden">
         {/* Bride */}
         <div className="rounded-xl glass-panel-accent p-5 shadow-2xs space-y-3">
-          <h3 className="font-serif text-base font-semibold text-[#2c2825] flex items-center gap-2 border-b border-[#e6dfd3]/80 pb-2">
-            <Users className="h-4 w-4 text-[#b85d19]" /> {t.brideDetails} (Bride)
-          </h3>
+          <div className="flex items-center justify-between border-b border-[#e6dfd3]/80 pb-2">
+            <h3 className="font-serif text-base font-semibold text-[#2c2825] flex items-center gap-2">
+              <Users className="h-4 w-4 text-[#b85d19]" /> {t.brideDetails} (Bride)
+            </h3>
+            <button
+              type="button"
+              onClick={handleClearBride}
+              title={t.clearBrideForm || 'Clear Bride Details'}
+              className="text-[11px] font-medium text-[#736a60] hover:text-[#802020] flex items-center gap-1 transition"
+            >
+              <RotateCcw className="h-3 w-3" />
+              <span>{t.clearForm || 'Clear'}</span>
+            </button>
+          </div>
           <div>
             <label className="text-xs font-medium text-[#544d44]">{t.name}</label>
             <input
@@ -288,9 +342,20 @@ export default function Matchmaking({ t }) {
 
         {/* Groom */}
         <div className="rounded-xl glass-panel-accent p-5 shadow-2xs space-y-3">
-          <h3 className="font-serif text-base font-semibold text-[#2c2825] flex items-center gap-2 border-b border-[#e6dfd3]/80 pb-2">
-            <Users className="h-4 w-4 text-[#b85d19]" /> {t.groomDetails} (Groom)
-          </h3>
+          <div className="flex items-center justify-between border-b border-[#e6dfd3]/80 pb-2">
+            <h3 className="font-serif text-base font-semibold text-[#2c2825] flex items-center gap-2">
+              <Users className="h-4 w-4 text-[#b85d19]" /> {t.groomDetails} (Groom)
+            </h3>
+            <button
+              type="button"
+              onClick={handleClearGroom}
+              title={t.clearGroomForm || 'Clear Groom Details'}
+              className="text-[11px] font-medium text-[#736a60] hover:text-[#802020] flex items-center gap-1 transition"
+            >
+              <RotateCcw className="h-3 w-3" />
+              <span>{t.clearForm || 'Clear'}</span>
+            </button>
+          </div>
           <div>
             <label className="text-xs font-medium text-[#544d44]">{t.name}</label>
             <input
@@ -333,13 +398,25 @@ export default function Matchmaking({ t }) {
         </div>
       </div>
 
-      {/* Check Compatibility Button */}
-      <button
-        onClick={handleMatch}
-        className="w-full rounded-xl glass-button-primary py-3 text-center text-sm font-bold shadow-md transition print:hidden"
-      >
-        {t.checkCompatibility}
-      </button>
+      {/* Action Buttons Bar */}
+      <div className="flex flex-wrap items-center gap-3 print:hidden">
+        <button
+          onClick={handleMatch}
+          className="flex-1 rounded-xl glass-button-primary py-3 text-center text-sm font-bold shadow-md transition cursor-pointer"
+        >
+          {t.checkCompatibility}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleClearBoth}
+          title={t.clearForm || 'Clear Both Forms'}
+          className="rounded-xl glass-card px-5 py-3 text-sm font-medium text-[#736a60] hover:text-[#802020] hover:bg-rose-50/50 dark:hover:bg-rose-950/30 transition shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <RotateCcw className="h-4 w-4" />
+          <span>{t.clearForm || 'Clear All'}</span>
+        </button>
+      </div>
 
       {/* Results Display */}
       {milanResult && (

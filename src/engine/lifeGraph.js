@@ -8,11 +8,11 @@ export function generate120YearLifeGraph(kundliData, birthYear = 1986) {
   const points = [];
   const milestones = [];
 
-  // Determine baseline strength from Lagna & Moon
+  // Determine baseline strength from Lagna
+  const planets = kundliData?.planets || kundliData?.astro?.planets;
   const lagnaSign =
-    kundliData && kundliData.astro && kundliData.astro.planets && kundliData.astro.planets.Lagna
-      ? Math.floor(kundliData.astro.planets.Lagna.lon / 30)
-      : 0;
+    kundliData?.lagnaSignIndex ??
+    (planets?.Lagna ? Math.floor((((planets.Lagna.lon % 360) + 360) % 360) / 30) : 0);
 
   for (let age = 0; age <= 120; age += 2) {
     const year = birthYear + age;

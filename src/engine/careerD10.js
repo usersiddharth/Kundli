@@ -75,8 +75,7 @@ export const CAREER_DOMAINS = [
  * Evaluate D10 Dashamsha Career Strengths
  */
 export function analyzeD10Career(kundliData) {
-  const planets =
-    kundliData && kundliData.astro && kundliData.astro.planets ? kundliData.astro.planets : {};
+  const planets = kundliData?.planets || kundliData?.astro?.planets || {};
 
   const sunLon = planets.Sun ? planets.Sun.lon : 0;
   const marsLon = planets.Mars ? planets.Mars.lon : 0;

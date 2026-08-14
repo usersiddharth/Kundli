@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Sparkles, Calendar, Clock, CalendarDays, Hash, Heart } from 'lucide-react';
+import { Home, Sparkles, Calendar, Clock, CalendarDays, Hash, Heart, Orbit } from 'lucide-react';
 
 export default function MobileBottomNav({ mainSection, setMainSection }) {
   const tabs = [
@@ -45,17 +45,29 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
       sublabel: 'Matching',
       icon: Heart,
     },
+    {
+      id: 'upcomingEvents',
+      label: 'ઘટનાઓ',
+      sublabel: 'Events',
+      icon: Orbit,
+    },
+    {
+      id: 'rashifal',
+      label: 'રાશિફળ',
+      sublabel: 'Horoscope',
+      icon: Sparkles,
+    },
   ];
 
   return (
     <nav
       aria-label="Mobile Portal Navigation"
-      className="fixed bottom-0 left-0 right-0 z-50 sm:hidden glass-header border-t border-[var(--border-subtle)] px-1 py-1.5 backdrop-blur-xl shadow-2xl print:hidden"
+      className="fixed bottom-0 left-0 right-0 z-50 sm:hidden glass-header border-t border-[var(--border-subtle)] px-1 py-1.5 backdrop-blur-xl shadow-2xl print:hidden overflow-x-auto no-scrollbar"
     >
       <div
         role="tablist"
         aria-label="Mobile Portal Tabs"
-        className="grid grid-cols-7 gap-0.5 max-w-lg mx-auto"
+        className="flex items-center justify-between min-w-[380px] max-w-lg mx-auto gap-0.5"
       >
         {tabs.map((tab) => {
           const Icon = tab.icon;

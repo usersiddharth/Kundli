@@ -11,6 +11,8 @@ import {
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
+  RotateCcw,
+  X,
 } from 'lucide-react';
 
 const iconMap = {
@@ -151,21 +153,49 @@ export default function AiConsultationView({ kundliData, t, lang }) {
 
       {/* Custom Question Query Form */}
       <div className="rounded-xl border border-[#e6dfd3] bg-[#f5efe6]/40 p-5 space-y-3">
-        <h4 className="font-serif text-sm font-semibold text-[#2c2825] flex items-center gap-1.5">
-          <MessageSquare className="h-4 w-4 text-[#b85d19]" /> Ask a Specific Question to AI
-          Astrologer
-        </h4>
+        <div className="flex items-center justify-between">
+          <h4 className="font-serif text-sm font-semibold text-[#2c2825] flex items-center gap-1.5">
+            <MessageSquare className="h-4 w-4 text-[#b85d19]" /> Ask a Specific Question to AI
+            Astrologer
+          </h4>
+          {(customQuestion || customAnswer) && (
+            <button
+              type="button"
+              onClick={() => {
+                setCustomQuestion('');
+                setCustomAnswer(null);
+              }}
+              title="Clear Question & Answer"
+              className="text-xs font-medium text-[#736a60] hover:text-[#802020] flex items-center gap-1 transition cursor-pointer"
+            >
+              <RotateCcw className="h-3 w-3" />
+              <span>Clear</span>
+            </button>
+          )}
+        </div>
         <form onSubmit={handleAskCustom} className="flex gap-2">
-          <input
-            type="text"
-            value={customQuestion}
-            onChange={(e) => setCustomQuestion(e.target.value)}
-            placeholder="e.g. When will my financial growth stabilize? or How is my health?"
-            className="flex-1 rounded-lg border border-[#e6dfd3] bg-[#fffdfa] px-3.5 py-2 text-xs text-[#2c2825] focus:border-[#b85d19] focus:outline-none"
-          />
+          <div className="relative flex-1">
+            <input
+              type="text"
+              value={customQuestion}
+              onChange={(e) => setCustomQuestion(e.target.value)}
+              placeholder="e.g. When will my financial growth stabilize? or How is my health?"
+              className="w-full rounded-lg border border-[#e6dfd3] bg-[#fffdfa] pl-3.5 pr-8 py-2 text-xs text-[#2c2825] focus:border-[#b85d19] focus:outline-none"
+            />
+            {customQuestion && (
+              <button
+                type="button"
+                onClick={() => setCustomQuestion('')}
+                title="Clear input"
+                className="absolute right-2 top-2 h-4 w-4 flex items-center justify-center text-[#736a60] hover:text-[#2c2825]"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            )}
+          </div>
           <button
             type="submit"
-            className="flex items-center gap-1.5 rounded-lg bg-[#2c2825] px-4 py-2 text-xs font-medium text-[#f4ebd9] hover:bg-[#423c38] transition shadow-xs"
+            className="flex items-center gap-1.5 rounded-lg bg-[#2c2825] px-4 py-2 text-xs font-medium text-[#f4ebd9] hover:bg-[#423c38] transition shadow-xs cursor-pointer"
           >
             <span>Consult</span>
             <ArrowRight className="h-3.5 w-3.5" />
@@ -174,9 +204,18 @@ export default function AiConsultationView({ kundliData, t, lang }) {
 
         {customAnswer && (
           <div className="mt-3 rounded-lg border border-[#e6dfd3] bg-[#fffdfa] p-4 text-xs space-y-2 animate-fadeIn">
-            <span className="font-semibold text-[#b85d19] block">
-              Answer for "{customQuestion}":
-            </span>
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-[#b85d19] block">
+                Answer for "{customQuestion}":
+              </span>
+              <button
+                type="button"
+                onClick={() => setCustomAnswer(null)}
+                className="text-[#736a60] hover:text-[#802020] text-[10px]"
+              >
+                Dismiss
+              </button>
+            </div>
             <p className="text-[#2c2825] leading-relaxed">
               {customAnswer.summary[lang] || customAnswer.summary.en}
             </p>
