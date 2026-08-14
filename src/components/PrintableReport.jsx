@@ -10,7 +10,18 @@ import AshtakvargaView from './AshtakvargaView.jsx';
 import ShadbalaView from './ShadbalaView.jsx';
 import DashaView from './DashaView.jsx';
 import { degToDms } from '../engine/astronomy.js';
-import { Printer, Compass, Sparkles, Award, ShieldCheck, Gem, User, Calendar, MapPin, Clock } from 'lucide-react';
+import {
+  Printer,
+  Compass,
+  Sparkles,
+  Award,
+  ShieldCheck,
+  Gem,
+  User,
+  Calendar,
+  MapPin,
+  Clock,
+} from 'lucide-react';
 
 export default function PrintableReport({ kundliData, formData, birthDate, t, lang }) {
   if (!kundliData) return null;
@@ -25,10 +36,12 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl glass-panel p-5 shadow-sm print:hidden">
         <div>
           <h3 className="font-serif text-lg font-bold text-[#2c2825] flex items-center gap-2">
-            <Printer className="h-5 w-5 text-[#b85d19]" /> {t.tabPrint} (Publication-Grade Vedic Horoscope Dossier)
+            <Printer className="h-5 w-5 text-[#b85d19]" /> {t.tabPrint} (Publication-Grade Vedic
+            Horoscope Dossier)
           </h3>
           <p className="text-xs text-[#736a60] mt-0.5">
-            સંપૂર્ણ કુંડળી, નવમાંશ ચાર્ટ, ગ્રહ સ્પષ્ટ, ષડ્બળ, દશા, દોષ અને રત્ન ઉપાયો સાથે A4 સાઇઝમાં પ્રિન્ટ અથવા PDF સેવ કરો
+            સંપૂર્ણ કુંડળી, નવમાંશ ચાર્ટ, ગ્રહ સ્પષ્ટ, ષડ્બળ, દશા, દોષ અને રત્ન ઉપાયો સાથે A4
+            સાઇઝમાં પ્રિન્ટ અથવા PDF સેવ કરો
           </p>
         </div>
 
@@ -44,7 +57,6 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
           PUBLICATION-GRADE PRINTABLE DOCUMENT DOSSIER (A4 Multi-Page Layout)
           ========================================================================= */}
       <div className="rounded-xl glass-panel p-8 shadow-sm space-y-8 print:border-none print:shadow-none print:p-0 print:space-y-6">
-
         {/* -----------------------------------------------------------------------
             PAGE 1: VEDIC INVOCATION, NATIVE PROFILE & D1 + D9 CHARTS
             ----------------------------------------------------------------------- */}
@@ -66,11 +78,17 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
           <div className="rounded-xl border border-[#d4c8b8] bg-[#fcfbf7] p-4 text-xs">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 font-mono">
               <div>
-                <span className="text-[10px] text-[#736a60] block font-sans">જાતકનું નામ (Name):</span>
-                <strong className="text-[#2c2825] text-sm font-sans">{formData.name || "Tapan Tailor"}</strong>
+                <span className="text-[10px] text-[#736a60] block font-sans">
+                  જાતકનું નામ (Name):
+                </span>
+                <strong className="text-[#2c2825] text-sm font-sans">
+                  {formData?.name || 'જાતક (Native)'}
+                </strong>
               </div>
               <div>
-                <span className="text-[10px] text-[#736a60] block font-sans">જન્મ તારીખ (DOB):</span>
+                <span className="text-[10px] text-[#736a60] block font-sans">
+                  જન્મ તારીખ (DOB):
+                </span>
                 <strong className="text-[#2c2825]">{formData.dob}</strong>
               </div>
               <div>
@@ -78,15 +96,25 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
                 <strong className="text-[#2c2825]">{formData.tob} (IST)</strong>
               </div>
               <div>
-                <span className="text-[10px] text-[#736a60] block font-sans">જન્મ સ્થળ (Place):</span>
+                <span className="text-[10px] text-[#736a60] block font-sans">
+                  જન્મ સ્થળ (Place):
+                </span>
                 <strong className="text-[#2c2825] font-sans truncate block">{formData.city}</strong>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 font-mono mt-2 pt-2 border-t border-[#e6dfd3] text-[11px] text-[#544d44]">
-              <div>અક્ષાંશ (Lat): <strong>{formData.lat}° N</strong></div>
-              <div>રેખાંશ (Lng): <strong>{formData.lng}° E</strong></div>
-              <div>ટાઈમ ઝોન (TZ): <strong>+{formData.tz} GMT</strong></div>
-              <div>અયનાંશ: <strong>{degToDms(kundliData.ayanamsha).formatted} (Lahiri)</strong></div>
+              <div>
+                અક્ષાંશ (Lat): <strong>{formData.lat}° N</strong>
+              </div>
+              <div>
+                રેખાંશ (Lng): <strong>{formData.lng}° E</strong>
+              </div>
+              <div>
+                ટાઈમ ઝોન (TZ): <strong>+{formData.tz} GMT</strong>
+              </div>
+              <div>
+                અયનાંશ: <strong>{degToDms(kundliData.ayanamsha).formatted} (Lahiri)</strong>
+              </div>
             </div>
           </div>
 
@@ -107,7 +135,8 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
           {/* Full Planetary Ephemeris Table */}
           <div className="avoid-page-break pt-2">
             <h4 className="font-serif text-sm font-bold text-[#2c2825] mb-2 flex items-center gap-1.5">
-              <Compass className="h-4 w-4 text-[#b85d19]" /> ગ્રહ સ્પષ્ટ અને નક્ષત્ર સ્થિતિ (Planetary Positions & Nakshatra)
+              <Compass className="h-4 w-4 text-[#b85d19]" /> ગ્રહ સ્પષ્ટ અને નક્ષત્ર સ્થિતિ
+              (Planetary Positions & Nakshatra)
             </h4>
             <PlanetaryTable kundliData={kundliData} t={t} />
           </div>
@@ -119,21 +148,24 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
         <div className="page-break-before space-y-6 pt-4">
           <div className="avoid-page-break">
             <h3 className="font-serif text-base font-bold text-[#b85d19] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Award className="h-4 w-4 text-[#b85d19]" /> ષડ્બળ અને ગ્રહ બળ તાકાત (Shadbala Strength Analysis)
+              <Award className="h-4 w-4 text-[#b85d19]" /> ષડ્બળ અને ગ્રહ બળ તાકાત (Shadbala
+              Strength Analysis)
             </h3>
             <ShadbalaView kundliData={kundliData} t={t} />
           </div>
 
           <div className="avoid-page-break">
             <h3 className="font-serif text-base font-bold text-[#2c2825] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[#b85d19]" /> સર્વાષ્ટકવર્ગ બિંદુ ચક્ર (Sarvashtakvarga Matrix)
+              <Sparkles className="h-4 w-4 text-[#b85d19]" /> સર્વાષ્ટકવર્ગ બિંદુ ચક્ર
+              (Sarvashtakvarga Matrix)
             </h3>
             <AshtakvargaView kundliData={kundliData} t={t} />
           </div>
 
           <div className="avoid-page-break">
             <h3 className="font-serif text-base font-bold text-[#2c2825] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[#b85d19]" /> મુખ્ય સક્રિય રાજયોગ અને ગ્રહ યુતિ (Major Rajayogas & Conjunctions)
+              <Sparkles className="h-4 w-4 text-[#b85d19]" /> મુખ્ય સક્રિય રાજયોગ અને ગ્રહ યુતિ
+              (Major Rajayogas & Conjunctions)
             </h3>
             <YogasView kundliData={kundliData} t={t} lang={lang} />
           </div>
@@ -145,21 +177,24 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
         <div className="page-break-before space-y-6 pt-4">
           <div className="avoid-page-break">
             <h3 className="font-serif text-base font-bold text-[#b85d19] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Clock className="h-4 w-4 text-[#b85d19]" /> વિંશોત્તરી મહાદશા અને અંતર્દશા (Vimshottari Dasha Timeline)
+              <Clock className="h-4 w-4 text-[#b85d19]" /> વિંશોત્તરી મહાદશા અને અંતર્દશા
+              (Vimshottari Dasha Timeline)
             </h3>
             <DashaView kundliData={kundliData} t={t} lang={lang} />
           </div>
 
           <div className="avoid-page-break">
             <h3 className="font-serif text-base font-bold text-[#802020] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-[#802020]" /> દોષ વિશ્લેષણ (Mangal, Kaal Sarp & Shani Sade Sati)
+              <ShieldCheck className="h-4 w-4 text-[#802020]" /> દોષ વિશ્લેષણ (Mangal, Kaal Sarp &
+              Shani Sade Sati)
             </h3>
             <DoshaReport kundliData={kundliData} t={t} lang={lang} />
           </div>
 
           <div className="avoid-page-break">
             <h3 className="font-serif text-base font-bold text-[#285e20] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Gem className="h-4 w-4 text-[#285e20]" /> શુભ રત્ન અને શાસ્ત્રીય ઉપાય ભલામણ (Gemstone & Vedic Remedies)
+              <Gem className="h-4 w-4 text-[#285e20]" /> શુભ રત્ન અને શાસ્ત્રીય ઉપાય ભલામણ (Gemstone
+              & Vedic Remedies)
             </h3>
             <GemstonesView kundliData={kundliData} t={t} lang={lang} />
           </div>
@@ -172,18 +207,20 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
                   || શુભમ્ ભવતુ • કલ્યાણમ્ અસ્તુ ||
                 </span>
                 <p className="text-[10px] text-[#736a60] mt-1">
-                  આ કુંડળી વૈદિક પરાશરી પદ્ધતિ અને ચિત્રા પક્ષીય લાહિડી અયનાંશ ગણતરી મુજબ તૈયાર કરવામાં આવેલ છે.
+                  આ કુંડળી વૈદિક પરાશરી પદ્ધતિ અને ચિત્રા પક્ષીય લાહિડી અયનાંશ ગણતરી મુજબ તૈયાર
+                  કરવામાં આવેલ છે.
                 </p>
               </div>
 
               <div className="text-right">
                 <div className="w-36 border-b border-dashed border-[#736a60] pb-1 mb-1"></div>
-                <span className="text-[10px] font-bold text-[#2c2825] uppercase">જ્યોતિષી હસ્તાક્ષર / મહોર</span>
+                <span className="text-[10px] font-bold text-[#2c2825] uppercase">
+                  જ્યોતિષી હસ્તાક્ષર / મહોર
+                </span>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ export const SHADBALA_REQUIRED_RUPAS = {
   Mercury: 7.0,
   Jupiter: 6.5,
   Venus: 5.5,
-  Saturn: 5.0
+  Saturn: 5.0,
 };
 
 // Natural brightness (Naisargika Bala) in Virupas (60 Virupas = 1 Rupa)
@@ -20,7 +20,7 @@ const NAISARGIKA_BALA = {
   Jupiter: 34.28,
   Mercury: 25.71,
   Mars: 17.14,
-  Saturn: 8.57
+  Saturn: 8.57,
 };
 
 export function calculateShadbala(kundliData, isDayBirth = true) {
@@ -29,15 +29,15 @@ export function calculateShadbala(kundliData, isDayBirth = true) {
 
   const results = {};
 
-  majorPlanets.forEach(pName => {
+  majorPlanets.forEach((pName) => {
     const p = planets[pName];
     if (!p) return;
 
     // 1. Sthana Bala (Positional Strength: Uchcha Bala, Saptavargaja Bala, Ojhayugma Bala)
     let sthanaBala = 120; // Base baseline in Virupas
-    if (p.dignity.includes("Exalted")) sthanaBala += 60;
-    else if (p.dignity.includes("Debilitated")) sthanaBala += 10;
-    else if (p.dignity.includes("Own House")) sthanaBala += 45;
+    if (p.dignity.includes('Exalted')) sthanaBala += 60;
+    else if (p.dignity.includes('Debilitated')) sthanaBala += 10;
+    else if (p.dignity.includes('Own House')) sthanaBala += 45;
     else sthanaBala += 30;
 
     // 2. Dig Bala (Directional Strength)
@@ -69,7 +69,8 @@ export function calculateShadbala(kundliData, isDayBirth = true) {
 
     // 6. Drik Bala (Aspectual Strength)
     let drikBala = 25;
-    if (p.houseNum === 1 || p.houseNum === 5 || p.houseNum === 9 || p.houseNum === 10) drikBala += 15;
+    if (p.houseNum === 1 || p.houseNum === 5 || p.houseNum === 9 || p.houseNum === 10)
+      drikBala += 15;
 
     // Total Virupas & Rupas (1 Rupa = 60 Virupas)
     const totalVirupas = sthanaBala + digBala + kaalaBala + chestaBala + naisargikaBala + drikBala;
@@ -91,7 +92,7 @@ export function calculateShadbala(kundliData, isDayBirth = true) {
       requiredRupas,
       strengthRatio,
       isAdequate,
-      status: isAdequate ? "Strong (બળવાન)" : "Moderate (સાધારણ)"
+      status: isAdequate ? 'Strong (બળવાન)' : 'Moderate (સાધારણ)',
     };
   });
 
@@ -103,6 +104,6 @@ export function calculateShadbala(kundliData, isDayBirth = true) {
 
   return {
     planetBalas: results,
-    rankedList: ranked
+    rankedList: ranked,
   };
 }

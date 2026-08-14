@@ -4,15 +4,15 @@ import { RASHIS, NAKSHATRAS } from './kundli.js';
 
 // Vimshottari Dasha Lord sequence & years for Sub-Lord calculation
 const DASHA_LORDS = [
-  { lord: "Ketu", years: 7 },
-  { lord: "Venus", years: 20 },
-  { lord: "Sun", years: 6 },
-  { lord: "Moon", years: 10 },
-  { lord: "Mars", years: 7 },
-  { lord: "Rahu", years: 18 },
-  { lord: "Jupiter", years: 16 },
-  { lord: "Saturn", years: 19 },
-  { lord: "Mercury", years: 17 }
+  { lord: 'Ketu', years: 7 },
+  { lord: 'Venus', years: 20 },
+  { lord: 'Sun', years: 6 },
+  { lord: 'Moon', years: 10 },
+  { lord: 'Mars', years: 7 },
+  { lord: 'Rahu', years: 18 },
+  { lord: 'Jupiter', years: 16 },
+  { lord: 'Saturn', years: 19 },
+  { lord: 'Mercury', years: 17 },
 ];
 
 const TOTAL_YEARS = 120;
@@ -20,8 +20,8 @@ const NAKSHATRA_SPAN = 360 / 27; // 13° 20' = 13.333333°
 
 // Calculate KP Sign Lord, Star Lord, and Sub Lord for any longitude
 export function getKpLords(longitude) {
-  const normLon = (longitude % 360 + 360) % 360;
-  
+  const normLon = ((longitude % 360) + 360) % 360;
+
   // 1. Sign Lord
   const signIdx = Math.floor(normLon / 30) % 12;
   const signLord = RASHIS[signIdx].lord;
@@ -34,9 +34,9 @@ export function getKpLords(longitude) {
   // 3. Sub Lord
   // Find position inside the current nakshatra
   const degInNak = normLon % NAKSHATRA_SPAN;
-  
+
   // Starting lord index in the Vimshottari cycle
-  let startLordIdx = DASHA_LORDS.findIndex(d => d.lord === starLord);
+  let startLordIdx = DASHA_LORDS.findIndex((d) => d.lord === starLord);
   if (startLordIdx === -1) startLordIdx = 0;
 
   let cumulativeDeg = 0;
@@ -45,7 +45,7 @@ export function getKpLords(longitude) {
   for (let i = 0; i < 9; i++) {
     const currentLord = DASHA_LORDS[(startLordIdx + i) % 9];
     const subSpan = (currentLord.years / TOTAL_YEARS) * NAKSHATRA_SPAN;
-    
+
     if (degInNak >= cumulativeDeg && degInNak < cumulativeDeg + subSpan + 0.000001) {
       subLord = currentLord.lord;
       break;
@@ -58,7 +58,7 @@ export function getKpLords(longitude) {
     signLord,
     nakshatra: nak.name,
     starLord,
-    subLord
+    subLord,
   };
 }
 
@@ -74,19 +74,29 @@ export function calculateKpSystem(kundliData) {
     return {
       houseNum: i + 1,
       degree: cuspLon,
-      ...kpInfo
+      ...kpInfo,
     };
   });
 
   // Planetary KP Status
   const planetKp = {};
-  const majorPlanetKeys = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"];
+  const majorPlanetKeys = [
+    'Sun',
+    'Moon',
+    'Mars',
+    'Mercury',
+    'Jupiter',
+    'Venus',
+    'Saturn',
+    'Rahu',
+    'Ketu',
+  ];
 
-  majorPlanetKeys.forEach(pKey => {
+  majorPlanetKeys.forEach((pKey) => {
     const p = planets[pKey];
     if (!p) return;
     const kpInfo = getKpLords(p.lon);
-    
+
     // Star Lord's house and Planet's house
     const starLordPlanet = planets[kpInfo.starLord];
     const starLordHouse = starLordPlanet ? starLordPlanet.houseNum : 1;
@@ -105,13 +115,13 @@ export function calculateKpSystem(kundliData) {
         levelA: `House ${starLordHouse} (Star Lord's House)`,
         levelB: `House ${p.houseNum} (Occupied House)`,
         levelC: `Lord of ${p.rashi.id}`,
-        levelD: `Star Lord of ${kpInfo.starLord}`
-      }
+        levelD: `Star Lord of ${kpInfo.starLord}`,
+      },
     };
   });
 
   return {
     cusps,
-    planetKp
+    planetKp,
   };
 }

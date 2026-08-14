@@ -15,7 +15,9 @@ export default function AshtakvargaView({ kundliData, t }) {
           <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
             <Grid className="h-5 w-5 text-[#b85d19]" /> Ashtakavarga Matrix (BAV & SAV)
           </h2>
-          <p className="text-xs text-[#736a60]">Benefic point contributions across 12 houses (Total SAV: {avData.totalSAV} Bindus)</p>
+          <p className="text-xs text-[#736a60]">
+            Benefic point contributions across 12 houses (Total SAV: {avData.totalSAV} Bindus)
+          </p>
         </div>
       </div>
 
@@ -32,8 +34,8 @@ export default function AshtakvargaView({ kundliData, t }) {
                 h.bindus >= 30
                   ? 'border-[#c1dec4] bg-[#e0edd8]/50 text-[#285e20]'
                   : h.bindus >= 28
-                  ? 'border-[#f0cca3] bg-[#fae8d4]/40 text-[#964708]'
-                  : 'border-[#e4b5b5] bg-[#f0d5d5]/40 text-[#802020]'
+                    ? 'border-[#f0cca3] bg-[#fae8d4]/40 text-[#964708]'
+                    : 'border-[#e4b5b5] bg-[#f0d5d5]/40 text-[#802020]'
               }`}
             >
               <div className="flex justify-between items-center">
@@ -49,14 +51,18 @@ export default function AshtakvargaView({ kundliData, t }) {
 
       {/* Bhinnashtakavarga (BAV) Table */}
       <div>
-        <h3 className="font-serif text-base font-semibold text-[#2c2825] mb-3">Bhinnashtakavarga (BAV) Planet Breakdown</h3>
+        <h3 className="font-serif text-base font-semibold text-[#2c2825] mb-3">
+          Bhinnashtakavarga (BAV) Planet Breakdown
+        </h3>
         <div className="overflow-x-auto rounded-xl border border-[#e6dfd3] bg-[#fffdfa]">
           <table className="w-full text-left text-xs text-[#2c2825]">
             <thead className="border-b border-[#e6dfd3] bg-[#f5efe6] font-semibold text-[#544d44]">
               <tr>
                 <th className="p-2.5">Planet</th>
                 {Array.from({ length: 12 }, (_, i) => (
-                  <th key={i} className="p-2.5 text-center font-mono">H{i + 1}</th>
+                  <th key={i} className="p-2.5 text-center font-mono">
+                    H{i + 1}
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -68,9 +74,15 @@ export default function AshtakvargaView({ kundliData, t }) {
                     <td className="p-2.5 font-semibold text-[#2c2825]">{t[pName] || pName}</td>
                     {row.map((val, idx) => (
                       <td key={idx} className="p-2.5 text-center font-mono font-medium">
-                        <span className={`inline-block w-6 py-0.5 rounded ${
-                          val >= 5 ? 'bg-[#e0edd8] text-[#285e20] font-bold' : val <= 2 ? 'bg-[#f0d5d5] text-[#802020]' : 'text-[#2c2825]'
-                        }`}>
+                        <span
+                          className={`inline-block w-6 py-0.5 rounded ${
+                            val >= 5
+                              ? 'bg-[#e0edd8] text-[#285e20] font-bold'
+                              : val <= 2
+                                ? 'bg-[#f0d5d5] text-[#802020]'
+                                : 'text-[#2c2825]'
+                          }`}
+                        >
                           {val}
                         </span>
                       </td>

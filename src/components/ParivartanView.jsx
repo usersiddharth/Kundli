@@ -23,7 +23,10 @@ export default function ParivartanView({ kundliData, t, lang }) {
       ) : (
         <div className="space-y-4">
           {parivartans.map((p, idx) => (
-            <div key={idx} className="rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-5 shadow-sm">
+            <div
+              key={idx}
+              className="rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-5 shadow-sm"
+            >
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#e6dfd3] pb-3">
                 <div className="flex items-center space-x-2">
                   <Award className="h-5 w-5 text-[#b85d19]" />
@@ -38,12 +41,19 @@ export default function ParivartanView({ kundliData, t, lang }) {
 
               <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="rounded-lg bg-[#f5efe6]/60 p-3">
-                  <span className="text-xs font-medium text-[#736a60]">{t.participatingPlanets}:</span>
-                  <p className="font-semibold text-[#2c2825]">{t[p.planet1] || p.planet1} ⇄ {t[p.planet2] || p.planet2}</p>
+                  <span className="text-xs font-medium text-[#736a60]">
+                    {t.participatingPlanets}:
+                  </span>
+                  <p className="font-semibold text-[#2c2825]">
+                    {t[p.planet1] || p.planet1} ⇄ {t[p.planet2] || p.planet2}
+                  </p>
                 </div>
                 <div className="rounded-lg bg-[#f5efe6]/60 p-3">
                   <span className="text-xs font-medium text-[#736a60]">{t.exchangedHouses}:</span>
-                  <p className="font-semibold text-[#2c2825]">House {p.house1} ({t[p.sign1] || p.sign1}) ⇄ House {p.house2} ({t[p.sign2] || p.sign2})</p>
+                  <p className="font-semibold text-[#2c2825]">
+                    House {p.house1} ({t[p.sign1] || p.sign1}) ⇄ House {p.house2} (
+                    {t[p.sign2] || p.sign2})
+                  </p>
                 </div>
               </div>
 

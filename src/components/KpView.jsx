@@ -14,7 +14,8 @@ export default function KpView({ kundliData, t }) {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6dfd3] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
-            <Key className="h-5 w-5 text-[#b85d19]" /> Krishnamurti Paddhati (KP System / કેપી જ્યોતિષ)
+            <Key className="h-5 w-5 text-[#b85d19]" /> Krishnamurti Paddhati (KP System / કેપી
+            જ્યોતિષ)
           </h2>
           <p className="text-xs text-[#736a60]">
             Exact Cuspal Sub-Lords, Placidus House Divisions, and 4-Level Planetary Significators
@@ -24,7 +25,9 @@ export default function KpView({ kundliData, t }) {
 
       {/* 12 House Cusps Table */}
       <div>
-        <h3 className="font-serif text-base font-semibold text-[#2c2825] mb-3">12 House Cuspal Sub-Lords (ભાવ પ્રારંભ અને સબ લોર્ડ)</h3>
+        <h3 className="font-serif text-base font-semibold text-[#2c2825] mb-3">
+          12 House Cuspal Sub-Lords (ભાવ પ્રારંભ અને સબ લોર્ડ)
+        </h3>
         <div className="overflow-x-auto rounded-xl border border-[#e6dfd3] bg-[#fffdfa]">
           <table className="w-full text-left text-xs text-[#2c2825]">
             <thead className="border-b border-[#e6dfd3] bg-[#f5efe6] font-semibold text-[#544d44]">
@@ -62,7 +65,9 @@ export default function KpView({ kundliData, t }) {
 
       {/* Planetary Significators Table */}
       <div>
-        <h3 className="font-serif text-base font-semibold text-[#2c2825] mb-3">Planetary KP Coordinates & Significations</h3>
+        <h3 className="font-serif text-base font-semibold text-[#2c2825] mb-3">
+          Planetary KP Coordinates & Significations
+        </h3>
         <div className="overflow-x-auto rounded-xl border border-[#e6dfd3] bg-[#fffdfa]">
           <table className="w-full text-left text-xs text-[#2c2825]">
             <thead className="border-b border-[#e6dfd3] bg-[#f5efe6] font-semibold text-[#544d44]">

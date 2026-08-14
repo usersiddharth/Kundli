@@ -22,15 +22,15 @@ export default function DoshaReport({ kundliData, t, lang }) {
               mangalDosha.isCancelled
                 ? 'bg-[#e0edd8] text-[#285e20]'
                 : mangalDosha.isPresent
-                ? 'bg-[#f0d5d5] text-[#802020]'
-                : 'bg-[#e0edd8] text-[#285e20]'
+                  ? 'bg-[#f0d5d5] text-[#802020]'
+                  : 'bg-[#e0edd8] text-[#285e20]'
             }`}
           >
             {mangalDosha.isCancelled
               ? t.mangalCancelled
               : mangalDosha.isPresent
-              ? t.mangalDoshaPresent
-              : t.mangalDoshaAbsent}
+                ? t.mangalDoshaPresent
+                : t.mangalDoshaAbsent}
           </span>
         </div>
 
@@ -41,7 +41,9 @@ export default function DoshaReport({ kundliData, t, lang }) {
         )}
 
         <div className="mt-4">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-[#544d44] mb-2">{t.remedies}:</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-[#544d44] mb-2">
+            {t.remedies}:
+          </h4>
           <ul className="list-disc space-y-1.5 pl-5 text-sm text-[#2c2825]">
             {(mangalDosha.remedies[lang] || mangalDosha.remedies.en).map((rem, i) => (
               <li key={i}>{rem}</li>
@@ -59,7 +61,9 @@ export default function DoshaReport({ kundliData, t, lang }) {
 
           <span
             className={`rounded-full px-3 py-1 text-xs font-semibold ${
-              kalsarpaDosha.isPresent ? 'bg-[#f0d5d5] text-[#802020]' : 'bg-[#e0edd8] text-[#285e20]'
+              kalsarpaDosha.isPresent
+                ? 'bg-[#f0d5d5] text-[#802020]'
+                : 'bg-[#e0edd8] text-[#285e20]'
             }`}
           >
             {kalsarpaDosha.isPresent ? `Present (${kalsarpaDosha.type})` : 'Absent'}
@@ -67,7 +71,9 @@ export default function DoshaReport({ kundliData, t, lang }) {
         </div>
 
         <div className="mt-4">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-[#544d44] mb-2">{t.remedies}:</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-[#544d44] mb-2">
+            {t.remedies}:
+          </h4>
           <ul className="list-disc space-y-1.5 pl-5 text-sm text-[#2c2825]">
             {(kalsarpaDosha.remedies[lang] || kalsarpaDosha.remedies.en).map((rem, i) => (
               <li key={i}>{rem}</li>
@@ -89,7 +95,9 @@ export default function DoshaReport({ kundliData, t, lang }) {
         </div>
 
         <div className="mt-4">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-[#544d44] mb-2">{t.remedies}:</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-[#544d44] mb-2">
+            {t.remedies}:
+          </h4>
           <ul className="list-disc space-y-1.5 pl-5 text-sm text-[#2c2825]">
             {(sadeSati.remedies[lang] || sadeSati.remedies.en).map((rem, i) => (
               <li key={i}>{rem}</li>

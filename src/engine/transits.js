@@ -19,14 +19,14 @@ export function calculateCurrentTransits(natalMoonSignIndex) {
   const currentPlanets = currentAstro.planets;
   const transitReport = [];
 
-  Object.keys(currentPlanets).forEach(pName => {
+  Object.keys(currentPlanets).forEach((pName) => {
     if (pName === 'Lagna') return;
     let p = currentPlanets[pName];
     let currentSignIndex = Math.floor(p.lon / 30);
     // House position from Natal Moon
-    let houseFromMoon = (((currentSignIndex - natalMoonSignIndex) % 12 + 12) % 12) + 1;
+    let houseFromMoon = ((((currentSignIndex - natalMoonSignIndex) % 12) + 12) % 12) + 1;
 
-    let impact = "Neutral";
+    let impact = 'Neutral';
     let isFavorable = [3, 6, 10, 11].includes(houseFromMoon);
     if (pName === 'Jupiter' && [2, 5, 7, 9, 11].includes(houseFromMoon)) isFavorable = true;
     if (pName === 'Moon' && [1, 3, 6, 7, 10, 11].includes(houseFromMoon)) isFavorable = true;
@@ -40,8 +40,8 @@ export function calculateCurrentTransits(natalMoonSignIndex) {
       desc: {
         en: `${pName} is transiting House ${houseFromMoon} from your Natal Moon. Result: ${isFavorable ? 'Auspicious & Positive' : 'Requires Caution & Patience'}.`,
         hi: `${pName} आपकी जन्म चंद्र राशि से भाव ${houseFromMoon} में गोचर कर रहा है। परिणाम: ${isFavorable ? 'शुभ एवं सकारात्मक' : 'सावधानी एवं धैर्य आवश्यक'}।`,
-        gu: `${pName} તમારી જન્મ ચંદ્ર રાશિથી સ્થાન ${houseFromMoon} માં ગોચર કરી રહ્યો છે. પરિણામ: ${isFavorable ? 'શુભ અને સકારાત્મક' : 'સાવધાની અને ધીરજ જરૂરી'}.`
-      }
+        gu: `${pName} તમારી જન્મ ચંદ્ર રાશિથી સ્થાન ${houseFromMoon} માં ગોચર કરી રહ્યો છે. પરિણામ: ${isFavorable ? 'શુભ અને સકારાત્મક' : 'સાવધાની અને ધીરજ જરૂરી'}.`,
+      },
     });
   });
 

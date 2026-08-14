@@ -24,9 +24,11 @@ export default function TransitView({ kundliData, t, lang }) {
               <span className="font-serif text-base font-semibold text-[#2c2825]">
                 {t[tr.planet] || tr.planet}
               </span>
-              <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                tr.isFavorable ? 'bg-[#e0edd8] text-[#285e20]' : 'bg-[#f5efe6] text-[#544d44]'
-              }`}>
+              <span
+                className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                  tr.isFavorable ? 'bg-[#e0edd8] text-[#285e20]' : 'bg-[#f5efe6] text-[#544d44]'
+                }`}
+              >
                 House {tr.houseFromMoon} Transit
               </span>
             </div>

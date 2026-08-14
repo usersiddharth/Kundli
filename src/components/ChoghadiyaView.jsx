@@ -12,18 +12,18 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
     if (['Amrit', 'Shubh', 'Labh'].includes(typeKey)) {
       return {
         label: lang === 'gu' ? '✅ શુભ' : lang === 'hi' ? '✅ शुभ' : '✅ Auspicious',
-        className: 'glass-badge-success'
+        className: 'glass-badge-success',
       };
     }
     if (typeKey === 'Chal') {
       return {
         label: lang === 'gu' ? '⚡ સામાન્ય' : lang === 'hi' ? '⚡ सामान्य' : '⚡ Neutral',
-        className: 'glass-badge-gold'
+        className: 'glass-badge-gold',
       };
     }
     return {
       label: lang === 'gu' ? '⚠️ અશુભ' : lang === 'hi' ? '⚠️ अशुभ' : '⚠️ Inauspicious',
-      className: 'glass-badge-danger'
+      className: 'glass-badge-danger',
     };
   };
 
@@ -42,7 +42,11 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
         </div>
 
         {/* Day / Night Switcher */}
-        <div role="tablist" aria-label="Choghadiya Time Mode" className="flex rounded-lg glass-pill p-1">
+        <div
+          role="tablist"
+          aria-label="Choghadiya Time Mode"
+          className="flex rounded-lg glass-pill p-1"
+        >
           <button
             role="tab"
             aria-selected={activeMode === 'day'}
@@ -79,9 +83,16 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
           <div className="flex items-center gap-2.5 text-[#802020]">
             <ShieldAlert className="h-4 w-4 shrink-0 text-[#802020]" aria-hidden="true" />
             <span>
-              આજનો રાહુ કાળ (Rahu Kaal): <strong className="font-mono text-[#802020] ml-1">{chData.rahuKaal}</strong>
-              <span className="ml-2 font-bold text-[#b85d19]"> [સ્લોટ #{chData.rahuKaalSlotNumber}]</span>
-              <span className="ml-2 text-[#544d44] hidden md:inline">— વૈદિક નિયમ: રાહુ કાળ દરમિયાન ગમે તેટલું શુભ ચોઘડિયું હોય તો પણ નવું શુભ કાર્ય શરૂ કરવું વર્જિત છે.</span>
+              આજનો રાહુ કાળ (Rahu Kaal):{' '}
+              <strong className="font-mono text-[#802020] ml-1">{chData.rahuKaal}</strong>
+              <span className="ml-2 font-bold text-[#b85d19]">
+                {' '}
+                [સ્લોટ #{chData.rahuKaalSlotNumber}]
+              </span>
+              <span className="ml-2 text-[#544d44] hidden md:inline">
+                — વૈદિક નિયમ: રાહુ કાળ દરમિયાન ગમે તેટલું શુભ ચોઘડિયું હોય તો પણ નવું શુભ કાર્ય શરૂ
+                કરવું વર્જિત છે.
+              </span>
             </span>
           </div>
         </div>
@@ -124,7 +135,9 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
                 </div>
 
                 <div className="flex flex-col items-end gap-1">
-                  <span className={`rounded-lg px-2 py-0.5 text-[10px] font-bold border shrink-0 ${badge.className}`}>
+                  <span
+                    className={`rounded-lg px-2 py-0.5 text-[10px] font-bold border shrink-0 ${badge.className}`}
+                  >
                     {badge.label}
                   </span>
                   {isRahuKaal && (
@@ -136,11 +149,13 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
               </div>
 
               {/* Time Interval Block */}
-              <div className={`font-mono text-xs font-semibold px-3 py-2 rounded-lg border text-center ${
-                isRahuKaal
-                  ? 'bg-[#f7dcdb] text-[#802020] border-[#e4aaaa]'
-                  : 'bg-[#f5efe6]/70 text-[#2c2825] border-[#e6dfd3]/80'
-              }`}>
+              <div
+                className={`font-mono text-xs font-semibold px-3 py-2 rounded-lg border text-center ${
+                  isRahuKaal
+                    ? 'bg-[#f7dcdb] text-[#802020] border-[#e4aaaa]'
+                    : 'bg-[#f5efe6]/70 text-[#2c2825] border-[#e6dfd3]/80'
+                }`}
+              >
                 {slot.start} – {slot.end}
               </div>
 
@@ -150,7 +165,9 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
                 {isRahuKaal && (
                   <div className="mt-2 pt-2 border-t border-[#e8b6b6] text-[#802020] font-semibold text-[10.5px] flex items-start gap-1">
                     <AlertTriangle className="h-3.5 w-3.5 shrink-0 mt-0.5" aria-hidden="true" />
-                    <span>રાહુ કાળ પ્રભાવ: અમૃત ચોઘડિયું હોવા છતાં આ સમયગાળામાં શુભ કાર્ય વર્જિત છે.</span>
+                    <span>
+                      રાહુ કાળ પ્રભાવ: અમૃત ચોઘડિયું હોવા છતાં આ સમયગાળામાં શુભ કાર્ય વર્જિત છે.
+                    </span>
                   </div>
                 )}
               </div>

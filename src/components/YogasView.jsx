@@ -23,7 +23,10 @@ export default function YogasView({ kundliData, t, lang }) {
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {yogas.map((y, idx) => (
-            <div key={idx} className="flex flex-col justify-between rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-5 shadow-xs">
+            <div
+              key={idx}
+              className="flex flex-col justify-between rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-5 shadow-xs"
+            >
               <div>
                 <div className="flex items-center justify-between border-b border-[#e6dfd3] pb-2">
                   <h3 className="font-serif text-base font-semibold text-[#2c2825] flex items-center gap-1.5">

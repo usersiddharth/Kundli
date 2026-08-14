@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { RASHIS, NAKSHATRAS } from '../engine/kundli.js';
-import { Compass, Sparkles, Orbit, Info } from 'lucide-react';
+import { RASHIS } from '../engine/kundli.js';
+import { Orbit } from 'lucide-react';
 
-export default function ZodiacWheel({ kundliData, t, lang }) {
+export default function ZodiacWheel({ kundliData, t }) {
   const [selectedSign, setSelectedSign] = useState(0); // 0 = Aries
   const [selectedPlanet, setSelectedPlanet] = useState(null);
 
@@ -19,12 +19,12 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
   const innerR = 120;
   const centerR = 60;
 
-  // Element colors
+  // Dark & Light compatible Element colors
   const elementColors = {
-    Fire: { bg: "#fdf1ec", stroke: "#e86c47", text: "#963518" },   // Aries, Leo, Sagi
-    Earth: { bg: "#f7f4ed", stroke: "#b89f74", text: "#574426" },  // Taurus, Virgo, Cap
-    Air: { bg: "#eef5f8", stroke: "#74a8c9", text: "#225675" },    // Gemini, Libra, Aqua
-    Water: { bg: "#edf6f3", stroke: "#66b19a", text: "#1b5a47" }   // Cancer, Scorpio, Pisces
+    Fire: { bg: 'rgba(230, 80, 50, 0.2)', stroke: '#e74c3c', text: '#ff7675' },
+    Earth: { bg: 'rgba(212, 175, 55, 0.18)', stroke: '#d4ac0d', text: '#f1c40f' },
+    Air: { bg: 'rgba(52, 152, 219, 0.2)', stroke: '#3498db', text: '#74b9ff' },
+    Water: { bg: 'rgba(38, 166, 154, 0.2)', stroke: '#1abc9c', text: '#55efc4' },
   };
 
   // Convert degrees to polar coordinate (0° = Top / North)
@@ -32,7 +32,7 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
     const angleRad = ((deg - 90) * Math.PI) / 180;
     return {
       x: cx + radius * Math.cos(angleRad),
-      y: cy + radius * Math.sin(angleRad)
+      y: cy + radius * Math.sin(angleRad),
     };
   };
 
@@ -47,20 +47,20 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
   };
 
   const selectedSignInfo = RASHIS[selectedSign];
-  const planetsInSelectedSign = majorPlanets.filter(p => p.signIndex === selectedSign);
+  const planetsInSelectedSign = majorPlanets.filter((p) => p.signIndex === selectedSign);
 
   return (
-    <div className="rounded-xl border border-[#e6dfd3] bg-[#fcfbf7] p-6 shadow-sm space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6dfd3] pb-4">
+    <div className="rounded-2xl glass-panel p-4 sm:p-6 space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
-          <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
-            <Orbit className="h-5 w-5 text-[#b85d19]" /> 360° Vedic Celestial Zodiac Wheel
+          <h2 className="text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif flex items-center gap-2">
+            <Orbit className="h-5 w-5 text-[var(--text-gold)]" /> 360° Vedic Celestial Zodiac Wheel
           </h2>
-          <p className="text-xs text-[#736a60]">
-            Interactive circular sky sphere mapping exact planetary longitudes, elements, and nakshatras
+          <p className="text-xs text-[var(--text-muted)]">
+            Interactive circular sky sphere mapping planetary longitudes, elements, and nakshatras
           </p>
         </div>
-        <span className="rounded-full bg-[#f5efe6] px-3 py-1 text-xs font-medium text-[#544d44]">
+        <span className="glass-badge-gold px-3 py-1 rounded-full text-xs font-semibold">
           Sidereal Natural Sky Projection
         </span>
       </div>
@@ -68,11 +68,32 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
       {/* SVG Zodiac Wheel */}
       <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
         <div className="relative">
-          <svg viewBox="0 0 500 500" className="h-96 w-96 max-w-full drop-shadow-sm select-none">
+          <svg viewBox="0 0 500 500" className="h-96 w-96 max-w-full drop-shadow-xl select-none">
             {/* Background Outer Ring */}
-            <circle cx={cx} cy={cy} r={outerR} fill="#fffdfa" stroke="#8c7456" strokeWidth="2" />
-            <circle cx={cx} cy={cy} r={innerR} fill="#fcfbf7" stroke="#e6dfd3" strokeWidth="1.5" />
-            <circle cx={cx} cy={cy} r={centerR} fill="#2c2825" stroke="#8c7456" strokeWidth="2" />
+            <circle
+              cx={cx}
+              cy={cy}
+              r={outerR}
+              fill="var(--bg-chart)"
+              stroke="var(--chart-line)"
+              strokeWidth="2"
+            />
+            <circle
+              cx={cx}
+              cy={cy}
+              r={innerR}
+              fill="var(--bg-chart-poly)"
+              stroke="var(--border-subtle)"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx={cx}
+              cy={cy}
+              r={centerR}
+              fill="var(--bg-pill)"
+              stroke="var(--chart-line)"
+              strokeWidth="2"
+            />
 
             {/* 12 Zodiac Segments */}
             {RASHIS.map((r, i) => {
@@ -87,14 +108,17 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
               return (
                 <g
                   key={r.id}
-                  onClick={() => { setSelectedSign(i); setSelectedPlanet(null); }}
-                  className="cursor-pointer transition-all hover:opacity-85"
+                  onClick={() => {
+                    setSelectedSign(i);
+                    setSelectedPlanet(null);
+                  }}
+                  className="cursor-pointer transition-all hover:opacity-90"
                 >
                   <path
                     d={describeArc(startDeg, endDeg, innerR, outerR)}
-                    fill={isSelected ? "#ecd8b8" : col.bg}
-                    stroke={isSelected ? "#b85d19" : col.stroke}
-                    strokeWidth={isSelected ? "2.5" : "1"}
+                    fill={isSelected ? 'var(--bg-chart-poly-selected)' : col.bg}
+                    stroke={isSelected ? 'var(--chart-line-selected)' : col.stroke}
+                    strokeWidth={isSelected ? '2.5' : '1'}
                   />
                   {/* Sign Symbol */}
                   <text
@@ -114,7 +138,7 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
                     y={midPos.y}
                     fontSize="11"
                     fontWeight="bold"
-                    fill="#2c2825"
+                    fill="var(--text-primary)"
                     textAnchor="middle"
                     dominantBaseline="middle"
                     className="font-serif"
@@ -143,9 +167,9 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
                   <circle
                     cx={planetPos.x}
                     cy={planetPos.y}
-                    r={isPlanSelected ? "13" : "10"}
-                    fill={isPlanSelected ? "#b85d19" : "#2c2825"}
-                    stroke="#fffdfa"
+                    r={isPlanSelected ? '13' : '10'}
+                    fill={isPlanSelected ? 'var(--text-gold)' : 'var(--bg-pill)'}
+                    stroke={isPlanSelected ? '#ffffff' : 'var(--chart-line)'}
                     strokeWidth="1.5"
                     className="shadow-md"
                   />
@@ -154,7 +178,7 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
                     y={planetPos.y}
                     fontSize="9"
                     fontWeight="bold"
-                    fill="#f4ebd9"
+                    fill={isPlanSelected ? '#0c0e17' : 'var(--text-primary)'}
                     textAnchor="middle"
                     dominantBaseline="middle"
                   >
@@ -170,7 +194,7 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
               y={cy - 6}
               fontSize="12"
               fontWeight="bold"
-              fill="#f4ebd9"
+              fill="var(--text-primary)"
               textAnchor="middle"
               className="font-serif"
             >
@@ -180,7 +204,7 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
               x={cx}
               y={cy + 10}
               fontSize="9"
-              fill="#c2b7a3"
+              fill="var(--text-gold)"
               textAnchor="middle"
               className="font-mono"
             >
@@ -190,42 +214,57 @@ export default function ZodiacWheel({ kundliData, t, lang }) {
         </div>
 
         {/* Selected Sign / Planet Info Card */}
-        <div className="w-full max-w-sm rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-5 shadow-2xs space-y-4">
-          <div className="border-b border-[#e6dfd3] pb-3">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#736a60]">Selected Cosmic Sector</span>
-            <h3 className="font-serif text-xl font-bold text-[#2c2825] flex items-center gap-2 mt-0.5">
-              <span>{selectedSignInfo.symbol}</span>
-              <span>{selectedSign + 1}. {t[selectedSignInfo.id] || selectedSignInfo.id}</span>
+        <div className="w-full max-w-sm rounded-xl glass-card p-5 space-y-4">
+          <div className="border-b border-[var(--border-subtle)] pb-3">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+              Selected Cosmic Sector
+            </span>
+            <h3 className="font-serif text-xl font-bold text-[var(--text-primary)] flex items-center gap-2 mt-0.5">
+              <span className="text-[var(--text-gold)]">{selectedSignInfo.symbol}</span>
+              <span>
+                {selectedSign + 1}. {t[selectedSignInfo.id] || selectedSignInfo.id}
+              </span>
             </h3>
             <div className="flex gap-2 mt-2">
-              <span className="rounded-md bg-[#f5efe6] px-2 py-0.5 text-xs font-semibold text-[#544d44]">
+              <span className="rounded-md glass-pill px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)]">
                 Lord: {t[selectedSignInfo.lord] || selectedSignInfo.lord}
               </span>
-              <span className="rounded-md bg-[#f5efe6] px-2 py-0.5 text-xs font-semibold text-[#b85d19]">
+              <span className="glass-badge-gold px-2 py-0.5 text-xs font-semibold">
                 Element: {selectedSignInfo.element}
               </span>
             </div>
           </div>
 
           <div>
-            <span className="text-xs font-semibold text-[#544d44] block mb-2">
-              Planets In This Sign ({planetsInSelectedSign.length}):
+            <span className="text-xs font-semibold text-[var(--text-secondary)] block mb-2">
+              Planets in this sign ({planetsInSelectedSign.length}):
             </span>
             {planetsInSelectedSign.length === 0 ? (
-              <p className="text-xs text-[#736a60] italic">No physical planet placed in this sign.</p>
+              <p className="text-xs text-[var(--text-muted)] italic">
+                No physical planet placed in this sign.
+              </p>
             ) : (
               <div className="space-y-2">
-                {planetsInSelectedSign.map(p => (
-                  <div key={p.name} className="flex justify-between items-center rounded-lg border border-[#e6dfd3] bg-[#fcfbf7] p-2.5 text-xs">
+                {planetsInSelectedSign.map((p) => (
+                  <div
+                    key={p.name}
+                    className="flex justify-between items-center rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-card)] p-2.5 text-xs"
+                  >
                     <div>
-                      <span className="font-semibold text-[#2c2825]">{t[p.name] || p.name}</span>
-                      <span className="text-[#736a60] text-[10px] block">
+                      <span className="font-semibold text-[var(--text-primary)]">
+                        {t[p.name] || p.name}
+                      </span>
+                      <span className="text-[var(--text-muted)] text-[10px] block">
                         {p.nakshatra} (Pada {p.pada})
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className="font-mono font-bold text-[#b85d19]">{(p.lon % 30).toFixed(2)}°</span>
-                      <span className="text-[10px] text-[#736a60] block">{p.dignity.split(' ')[0]}</span>
+                      <span className="font-mono font-bold text-[var(--text-gold)]">
+                        {(p.lon % 30).toFixed(2)}°
+                      </span>
+                      <span className="text-[10px] text-[var(--text-muted)] block">
+                        {p.dignity.split(' ')[0]}
+                      </span>
                     </div>
                   </div>
                 ))}

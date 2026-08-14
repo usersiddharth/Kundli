@@ -1,6 +1,6 @@
 import React from 'react';
 import { degToDms } from '../engine/astronomy.js';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Moon, Compass, Sun, Shield, Feather, Flame, Award } from 'lucide-react';
 
 export default function BasicDetails({ kundliData, t }) {
   if (!kundliData) return null;
@@ -9,40 +9,66 @@ export default function BasicDetails({ kundliData, t }) {
   const ayanamshaDms = degToDms(ayanamsha).formatted;
 
   const detailsList = [
-    { label: t.ayanamsha, value: ayanamshaDms, isMono: true },
-    { label: t.tithi, value: panchang.tithi },
-    { label: t.vaar, value: panchang.vaar },
-    { label: t.nakshatra, value: `${panchang.nakshatra} (Lord: ${panchang.nakshatraLord})` },
-    { label: t.pada, value: panchang.pada, isMono: true },
-    { label: t.ascendant, value: panchang.ascendant },
-    { label: t.sunSign, value: panchang.sunSign },
-    { label: t.moonSign, value: panchang.moonSign },
-    { label: t.gana, value: panchang.gana },
-    { label: t.yoni, value: panchang.yoni },
-    { label: t.nadi, value: panchang.nadi },
-    { label: t.varna, value: panchang.varna }
+    { label: t.ayanamsha || 'Ayanamsha', value: ayanamshaDms, isMono: true, icon: Compass },
+    { label: t.tithi || 'Tithi', value: panchang.tithi, icon: Moon },
+    { label: t.vaar || 'Vaar (Day)', value: panchang.vaar, icon: Sun },
+    {
+      label: t.nakshatra || 'Nakshatra',
+      value: `${panchang.nakshatra} (Lord: ${panchang.nakshatraLord})`,
+      icon: Sparkles,
+    },
+    { label: t.pada || 'Pada', value: `Quarter ${panchang.pada}`, isMono: true, icon: Feather },
+    {
+      label: t.ascendant || 'Lagna (Ascendant)',
+      value: t[panchang.ascendant] || panchang.ascendant,
+      icon: Compass,
+    },
+    { label: t.sunSign || 'Sun Sign', value: t[panchang.sunSign] || panchang.sunSign, icon: Sun },
+    {
+      label: t.moonSign || 'Moon Sign',
+      value: t[panchang.moonSign] || panchang.moonSign,
+      icon: Moon,
+    },
+    { label: t.gana || 'Gana', value: panchang.gana, icon: Shield },
+    { label: t.yoni || 'Yoni Symbol', value: panchang.yoni, icon: Feather },
+    { label: t.nadi || 'Nadi Element', value: panchang.nadi, icon: Flame },
+    { label: t.varna || 'Varna Category', value: panchang.varna, icon: Award },
   ];
 
   return (
-    <div className="rounded-xl glass-panel p-6 shadow-sm">
-      <div className="mb-4 flex items-center justify-between border-b border-[#e6dfd3]/80 pb-3">
-        <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-[#b85d19]" /> {t.avakhadaChakra}
+    <div className="rounded-2xl glass-panel p-4 sm:p-6 space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4">
+        <h2 className="text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Sparkles className="h-5 w-5 text-[var(--text-gold)]" />{' '}
+          {t.avakhadaChakra || 'Avakahada Chakra & Panchang Details'}
         </h2>
-        <span className="rounded-full glass-pill px-3 py-1 text-xs font-medium text-[#544d44]">
-          Chitra Paksha
+        <span className="glass-badge-gold px-3 py-1 rounded-full text-xs font-semibold">
+          Chitra Paksha (Lahiri)
         </span>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {detailsList.map((item, idx) => (
-          <div key={idx} className="flex items-center justify-between rounded-lg glass-card p-3 shadow-2xs">
-            <span className="text-xs font-medium text-[#736a60]">{item.label}</span>
-            <span className={`text-sm font-semibold text-[#2c2825] ${item.isMono ? 'font-mono' : ''}`}>
-              {item.value}
-            </span>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {detailsList.map((item, idx) => {
+          const IconComponent = item.icon || Sparkles;
+          return (
+            <div
+              key={idx}
+              className="flex items-center justify-between rounded-xl glass-card p-3.5 transition hover:border-[var(--border-gold)]"
+            >
+              <div className="flex items-center space-x-2.5">
+                <div className="p-2 rounded-lg glass-pill text-[var(--text-gold)]">
+                  <IconComponent className="h-4 w-4" />
+                </div>
+                <span className="text-xs font-medium text-[var(--text-muted)]">{item.label}</span>
+              </div>
+              <span
+                className={`text-xs font-bold text-[var(--text-primary)] ${item.isMono ? 'font-mono' : ''}`}
+              >
+                {item.value}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
 import { calculateVimshottariDasha, calculateCurrentMicroDasha } from '../engine/dasha.js';
 import { generateSookshmaPranaReading } from '../engine/dashaPredictions.js';
-import { Clock, Sparkles, ChevronDown, ChevronRight, Search, Info, Activity, Zap, HelpCircle, Share2 } from 'lucide-react';
+import {
+  Clock,
+  Sparkles,
+  ChevronDown,
+  ChevronRight,
+  Search,
+  Info,
+  Activity,
+  Zap,
+  HelpCircle,
+  Share2,
+} from 'lucide-react';
 
 export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
   const [expandedIndex, setExpandedIndex] = useState(0);
@@ -18,19 +29,22 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
   const now = new Date();
   const nowStr = now.toISOString().split('T')[0];
 
-  const filteredDashaList = dashaList.filter(d =>
-    d.lord.toLowerCase().includes(filterQuery.toLowerCase()) ||
-    (t[d.lord] && t[d.lord].toLowerCase().includes(filterQuery.toLowerCase())) ||
-    d.startDate.includes(filterQuery) ||
-    d.endDate.includes(filterQuery)
+  const filteredDashaList = dashaList.filter(
+    (d) =>
+      d.lord.toLowerCase().includes(filterQuery.toLowerCase()) ||
+      (t[d.lord] && t[d.lord].toLowerCase().includes(filterQuery.toLowerCase())) ||
+      d.startDate.includes(filterQuery) ||
+      d.endDate.includes(filterQuery)
   );
 
   const handleShare = () => {
     if (navigator.share && microReading) {
-      navigator.share({
-        title: microReading.title[lang] || microReading.title.gu,
-        text: microReading.narrative
-      }).catch(() => {});
+      navigator
+        .share({
+          title: microReading.title[lang] || microReading.title.gu,
+          text: microReading.narrative,
+        })
+        .catch(() => {});
     }
   };
 
@@ -112,7 +126,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                     <span>
                       {lang === 'hi' ? 'तक लागू:' : lang === 'en' ? 'Valid until:' : 'સુધી માન્ય:'}
                     </span>
-                    <strong className="font-mono text-[#91450c]">{microReading.validUntil.formatted}</strong>
+                    <strong className="font-mono text-[#91450c]">
+                      {microReading.validUntil.formatted}
+                    </strong>
                   </p>
                 </div>
 
@@ -147,13 +163,19 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
               {/* Active Planet Badges Bar */}
               <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#e6dfd3]">
                 <span className="text-xs font-semibold text-[#736a60]">
-                  {lang === 'hi' ? 'सक्रिय ग्रह प्रभाव:' : lang === 'en' ? 'Active Influence:' : 'સક્રિય ગ્રહ પ્રભાવ:'}
+                  {lang === 'hi'
+                    ? 'सक्रिय ग्रह प्रभाव:'
+                    : lang === 'en'
+                      ? 'Active Influence:'
+                      : 'સક્રિય ગ્રહ પ્રભાવ:'}
                 </span>
                 <span className="rounded-lg glass-badge-gold px-2.5 py-1 text-xs font-bold text-[#8a6a12]">
-                  સૂક્ષ્મ દશા: {t[microReading.sookshmaLord] || microReading.sookshmaLord} ({microReading.primaryTheme})
+                  સૂક્ષ્મ દશા: {t[microReading.sookshmaLord] || microReading.sookshmaLord} (
+                  {microReading.primaryTheme})
                 </span>
                 <span className="rounded-lg glass-badge-warning px-2.5 py-1 text-xs font-bold text-[#a34e0e]">
-                  પ્રાણ દશા: {t[microReading.pranaLord] || microReading.pranaLord} ({microReading.hourlyFocus})
+                  પ્રાણ દશા: {t[microReading.pranaLord] || microReading.pranaLord} (
+                  {microReading.hourlyFocus})
                 </span>
               </div>
             </div>
@@ -177,76 +199,125 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {/* 1. Mahadasha */}
               <div className="rounded-xl glass-card p-3.5 space-y-1.5 border-l-4 border-l-[#b85d19]">
-                <span className="text-[10px] font-bold text-[#736a60] uppercase tracking-wider block">૧. મહાદશા (Mahadasha)</span>
-                <h4 className="font-serif text-base font-bold text-[#b85d19]">{t[currentMicro.mahadasha.lord] || currentMicro.mahadasha.lord}</h4>
+                <span className="text-[10px] font-bold text-[#736a60] uppercase tracking-wider block">
+                  ૧. મહાદશા (Mahadasha)
+                </span>
+                <h4 className="font-serif text-base font-bold text-[#b85d19]">
+                  {t[currentMicro.mahadasha.lord] || currentMicro.mahadasha.lord}
+                </h4>
                 <div className="text-[10px] font-mono text-[#544d44]">
                   {currentMicro.mahadasha.startDate} ➔ {currentMicro.mahadasha.endDate}
                 </div>
                 <div className="w-full bg-[#f5efe6] h-1.5 rounded-full overflow-hidden mt-2">
-                  <div className="bg-[#b85d19] h-full rounded-full" style={{ width: `${currentMicro.mahadasha.progress}%` }} />
+                  <div
+                    className="bg-[#b85d19] h-full rounded-full"
+                    style={{ width: `${currentMicro.mahadasha.progress}%` }}
+                  />
                 </div>
-                <span className="text-[9px] text-[#736a60] block text-right font-mono">{currentMicro.mahadasha.progress}% પૂર્ણ</span>
+                <span className="text-[9px] text-[#736a60] block text-right font-mono">
+                  {currentMicro.mahadasha.progress}% પૂર્ણ
+                </span>
               </div>
 
               {/* 2. Antardasha */}
               <div className="rounded-xl glass-card p-3.5 space-y-1.5 border-l-4 border-l-[#c59b27]">
-                <span className="text-[10px] font-bold text-[#736a60] uppercase tracking-wider block">૨. અંતર્દશા (Antardasha)</span>
-                <h4 className="font-serif text-base font-bold text-[#964708]">{t[currentMicro.antardasha.lord] || currentMicro.antardasha.lord}</h4>
+                <span className="text-[10px] font-bold text-[#736a60] uppercase tracking-wider block">
+                  ૨. અંતર્દશા (Antardasha)
+                </span>
+                <h4 className="font-serif text-base font-bold text-[#964708]">
+                  {t[currentMicro.antardasha.lord] || currentMicro.antardasha.lord}
+                </h4>
                 <div className="text-[10px] font-mono text-[#544d44]">
                   {currentMicro.antardasha.startDate} ➔ {currentMicro.antardasha.endDate}
                 </div>
                 <div className="w-full bg-[#f5efe6] h-1.5 rounded-full overflow-hidden mt-2">
-                  <div className="bg-[#c59b27] h-full rounded-full" style={{ width: `${currentMicro.antardasha.progress}%` }} />
+                  <div
+                    className="bg-[#c59b27] h-full rounded-full"
+                    style={{ width: `${currentMicro.antardasha.progress}%` }}
+                  />
                 </div>
-                <span className="text-[9px] text-[#736a60] block text-right font-mono">{currentMicro.antardasha.progress}% પૂર્ણ</span>
+                <span className="text-[9px] text-[#736a60] block text-right font-mono">
+                  {currentMicro.antardasha.progress}% પૂર્ણ
+                </span>
               </div>
 
               {/* 3. Pratyantardasha */}
               <div className="rounded-xl glass-card p-3.5 space-y-1.5 border-l-4 border-l-[#285e20]">
-                <span className="text-[10px] font-bold text-[#736a60] uppercase tracking-wider block">૩. પ્રત્યંતર્દશા (Pratyantar)</span>
-                <h4 className="font-serif text-base font-bold text-[#1f5218]">{t[currentMicro.pratyantardasha.lord] || currentMicro.pratyantardasha.lord}</h4>
+                <span className="text-[10px] font-bold text-[#736a60] uppercase tracking-wider block">
+                  ૩. પ્રત્યંતર્દશા (Pratyantar)
+                </span>
+                <h4 className="font-serif text-base font-bold text-[#1f5218]">
+                  {t[currentMicro.pratyantardasha.lord] || currentMicro.pratyantardasha.lord}
+                </h4>
                 <div className="text-[10px] font-mono text-[#544d44]">
                   {currentMicro.pratyantardasha.startDate} ➔ {currentMicro.pratyantardasha.endDate}
                 </div>
                 <div className="w-full bg-[#f5efe6] h-1.5 rounded-full overflow-hidden mt-2">
-                  <div className="bg-[#285e20] h-full rounded-full" style={{ width: `${currentMicro.pratyantardasha.progress}%` }} />
+                  <div
+                    className="bg-[#285e20] h-full rounded-full"
+                    style={{ width: `${currentMicro.pratyantardasha.progress}%` }}
+                  />
                 </div>
-                <span className="text-[9px] text-[#736a60] block text-right font-mono">{currentMicro.pratyantardasha.progress}% પૂર્ણ</span>
+                <span className="text-[9px] text-[#736a60] block text-right font-mono">
+                  {currentMicro.pratyantardasha.progress}% પૂર્ણ
+                </span>
               </div>
 
               {/* 4. Sookshma Dasha */}
               <div className="rounded-xl glass-card p-3.5 space-y-1.5 border-l-4 border-l-[#91450c] bg-[#fffaf2]">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-[#b85d19] uppercase tracking-wider block">૪. સૂક્ષ્મ દશા (Sookshma)</span>
-                  <span className="rounded glass-badge-warning px-1 text-[8px] font-bold font-mono">{currentMicro.sookshmaDasha.durationDays} દિવસ</span>
+                  <span className="text-[10px] font-bold text-[#b85d19] uppercase tracking-wider block">
+                    ૪. સૂક્ષ્મ દશા (Sookshma)
+                  </span>
+                  <span className="rounded glass-badge-warning px-1 text-[8px] font-bold font-mono">
+                    {currentMicro.sookshmaDasha.durationDays} દિવસ
+                  </span>
                 </div>
-                <h4 className="font-serif text-base font-bold text-[#b85d19]">{t[currentMicro.sookshmaDasha.lord] || currentMicro.sookshmaDasha.lord}</h4>
+                <h4 className="font-serif text-base font-bold text-[#b85d19]">
+                  {t[currentMicro.sookshmaDasha.lord] || currentMicro.sookshmaDasha.lord}
+                </h4>
                 <div className="text-[9.5px] font-mono text-[#544d44]">
-                  {currentMicro.sookshmaDasha.startDateFormatted.split(' ')[0]} ➔ {currentMicro.sookshmaDasha.endDateFormatted.split(' ')[0]}
+                  {currentMicro.sookshmaDasha.startDateFormatted.split(' ')[0]} ➔{' '}
+                  {currentMicro.sookshmaDasha.endDateFormatted.split(' ')[0]}
                 </div>
                 <div className="w-full bg-[#f5efe6] h-1.5 rounded-full overflow-hidden mt-2">
-                  <div className="bg-[#b85d19] h-full rounded-full" style={{ width: `${currentMicro.sookshmaDasha.progress}%` }} />
+                  <div
+                    className="bg-[#b85d19] h-full rounded-full"
+                    style={{ width: `${currentMicro.sookshmaDasha.progress}%` }}
+                  />
                 </div>
-                <span className="text-[9px] text-[#736a60] block text-right font-mono">{currentMicro.sookshmaDasha.progress}% પૂર્ણ</span>
+                <span className="text-[9px] text-[#736a60] block text-right font-mono">
+                  {currentMicro.sookshmaDasha.progress}% પૂર્ણ
+                </span>
               </div>
 
               {/* 5. Prana Dasha (Tiniest Dasa) */}
               <div className="rounded-xl glass-card p-3.5 space-y-1.5 border-l-4 border-l-[#802020] bg-[#fcf5f5] ring-1 ring-[#802020]/20">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-[#802020] uppercase tracking-wider block">૫. પ્રાણ દશા (Prana Dasha)</span>
-                  <span className="rounded bg-[#802020] text-white px-1.5 text-[8px] font-bold font-mono">{currentMicro.pranaDasha.durationMinutes} મિનિટ</span>
+                  <span className="text-[10px] font-bold text-[#802020] uppercase tracking-wider block">
+                    ૫. પ્રાણ દશા (Prana Dasha)
+                  </span>
+                  <span className="rounded bg-[#802020] text-white px-1.5 text-[8px] font-bold font-mono">
+                    {currentMicro.pranaDasha.durationMinutes} મિનિટ
+                  </span>
                 </div>
                 <h4 className="font-serif text-base font-bold text-[#802020] flex items-center gap-1">
                   <Zap className="h-3.5 w-3.5 text-[#b85d19] animate-pulse" aria-hidden="true" />
                   {t[currentMicro.pranaDasha.lord] || currentMicro.pranaDasha.lord}
                 </h4>
                 <div className="text-[9px] font-mono text-[#544d44] truncate">
-                  {currentMicro.pranaDasha.startDateFormatted.split(' ')[1]} ➔ {currentMicro.pranaDasha.endDateFormatted.split(' ')[1]}
+                  {currentMicro.pranaDasha.startDateFormatted.split(' ')[1]} ➔{' '}
+                  {currentMicro.pranaDasha.endDateFormatted.split(' ')[1]}
                 </div>
                 <div className="w-full bg-[#f5efe6] h-1.5 rounded-full overflow-hidden mt-2">
-                  <div className="bg-[#802020] h-full rounded-full" style={{ width: `${currentMicro.pranaDasha.progress}%` }} />
+                  <div
+                    className="bg-[#802020] h-full rounded-full"
+                    style={{ width: `${currentMicro.pranaDasha.progress}%` }}
+                  />
                 </div>
-                <span className="text-[9px] text-[#802020] block text-right font-mono font-bold">{currentMicro.pranaDasha.progress}% પૂર્ણ</span>
+                <span className="text-[9px] text-[#802020] block text-right font-mono font-bold">
+                  {currentMicro.pranaDasha.progress}% પૂર્ણ
+                </span>
               </div>
             </div>
           </div>
@@ -279,12 +350,16 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                         <span className="font-mono text-[10px] text-[#736a60]">#{sIdx + 1}</span>
                         <span className="font-medium">{t[sd.lord] || sd.lord}</span>
                         {isCurrent && (
-                          <span className="rounded-full glass-badge-warning px-1.5 py-0.2 text-[8px] font-bold">● સક્રિય</span>
+                          <span className="rounded-full glass-badge-warning px-1.5 py-0.2 text-[8px] font-bold">
+                            ● સક્રિય
+                          </span>
                         )}
                       </div>
 
                       <div className="text-right font-mono text-[10.5px]">
-                        <span className="text-[#544d44]">{sd.startDateFormatted} ➔ {sd.endDateFormatted}</span>
+                        <span className="text-[#544d44]">
+                          {sd.startDateFormatted} ➔ {sd.endDateFormatted}
+                        </span>
                         <span className="ml-2 text-[#736a60]">({sd.durationDays} દિવસ)</span>
                       </div>
                     </div>
@@ -319,13 +394,19 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                         <span className="font-mono text-[10px] text-[#736a60]">#{pIdx + 1}</span>
                         <span className="font-medium">{t[pr.lord] || pr.lord}</span>
                         {isCurrent && (
-                          <span className="rounded-full bg-[#802020] text-white px-1.5 py-0.2 text-[8px] font-bold animate-pulse">● સક્રિય</span>
+                          <span className="rounded-full bg-[#802020] text-white px-1.5 py-0.2 text-[8px] font-bold animate-pulse">
+                            ● સક્રિય
+                          </span>
                         )}
                       </div>
 
                       <div className="text-right font-mono text-[10.5px]">
-                        <span className="text-[#544d44]">{pr.startDateFormatted} ➔ {pr.endDateFormatted}</span>
-                        <span className="ml-2 font-bold text-[#b85d19]">({pr.durationMinutes} મિનિટ)</span>
+                        <span className="text-[#544d44]">
+                          {pr.startDateFormatted} ➔ {pr.endDateFormatted}
+                        </span>
+                        <span className="ml-2 font-bold text-[#b85d19]">
+                          ({pr.durationMinutes} મિનિટ)
+                        </span>
                       </div>
                     </div>
                   );
@@ -353,7 +434,10 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                 placeholder="Search planet or year..."
                 className="rounded-lg glass-input pl-8 pr-3 py-1.5 text-xs text-[#2c2825] focus:outline-hidden focus:ring-2 focus:ring-[#b85d19]"
               />
-              <Search className="absolute left-2.5 top-2 h-3.5 w-3.5 text-[#736a60]" aria-hidden="true" />
+              <Search
+                className="absolute left-2.5 top-2 h-3.5 w-3.5 text-[#736a60]"
+                aria-hidden="true"
+              />
             </div>
           </div>
 
@@ -376,7 +460,11 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                     className="flex w-full items-center justify-between p-4 text-left font-serif focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] rounded-xl"
                   >
                     <div className="flex items-center space-x-3">
-                      {isExpanded ? <ChevronDown className="h-4 w-4 text-[#736a60]" /> : <ChevronRight className="h-4 w-4 text-[#736a60]" />}
+                      {isExpanded ? (
+                        <ChevronDown className="h-4 w-4 text-[#736a60]" />
+                      ) : (
+                        <ChevronRight className="h-4 w-4 text-[#736a60]" />
+                      )}
                       <span className="text-base font-semibold text-[#2c2825]">
                         {t[d.lord] || d.lord} {t.mahadasha}
                       </span>
@@ -388,7 +476,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                     </div>
 
                     <div className="flex items-center space-x-4 font-mono text-xs text-[#736a60]">
-                      <span>{d.startDate} ➔ {d.endDate}</span>
+                      <span>
+                        {d.startDate} ➔ {d.endDate}
+                      </span>
                       <span className="font-semibold text-[#2c2825]">{d.years} Yrs</span>
                     </div>
                   </button>
@@ -413,7 +503,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                             >
                               <div className="flex justify-between font-medium">
                                 <span>{t[sub.lord] || sub.lord}</span>
-                                <span className="font-mono text-[11px] font-semibold">{sub.years} y</span>
+                                <span className="font-mono text-[11px] font-semibold">
+                                  {sub.years} y
+                                </span>
                               </div>
                               <div className="mt-1 font-mono text-[10px] text-[#736a60]">
                                 {sub.startDate} ➔ {sub.endDate}
@@ -448,20 +540,28 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
             <div className="rounded-xl glass-card p-4 space-y-2 border-l-4 border-l-[#b85d19]">
               <h4 className="font-bold text-sm text-[#b85d19]">સૂક્ષ્મ દશા (Sookshma Dasa)</h4>
               <p className="text-[#544d44]">
-                સૂક્ષ્મ દશાનો સમયગાળો <strong>૬.૫ કલાકથી લઈને ૩૩ દિવસ</strong> સુધીનો હોય છે. પ્રત્યંતર્દશાના સમયગાળાને સંબંધિત ગ્રહના દશા વર્ષ વડે ગુણીને ૧૨૦ વડે ભાગવાથી સૂક્ષ્મ દશા પ્રાપ્ત થાય છે.
+                સૂક્ષ્મ દશાનો સમયગાળો <strong>૬.૫ કલાકથી લઈને ૩૩ દિવસ</strong> સુધીનો હોય છે.
+                પ્રત્યંતર્દશાના સમયગાળાને સંબંધિત ગ્રહના દશા વર્ષ વડે ગુણીને ૧૨૦ વડે ભાગવાથી સૂક્ષ્મ
+                દશા પ્રાપ્ત થાય છે.
               </p>
               <p className="text-[#736a60] text-[11px]">
-                આ દશા આગામી થોડા દિવસો કે અઠવાડિયા દરમિયાન બનનારી મહત્વપૂર્ણ ઘટનાઓ, યાત્રાઓ, માનસિક સ્થિતિ અને તકોની ચોક્કસ આગાહી માટે અત્યંત ઉપયોગી છે.
+                આ દશા આગામી થોડા દિવસો કે અઠવાડિયા દરમિયાન બનનારી મહત્વપૂર્ણ ઘટનાઓ, યાત્રાઓ, માનસિક
+                સ્થિતિ અને તકોની ચોક્કસ આગાહી માટે અત્યંત ઉપયોગી છે.
               </p>
             </div>
 
             <div className="rounded-xl glass-card p-4 space-y-2 border-l-4 border-l-[#802020]">
-              <h4 className="font-bold text-sm text-[#802020]">પ્રાણ દશા (Prana Dasa - The Tiniest Period)</h4>
+              <h4 className="font-bold text-sm text-[#802020]">
+                પ્રાણ દશા (Prana Dasa - The Tiniest Period)
+              </h4>
               <p className="text-[#544d44]">
-                પ્રાણ દશા એ વિંશોત્તરી પદ્ધતિનો <strong>સૌથી સૂક્ષ્મ સમયગાળો</strong> છે, જેનો વ્યાપ <strong>૨૦ મિનિટથી લઈને ૬.૫ કલાક</strong> સુધીનો હોય છે. સૂક્ષ્મ દશાના સમયગાળાને ગ્રહ વર્ષ વડે ગુણી ૧૨૦ વડે ભાગવાથી પ્રાણ દશા મળે છે.
+                પ્રાણ દશા એ વિંશોત્તરી પદ્ધતિનો <strong>સૌથી સૂક્ષ્મ સમયગાળો</strong> છે, જેનો વ્યાપ{' '}
+                <strong>૨૦ મિનિટથી લઈને ૬.૫ કલાક</strong> સુધીનો હોય છે. સૂક્ષ્મ દશાના સમયગાળાને
+                ગ્રહ વર્ષ વડે ગુણી ૧૨૦ વડે ભાગવાથી પ્રાણ દશા મળે છે.
               </p>
               <p className="text-[#736a60] text-[11px]">
-                પ્રાણ દશા વ્યક્તિના કલાકે-કલાકના મૂડ, તાત્કાલિક નિર્ણયો, ટેલિફોન કોલ્સ, આકસ્મિક મુલાકાતો અને ક્ષણિક ઘટનાઓની સૂક્ષ્મ આગાહી માટે સક્ષમ બનાવે છે.
+                પ્રાણ દશા વ્યક્તિના કલાકે-કલાકના મૂડ, તાત્કાલિક નિર્ણયો, ટેલિફોન કોલ્સ, આકસ્મિક
+                મુલાકાતો અને ક્ષણિક ઘટનાઓની સૂક્ષ્મ આગાહી માટે સક્ષમ બનાવે છે.
               </p>
             </div>
           </div>
@@ -503,7 +603,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                 <span className="font-bold font-mono text-[#802020]">Level 5</span>
                 <span className="text-[#802020] font-bold">પ્રાણ દશા (Prana)</span>
                 <span className="font-mono font-bold text-[#802020]">૨૦ મિનિટ થી ૬.૫ કલાક</span>
-                <span className="font-sans font-bold text-[#802020]">કલાકે-કલાકના પરિણામ અને ત્વરિત ઘટનાઓ</span>
+                <span className="font-sans font-bold text-[#802020]">
+                  કલાકે-કલાકના પરિણામ અને ત્વરિત ઘટનાઓ
+                </span>
               </div>
             </div>
           </div>

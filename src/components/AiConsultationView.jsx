@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { CONSULTATION_TOPICS, generateAstrologicalInsight } from '../engine/aiConsultation.js';
-import { Sparkles, MessageSquare, Briefcase, Heart, Coins, Activity, GraduationCap, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import {
+  Sparkles,
+  MessageSquare,
+  Briefcase,
+  Heart,
+  Coins,
+  Activity,
+  GraduationCap,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2,
+} from 'lucide-react';
 
 const iconMap = {
   Briefcase,
@@ -8,7 +19,7 @@ const iconMap = {
   Coins,
   Activity,
   GraduationCap,
-  Sparkles
+  Sparkles,
 };
 
 export default function AiConsultationView({ kundliData, t, lang }) {
@@ -27,11 +38,43 @@ export default function AiConsultationView({ kundliData, t, lang }) {
     // Synthesis based on topic keywords
     let matchTopic = 'career';
     const qLower = customQuestion.toLowerCase();
-    if (qLower.includes('marriage') || qLower.includes('spouse') || qLower.includes('love') || qLower.includes('લગ્ન')) matchTopic = 'marriage';
-    else if (qLower.includes('money') || qLower.includes('wealth') || qLower.includes('finance') || qLower.includes('ધન') || qLower.includes('પૈસા')) matchTopic = 'wealth';
-    else if (qLower.includes('health') || qLower.includes('illness') || qLower.includes('સ્વાસ્થ્ય') || qLower.includes('બીમારી')) matchTopic = 'health';
-    else if (qLower.includes('study') || qLower.includes('exam') || qLower.includes('education') || qLower.includes('વિદ્યા')) matchTopic = 'education';
-    else if (qLower.includes('spirit') || qLower.includes('god') || qLower.includes('moksha') || qLower.includes('ધર્મ') || qLower.includes('મોક્ષ')) matchTopic = 'spirituality';
+    if (
+      qLower.includes('marriage') ||
+      qLower.includes('spouse') ||
+      qLower.includes('love') ||
+      qLower.includes('લગ્ન')
+    )
+      matchTopic = 'marriage';
+    else if (
+      qLower.includes('money') ||
+      qLower.includes('wealth') ||
+      qLower.includes('finance') ||
+      qLower.includes('ધન') ||
+      qLower.includes('પૈસા')
+    )
+      matchTopic = 'wealth';
+    else if (
+      qLower.includes('health') ||
+      qLower.includes('illness') ||
+      qLower.includes('સ્વાસ્થ્ય') ||
+      qLower.includes('બીમારી')
+    )
+      matchTopic = 'health';
+    else if (
+      qLower.includes('study') ||
+      qLower.includes('exam') ||
+      qLower.includes('education') ||
+      qLower.includes('વિદ્યા')
+    )
+      matchTopic = 'education';
+    else if (
+      qLower.includes('spirit') ||
+      qLower.includes('god') ||
+      qLower.includes('moksha') ||
+      qLower.includes('ધર્મ') ||
+      qLower.includes('મોક્ષ')
+    )
+      matchTopic = 'spirituality';
 
     const insight = generateAstrologicalInsight(matchTopic, kundliData, lang);
     setCustomAnswer(insight);
@@ -42,10 +85,12 @@ export default function AiConsultationView({ kundliData, t, lang }) {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6dfd3] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-[#b85d19]" /> AI Astrologer (જ્યોતિષ પરામર્શ & માર્ગદર્શન)
+            <Sparkles className="h-5 w-5 text-[#b85d19]" /> AI Astrologer (જ્યોતિષ પરામર્શ &
+            માર્ગદર્શન)
           </h2>
           <p className="text-xs text-[#736a60]">
-            Interactive personalized astrological guidance synthesizing all houses, lords, and planetary strengths
+            Interactive personalized astrological guidance synthesizing all houses, lords, and
+            planetary strengths
           </p>
         </div>
       </div>
@@ -59,7 +104,10 @@ export default function AiConsultationView({ kundliData, t, lang }) {
           return (
             <button
               key={topic.id}
-              onClick={() => { setSelectedTopic(topic.id); setCustomAnswer(null); }}
+              onClick={() => {
+                setSelectedTopic(topic.id);
+                setCustomAnswer(null);
+              }}
               className={`flex flex-col items-center justify-center rounded-xl border p-4 text-center text-xs transition shadow-2xs space-y-2 ${
                 isSelected
                   ? 'border-[#b85d19] bg-[#2c2825] text-[#f4ebd9] shadow-sm ring-2 ring-[#b85d19]/20'
@@ -104,7 +152,8 @@ export default function AiConsultationView({ kundliData, t, lang }) {
       {/* Custom Question Query Form */}
       <div className="rounded-xl border border-[#e6dfd3] bg-[#f5efe6]/40 p-5 space-y-3">
         <h4 className="font-serif text-sm font-semibold text-[#2c2825] flex items-center gap-1.5">
-          <MessageSquare className="h-4 w-4 text-[#b85d19]" /> Ask a Specific Question to AI Astrologer
+          <MessageSquare className="h-4 w-4 text-[#b85d19]" /> Ask a Specific Question to AI
+          Astrologer
         </h4>
         <form onSubmit={handleAskCustom} className="flex gap-2">
           <input

@@ -15,7 +15,9 @@ export default function GemstonesView({ kundliData, t, lang }) {
           <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
             <Gem className="h-5 w-5 text-[#b85d19]" /> Lucky Gemstones & Jaimini Karakas
           </h2>
-          <p className="text-xs text-[#736a60]">Astrological gemstone recommendations and primary soul indicators</p>
+          <p className="text-xs text-[#736a60]">
+            Astrological gemstone recommendations and primary soul indicators
+          </p>
         </div>
       </div>
 
@@ -23,7 +25,9 @@ export default function GemstonesView({ kundliData, t, lang }) {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <div className="rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-4 text-xs space-y-1">
           <span className="text-[#736a60] font-medium">Lucky Numbers</span>
-          <p className="font-mono text-base font-bold text-[#b85d19]">{luckyMeta.number.join(', ')}</p>
+          <p className="font-mono text-base font-bold text-[#b85d19]">
+            {luckyMeta.number.join(', ')}
+          </p>
         </div>
 
         <div className="rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-4 text-xs space-y-1">
@@ -49,11 +53,18 @@ export default function GemstonesView({ kundliData, t, lang }) {
         </h3>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {gemstones.map((gem, idx) => (
-            <div key={idx} className="flex flex-col justify-between rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-5 shadow-2xs space-y-3">
+            <div
+              key={idx}
+              className="flex flex-col justify-between rounded-xl border border-[#e6dfd3] bg-[#fffdfa] p-5 shadow-2xs space-y-3"
+            >
               <div>
                 <div className="flex justify-between items-center border-b border-[#e6dfd3] pb-2">
-                  <span className="text-xs font-semibold text-[#544d44] uppercase tracking-wider">{gem.type}</span>
-                  <span className="rounded-md bg-[#f5efe6] px-2 py-0.5 text-[11px] font-semibold text-[#b85d19]">{t[gem.planet] || gem.planet}</span>
+                  <span className="text-xs font-semibold text-[#544d44] uppercase tracking-wider">
+                    {gem.type}
+                  </span>
+                  <span className="rounded-md bg-[#f5efe6] px-2 py-0.5 text-[11px] font-semibold text-[#b85d19]">
+                    {t[gem.planet] || gem.planet}
+                  </span>
                 </div>
                 <h4 className="font-serif text-lg font-bold text-[#2c2825] mt-2">{gem.stone}</h4>
                 <p className="text-xs text-[#544d44] leading-relaxed mt-2">
@@ -62,9 +73,15 @@ export default function GemstonesView({ kundliData, t, lang }) {
               </div>
 
               <div className="rounded-lg bg-[#f5efe6]/60 p-2.5 text-[11px] text-[#736a60] space-y-1 border border-[#e6dfd3]/60">
-                <div><strong>Metal:</strong> {gem.metal}</div>
-                <div><strong>Finger:</strong> {gem.finger}</div>
-                <div><strong>Day:</strong> {gem.day}</div>
+                <div>
+                  <strong>Metal:</strong> {gem.metal}
+                </div>
+                <div>
+                  <strong>Finger:</strong> {gem.finger}
+                </div>
+                <div>
+                  <strong>Day:</strong> {gem.day}
+                </div>
               </div>
             </div>
           ))}

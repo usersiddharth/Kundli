@@ -31,18 +31,18 @@ export function detectParivartanYogas(kundliData) {
         let h1 = p1.houseNum;
         let h2 = p2.houseNum;
 
-        let yogaType = "";
-        let impactCategory = "";
+        let yogaType = '';
+        let impactCategory = '';
 
         if (dusthanaHouses.includes(h1) || dusthanaHouses.includes(h2)) {
-          yogaType = "Dainya Yoga";
-          impactCategory = "Challenging / Transformation";
+          yogaType = 'Dainya Yoga';
+          impactCategory = 'Challenging / Transformation';
         } else if (h1 === 3 || h2 === 3) {
-          yogaType = "Kahala Yoga";
-          impactCategory = "Effort & Courage";
+          yogaType = 'Kahala Yoga';
+          impactCategory = 'Effort & Courage';
         } else {
-          yogaType = "Maha Yoga";
-          impactCategory = "Highly Auspicious & Royal";
+          yogaType = 'Maha Yoga';
+          impactCategory = 'Highly Auspicious & Royal';
         }
 
         parivartanResults.push({
@@ -57,8 +57,8 @@ export function detectParivartanYogas(kundliData) {
           details: {
             en: `${p1Name} (House ${h1}) and ${p2Name} (House ${h2}) exchange their houses. This creates a ${yogaType}.`,
             hi: `${p1Name} (भाव ${h1}) तथा ${p2Name} (भाव ${h2}) ने अपनी राशियों का विनिमय किया है। यह एक ${yogaType} बनाता है।`,
-            gu: `${p1Name} (સ્થાન ${h1}) અને ${p2Name} (સ્થાન ${h2}) એ એકબીજાની રાશિનું પરિવર્તન કર્યું છે. આ એક ${yogaType} સર્જે છે.`
-          }
+            gu: `${p1Name} (સ્થાન ${h1}) અને ${p2Name} (સ્થાન ${h2}) એ એકબીજાની રાશિનું પરિવર્તન કર્યું છે. આ એક ${yogaType} સર્જે છે.`,
+          },
         });
       }
     }

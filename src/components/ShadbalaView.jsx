@@ -12,10 +12,12 @@ export default function ShadbalaView({ kundliData, t }) {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6dfd3] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-[#b85d19]" /> Shadbala (ષડ્બળ - 6-Fold Planetary Strength)
+            <BarChart3 className="h-5 w-5 text-[#b85d19]" /> Shadbala (ષડ્બળ - 6-Fold Planetary
+            Strength)
           </h2>
           <p className="text-xs text-[#736a60]">
-            Sthana, Dig, Kaala, Chesta, Naisargika, and Drik balas measured in Rupas and Virupas (60 Virupas = 1 Rupa)
+            Sthana, Dig, Kaala, Chesta, Naisargika, and Drik balas measured in Rupas and Virupas (60
+            Virupas = 1 Rupa)
           </p>
         </div>
       </div>
@@ -38,25 +40,35 @@ export default function ShadbalaView({ kundliData, t }) {
                   </span>
                   {t[p.name] || p.name}
                 </span>
-                <span className={`rounded-md px-2 py-0.5 text-[11px] font-semibold ${
-                  p.isAdequate ? 'bg-[#e0edd8] text-[#285e20]' : 'bg-[#fae8d4] text-[#964708]'
-                }`}>
+                <span
+                  className={`rounded-md px-2 py-0.5 text-[11px] font-semibold ${
+                    p.isAdequate ? 'bg-[#e0edd8] text-[#285e20]' : 'bg-[#fae8d4] text-[#964708]'
+                  }`}
+                >
                   {p.strengthRatio >= 1.2 ? 'Strong' : 'Moderate'}
                 </span>
               </div>
 
               <div>
                 <div className="flex justify-between text-[11px] text-[#736a60] mb-1">
-                  <span>Actual: <strong>{p.totalRupas} Rupas</strong></span>
+                  <span>
+                    Actual: <strong>{p.totalRupas} Rupas</strong>
+                  </span>
                   <span>Required: {p.requiredRupas}</span>
                 </div>
                 {/* Progress bar */}
                 <div className="w-full h-2 rounded-full bg-[#f5efe6] overflow-hidden border border-[#e6dfd3]">
                   <div
                     className={`h-full rounded-full transition-all duration-500 ${
-                      p.strengthRatio >= 1.2 ? 'bg-[#285e20]' : p.strengthRatio >= 1.0 ? 'bg-[#b85d19]' : 'bg-[#964708]'
+                      p.strengthRatio >= 1.2
+                        ? 'bg-[#285e20]'
+                        : p.strengthRatio >= 1.0
+                          ? 'bg-[#b85d19]'
+                          : 'bg-[#964708]'
                     }`}
-                    style={{ width: `${Math.min(100, (p.totalRupas / (p.requiredRupas * 1.5)) * 100)}%` }}
+                    style={{
+                      width: `${Math.min(100, (p.totalRupas / (p.requiredRupas * 1.5)) * 100)}%`,
+                    }}
                   />
                 </div>
               </div>
@@ -72,7 +84,9 @@ export default function ShadbalaView({ kundliData, t }) {
 
       {/* Detailed Shadbala Breakdown Matrix */}
       <div>
-        <h3 className="font-serif text-base font-semibold text-[#2c2825] mb-3">6-Fold Bala Breakdown Matrix (Virupas)</h3>
+        <h3 className="font-serif text-base font-semibold text-[#2c2825] mb-3">
+          6-Fold Bala Breakdown Matrix (Virupas)
+        </h3>
         <div className="overflow-x-auto rounded-xl border border-[#e6dfd3] bg-[#fffdfa]">
           <table className="w-full text-left text-xs text-[#2c2825]">
             <thead className="border-b border-[#e6dfd3] bg-[#f5efe6] font-semibold text-[#544d44]">

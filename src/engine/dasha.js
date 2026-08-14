@@ -2,15 +2,15 @@
 // Levels: Mahadasha (L1) -> Antardasha (L2) -> Pratyantardasha (L3) -> Sookshma Dasha (L4) -> Prana Dasha (L5)
 
 export const DASHA_LORDS = [
-  { lord: "Ketu", years: 7, planetGu: "કેતુ", planetHi: "केतु" },
-  { lord: "Venus", years: 20, planetGu: "શુક્ર", planetHi: "शुक्र" },
-  { lord: "Sun", years: 6, planetGu: "સૂર્ય", planetHi: "सूर्य" },
-  { lord: "Moon", years: 10, planetGu: "ચંદ્ર", planetHi: "चन्द्र" },
-  { lord: "Mars", years: 7, planetGu: "મંગળ", planetHi: "मंगल" },
-  { lord: "Rahu", years: 18, planetGu: "રાહુ", planetHi: "राहु" },
-  { lord: "Jupiter", years: 16, planetGu: "ગુરુ", planetHi: "बृहस्पति" },
-  { lord: "Saturn", years: 19, planetGu: "શનિ", planetHi: "शनि" },
-  { lord: "Mercury", years: 17, planetGu: "બુધ", planetHi: "बुध" }
+  { lord: 'Ketu', years: 7, planetGu: 'કેતુ', planetHi: 'केतु' },
+  { lord: 'Venus', years: 20, planetGu: 'શુક્ર', planetHi: 'शुक्र' },
+  { lord: 'Sun', years: 6, planetGu: 'સૂર્ય', planetHi: 'सूर्य' },
+  { lord: 'Moon', years: 10, planetGu: 'ચંદ્ર', planetHi: 'चन्द्र' },
+  { lord: 'Mars', years: 7, planetGu: 'મંગળ', planetHi: 'मंगल' },
+  { lord: 'Rahu', years: 18, planetGu: 'રાહુ', planetHi: 'राहु' },
+  { lord: 'Jupiter', years: 16, planetGu: 'ગુરુ', planetHi: 'बृहस्पति' },
+  { lord: 'Saturn', years: 19, planetGu: 'શનિ', planetHi: 'शनि' },
+  { lord: 'Mercury', years: 17, planetGu: 'બુધ', planetHi: 'बुध' },
 ];
 
 const TOTAL_CYCLE_YEARS = 120;
@@ -51,7 +51,7 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
   for (let i = 0; i < 9; i++) {
     let mLordIdx = (firstLordIndex + i) % 9;
     let mLordData = DASHA_LORDS[mLordIdx];
-    let durationYears = (i === 0) ? remainingYearsInFirst : mLordData.years;
+    let durationYears = i === 0 ? remainingYearsInFirst : mLordData.years;
 
     let mStartDate = new Date(runnerDate);
     let mEndMs = runnerDate.getTime() + durationYears * 365.25 * 24 * 3600 * 1000;
@@ -67,7 +67,7 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
 
       let aRatio = (mLordData.years * aLordData.years) / TOTAL_CYCLE_YEARS;
       if (i === 0) {
-        aRatio *= (durationYears / mLordData.years);
+        aRatio *= durationYears / mLordData.years;
       }
 
       let aStartDate = new Date(aRunner);
@@ -95,7 +95,7 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
           startDate: pdStartDate.toISOString().split('T')[0],
           endDate: pdEndDate.toISOString().split('T')[0],
           startMs: pdStartDate.getTime(),
-          endMs: pdEndMs
+          endMs: pdEndMs,
         });
 
         pdRunner = pdEndDate;
@@ -108,7 +108,7 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
         endDate: aEndDate.toISOString().split('T')[0],
         startMs: aStartDate.getTime(),
         endMs: aEndMs,
-        pratyantardashas
+        pratyantardashas,
       });
 
       aRunner = aEndDate;
@@ -121,7 +121,7 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
       endDate: mEndDate.toISOString().split('T')[0],
       startMs: mStartDate.getTime(),
       endMs: mEndMs,
-      antardashas
+      antardashas,
     });
 
     runnerDate = mEndDate;
@@ -132,7 +132,7 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
 
 // Calculate Sookshma Dashas (Level 4: ~6.5 hours to 33 days)
 export function calculateSookshmaDasha(pdStartMs, pdEndMs, pdLordName) {
-  let startLordIdx = DASHA_LORDS.findIndex(d => d.lord === pdLordName);
+  let startLordIdx = DASHA_LORDS.findIndex((d) => d.lord === pdLordName);
   if (startLordIdx === -1) startLordIdx = 0;
 
   const totalPdMs = pdEndMs - pdStartMs;
@@ -154,7 +154,7 @@ export function calculateSookshmaDasha(pdStartMs, pdEndMs, pdLordName) {
       startDateFormatted: formatDateTime(start),
       endDateFormatted: formatDateTime(end),
       startMs: runner,
-      endMs: runner + sdSpanMs
+      endMs: runner + sdSpanMs,
     });
 
     runner += sdSpanMs;
@@ -165,7 +165,7 @@ export function calculateSookshmaDasha(pdStartMs, pdEndMs, pdLordName) {
 
 // Calculate Prana Dashas (Level 5: ~20 minutes to ~6.5 hours)
 export function calculatePranaDasha(sdStartMs, sdEndMs, sdLordName) {
-  let startLordIdx = DASHA_LORDS.findIndex(d => d.lord === sdLordName);
+  let startLordIdx = DASHA_LORDS.findIndex((d) => d.lord === sdLordName);
   if (startLordIdx === -1) startLordIdx = 0;
 
   const totalSdMs = sdEndMs - sdStartMs;
@@ -187,7 +187,7 @@ export function calculatePranaDasha(sdStartMs, sdEndMs, sdLordName) {
       startDateFormatted: formatDateTime(start),
       endDateFormatted: formatDateTime(end),
       startMs: runner,
-      endMs: runner + prSpanMs
+      endMs: runner + prSpanMs,
     });
 
     runner += prSpanMs;
@@ -202,22 +202,29 @@ export function calculateCurrentMicroDasha(kundliData, birthDate, targetDate = n
   const fullTimeline = calculateVimshottariDasha(kundliData, birthDate);
 
   // 1. Find Active Mahadasha
-  const activeM = fullTimeline.find(m => targetMs >= m.startMs && targetMs <= m.endMs) || fullTimeline[0];
+  const activeM =
+    fullTimeline.find((m) => targetMs >= m.startMs && targetMs <= m.endMs) || fullTimeline[0];
   if (!activeM) return null;
 
   // 2. Find Active Antardasha
-  const activeA = activeM.antardashas.find(a => targetMs >= a.startMs && targetMs <= a.endMs) || activeM.antardashas[0];
+  const activeA =
+    activeM.antardashas.find((a) => targetMs >= a.startMs && targetMs <= a.endMs) ||
+    activeM.antardashas[0];
 
   // 3. Find Active Pratyantardasha
-  const activePD = activeA.pratyantardashas.find(pd => targetMs >= pd.startMs && targetMs <= pd.endMs) || activeA.pratyantardashas[0];
+  const activePD =
+    activeA.pratyantardashas.find((pd) => targetMs >= pd.startMs && targetMs <= pd.endMs) ||
+    activeA.pratyantardashas[0];
 
   // 4. Find Active Sookshma Dasha (Level 4)
   const sookshmaList = calculateSookshmaDasha(activePD.startMs, activePD.endMs, activePD.lord);
-  const activeSD = sookshmaList.find(sd => targetMs >= sd.startMs && targetMs <= sd.endMs) || sookshmaList[0];
+  const activeSD =
+    sookshmaList.find((sd) => targetMs >= sd.startMs && targetMs <= sd.endMs) || sookshmaList[0];
 
   // 5. Find Active Prana Dasha (Level 5)
   const pranaList = calculatePranaDasha(activeSD.startMs, activeSD.endMs, activeSD.lord);
-  const activePrD = pranaList.find(pr => targetMs >= pr.startMs && targetMs <= pr.endMs) || pranaList[0];
+  const activePrD =
+    pranaList.find((pr) => targetMs >= pr.startMs && targetMs <= pr.endMs) || pranaList[0];
 
   // Progress Calculations
   const calcProgress = (startMs, endMs) => {
@@ -233,20 +240,20 @@ export function calculateCurrentMicroDasha(kundliData, birthDate, targetDate = n
       startDate: activeM.startDate,
       endDate: activeM.endDate,
       years: activeM.years,
-      progress: calcProgress(activeM.startMs, activeM.endMs)
+      progress: calcProgress(activeM.startMs, activeM.endMs),
     },
     antardasha: {
       lord: activeA.lord,
       startDate: activeA.startDate,
       endDate: activeA.endDate,
       years: activeA.years,
-      progress: calcProgress(activeA.startMs, activeA.endMs)
+      progress: calcProgress(activeA.startMs, activeA.endMs),
     },
     pratyantardasha: {
       lord: activePD.lord,
       startDate: activePD.startDate,
       endDate: activePD.endDate,
-      progress: calcProgress(activePD.startMs, activePD.endMs)
+      progress: calcProgress(activePD.startMs, activePD.endMs),
     },
     sookshmaDasha: {
       lord: activeSD.lord,
@@ -255,7 +262,7 @@ export function calculateCurrentMicroDasha(kundliData, birthDate, targetDate = n
       durationDays: activeSD.durationDays,
       durationHours: activeSD.durationHours,
       progress: calcProgress(activeSD.startMs, activeSD.endMs),
-      allSlots: sookshmaList
+      allSlots: sookshmaList,
     },
     pranaDasha: {
       lord: activePrD.lord,
@@ -263,7 +270,7 @@ export function calculateCurrentMicroDasha(kundliData, birthDate, targetDate = n
       endDateFormatted: activePrD.endDateFormatted,
       durationMinutes: activePrD.durationMinutes,
       progress: calcProgress(activePrD.startMs, activePrD.endMs),
-      allSlots: pranaList
-    }
+      allSlots: pranaList,
+    },
   };
 }
