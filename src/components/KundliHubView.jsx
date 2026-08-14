@@ -17,6 +17,7 @@ import VarshphalView from './VarshphalView.jsx';
 import DashaView from './DashaView.jsx';
 import DoshaReport from './DoshaReport.jsx';
 import TransitView from './TransitView.jsx';
+import VedicClockView from './VedicClockView.jsx';
 import PrintableReport from './PrintableReport.jsx';
 
 import {
@@ -76,6 +77,7 @@ export default function KundliHubView({
       defaultTool: 'dasha',
       tools: [
         { id: 'dasha', label: { gu: '૫-સ્તરીય વિંશોત્તરી દશા (સૂક્ષ્મ-પ્રાણ)', hi: '५-स्तरीय विंशोत्तरी दशा', en: '5-Tier Dasha (Micro)' }, icon: Clock },
+        { id: 'vedicClock', label: { gu: 'વૈદિક ઘડિયાળ & કાળ ચક્ર', hi: 'वैदिक घड़ी व काल चक्र', en: 'Vedic Clock & Kaal Chakra' }, icon: Clock },
         { id: 'transits', label: { gu: 'રીઅલ-ટાઇમ ગોચર પરિભ્રમણ', hi: 'वर्तमान गोचर स्थिति', en: 'Real-Time Transits' }, icon: Activity },
         { id: 'varshphal', label: { gu: 'તાજિક વર્ષફળ & મુન્થા', hi: 'ताजिक वर्षफल एवं मुंथा', en: 'Tajik Varshphal' }, icon: Sun }
       ]
@@ -318,6 +320,10 @@ export default function KundliHubView({
 
         {activeSubTool === 'transits' && (
           <TransitView kundliData={kundliData} t={t} lang={lang} />
+        )}
+
+        {activeSubTool === 'vedicClock' && (
+          <VedicClockView t={t} lang={lang} />
         )}
 
         {activeSubTool === 'varshphal' && (

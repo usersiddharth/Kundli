@@ -28,6 +28,7 @@ export const en = {
   tabDoshas: "Dosha & Remedies Report",
   tabMatchmaking: "Kundli Matchmaking (Ashtakoota)",
   tabTransits: "Planetary Transits (Gochar)",
+  tabVedicClock: "Vedic Clock (Vedic Time & Muhurta)",
   tabPrint: "Print / Export PDF",
 
   // Form

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Calendar, CalendarDays, Hash, Heart } from 'lucide-react';
+import { Sparkles, Calendar, Clock, CalendarDays, Hash, Heart } from 'lucide-react';
 
 export default function MobileBottomNav({ mainSection, setMainSection, t }) {
   const tabs = [
@@ -16,6 +16,12 @@ export default function MobileBottomNav({ mainSection, setMainSection, t }) {
       icon: Calendar,
     },
     {
+      id: 'vedicClock',
+      label: 'ઘડિયાળ',
+      sublabel: 'Clock',
+      icon: Clock,
+    },
+    {
       id: 'calendar',
       label: 'કૅલેન્ડર',
       sublabel: 'Calendar',
@@ -29,7 +35,7 @@ export default function MobileBottomNav({ mainSection, setMainSection, t }) {
     },
     {
       id: 'matchmaking',
-      label: 'ગુણ મિલન',
+      label: 'મિલન',
       sublabel: 'Matching',
       icon: Heart,
     },
@@ -40,7 +46,7 @@ export default function MobileBottomNav({ mainSection, setMainSection, t }) {
       aria-label="Mobile Portal Navigation"
       className="fixed bottom-0 left-0 right-0 z-50 sm:hidden glass-header border-t border-[#d4c8b8] px-1 py-1.5 backdrop-blur-lg shadow-lg print:hidden"
     >
-      <div role="tablist" aria-label="Mobile Portal Tabs" className="grid grid-cols-5 gap-0.5 max-w-md mx-auto">
+      <div role="tablist" aria-label="Mobile Portal Tabs" className="grid grid-cols-6 gap-0.5 max-w-md mx-auto">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = mainSection === tab.id;

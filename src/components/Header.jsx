@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, Globe, Printer, Calendar, Sparkles, Heart, Hash, CalendarDays } from 'lucide-react';
+import { Compass, Globe, Printer, Calendar, Sparkles, Heart, Hash, CalendarDays, Clock } from 'lucide-react';
 
 export default function Header({ lang, setLang, t, mainSection, setMainSection }) {
   return (
@@ -21,7 +21,7 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
           </div>
         </div>
 
-        {/* Center Main 5-Portal Switcher (Desktop Only) */}
+        {/* Center Main 6-Portal Switcher (Desktop Only) */}
         <nav aria-label="Portal Navigation" className="hidden sm:block">
           <div role="tablist" aria-label="Portal Switcher" className="flex flex-wrap rounded-xl glass-pill p-1 shadow-inner print:hidden gap-1">
             <button
@@ -50,6 +50,20 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
             >
               <Calendar className="h-4 w-4 text-[#e6a86c]" />
               <span>ગુજરાતી પંચાંગ (Panchang)</span>
+            </button>
+
+            <button
+              role="tab"
+              aria-selected={mainSection === 'vedicClock'}
+              onClick={() => setMainSection('vedicClock')}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs sm:text-sm font-semibold transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] ${
+                mainSection === 'vedicClock'
+                  ? 'glass-button-dark text-[#f4ebd9] shadow-xs'
+                  : 'text-[#544d44] hover:bg-white/60'
+              }`}
+            >
+              <Clock className="h-4 w-4 text-[#e6a86c]" />
+              <span>વૈદિક ઘડિયાળ (Clock)</span>
             </button>
 
             <button

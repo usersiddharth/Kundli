@@ -13,12 +13,13 @@ import GujaratiPanchangView from './components/GujaratiPanchangView.jsx';
 import GujaratiCalendarView from './components/GujaratiCalendarView.jsx';
 import NumerologyView from './components/NumerologyView.jsx';
 import ChoghadiyaView from './components/ChoghadiyaView.jsx';
+import VedicClockView from './components/VedicClockView.jsx';
 import Matchmaking from './components/Matchmaking.jsx';
 import MobileBottomNav from './components/MobileBottomNav.jsx';
 
 export default function App() {
   const [lang, setLang] = useState('gu'); // Default Gujarati
-  const [mainSection, setMainSection] = useState('kundli'); // 'kundli' | 'panchang' | 'calendar' | 'numerology' | 'matchmaking'
+  const [mainSection, setMainSection] = useState('kundli'); // 'kundli' | 'panchang' | 'vedicClock' | 'calendar' | 'numerology' | 'matchmaking'
   const [externalPanchangDate, setExternalPanchangDate] = useState(null);
 
   const locales = { en, hi, gu };
@@ -109,7 +110,16 @@ export default function App() {
         )}
 
         {/* -----------------------------------------------------------------
-            PORTAL 3: GUJARATI WALL CALENDAR (VIKRAM SAMVAT 2082 - 2083)
+            PORTAL 3: VEDIC CLOCK & KAAL CHAKRA
+            ----------------------------------------------------------------- */}
+        {mainSection === 'vedicClock' && (
+          <div className="space-y-6 animate-fade-in-up">
+            <VedicClockView t={t} lang={lang} />
+          </div>
+        )}
+
+        {/* -----------------------------------------------------------------
+            PORTAL 4: GUJARATI WALL CALENDAR (VIKRAM SAMVAT 2082 - 2083)
             ----------------------------------------------------------------- */}
         {mainSection === 'calendar' && (
           <div className="space-y-6 animate-fade-in-up">

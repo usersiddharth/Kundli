@@ -28,6 +28,7 @@ export const gu = {
   tabDoshas: "દોષ અને ઉપાય રીપોર્ટ",
   tabMatchmaking: "કુંડળી મિલાન (ગુણ મિલન)",
   tabTransits: "વર્તમાન ગોચર (Transits)",
+  tabVedicClock: "વૈદિક ઘડિયાળ (Vedic Clock)",
   tabPrint: "પ્રિન્ટ / PDF ડાઉનલોડ",
 
   // Form

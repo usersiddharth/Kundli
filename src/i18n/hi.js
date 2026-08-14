@@ -28,6 +28,7 @@ export const hi = {
   tabDoshas: "दोष एवं उपाय रिपोर्ट",
   tabMatchmaking: "कुंडली मिलान (गुण मिलान)",
   tabTransits: "वर्तमान गोचर (Transits)",
+  tabVedicClock: "वैदिक घड़ी (Vedic Clock)",
   tabPrint: "प्रिंट / PDF डाउनलोड",
 
   // Form
