@@ -85,7 +85,7 @@
   }
 
   .font-serif {
-    font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Cinzel', 'Cormorant Garamond', 'Noto Serif Gujarati', 'Noto Sans Gujarati', 'Shruti', 'Nirmala UI', Georgia, serif;
   }
 
   /* Custom Smooth Scrollbar */

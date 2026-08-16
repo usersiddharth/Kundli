@@ -35,6 +35,9 @@ export default function GujaratiPanchangView({
     }
   }, [initialCustomDate]);
 
+  const birthDateStr = birthDate.toISOString().split('T')[0];
+  const todayDateStr = now.toISOString().split('T')[0];
+
   // Determine active date object
   let activeYear = birthDate.getFullYear();
   let activeMonth = birthDate.getMonth() + 1;
@@ -50,6 +53,13 @@ export default function GujaratiPanchangView({
     activeMonth = m;
     activeDay = d;
   }
+
+  const currentDateInputVal =
+    selectedDateMode === 'birth'
+      ? birthDateStr
+      : selectedDateMode === 'today'
+        ? todayDateStr
+        : customDate;
 
   const pData = calculateDetailedGujaratiPanchang(activeYear, activeMonth, activeDay);
 
@@ -113,7 +123,7 @@ export default function GujaratiPanchangView({
 
           <input
             type="date"
-            value={customDate}
+            value={currentDateInputVal}
             onChange={(e) => {
               setCustomDate(e.target.value);
               setSelectedDateMode('custom');
@@ -237,7 +247,7 @@ export default function GujaratiPanchangView({
               દિશા શૂળ: {pData.dishaShool.badDir}
             </span>
             <div className="text-[10px] text-[#736a60] pt-1">
-              સ્વામી: <strong>{pData.vaar.split(' ')[0]}</strong>
+              સ્વામી: <strong>{pData.vaarLord || pData.dishaShool.lord}</strong>
             </div>
           </div>
 

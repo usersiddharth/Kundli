@@ -99,40 +99,47 @@ export const DETAILED_TITHIS = [
   },
 ];
 
-// Disha Shool and Traditional Remedies
+// Disha Shool and Traditional Remedies with Planetary Day Lords
 export const DISHA_SHOOL = [
   {
     day: 'રવિવાર (Sunday)',
+    lord: 'સૂર્ય (Sun)',
     badDir: 'પશ્ચિમ (West)',
-    remedy: 'પાન ખાઈને મુસાફરી કરવી (Eat Betel Leaf)',
+    remedy: 'પાન અથવા ઘી ખાઈને પ્રસ્થાન કરવું (Eat Betel Leaf / Ghee)',
   },
   {
     day: 'સોમવાર (Monday)',
+    lord: 'ચંદ્ર (Moon)',
     badDir: 'પૂર્વ (East)',
     remedy: 'દર્પણ (અરીસો) જોઈને પ્રસ્થાન કરવું (Look in Mirror)',
   },
   {
     day: 'મંગળવાર (Tuesday)',
+    lord: 'મંગળ (Mars)',
     badDir: 'ઉત્તર (North)',
     remedy: 'ગોળ ખાઈને પ્રસ્થાન કરવું (Eat Jaggery)',
   },
   {
     day: 'બુધવાર (Wednesday)',
+    lord: 'બુધ (Mercury)',
     badDir: 'ઉત્તર (North)',
     remedy: 'ધાણા અથવા તલ ખાઈને પ્રસ્થાન કરવું (Eat Coriander)',
   },
   {
     day: 'ગુરુવાર (Thursday)',
+    lord: 'ગુરુ / બૃહસ્પતિ (Jupiter)',
     badDir: 'દક્ષિણ (South)',
     remedy: 'જીરું અથવા દહીં ખાઈને પ્રસ્થાન કરવું (Eat Cumin/Yogurt)',
   },
   {
     day: 'શુક્રવાર (Friday)',
+    lord: 'શુક્ર (Venus)',
     badDir: 'પશ્ચિમ (West)',
-    remedy: 'દહીં ખાઈને પ્રસ્થાન કરવું (Eat Curd/Yogurt)',
+    remedy: 'દહીં અથવા જવ ખાઈને પ્રસ્થાન કરવું (Eat Curd/Yogurt)',
   },
   {
     day: 'શનિવાર (Saturday)',
+    lord: 'શનિ (Saturn)',
     badDir: 'પૂર્વ (East)',
     remedy: 'આદું અથવા અડદ ખાઈને પ્રસ્થાન કરવું (Eat Ginger)',
   },
@@ -152,13 +159,7 @@ export function calculateDetailedGujaratiPanchang(
   const sunLon = astro.planets.Sun.lon;
   const moonLon = astro.planets.Moon.lon;
 
-  // 1. Vikram Samvat & Shaka Samvat
-  // Gujarati Vikram Samvat starts on Kartak Sud Ekam (approx late Oct / Nov)
-  // Standard conversion: Gregorian Year + 56 / 57
-  const vikramSamvat = month >= 11 ? year + 57 : year + 56;
-  const shakaSamvat = month >= 4 ? year - 78 : year - 79;
-
-  // 2. Tithi & Paksha Calculation
+  // 1. Tithi & Paksha Calculation
   const tithiDiff = (moonLon - sunLon + 360) % 360;
   const tithiIndexTotal = Math.floor(tithiDiff / 12); // 0 to 29
   const isShuklaPaksha = tithiIndexTotal < 15;
@@ -167,18 +168,34 @@ export function calculateDetailedGujaratiPanchang(
   const tithiInfo = DETAILED_TITHIS[tithiIndex];
   const tithiProgress = ((tithiDiff % 12) / 12) * 100;
 
-  // 3. Nakshatra
+  // 2. Gujarati Month & Ritu (Amanta System)
+  // Lunar month is determined by Sun's sign at the preceding Amavasya (New Moon)
+  const daysSinceNewMoon = tithiDiff / 12.190749;
+  const sunLonAtNewMoon = (sunLon - daysSinceNewMoon * 0.9856 + 3600) % 360;
+  const sunSignAtNewMoon = Math.floor(sunLonAtNewMoon / 30) % 12;
+  // Sun in Libra (6) at New Moon -> Kartak (0); Scorpio (7) -> Magshar (1), etc.
+  const gujMonthIdx = (sunSignAtNewMoon + 6) % 12;
+  const gujMonthName = GUJARATI_MONTHS[gujMonthIdx];
+  const ritu = RITUS.find((r) => r.months.includes(gujMonthIdx)) || RITUS[0];
+
+  // 3. Vikram Samvat & Shaka Samvat
+  // Gujarati Vikram Samvat starts on Kartak Sud Ekam (approx late Oct / Nov)
+  const isPastKartakSud = month >= 10 && (gujMonthIdx <= 2 || (gujMonthIdx === 11 && !isShuklaPaksha));
+  const vikramSamvat = isPastKartakSud ? year + 57 : year + 56;
+  const shakaSamvat = (gujMonthIdx >= 5 || (month >= 4 && gujMonthIdx < 11)) ? year - 78 : year - 79;
+
+  // 4. Nakshatra
   const nakDeg = 360 / 27;
   const nakIndex = Math.floor((((moonLon % 360) + 360) % 360) / nakDeg);
   const nakInfo = NAKSHATRAS[nakIndex];
   const nakPada = Math.floor(((((moonLon % 360) + 360) % 360) % nakDeg) / (nakDeg / 4)) + 1;
 
-  // 4. Nitya Yoga: (Sun Longitude + Moon Longitude) / 13° 20'
+  // 5. Nitya Yoga: (Sun Longitude + Moon Longitude) / 13° 20'
   const yogaSum = (sunLon + moonLon + 3600) % 360;
   const yogaIndex = Math.floor(yogaSum / (360 / 27));
   const yogaInfo = NITYA_YOGAS[yogaIndex % 27];
 
-  // 5. Karana: Each Tithi has 2 Karanas (6° each)
+  // 6. Karana: Each Tithi has 2 Karanas (6° each)
   const karanaIndexTotal = Math.floor(tithiDiff / 6);
   let karanaInfo;
   if (karanaIndexTotal === 0) {
@@ -195,20 +212,13 @@ export function calculateDetailedGujaratiPanchang(
     karanaInfo = KARANAS[movableIdx];
   }
 
-  // 6. Day of week & Disha Shool
+  // 7. Day of week & Disha Shool
   const dateObj = new Date(year, month - 1, day);
   const dayOfWeek = dateObj.getDay();
   const dishaInfo = DISHA_SHOOL[dayOfWeek];
 
-  // 7. Gujarati Month & Ritu
-  // Approximate Gujarati Month based on Solar Ingress / Lunar Tithi
-  const sunSignIdx = Math.floor((((sunLon % 360) + 360) % 360) / 30) % 12;
-  const gujMonthIdx = (sunSignIdx + 7) % 12; // Scorpio = Kartak, Sagittarius = Magshar...
-  const gujMonthName = GUJARATI_MONTHS[gujMonthIdx];
-  const ritu = RITUS.find((r) => r.months.includes(gujMonthIdx)) || RITUS[0];
-
   // 8. Ayana (Sun moving North = Uttarayana, South = Dakshinayana)
-  // Capricorn (9) to Gemini (2) = Uttarayana; Cancer (3) to Sagittarius (8) = Dakshinayana
+  const sunSignIdx = Math.floor((((sunLon % 360) + 360) % 360) / 30) % 12;
   const isUttarayana = sunSignIdx >= 9 || sunSignIdx <= 2;
   const ayanaName = isUttarayana ? 'ઉત્તરાયણ (Uttarayana)' : 'દક્ષિણાયન (Dakshinayana)';
 
@@ -276,6 +286,7 @@ export function calculateDetailedGujaratiPanchang(
       progress: Math.round(tithiProgress),
     },
     vaar: dishaInfo.day,
+    vaarLord: dishaInfo.lord,
     nakshatra: {
       name: nakInfo.name,
       lord: nakInfo.lord,

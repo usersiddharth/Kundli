@@ -19,12 +19,15 @@ import {
   Compass,
   Zap,
   Globe,
+  CalendarRange,
 } from 'lucide-react';
 
 export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedTimeframe, setSelectedTimeframe] = useState('all');
   const [selectedYear, setSelectedYear] = useState('all');
+  const [customStartDate, setCustomStartDate] = useState('');
+  const [customEndDate, setCustomEndDate] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
   const events = useMemo(() => {
@@ -32,17 +35,34 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
       year: selectedYear,
       category: selectedCategory,
       timeframe: selectedTimeframe,
+      customStartDate,
+      customEndDate,
       searchQuery,
       kundliData,
       currentDate: new Date(),
     });
-  }, [selectedYear, selectedCategory, selectedTimeframe, searchQuery, kundliData]);
+  }, [
+    selectedYear,
+    selectedCategory,
+    selectedTimeframe,
+    customStartDate,
+    customEndDate,
+    searchQuery,
+    kundliData,
+  ]);
 
   const handleClearFilters = () => {
     setSelectedCategory('all');
     setSelectedTimeframe('all');
     setSelectedYear('all');
+    setCustomStartDate('');
+    setCustomEndDate('');
     setSearchQuery('');
+  };
+
+  const handleClearDateRange = () => {
+    setCustomStartDate('');
+    setCustomEndDate('');
   };
 
   const handlePrint = () => {
@@ -97,7 +117,8 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
           આગામી ગ્રહીય ઘટનાઓ & ગોચર પંચાંગ (Upcoming Planetary Events Dossier)
         </h1>
         <p className="text-xs text-[#544d44] mt-0.5">
-          ખગોળીય રાશિ પરિવર્તન, વક્રી-માર્ગી ગ્રહો, સૂર્ય-ચંદ્ર ગ્રહણ અને વ્યક્તિગત પ્રભાવ
+          ખગોળીય રાશિ પરિવર્તન, આરંભ-સમાપ્તિ તારીખ, વક્રી-માર્ગી ગ્રહો, સૂર્ય-ચંદ્ર ગ્રહણ અને
+          વ્યક્તિગત પ્રભાવ
         </p>
       </div>
 
@@ -109,7 +130,7 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
             <span>આગામી ગ્રહીય ઘટનાઓ & ગોચર (Upcoming Planetary Events)</span>
           </h2>
           <p className="text-xs text-[#736a60]">
-            રાશિ પરિવર્તન, વક્રી-માર્ગી ગ્રહો, સૂર્ય-ચંદ્ર ગ્રહણ અને તમારી કુંડળી પર વ્યક્તિગત
+            આરંભ & સમાપ્તિ તારીખ, રાશિ પરિવર્તન, વક્રી-માર્ગી ગ્રહો, સૂર્ય-ચંદ્ર ગ્રહણ અને વ્યક્તિગત
             પ્રભાવ
           </p>
         </div>
@@ -166,9 +187,13 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
             ].map((tf) => (
               <button
                 key={tf.id}
-                onClick={() => setSelectedTimeframe(tf.id)}
+                onClick={() => {
+                  setSelectedTimeframe(tf.id);
+                  setCustomStartDate('');
+                  setCustomEndDate('');
+                }}
                 className={`flex-1 rounded-md py-1 text-[11px] font-medium text-center transition cursor-pointer ${
-                  selectedTimeframe === tf.id
+                  selectedTimeframe === tf.id && !customStartDate && !customEndDate
                     ? 'glass-badge-warning font-bold shadow-2xs'
                     : 'glass-pill text-[#544d44] hover:bg-white/60'
                 }`}
@@ -183,7 +208,11 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
             <span className="text-xs font-medium text-[#736a60] shrink-0">વર્ષ (Year):</span>
             <select
               value={selectedYear}
-              onChange={(e) => setSelectedYear(e.target.value)}
+              onChange={(e) => {
+                setSelectedYear(e.target.value);
+                setCustomStartDate('');
+                setCustomEndDate('');
+              }}
               className="flex-1 rounded-lg glass-input px-2.5 py-1.5 text-xs font-mono text-[#2c2825] focus:outline-none"
             >
               <option value="all">તમામ વર્ષ (All Years)</option>
@@ -217,6 +246,55 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
               </button>
             )}
           </div>
+        </div>
+
+        {/* Start Date & End Date Custom Range Picker Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#e6dfd3]/60 pt-3 text-xs">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-serif font-bold text-[#2c2825] flex items-center gap-1.5">
+              <CalendarRange className="h-4 w-4 text-[#b85d19]" />
+              તારીખ ગાળો (Date Range):
+            </span>
+
+            {/* Start Date */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] text-[#736a60]">શરૂઆત (From):</span>
+              <input
+                type="date"
+                value={customStartDate}
+                onChange={(e) => setCustomStartDate(e.target.value)}
+                className="rounded-lg glass-input px-2 py-1 text-xs font-mono text-[#2c2825] focus:outline-none"
+              />
+            </div>
+
+            {/* End Date */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] text-[#736a60]">સમાપ્તિ (To):</span>
+              <input
+                type="date"
+                value={customEndDate}
+                onChange={(e) => setCustomEndDate(e.target.value)}
+                className="rounded-lg glass-input px-2 py-1 text-xs font-mono text-[#2c2825] focus:outline-none"
+              />
+            </div>
+
+            {(customStartDate || customEndDate) && (
+              <button
+                onClick={handleClearDateRange}
+                title="Clear Date Range"
+                className="flex items-center gap-1 text-[11px] font-bold text-rose-700 hover:text-rose-900 ml-1 cursor-pointer"
+              >
+                <X className="h-3.5 w-3.5" />
+                <span>તારીખ સાફ કરો</span>
+              </button>
+            )}
+          </div>
+
+          <span className="text-[11px] font-mono text-[#736a60]">
+            {customStartDate && customEndDate
+              ? `${customStartDate} થી ${customEndDate}`
+              : 'તમામ સક્રિય ઘટનાઓ'}
+          </span>
         </div>
       </div>
 
@@ -271,8 +349,8 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
             કોઈ ગ્રહીય ઘટના મળી નથી (No Events Found)
           </h3>
           <p className="text-xs text-[#736a60] max-w-md mx-auto">
-            પસંદ કરેલ ફિલ્ટર્સ કે શોધ શબ્દ માટે કોઈ પરિણામ મળ્યું નથી. તમામ ઘટનાઓ જોવા માટે ફિલ્ટર્સ
-            સાફ કરો.
+            પસંદ કરેલ ફિલ્ટર્સ કે તારીખ ગાળા માટે કોઈ પરિણામ મળ્યું નથી. તમામ ઘટનાઓ જોવા માટે
+            ફિલ્ટર્સ સાફ કરો.
           </p>
           <button
             onClick={handleClearFilters}
@@ -284,16 +362,16 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
       ) : (
         <div className="space-y-4">
           {events.map((evt, idx) => {
-            const isToday = evt.timeStatus === 'today';
+            const isToday = evt.timeStatus === 'today' || evt.isOngoing;
             const isUpcoming = evt.timeStatus === 'upcoming';
 
             return (
               <div
                 key={evt.id || idx}
-                className={`rounded-xl border transition p-4 sm:p-5 shadow-xs space-y-3 ${
+                className={`rounded-xl border transition p-4 sm:p-5 shadow-xs space-y-3.5 ${
                   isToday
                     ? 'border-[#b85d19] bg-[#fff8ee] dark:bg-[#281b10] ring-1.5 ring-[#b85d19]'
-                    : isUpcoming && evt.diffDays <= 30
+                    : isUpcoming && evt.diffStartDays <= 30
                       ? 'border-[#8c7456]/50 glass-panel-accent'
                       : 'border-[#e6dfd3]/80 glass-panel'
                 }`}
@@ -301,22 +379,26 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
                 {/* Event Header: Date, Countdown Badge & Category */}
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#e6dfd3]/60 pb-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl glass-button-dark font-serif text-lg font-bold text-[#e6a86c]">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl glass-button-dark font-serif text-xl font-bold text-[#e6a86c]">
                       {evt.planetSymbol || '♃'}
                     </div>
 
                     <div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-sm font-bold text-[#2c2825]">
-                          {evt.date}
+                      <h3 className="font-serif text-base sm:text-lg font-bold text-[#b85d19] leading-tight">
+                        {evt.title[lang] || evt.title.gu || evt.title.en}
+                      </h3>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span
+                          className={`text-[10px] px-2 py-0.5 rounded-full font-semibold inline-block ${getCategoryBadgeClass(evt.category)}`}
+                        >
+                          {evt.category.toUpperCase()}
                         </span>
-                        <span className="font-mono text-xs text-[#736a60]">({evt.time} IST)</span>
+                        {evt.durationLabel && (
+                          <span className="text-[10px] font-mono text-[#736a60]">
+                            સમયગાળો: {evt.durationLabel[lang] || evt.durationLabel.gu}
+                          </span>
+                        )}
                       </div>
-                      <span
-                        className={`text-[10px] px-2 py-0.5 rounded-full font-semibold inline-block mt-0.5 ${getCategoryBadgeClass(evt.category)}`}
-                      >
-                        {evt.category.toUpperCase()}
-                      </span>
                     </div>
                   </div>
 
@@ -327,7 +409,7 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
                         isToday
                           ? 'glass-badge-danger animate-pulse-glow'
                           : isUpcoming
-                            ? evt.diffDays <= 30
+                            ? evt.diffStartDays <= 30
                               ? 'glass-badge-warning'
                               : 'glass-pill text-[#544d44]'
                             : 'bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-400'
@@ -338,14 +420,49 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
                   </div>
                 </div>
 
-                {/* Event Title & Sign Shift Transition */}
-                <div>
-                  <h3 className="font-serif text-base sm:text-lg font-bold text-[#b85d19]">
-                    {evt.title[lang] || evt.title.gu || evt.title.en}
-                  </h3>
+                {/* Explicit Start Date & End Date Timeline Box */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 rounded-xl glass-panel-accent p-3 border border-[#e6dfd3]/80">
+                  {/* Start Date */}
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 shrink-0">
+                      <Calendar className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-medium text-[#736a60] block">
+                        આરંભ તારીખ (Start Date & Time):
+                      </span>
+                      <div className="flex items-center gap-1.5 font-mono text-xs font-bold text-[#2c2825]">
+                        <span>{evt.startDateFormatted}</span>
+                        <span className="text-[11px] text-[#736a60]">
+                          ({evt.startTimeFormatted} IST)
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
+                  {/* End Date */}
+                  <div className="flex items-center gap-2.5 border-t sm:border-t-0 sm:border-l border-[#e6dfd3]/60 pt-2 sm:pt-0 sm:pl-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-500/15 text-rose-700 dark:text-rose-300 shrink-0">
+                      <Clock className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-medium text-[#736a60] block">
+                        સમાપ્તિ તારીખ (End Date & Time):
+                      </span>
+                      <div className="flex items-center gap-1.5 font-mono text-xs font-bold text-[#2c2825]">
+                        <span>{evt.endDateFormatted}</span>
+                        <span className="text-[11px] text-[#736a60]">
+                          ({evt.endTimeFormatted} IST)
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sign Shift Transition (if applicable) & Description */}
+                <div>
                   {evt.fromSign && evt.toSign && (
-                    <div className="flex items-center gap-2 text-xs text-[#544d44] font-medium mt-1">
+                    <div className="flex items-center gap-2 text-xs text-[#544d44] font-medium mb-2">
                       <span className="rounded glass-pill px-2 py-0.5 font-mono">
                         {evt.fromSign}
                       </span>
@@ -356,7 +473,7 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
                     </div>
                   )}
 
-                  <p className="text-xs text-[#2c2825] leading-relaxed mt-2">
+                  <p className="text-xs text-[#2c2825] leading-relaxed">
                     {evt.description[lang] || evt.description.gu || evt.description.en}
                   </p>
                 </div>

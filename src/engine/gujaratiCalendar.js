@@ -412,13 +412,16 @@ export function calculateDayPanchang(year, month, day) {
   const tithiNum = (tithiIndexTotal % 15) + 1;
   const tithiName = DETAILED_TITHIS[tithiNum - 1]?.name.split(' ')[0] || `તિથિ ${tithiNum}`;
 
-  // Gujarati Month calculation (Amanta)
-  const sunSignIdx = Math.floor((((sunLon % 360) + 360) % 360) / 30) % 12;
-  const gujMonthIdx = (sunSignIdx + 7) % 12; // Scorpio = Kartak...
+  // Gujarati Month calculation (Amanta System)
+  const daysSinceNewMoon = tithiDiff / 12.190749;
+  const sunLonAtNewMoon = (sunLon - daysSinceNewMoon * 0.9856 + 3600) % 360;
+  const sunSignAtNewMoon = Math.floor(sunLonAtNewMoon / 30) % 12;
+  const gujMonthIdx = (sunSignAtNewMoon + 6) % 12;
   const gujMonthName = GUJARATI_MONTHS[gujMonthIdx];
 
-  // Vikram Samvat
-  const vikramSamvat = month >= 11 ? year + 57 : year + 56;
+  // Vikram Samvat (Gujarati new year on Kartak Sud Ekam)
+  const isPastKartakSud = month >= 10 && (gujMonthIdx <= 2 || (gujMonthIdx === 11 && !isShuklaPaksha));
+  const vikramSamvat = isPastKartakSud ? year + 57 : year + 56;
 
   // Nakshatra
   const nakDeg = 360 / 27;

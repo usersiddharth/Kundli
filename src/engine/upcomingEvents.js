@@ -1,5 +1,5 @@
 // Upcoming Planetary Events & Astrological Transits Engine (2024 - 2030)
-// High-precision Vedic ephemeris of Ingresses, Retrogrades, Eclipses, Combustions, and Conjunctions.
+// High-precision Vedic ephemeris of Ingresses, Retrogrades, Eclipses, Combustions, and Conjunctions with Start & End Dates.
 
 import { RASHIS } from './kundli.js';
 
@@ -19,7 +19,7 @@ export const EVENT_CATEGORIES = [
   },
   {
     id: 'combustion',
-    label: { gu: 'અસ્ત / ઉદય (Combustion)', hi: 'अस्त / उदय', en: 'Combustion & Rise' },
+    label: { gu: 'અસ્ત / ઉદય (Combustion)', hi: 'અસ્ત / उदय', en: 'Combustion & Rise' },
   },
   {
     id: 'conjunction',
@@ -34,7 +34,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2024-05-01-jup',
     date: '2024-05-01',
+    startDate: '2024-05-01',
+    endDate: '2025-05-14',
     time: '12:59',
+    startTime: '12:59',
+    endTime: '23:20',
+    durationLabel: { gu: '૧ વર્ષ (૧૨ મહિના)', hi: '१ वर्ष (१२ माह)', en: '1 Year (12 Months)' },
     category: 'ingress',
     planet: 'Jupiter',
     planetSymbol: '♃',
@@ -55,7 +60,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2024-09-18-lun-ecl',
     date: '2024-09-18',
+    startDate: '2024-09-18',
+    endDate: '2024-09-18',
     time: '08:14',
+    startTime: '06:11',
+    endTime: '10:17',
+    durationLabel: { gu: '૪ કલાક ૬ મિનિટ', hi: '४ घंटे ६ मिनट', en: '4h 06m Window' },
     category: 'eclipse',
     planet: 'Moon',
     planetSymbol: '☽',
@@ -76,7 +86,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2024-10-02-sol-ecl',
     date: '2024-10-02',
+    startDate: '2024-10-02',
+    endDate: '2024-10-02',
     time: '21:19',
+    startTime: '19:13',
+    endTime: '23:25',
+    durationLabel: { gu: '૬ કલાક ૧૨ મિનિટ', hi: '६ घंटे १२ मिनट', en: '6h 12m Eclipse' },
     category: 'eclipse',
     planet: 'Sun',
     planetSymbol: '☉',
@@ -97,7 +112,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2024-10-09-jup-retro',
     date: '2024-10-09',
+    startDate: '2024-10-09',
+    endDate: '2025-02-04',
     time: '12:35',
+    startTime: '12:35',
+    endTime: '15:10',
+    durationLabel: { gu: '૧૧૯ દિવસ (૪ મહિના)', hi: '११९ दिन (४ माह)', en: '119 Days (4 Months)' },
     category: 'retrograde',
     planet: 'Jupiter',
     planetSymbol: '♃',
@@ -118,7 +138,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2024-11-15-sat-dir',
     date: '2024-11-15',
+    startDate: '2024-11-15',
+    endDate: '2025-03-29',
     time: '06:50',
+    startTime: '06:50',
+    endTime: '23:01',
+    durationLabel: { gu: '૧૩૪ દિવસ', hi: '१३४ दिन', en: '134 Days Direct Phase' },
     category: 'retrograde',
     planet: 'Saturn',
     planetSymbol: '♄',
@@ -143,7 +168,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-02-04-jup-dir',
     date: '2025-02-04',
+    startDate: '2025-02-04',
+    endDate: '2025-05-14',
     time: '15:10',
+    startTime: '15:10',
+    endTime: '23:20',
+    durationLabel: { gu: '૯૯ દિવસ', hi: '९९ दिन', en: '99 Days Forward Transit' },
     category: 'retrograde',
     planet: 'Jupiter',
     planetSymbol: '♃',
@@ -164,7 +194,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-03-14-lun-ecl',
     date: '2025-03-14',
+    startDate: '2025-03-14',
+    endDate: '2025-03-14',
     time: '11:29',
+    startTime: '09:27',
+    endTime: '13:31',
+    durationLabel: { gu: '૪ કલાક ૪ મિનિટ', hi: '४ घंटे ४ मिनट', en: '4h 04m Total Eclipse' },
     category: 'eclipse',
     planet: 'Moon',
     planetSymbol: '☽',
@@ -185,7 +220,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-03-29-sat-ing',
     date: '2025-03-29',
+    startDate: '2025-03-29',
+    endDate: '2027-06-03',
     time: '23:01',
+    startTime: '23:01',
+    endTime: '11:15',
+    durationLabel: {
+      gu: '૨.૫ વર્ષ (૩૦ મહિના)',
+      hi: '२.५ वर्ष (३० माह)',
+      en: '2.5 Years (30 Months)',
+    },
     category: 'ingress',
     planet: 'Saturn',
     planetSymbol: '♄',
@@ -206,7 +250,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-03-29-sol-ecl',
     date: '2025-03-29',
+    startDate: '2025-03-29',
+    endDate: '2025-03-29',
     time: '16:18',
+    startTime: '14:20',
+    endTime: '18:16',
+    durationLabel: { gu: '૩ કલાક ૫૬ મિનિટ', hi: '३ घंटे ५६ मिनट', en: '3h 56m Partial Eclipse' },
     category: 'eclipse',
     planet: 'Sun',
     planetSymbol: '☉',
@@ -227,7 +276,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-05-14-jup-ing',
     date: '2025-05-14',
+    startDate: '2025-05-14',
+    endDate: '2026-06-02',
     time: '23:20',
+    startTime: '23:20',
+    endTime: '04:15',
+    durationLabel: {
+      gu: '૧ વર્ષ ૧૯ દિવસ (૧૩ મહિના)',
+      hi: '१ वर्ष १९ दिन (१३ माह)',
+      en: '1 Year 19 Days (13 Months)',
+    },
     category: 'ingress',
     planet: 'Jupiter',
     planetSymbol: '♃',
@@ -248,7 +306,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-05-18-rahu-ketu',
     date: '2025-05-18',
+    startDate: '2025-05-18',
+    endDate: '2026-11-24',
     time: '16:30',
+    startTime: '16:30',
+    endTime: '08:45',
+    durationLabel: {
+      gu: '૧૮ મહિના (૧.૫ વર્ષ)',
+      hi: '१८ माह (१.५ वर्ष)',
+      en: '18 Months (1.5 Years)',
+    },
     category: 'ingress',
     planet: 'Rahu',
     planetSymbol: '☊',
@@ -269,7 +336,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-07-13-sat-retro',
     date: '2025-07-13',
+    startDate: '2025-07-13',
+    endDate: '2025-11-28',
     time: '04:18',
+    startTime: '04:18',
+    endTime: '08:35',
+    durationLabel: {
+      gu: '૧૩૮ દિવસ (૪.૫ મહિના)',
+      hi: '१३८ दिन (४.५ माह)',
+      en: '138 Days Retrograde',
+    },
     category: 'retrograde',
     planet: 'Saturn',
     planetSymbol: '♄',
@@ -290,7 +366,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-09-07-lun-ecl',
     date: '2025-09-07',
+    startDate: '2025-09-07',
+    endDate: '2025-09-07',
     time: '23:41',
+    startTime: '21:58',
+    endTime: '01:24',
+    durationLabel: {
+      gu: '૩ કલાક ૨૬ મિનિટ (સૂતક ૯ કલાક)',
+      hi: '३ घंटे २६ मिनट',
+      en: '3h 26m Total Blood Moon',
+    },
     category: 'eclipse',
     planet: 'Moon',
     planetSymbol: '☽',
@@ -311,7 +396,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-09-21-sol-ecl',
     date: '2025-09-21',
+    startDate: '2025-09-21',
+    endDate: '2025-09-21',
     time: '22:42',
+    startTime: '20:54',
+    endTime: '00:30',
+    durationLabel: { gu: '૩ કલાક ૩૬ મિનિટ', hi: '३ घंटे ३६ मिनट', en: '3h 36m Partial Eclipse' },
     category: 'eclipse',
     planet: 'Sun',
     planetSymbol: '☉',
@@ -332,7 +422,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2025-11-28-sat-dir',
     date: '2025-11-28',
+    startDate: '2025-11-28',
+    endDate: '2027-06-03',
     time: '08:35',
+    startTime: '08:35',
+    endTime: '11:15',
+    durationLabel: {
+      gu: '૫૫૨ દિવસ માર્ગી ચાલ',
+      hi: '५५२ दिन मार्गी चाल',
+      en: '552 Days Direct Phase',
+    },
     category: 'retrograde',
     planet: 'Saturn',
     planetSymbol: '♄',
@@ -357,7 +456,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2026-02-17-sol-ecl',
     date: '2026-02-17',
+    startDate: '2026-02-17',
+    endDate: '2026-02-17',
     time: '17:42',
+    startTime: '15:26',
+    endTime: '19:58',
+    durationLabel: { gu: '૪ કલાક ૩૨ મિનિટ', hi: '४ घंटे ३२ मिनट', en: '4h 32m Annular Eclipse' },
     category: 'eclipse',
     planet: 'Sun',
     planetSymbol: '☉',
@@ -378,7 +482,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2026-03-03-lun-ecl',
     date: '2026-03-03',
+    startDate: '2026-03-03',
+    endDate: '2026-03-03',
     time: '17:03',
+    startTime: '14:50',
+    endTime: '19:16',
+    durationLabel: {
+      gu: '૪ કલાક ૨૬ મિનિટ (સૂતક ૯ કલાક)',
+      hi: '४ घंटे २६ मिनट',
+      en: '4h 26m Total Eclipse',
+    },
     category: 'eclipse',
     planet: 'Moon',
     planetSymbol: '☽',
@@ -399,7 +512,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2026-06-02-jup-ing-can',
     date: '2026-06-02',
+    startDate: '2026-06-02',
+    endDate: '2026-10-31',
     time: '04:15',
+    startTime: '04:15',
+    endTime: '18:50',
+    durationLabel: {
+      gu: '૫ મહિના (૧૫૧ દિવસ ઉચ્ચ અવસ્થા)',
+      hi: '५ माह (१५१ दिन उच्च अवस्था)',
+      en: '5 Months (Exalted Phase)',
+    },
     category: 'ingress',
     planet: 'Jupiter',
     planetSymbol: '♃',
@@ -420,7 +542,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2026-08-12-sol-ecl',
     date: '2026-08-12',
+    startDate: '2026-08-12',
+    endDate: '2026-08-12',
     time: '23:16',
+    startTime: '21:05',
+    endTime: '01:27',
+    durationLabel: {
+      gu: '૪ કલાક ૨૨ મિનિટ',
+      hi: '४ घंटे २२ मिनट',
+      en: '4h 22m Total Solar Eclipse',
+    },
     category: 'eclipse',
     planet: 'Sun',
     planetSymbol: '☉',
@@ -441,7 +572,12 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2026-08-28-lun-ecl',
     date: '2026-08-28',
+    startDate: '2026-08-28',
+    endDate: '2026-08-28',
     time: '09:44',
+    startTime: '07:38',
+    endTime: '11:50',
+    durationLabel: { gu: '૪ કલાક ૧૨ મિનિટ', hi: '४ घंटे १२ मिनट', en: '4h 12m Partial Eclipse' },
     category: 'eclipse',
     planet: 'Moon',
     planetSymbol: '☽',
@@ -462,7 +598,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2026-10-31-jup-ing-leo',
     date: '2026-10-31',
+    startDate: '2026-10-31',
+    endDate: '2027-11-25',
     time: '18:50',
+    startTime: '18:50',
+    endTime: '14:40',
+    durationLabel: {
+      gu: '૧ વર્ષ ૨૫ દિવસ (૧૩ મહિના)',
+      hi: '१ वर्ष २५ दिन (१३ माह)',
+      en: '1 Year 25 Days (13 Months)',
+    },
     category: 'ingress',
     planet: 'Jupiter',
     planetSymbol: '♃',
@@ -487,7 +632,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2027-06-03-sat-ing-ari',
     date: '2027-06-03',
+    startDate: '2027-06-03',
+    endDate: '2029-08-08',
     time: '11:15',
+    startTime: '11:15',
+    endTime: '07:20',
+    durationLabel: {
+      gu: '૨.૨ વર્ષ (૨૬ મહિના)',
+      hi: '२.२ वर्ष (२६ माह)',
+      en: '2.2 Years (26 Months)',
+    },
     category: 'ingress',
     planet: 'Saturn',
     planetSymbol: '♄',
@@ -508,7 +662,16 @@ export const PLANETARY_EVENTS_DATABASE = [
   {
     id: 'evt-2027-11-25-jup-ing-vir',
     date: '2027-11-25',
+    startDate: '2027-11-25',
+    endDate: '2028-12-26',
     time: '14:40',
+    startTime: '14:40',
+    endTime: '19:10',
+    durationLabel: {
+      gu: '૧ વર્ષ ૩૧ દિવસ (૧૩ મહિના)',
+      hi: '१ वर्ष ३१ दिन (१३ माह)',
+      en: '1 Year 31 Days (13 Months)',
+    },
     category: 'ingress',
     planet: 'Jupiter',
     planetSymbol: '♃',
@@ -570,16 +733,6 @@ export function calculatePersonalEventImpact(event, kundliData) {
   let remedy = {};
 
   const pName = event.planet || 'Jupiter';
-
-  // Classical Gochar Auspicious Houses
-  // Sun: 3, 6, 10, 11
-  // Moon: 1, 3, 6, 7, 10, 11
-  // Mars: 3, 6, 11
-  // Mercury: 2, 4, 6, 8, 10, 11
-  // Jupiter: 2, 5, 7, 9, 11
-  // Venus: 1, 2, 3, 4, 5, 8, 9, 11, 12
-  // Saturn: 3, 6, 11
-  // Rahu/Ketu: 3, 6, 10, 11
 
   const isTrikona = houseFromMoon === 1 || houseFromMoon === 5 || houseFromMoon === 9;
   const isKendra =
@@ -686,42 +839,65 @@ export function getFilteredPlanetaryEvents({
   year = null,
   category = 'all',
   timeframe = 'all', // 'next30' | 'next90' | 'thisYear' | 'all'
+  customStartDate = '',
+  customEndDate = '',
   searchQuery = '',
   kundliData = null,
   currentDate = new Date(),
 }) {
   let list = [...PLANETARY_EVENTS_DATABASE];
 
-  // 1. Year Filter
-  if (year && year !== 'all') {
-    list = list.filter((e) => e.date.startsWith(String(year)));
+  // 1. Custom Date Range Filter (if provided)
+  if (customStartDate) {
+    list = list.filter((e) => {
+      const eEnd = e.endDate || e.date || e.startDate;
+      return eEnd >= customStartDate;
+    });
   }
 
-  // 2. Category Filter
+  if (customEndDate) {
+    list = list.filter((e) => {
+      const eStart = e.startDate || e.date;
+      return eStart <= customEndDate;
+    });
+  }
+
+  // 2. Year Filter (when not filtered by custom dates)
+  if (!customStartDate && !customEndDate && year && year !== 'all') {
+    list = list.filter((e) => (e.startDate || e.date).startsWith(String(year)));
+  }
+
+  // 3. Category Filter
   if (category && category !== 'all') {
     list = list.filter((e) => e.category === category);
   }
 
-  // 3. Timeframe Filter
+  // 4. Timeframe Filter
   const nowMs = currentDate.getTime();
-  if (timeframe === 'next30') {
-    const limitMs = nowMs + 30 * 24 * 60 * 60 * 1000;
-    list = list.filter((e) => {
-      const eMs = new Date(e.date + 'T' + e.time).getTime();
-      return eMs >= nowMs && eMs <= limitMs;
-    });
-  } else if (timeframe === 'next90') {
-    const limitMs = nowMs + 90 * 24 * 60 * 60 * 1000;
-    list = list.filter((e) => {
-      const eMs = new Date(e.date + 'T' + e.time).getTime();
-      return eMs >= nowMs && eMs <= limitMs;
-    });
-  } else if (timeframe === 'thisYear') {
-    const curYear = currentDate.getFullYear();
-    list = list.filter((e) => e.date.startsWith(String(curYear)));
+  if (!customStartDate && !customEndDate) {
+    if (timeframe === 'next30') {
+      const limitMs = nowMs + 30 * 24 * 60 * 60 * 1000;
+      list = list.filter((e) => {
+        const eMs = new Date(
+          (e.startDate || e.date) + 'T' + (e.startTime || e.time || '12:00')
+        ).getTime();
+        return eMs >= nowMs && eMs <= limitMs;
+      });
+    } else if (timeframe === 'next90') {
+      const limitMs = nowMs + 90 * 24 * 60 * 60 * 1000;
+      list = list.filter((e) => {
+        const eMs = new Date(
+          (e.startDate || e.date) + 'T' + (e.startTime || e.time || '12:00')
+        ).getTime();
+        return eMs >= nowMs && eMs <= limitMs;
+      });
+    } else if (timeframe === 'thisYear') {
+      const curYear = currentDate.getFullYear();
+      list = list.filter((e) => (e.startDate || e.date).startsWith(String(curYear)));
+    }
   }
 
-  // 4. Search Filter
+  // 5. Search Filter
   if (searchQuery.trim()) {
     const q = searchQuery.toLowerCase().trim();
     list = list.filter(
@@ -733,43 +909,62 @@ export function getFilteredPlanetaryEvents({
         e.description.en.toLowerCase().includes(q) ||
         e.planet.toLowerCase().includes(q) ||
         e.fromSign.toLowerCase().includes(q) ||
-        e.toSign.toLowerCase().includes(q)
+        e.toSign.toLowerCase().includes(q) ||
+        (e.startDate && e.startDate.includes(q)) ||
+        (e.endDate && e.endDate.includes(q))
     );
   }
 
-  // Sort chronologically
+  // Sort chronologically by start date
   list.sort((a, b) => {
-    const timeA = new Date(a.date + 'T' + a.time).getTime();
-    const timeB = new Date(b.date + 'T' + b.time).getTime();
+    const timeA = new Date(
+      (a.startDate || a.date) + 'T' + (a.startTime || a.time || '12:00')
+    ).getTime();
+    const timeB = new Date(
+      (b.startDate || b.date) + 'T' + (b.startTime || b.time || '12:00')
+    ).getTime();
     return timeA - timeB;
   });
 
   // Attach personal impact analysis if kundliData is present
   return list.map((evt) => {
     const personalImpact = calculatePersonalEventImpact(evt, kundliData);
-    const eventTime = new Date(evt.date + 'T' + evt.time);
-    const diffDays = Math.ceil((eventTime.getTime() - nowMs) / (1000 * 60 * 60 * 24));
+    const startObj = new Date(
+      (evt.startDate || evt.date) + 'T' + (evt.startTime || evt.time || '12:00')
+    );
+    const endObj = new Date((evt.endDate || evt.date) + 'T' + (evt.endTime || evt.time || '23:59'));
+
+    const diffStartDays = Math.ceil((startObj.getTime() - nowMs) / (1000 * 60 * 60 * 24));
+    const isOngoing = nowMs >= startObj.getTime() && nowMs <= endObj.getTime();
 
     let timeStatus = 'upcoming';
     let daysLabel = '';
 
-    if (diffDays === 0) {
+    if (isOngoing) {
       timeStatus = 'today';
-      daysLabel = 'આજે (Today)';
-    } else if (diffDays > 0) {
+      daysLabel = 'હાલમાં ચાલુ છે (Currently Active)';
+    } else if (diffStartDays === 0) {
+      timeStatus = 'today';
+      daysLabel = 'આજે શરૂ (Starting Today)';
+    } else if (diffStartDays > 0) {
       timeStatus = 'upcoming';
-      daysLabel = `${diffDays} દિવસ બાકી (${diffDays} days left)`;
+      daysLabel = `${diffStartDays} દિવસ બાકી (${diffStartDays} days left)`;
     } else {
       timeStatus = 'past';
-      daysLabel = `${Math.abs(diffDays)} દિવસ પહેલાં (${Math.abs(diffDays)} days ago)`;
+      daysLabel = `${Math.abs(diffStartDays)} દિવસ પહેલાં (${Math.abs(diffStartDays)} days ago)`;
     }
 
     return {
       ...evt,
+      startDateFormatted: evt.startDate || evt.date,
+      endDateFormatted: evt.endDate || evt.date,
+      startTimeFormatted: evt.startTime || evt.time || '12:00',
+      endTimeFormatted: evt.endTime || evt.time || '23:59',
       personalImpact,
-      diffDays,
+      diffStartDays,
       timeStatus,
       daysLabel,
+      isOngoing,
     };
   });
 }
