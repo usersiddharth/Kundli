@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { Button, Card, Chip } from '@heroui/react';
 import {
   calculateVedicClock,
   formatTimeString,
   MUHURTA_DEFINITIONS,
-  PRAHAR_DEFINITIONS,
-  HORA_PLANETS,
   NAKSHATRA_LIST,
   YOGA_LIST,
   TITHI_LIST,
@@ -21,14 +20,8 @@ import {
   RotateCcw,
   Navigation,
   BookOpen,
-  Layers,
-  Search,
-  CheckCircle2,
-  AlertTriangle,
   Compass,
   Zap,
-  Info,
-  Calendar,
   X,
 } from 'lucide-react';
 
@@ -144,13 +137,13 @@ export default function VedicClockView({ t, lang = 'gu' }) {
       {/* -----------------------------------------------------------------
           1. HEADER & INTERACTIVE LOCATION / TIME CONTROLS
           ----------------------------------------------------------------- */}
-      <div className="rounded-2xl glass-panel p-4 sm:p-6 space-y-4 border border-[var(--border-gold)]">
+      <Card className="rounded-2xl glass-panel p-4 sm:p-6 space-y-4 border border-[var(--border-gold)]">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
           {/* Title & Invocation */}
           <div className="space-y-1">
             <div className="flex items-center gap-2.5">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-primary shadow-xs">
-                <Clock className="h-5 w-5 text-stone-900 animate-spin-slow" />
+                <Clock className="h-5 w-5 text-[#0c0e17] animate-spin-slow" />
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl font-medium tracking-tight text-[var(--text-primary)] font-serif">
@@ -166,43 +159,45 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           {/* Time Controls: Live Status, Pause/Resume, Reset to Now */}
           <div className="flex flex-wrap items-center gap-2">
             {/* Live Indicator Badge */}
-            <div
-              className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold border ${
+            <Chip
+              className={`flex items-center gap-1.5 rounded-xl px-3 py-1 text-xs font-semibold border ${
                 isLive
                   ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-500'
                   : 'border-amber-500/40 bg-amber-500/10 text-amber-500'
               }`}
             >
-              <span
-                className={`w-2 h-2 rounded-full ${isLive ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`}
-              />
-              <span>{isLive ? 'જીવંત સમય (Live)' : 'સ્થિર સમય (Paused)'}</span>
-            </div>
+              <Chip.Label className="flex items-center gap-1.5">
+                <span
+                  className={`w-2 h-2 rounded-full ${isLive ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`}
+                />
+                <span>{isLive ? 'જીવંત સમય (Live)' : 'સ્થિર સમય (Paused)'}</span>
+              </Chip.Label>
+            </Chip>
 
             {/* Pause / Resume Button */}
-            <button
-              onClick={() => setIsLive(!isLive)}
-              title={isLive ? 'સમય રોકો (Pause Clock)' : 'સમય ચાલુ કરો (Resume Clock)'}
+            <Button
+              type="button"
+              onPress={() => setIsLive(!isLive)}
               aria-label={isLive ? 'Pause Clock' : 'Resume Clock'}
               className="flex items-center gap-1.5 rounded-xl glass-card px-3 py-1.5 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition cursor-pointer"
             >
               {isLive ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
               <span>{isLive ? 'Pause' : 'Play'}</span>
-            </button>
+            </Button>
 
             {/* Reset to Current Live Moment */}
-            <button
-              onClick={() => {
+            <Button
+              type="button"
+              onPress={() => {
                 setLiveDate(new Date());
                 setIsLive(true);
               }}
-              title="વર્તમાન સમય પર પાછા જાઓ (Reset to Now)"
               aria-label="Reset to Now"
               className="flex items-center gap-1.5 rounded-xl glass-card px-3 py-1.5 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition cursor-pointer"
             >
               <RotateCcw className="h-3.5 w-3.5 text-[var(--text-gold)]" />
               <span>હમણાં (Now)</span>
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -260,8 +255,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
 
           {/* Quick GPS & Selected Coordinates Badge */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => {
+            <Button
+              type="button"
+              onPress={() => {
                 if (navigator.geolocation) {
                   navigator.geolocation.getCurrentPosition((pos) => {
                     setLocation({
@@ -278,7 +274,7 @@ export default function VedicClockView({ t, lang = 'gu' }) {
             >
               <Navigation className="h-3.5 w-3.5" />
               <span>GPS સ્થાન</span>
-            </button>
+            </Button>
 
             <div className="rounded-xl glass-pill px-3 py-1.5 text-[11px] font-mono text-[var(--text-muted)] hidden sm:block shrink-0">
               {location.lat.toFixed(2)}°N, {location.lng.toFixed(2)}°E (GMT+{location.tz})
@@ -288,86 +284,92 @@ export default function VedicClockView({ t, lang = 'gu' }) {
 
         {/* Ring Filter Toggles Ribbon */}
         <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-xl glass-pill shadow-inner">
-          <button
-            onClick={() => toggleRing('tithi')}
+          <Button
+            type="button"
+            onPress={() => toggleRing('tithi')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeRings.tithi
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-muted)] opacity-50'
+                : 'text-[var(--text-muted)] opacity-50 bg-transparent'
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
             <span>૧. તિથિ (Tithi)</span>
-          </button>
+          </Button>
 
-          <button
-            onClick={() => toggleRing('nakshatra')}
+          <Button
+            type="button"
+            onPress={() => toggleRing('nakshatra')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeRings.nakshatra
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-muted)] opacity-50'
+                : 'text-[var(--text-muted)] opacity-50 bg-transparent'
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
             <span>૨. નક્ષત્ર (Nakshatra)</span>
-          </button>
+          </Button>
 
-          <button
-            onClick={() => toggleRing('yoga')}
+          <Button
+            type="button"
+            onPress={() => toggleRing('yoga')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeRings.yoga
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-muted)] opacity-50'
+                : 'text-[var(--text-muted)] opacity-50 bg-transparent'
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
             <span>૩. યોગ (Yoga)</span>
-          </button>
+          </Button>
 
-          <button
-            onClick={() => toggleRing('muhurta')}
+          <Button
+            type="button"
+            onPress={() => toggleRing('muhurta')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeRings.muhurta
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-muted)] opacity-50'
+                : 'text-[var(--text-muted)] opacity-50 bg-transparent'
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span>૪. મુહૂર્ત (Muhurta)</span>
-          </button>
+          </Button>
 
-          <button
-            onClick={() => toggleRing('prahar')}
+          <Button
+            type="button"
+            onPress={() => toggleRing('prahar')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeRings.prahar
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-muted)] opacity-50'
+                : 'text-[var(--text-muted)] opacity-50 bg-transparent'
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
             <span>૫. પહર (Prahar)</span>
-          </button>
+          </Button>
 
-          <button
-            onClick={() => toggleRing('ghatika')}
+          <Button
+            type="button"
+            onPress={() => toggleRing('ghatika')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeRings.ghatika
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-muted)] opacity-50'
+                : 'text-[var(--text-muted)] opacity-50 bg-transparent'
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
             <span>૬. ઘટી ડાયલ (Ghatika)</span>
-          </button>
+          </Button>
         </div>
-      </div>
+      </Card>
 
       {/* -----------------------------------------------------------------
           2. HERO DUAL SHOWCASE: CONCENTRIC DIAL + LIVE VEDIC TIMING METRICS
           ----------------------------------------------------------------- */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Canvas: Precision Concentric SVG Clock Dial (7 Cols) */}
-        <div className="lg:col-span-7 rounded-3xl glass-panel p-4 sm:p-6 border border-[var(--border-gold)] shadow-xl relative flex flex-col items-center justify-center overflow-hidden">
+        <Card className="lg:col-span-7 rounded-3xl glass-panel p-4 sm:p-6 border border-[var(--border-gold)] shadow-xl relative flex flex-col items-center justify-center overflow-hidden">
           {/* Top Sunrise & Bottom Sunset Badges */}
           <div className="flex items-center justify-between w-full text-xs font-semibold mb-2 px-2">
             <div className="flex items-center gap-1.5 rounded-full glass-card px-3 py-1 text-amber-500 font-mono">
@@ -380,7 +382,7 @@ export default function VedicClockView({ t, lang = 'gu' }) {
             </div>
           </div>
 
-          {/* Concentric SVG Clock Face (Expanded & Scaled for Maximum Readability) */}
+          {/* Concentric SVG Clock Face */}
           <div className="relative w-full max-w-[580px] lg:max-w-[620px] aspect-square my-2">
             <svg viewBox="0 0 600 600" className="w-full h-full drop-shadow-2xl select-none">
               <defs>
@@ -663,7 +665,7 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                 strokeWidth="1.2"
               />
 
-              {/* Glowing Ghati Pointer Hand (Emerges from outside center plate to Ghatika ring) */}
+              {/* Glowing Ghati Pointer Hand */}
               <line
                 x1={300 + 110 * Math.sin((ghatiAngle * Math.PI) / 180)}
                 y1={300 - 110 * Math.cos((ghatiAngle * Math.PI) / 180)}
@@ -686,7 +688,7 @@ export default function VedicClockView({ t, lang = 'gu' }) {
               />
             </svg>
 
-            {/* Center Digital Display Overlay (Strictly Centered Inside Center Circle) */}
+            {/* Center Digital Display Overlay */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[34%] h-[34%] rounded-full flex flex-col items-center justify-center text-center pointer-events-none z-10 select-none px-1">
               <span className="text-[9px] sm:text-[10.5px] font-serif font-bold uppercase tracking-[0.18em] text-[var(--text-gold)] block leading-tight">
                 ઇષ્ટકાળ (VEDIC TIME)
@@ -714,12 +716,12 @@ export default function VedicClockView({ t, lang = 'gu' }) {
               </span>
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Right Dashboard: Key Vedic Markers & Muhurta Cards (5 Cols) */}
         <div className="lg:col-span-5 space-y-4">
           {/* 1. Ishtakaal Detailed Card */}
-          <div className="rounded-2xl glass-panel p-4 sm:p-5 border border-[var(--border-subtle)] space-y-3">
+          <Card className="rounded-2xl glass-panel p-4 sm:p-5 border border-[var(--border-subtle)] space-y-3">
             <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2.5">
               <div className="flex items-center gap-2">
                 <Compass className="h-4 w-4 text-[var(--text-gold)]" />
@@ -733,21 +735,21 @@ export default function VedicClockView({ t, lang = 'gu' }) {
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-center">
-              <div className="p-2.5 rounded-xl glass-card">
+              <Card className="p-2.5 rounded-xl glass-card border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-[var(--text-muted)] block">ઘટી (Ghati)</span>
                 <strong className="font-mono text-base text-[var(--text-gold)]">
                   {ishtakaal.ghati}
                 </strong>
                 <span className="text-[9px] text-[var(--text-muted)] block">૧ ઘટી = ૨૪ મિનિટ</span>
-              </div>
-              <div className="p-2.5 rounded-xl glass-card">
+              </Card>
+              <Card className="p-2.5 rounded-xl glass-card border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-[var(--text-muted)] block">પળ / વિઘટી</span>
                 <strong className="font-mono text-base text-[var(--text-primary)]">
                   {ishtakaal.pala}
                 </strong>
                 <span className="text-[9px] text-[var(--text-muted)] block">૧ પળ = ૨૪ સેકન્ડ</span>
-              </div>
-              <div className="p-2.5 rounded-xl glass-card">
+              </Card>
+              <Card className="p-2.5 rounded-xl glass-card border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-[var(--text-muted)] block">વિપળ (Vipala)</span>
                 <strong className="font-mono text-base text-[var(--text-primary)]">
                   {ishtakaal.vipala}
@@ -755,12 +757,12 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                 <span className="text-[9px] text-[var(--text-muted)] block">
                   ૧ વિપળ = ૦.૪ સેકન્ડ
                 </span>
-              </div>
+              </Card>
             </div>
-          </div>
+          </Card>
 
           {/* 2. Active Muhurta & Auspicious Times */}
-          <div className="rounded-2xl glass-panel p-4 sm:p-5 border border-[var(--border-subtle)] space-y-3">
+          <Card className="rounded-2xl glass-panel p-4 sm:p-5 border border-[var(--border-subtle)] space-y-3">
             <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2.5">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-[var(--text-gold)]" />
@@ -768,8 +770,8 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                   સક્રિય & મુખ્ય મુહૂર્તો (Muhurtas)
                 </h2>
               </div>
-              <span
-                className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
+              <Chip
+                className={`px-2 py-0.5 text-[10px] font-bold ${
                   activeMuhurta.status === 'auspicious'
                     ? 'glass-badge-success'
                     : activeMuhurta.status === 'inauspicious'
@@ -777,12 +779,12 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                       : 'glass-badge-gold'
                 }`}
               >
-                {activeMuhurta.nature[lang] || activeMuhurta.nature.gu}
-              </span>
+                <Chip.Label>{activeMuhurta.nature[lang] || activeMuhurta.nature.gu}</Chip.Label>
+              </Chip>
             </div>
 
             {/* Current Muhurta */}
-            <div className="p-3 rounded-xl glass-card space-y-1">
+            <Card className="p-3 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-serif font-bold text-[var(--text-primary)]">
                   વર્તમાન #{activeMuhurta.id}: {activeMuhurta.name[lang] || activeMuhurta.name.gu}
@@ -796,11 +798,11 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                 અધિષ્ઠાતા દેવ: {activeMuhurta.deity[lang] || activeMuhurta.deity.gu} • ગુણવત્તા:{' '}
                 {activeMuhurta.nature[lang] || activeMuhurta.nature.gu}
               </p>
-            </div>
+            </Card>
 
             {/* Brahma Muhurta & Abhijit Muhurta & Rahu Kaal Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              <div className="p-2.5 rounded-xl glass-card">
+              <Card className="p-2.5 rounded-xl glass-card border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-emerald-500 font-bold flex items-center gap-1">
                   🌟 બ્રહ્મ મુહૂર્ત (Brahma)
                 </span>
@@ -808,9 +810,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                   {formatTimeString(brahmaMuhurta.startTime || brahmaMuhurta.start)} -{' '}
                   {formatTimeString(brahmaMuhurta.endTime || brahmaMuhurta.end)}
                 </span>
-              </div>
+              </Card>
 
-              <div className="p-2.5 rounded-xl glass-card">
+              <Card className="p-2.5 rounded-xl glass-card border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-amber-500 font-bold flex items-center gap-1">
                   ✨ અભિજિત મુહૂર્ત (Abhijit)
                 </span>
@@ -818,9 +820,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                   {formatTimeString(abhijitMuhurta.startTime || abhijitMuhurta.start)} -{' '}
                   {formatTimeString(abhijitMuhurta.endTime || abhijitMuhurta.end)}
                 </span>
-              </div>
+              </Card>
 
-              <div className="p-2.5 rounded-xl glass-card sm:col-span-2">
+              <Card className="p-2.5 rounded-xl glass-card sm:col-span-2 border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-rose-500 font-bold flex items-center gap-1">
                   ⚠️ રાહુ કાળ (Rahu Kaal - અશુભ)
                 </span>
@@ -828,15 +830,15 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                   {formatTimeString(rahuKaal.startTime || rahuKaal.start)} -{' '}
                   {formatTimeString(rahuKaal.endTime || rahuKaal.end)}
                 </span>
-              </div>
+              </Card>
             </div>
-          </div>
+          </Card>
 
           {/* 3. Active Prahar & Hora */}
-          <div className="rounded-2xl glass-panel p-4 sm:p-5 border border-[var(--border-subtle)] space-y-3">
+          <Card className="rounded-2xl glass-panel p-4 sm:p-5 border border-[var(--border-subtle)] space-y-3">
             <div className="grid grid-cols-2 gap-3 text-xs">
               {/* Active Prahar */}
-              <div className="p-3 rounded-xl glass-card space-y-1">
+              <Card className="p-3 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-indigo-400 font-bold">
                   ૫. વર્તમાન પહર (#{activePrahar.id})
                 </span>
@@ -846,10 +848,10 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                 <span className="text-[10px] text-[var(--text-muted)] block">
                   વ્યાપ્તિ: {activePrahar.ghati}
                 </span>
-              </div>
+              </Card>
 
               {/* Active Hora */}
-              <div className="p-3 rounded-xl glass-card space-y-1">
+              <Card className="p-3 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-yellow-500 font-bold">૬. ગ્રહ હોરા સ્વામી</span>
                 <h3 className="font-serif text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
                   <span
@@ -861,9 +863,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                 <span className="text-[10px] text-[var(--text-muted)] block">
                   {activeHoraPlanet.nature[lang] || activeHoraPlanet.nature.gu}
                 </span>
-              </div>
+              </Card>
             </div>
-          </div>
+          </Card>
         </div>
       </div>
 
@@ -871,7 +873,7 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           3. 6 VEDIC SUMMARY CHIPS RIBBON
           ----------------------------------------------------------------- */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
+        <Card className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
           <span className="text-[10px] font-serif text-[var(--text-gold)] uppercase tracking-wider block">
             ૧. તિથિ
           </span>
@@ -881,9 +883,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           <span className="text-[10px] font-mono text-[var(--text-muted)] block">
             {activeTithi.paksha} પક્ષ
           </span>
-        </div>
+        </Card>
 
-        <div className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
+        <Card className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
           <span className="text-[10px] font-serif text-sky-400 uppercase tracking-wider block">
             ૨. નક્ષત્ર
           </span>
@@ -893,9 +895,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           <span className="text-[10px] font-mono text-[var(--text-muted)] block">
             #{activeNakshatra.id} / ૨૭ નક્ષત્ર
           </span>
-        </div>
+        </Card>
 
-        <div className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
+        <Card className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
           <span className="text-[10px] font-serif text-orange-400 uppercase tracking-wider block">
             ૩. યોગ
           </span>
@@ -905,9 +907,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           <span className="text-[10px] font-mono text-[var(--text-muted)] block">
             #{activeYoga.id} / ૨૭ યોગ
           </span>
-        </div>
+        </Card>
 
-        <div className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
+        <Card className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
           <span className="text-[10px] font-serif text-emerald-400 uppercase tracking-wider block">
             ૪. સક્રિય મુહૂર્ત
           </span>
@@ -917,9 +919,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           <span className="text-[10px] font-mono text-[var(--text-muted)] block">
             #{activeMuhurta.id} ({activeMuhurta.code})
           </span>
-        </div>
+        </Card>
 
-        <div className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
+        <Card className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
           <span className="text-[10px] font-serif text-indigo-400 uppercase tracking-wider block">
             ૫. વર્તમાન પહર
           </span>
@@ -929,9 +931,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           <span className="text-[10px] font-mono text-[var(--text-muted)] block">
             {activePrahar.period === 'day' ? 'દિવસનો પહર' : 'રાત્રિનો પહર'}
           </span>
-        </div>
+        </Card>
 
-        <div className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
+        <Card className="p-3 rounded-2xl glass-panel border border-[var(--border-subtle)] space-y-0.5">
           <span className="text-[10px] font-serif text-yellow-500 uppercase tracking-wider block">
             ૬. ગ્રહ હોરા
           </span>
@@ -945,74 +947,78 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           <span className="text-[10px] font-mono text-[var(--text-muted)] block truncate">
             {activeHoraPlanet.nature[lang] || activeHoraPlanet.nature.gu}
           </span>
-        </div>
+        </Card>
       </div>
 
       {/* -----------------------------------------------------------------
           4. TABBED MATRIX EXPLORER: 30 MUHURTAS, 8 PRAHARS, 24 HORAS, GUIDE
           ----------------------------------------------------------------- */}
-      <div className="rounded-2xl glass-panel p-4 sm:p-6 border border-[var(--border-subtle)] space-y-5">
+      <Card className="rounded-2xl glass-panel p-4 sm:p-6 border border-[var(--border-subtle)] space-y-5">
         {/* Navigation Tabs */}
         <div
           role="tablist"
           aria-label="Vedic Clock Tabs"
           className="flex flex-wrap items-center gap-1.5 rounded-xl glass-pill p-1.5 shadow-inner"
         >
-          <button
+          <Button
+            type="button"
             role="tab"
             aria-selected={activeTab === 'muhurtas'}
-            onClick={() => setActiveTab('muhurtas')}
+            onPress={() => setActiveTab('muhurtas')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeTab === 'muhurtas'
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-transparent'
             }`}
           >
             <Sparkles className="h-3.5 w-3.5" />
             <span>૩૦ દૈનિક મુહૂર્ત સમયપત્રક (30 Muhurtas)</span>
-          </button>
+          </Button>
 
-          <button
+          <Button
+            type="button"
             role="tab"
             aria-selected={activeTab === 'prahars'}
-            onClick={() => setActiveTab('prahars')}
+            onPress={() => setActiveTab('prahars')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeTab === 'prahars'
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-transparent'
             }`}
           >
             <Clock className="h-3.5 w-3.5" />
             <span>૮ પ્રહર ચક્ર (8 Prahars)</span>
-          </button>
+          </Button>
 
-          <button
+          <Button
+            type="button"
             role="tab"
             aria-selected={activeTab === 'horas'}
-            onClick={() => setActiveTab('horas')}
+            onPress={() => setActiveTab('horas')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeTab === 'horas'
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-transparent'
             }`}
           >
             <Zap className="h-3.5 w-3.5" />
             <span>૨૪ ગ્રહ હોરા (24 Horas)</span>
-          </button>
+          </Button>
 
-          <button
+          <Button
+            type="button"
             role="tab"
             aria-selected={activeTab === 'guide'}
-            onClick={() => setActiveTab('guide')}
+            onPress={() => setActiveTab('guide')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeTab === 'guide'
                 ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-transparent'
             }`}
           >
             <BookOpen className="h-3.5 w-3.5" />
             <span>શાસ્ત્રીય સમય પરિમાણ (Surya Siddhanta Guide)</span>
-          </button>
+          </Button>
         </div>
 
         {/* TAB 1: 30 MUHURTAS TABLE */}
@@ -1046,8 +1052,8 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                     <td className="p-3 font-serif font-bold">{m.name[lang] || m.name.gu}</td>
                     <td className="p-3 text-[var(--text-muted)]">{m.deity[lang] || m.deity.gu}</td>
                     <td className="p-3">
-                      <span
-                        className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
+                      <Chip
+                        className={`text-[10px] font-bold ${
                           m.status === 'auspicious'
                             ? 'glass-badge-success'
                             : m.status === 'inauspicious'
@@ -1055,17 +1061,19 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                               : 'glass-badge-gold'
                         }`}
                       >
-                        {m.nature[lang] || m.nature.gu}
-                      </span>
+                        <Chip.Label>{m.nature[lang] || m.nature.gu}</Chip.Label>
+                      </Chip>
                     </td>
                     <td className="p-3 font-mono">{formatTimeString(m.startTime)}</td>
                     <td className="p-3 font-mono">{formatTimeString(m.endTime)}</td>
                     <td className="p-3">
                       {m.isActive ? (
-                        <span className="glass-button-primary px-2.5 py-0.5 rounded-full font-bold text-[10px] inline-flex items-center gap-1 shadow-xs">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                          <span>સક્રિય</span>
-                        </span>
+                        <Chip className="glass-button-primary font-bold text-[10px] shadow-xs text-[#0c0e17]">
+                          <Chip.Label className="flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                            <span>સક્રિય</span>
+                          </Chip.Label>
+                        </Chip>
                       ) : m.isPassed ? (
                         <span className="text-[var(--text-muted)] opacity-60">પૂર્ણ</span>
                       ) : (
@@ -1083,7 +1091,7 @@ export default function VedicClockView({ t, lang = 'gu' }) {
         {activeTab === 'prahars' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {allPrahars.map((p) => (
-              <div
+              <Card
                 key={p.id}
                 className={`p-4 rounded-2xl border transition space-y-2 ${
                   p.isActive
@@ -1095,9 +1103,9 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                   <span className="font-mono text-xs font-bold text-indigo-400">
                     {p.code} - #{p.id}
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full glass-pill text-[var(--text-secondary)] font-bold">
-                    {p.period === 'day' ? 'દિવસ' : 'રાત્રિ'}
-                  </span>
+                  <Chip className="text-[10px] glass-pill text-[var(--text-secondary)] font-bold">
+                    <Chip.Label>{p.period === 'day' ? 'દિવસ' : 'રાત્રિ'}</Chip.Label>
+                  </Chip>
                 </div>
                 <h3 className="font-serif text-sm font-bold text-[var(--text-primary)]">
                   {p.name[lang] || p.name.gu}
@@ -1108,7 +1116,7 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                 <div className="pt-2 border-t border-[var(--border-subtle)] font-mono text-[11px] text-[var(--text-gold)]">
                   ઘડી વ્યાપ્તિ: {p.ghati}
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         )}
@@ -1117,7 +1125,7 @@ export default function VedicClockView({ t, lang = 'gu' }) {
         {activeTab === 'horas' && (
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
             {allHoras.map((h, i) => (
-              <div
+              <Card
                 key={i}
                 className={`p-3 rounded-2xl text-center border transition space-y-1 ${
                   h.isActive
@@ -1136,19 +1144,19 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                   {h.planet.name[lang] || h.planet.name.gu}
                 </h4>
                 {h.isActive && (
-                  <span className="glass-button-primary text-[9px] font-bold px-2 py-0.5 rounded-full inline-block mt-1">
-                    સક્રિય હોરા
-                  </span>
+                  <Chip className="glass-button-primary text-[9px] font-bold px-2 py-0.5 text-[#0c0e17]">
+                    <Chip.Label>સક્રિય હોરા</Chip.Label>
+                  </Chip>
                 )}
-              </div>
+              </Card>
             ))}
           </div>
         )}
 
-        {/* TAB 4: VEDIC TIME SYSTEM GUIDE (SURYA SIDDHANTA) */}
+        {/* TAB 4: VEDIC TIME SYSTEM GUIDE */}
         {activeTab === 'guide' && (
           <div className="space-y-4 text-xs text-[var(--text-secondary)]">
-            <div className="p-4 rounded-xl glass-card space-y-2">
+            <Card className="p-4 rounded-xl glass-card space-y-2 border border-[var(--border-subtle)]">
               <h3 className="font-serif text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
                 <BookOpen className="h-4 w-4 text-[var(--text-gold)]" />
                 સૂર્ય સિદ્ધાંત મુજબ વૈદિક સમય પરિમાણ (Vedic Time System Architecture)
@@ -1158,37 +1166,37 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                 કાળ ચક્ર સૂર્યના સ્થાનિક ભ્રમણ અને પૃથ્વીના અક્ષીય પરિભ્રમણ સાથે સંપૂર્ણ સુમેળ ધરાવે
                 છે.
               </p>
-            </div>
+            </Card>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              <div className="p-3.5 rounded-xl glass-card space-y-1">
+              <Card className="p-3.5 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
                 <span className="font-serif font-bold text-[var(--text-gold)] block">
                   ૧. ત્રુટિ & નિમેષ
                 </span>
                 <p className="text-[11px] text-[var(--text-muted)]">
                   ૧ ત્રુટિ = ૨૯.૬૨૫ માઇક્રોસેકન્ડ • ૧ નિમેષ = ૧૬/૭૫ સેકન્ડ (આંખના પલકારા જેટલો સમય).
                 </p>
-              </div>
+              </Card>
 
-              <div className="p-3.5 rounded-xl glass-card space-y-1">
+              <Card className="p-3.5 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
                 <span className="font-serif font-bold text-[var(--text-gold)] block">
                   ૨. પળ (વિઘટી)
                 </span>
                 <p className="text-[11px] text-[var(--text-muted)]">
                   ૧ પળ = ૨૪ સેકન્ડ (૬ પ્રાણ શ્વાસોચ્છ્વાસ). ૬૦ પળ ભેગા મળીને ૧ ઘટી બને છે.
                 </p>
-              </div>
+              </Card>
 
-              <div className="p-3.5 rounded-xl glass-card space-y-1">
+              <Card className="p-3.5 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
                 <span className="font-serif font-bold text-[var(--text-gold)] block">
                   ૩. ઘટી (ઘડી)
                 </span>
                 <p className="text-[11px] text-[var(--text-muted)]">
                   ૧ ઘટી = ૨૪ મિનિટ = ૬૦ પળ = ૩૬૦૦ વિપળ. એક દિવસ-રાતમાં ૬૦ ઘટી હોય છે.
                 </p>
-              </div>
+              </Card>
 
-              <div className="p-3.5 rounded-xl glass-card space-y-1">
+              <Card className="p-3.5 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
                 <span className="font-serif font-bold text-[var(--text-gold)] block">
                   ૪. મુહૂર્ત (૪૮ મિનિટ)
                 </span>
@@ -1196,29 +1204,29 @@ export default function VedicClockView({ t, lang = 'gu' }) {
                   ૧ મુહૂર્ત = ૨ ઘટી = ૪૮ મિનિટ. ૨૪ કલાકમાં કુલ ૩૦ વૈદિક મુહૂર્ત આવે છે (૧૫ દિવસ + ૧૫
                   રાત્રિ).
                 </p>
-              </div>
+              </Card>
 
-              <div className="p-3.5 rounded-xl glass-card space-y-1">
+              <Card className="p-3.5 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
                 <span className="font-serif font-bold text-[var(--text-gold)] block">
                   ૫. પ્રહર (પહર)
                 </span>
                 <p className="text-[11px] text-[var(--text-muted)]">
                   ૧ પ્રહર = ૭.૫ ઘટી = ૩ કલાક. દિવસના ૪ પ્રહર અને રાત્રિના ૪ પ્રહર (કુલ ૮ પ્રહર).
                 </p>
-              </div>
+              </Card>
 
-              <div className="p-3.5 rounded-xl glass-card space-y-1">
+              <Card className="p-3.5 rounded-xl glass-card space-y-1 border border-[var(--border-subtle)]">
                 <span className="font-serif font-bold text-[var(--text-gold)] block">
                   ૬. અહોરાત્ર (દિવસ-રાત્રિ)
                 </span>
                 <p className="text-[11px] text-[var(--text-muted)]">
                   ૧ અહોરાત્ર = ૬૦ ઘટી = ૩૦ મુહૂર્ત = ૮ પ્રહર = ૨૪ કલાક.
                 </p>
-              </div>
+              </Card>
             </div>
           </div>
         )}
-      </div>
+      </Card>
     </div>
   );
 }

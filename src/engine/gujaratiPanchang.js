@@ -180,9 +180,10 @@ export function calculateDetailedGujaratiPanchang(
 
   // 3. Vikram Samvat & Shaka Samvat
   // Gujarati Vikram Samvat starts on Kartak Sud Ekam (approx late Oct / Nov)
-  const isPastKartakSud = month >= 10 && (gujMonthIdx <= 2 || (gujMonthIdx === 11 && !isShuklaPaksha));
+  const isPastKartakSud =
+    month >= 10 && (gujMonthIdx <= 2 || (gujMonthIdx === 11 && !isShuklaPaksha));
   const vikramSamvat = isPastKartakSud ? year + 57 : year + 56;
-  const shakaSamvat = (gujMonthIdx >= 5 || (month >= 4 && gujMonthIdx < 11)) ? year - 78 : year - 79;
+  const shakaSamvat = gujMonthIdx >= 5 || (month >= 4 && gujMonthIdx < 11) ? year - 78 : year - 79;
 
   // 4. Nakshatra
   const nakDeg = 360 / 27;

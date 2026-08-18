@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, Chip } from '@heroui/react';
 import { degToDms } from '../engine/astronomy.js';
 import { Table } from 'lucide-react';
 
@@ -44,9 +45,9 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
             ? '✨ उच्च (Exalted)'
             : '✨ Exalted';
       return (
-        <span className="glass-badge-success inline-flex items-center gap-1 rounded-md px-2.5 py-0.5 text-xs font-semibold shadow-xs">
-          {label}
-        </span>
+        <Chip className="glass-badge-success text-xs font-semibold">
+          <Chip.Label>{label}</Chip.Label>
+        </Chip>
       );
     }
     if (dignity.includes('Debilitated')) {
@@ -57,9 +58,9 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
             ? '⚠️ नीच (Debilitated)'
             : '⚠️ Debilitated';
       return (
-        <span className="glass-badge-danger inline-flex items-center gap-1 rounded-md px-2.5 py-0.5 text-xs font-semibold shadow-xs">
-          {label}
-        </span>
+        <Chip className="glass-badge-danger text-xs font-semibold">
+          <Chip.Label>{label}</Chip.Label>
+        </Chip>
       );
     }
     if (
@@ -74,9 +75,9 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
             ? '🏠 स्वगृही (Own Sign)'
             : '🏠 Own Sign';
       return (
-        <span className="glass-badge-gold inline-flex items-center gap-1 rounded-md px-2.5 py-0.5 text-xs font-semibold shadow-xs">
-          {label}
-        </span>
+        <Chip className="glass-badge-gold text-xs font-semibold">
+          <Chip.Label>{label}</Chip.Label>
+        </Chip>
       );
     }
     if (dignity.includes('Combust') || dignity.includes('Asta')) {
@@ -87,9 +88,9 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
             ? '🔥 अस्त (Combust)'
             : '🔥 Combust';
       return (
-        <span className="glass-badge-warning inline-flex items-center gap-1 rounded-md px-2.5 py-0.5 text-xs font-semibold shadow-xs">
-          {label}
-        </span>
+        <Chip className="glass-badge-warning text-xs font-semibold">
+          <Chip.Label>{label}</Chip.Label>
+        </Chip>
       );
     }
     if (dignity.includes('Friendly') || dignity.includes('Mitra')) {
@@ -100,9 +101,9 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
             ? '🤝 मित्र क्षेत्र (Friendly)'
             : '🤝 Friendly';
       return (
-        <span className="glass-badge-info inline-flex items-center gap-1 rounded-md px-2.5 py-0.5 text-xs font-semibold shadow-xs">
-          {label}
-        </span>
+        <Chip className="glass-badge-info text-xs font-semibold">
+          <Chip.Label>{label}</Chip.Label>
+        </Chip>
       );
     }
     if (dignity.includes('Enemy') || dignity.includes('Shatru')) {
@@ -113,9 +114,9 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
             ? '⚡ शत्रु क्षेत्र (Enemy)'
             : '⚡ Enemy';
       return (
-        <span className="inline-flex items-center gap-1 rounded-md border border-orange-200 bg-orange-50 px-2.5 py-0.5 text-xs font-semibold text-orange-800 shadow-xs dark:border-orange-700/50 dark:bg-orange-950/70 dark:text-orange-300">
-          {label}
-        </span>
+        <Chip className="bg-orange-500/10 text-orange-600 border border-orange-400/40 text-xs font-semibold">
+          <Chip.Label>{label}</Chip.Label>
+        </Chip>
       );
     }
 
@@ -127,28 +128,28 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
           ? '⚖️ सम / सामान्य (Neutral)'
           : '⚖️ Neutral';
     return (
-      <span className="inline-flex items-center gap-1 rounded-md border border-[#ded5c5] bg-[#f0ebe1] px-2.5 py-0.5 text-xs font-medium text-[#6b6255] dark:border-[#334155] dark:bg-[#1a2035] dark:text-[#cbd5e1]">
-        {label}
-      </span>
+      <Chip className="bg-stone-500/10 text-[var(--text-muted)] border border-[var(--border-subtle)] text-xs font-medium">
+        <Chip.Label>{label}</Chip.Label>
+      </Chip>
     );
   };
 
   return (
-    <div className="glass-panel space-y-5 rounded-2xl p-4 sm:p-6">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4">
+    <Card className="glass-panel space-y-5 rounded-2xl p-4 sm:p-6 border border-[var(--border-gold)]">
+      <Card.Header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4 p-0">
         <div>
-          <h2 className="flex items-center gap-2 font-serif text-xl font-medium tracking-tight text-[var(--text-primary)]">
+          <Card.Title className="flex items-center gap-2 font-serif text-xl font-medium tracking-tight text-[var(--text-primary)]">
             <Table className="h-5 w-5 text-[var(--text-gold)]" />{' '}
             {t.tabPlanets || 'Planetary Positions & Coordinates'}
-          </h2>
-          <p className="text-xs text-[var(--text-muted)]">
+          </Card.Title>
+          <Card.Description className="text-xs text-[var(--text-muted)]">
             Exact sidereal degrees, nakshatra padas, house placements & planetary dignities
-          </p>
+          </Card.Description>
         </div>
-        <span className="glass-badge-gold rounded-full px-3 py-1 text-xs font-semibold">
-          Lahiri Ayanamsha (Chitra Paksha)
-        </span>
-      </div>
+        <Chip className="glass-badge-gold px-3 py-1 text-xs font-semibold">
+          <Chip.Label>Lahiri Ayanamsha (Chitra Paksha)</Chip.Label>
+        </Chip>
+      </Card.Header>
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs text-[var(--text-primary)] sm:text-sm">
@@ -191,13 +192,15 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
                   <td className="p-3 font-medium">{p.nakshatra}</td>
                   <td className="p-3 font-mono font-semibold">{p.pada}</td>
                   <td className="p-3">
-                    <span
-                      className={`inline-block rounded-md px-2.5 py-0.5 text-xs font-semibold shadow-xs ${
+                    <Chip
+                      className={`text-xs font-semibold ${
                         p.retro ? 'glass-badge-danger' : 'glass-badge-success'
                       }`}
                     >
-                      {p.retro ? t.retrograde || 'વક્રી (Vakri)' : t.direct || 'માર્ગી (Direct)'}
-                    </span>
+                      <Chip.Label>
+                        {p.retro ? t.retrograde || 'વક્રી (Vakri)' : t.direct || 'માર્ગી (Direct)'}
+                      </Chip.Label>
+                    </Chip>
                   </td>
                   <td className="p-3">{getDignityBadge(p.dignity, lang)}</td>
                 </tr>
@@ -206,6 +209,6 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
           </tbody>
         </table>
       </div>
-    </div>
+    </Card>
   );
 }

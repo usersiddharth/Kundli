@@ -104,6 +104,7 @@ export default function App() {
             formData={formData}
             birthDateObj={birthDateObj}
             t={t}
+            lang={lang}
           />
         )}
 

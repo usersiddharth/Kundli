@@ -420,7 +420,8 @@ export function calculateDayPanchang(year, month, day) {
   const gujMonthName = GUJARATI_MONTHS[gujMonthIdx];
 
   // Vikram Samvat (Gujarati new year on Kartak Sud Ekam)
-  const isPastKartakSud = month >= 10 && (gujMonthIdx <= 2 || (gujMonthIdx === 11 && !isShuklaPaksha));
+  const isPastKartakSud =
+    month >= 10 && (gujMonthIdx <= 2 || (gujMonthIdx === 11 && !isShuklaPaksha));
   const vikramSamvat = isPastKartakSud ? year + 57 : year + 56;
 
   // Nakshatra

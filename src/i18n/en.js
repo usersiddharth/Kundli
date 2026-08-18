@@ -197,4 +197,31 @@ export const en = {
   Capricorn: 'Capricorn (Makara)',
   Aquarius: 'Aquarius (Kumbha)',
   Pisces: 'Pisces (Meena)',
+
+  // AI Astrologer
+  aiAstrologerTitle: 'AI Vedic Astrologer',
+  aiAstrologerSubtitle:
+    'Interactive multi-turn astrological consultation grounded in your complete Kundli dossier',
+  aiSettings: 'AI Settings & API Key',
+  aiProvider: 'AI Provider',
+  aiModel: 'Model',
+  aiApiKey: 'API Key',
+  aiKeyPlaceholder: 'Paste your Google Gemini or OpenAI API Key...',
+  getFreeGeminiKey: 'Get a free Gemini API key from Google AI Studio',
+  aiSaveSettings: 'Save Settings',
+  aiTestKey: 'Test Key',
+  aiKeyValid: 'API Key is valid and active!',
+  aiKeyInvalid: 'Invalid API key or network error',
+  aiModeActive: 'Gemini AI Active',
+  aiModeOffline: 'Offline Vedic Engine',
+  aiAskPlaceholder: 'Ask anything about your career, marriage, dasha, health, or remedies...',
+  aiSend: 'Consult',
+  aiThinking: 'Analyzing planetary placements and dasha timeline...',
+  aiQuickPrompts: 'Suggested Astrological Questions',
+  aiClearChat: 'Clear History',
+  aiRegenerate: 'Regenerate',
+  aiCopied: 'Copied to clipboard!',
+  aiCopy: 'Copy',
+  aiOfflineNotice:
+    'Running on built-in offline engine. To enable deep conversational multi-turn intelligence, configure your free Google Gemini key in AI Settings.',
 };

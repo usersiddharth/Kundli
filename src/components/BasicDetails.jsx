@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, Chip } from '@heroui/react';
 import { degToDms } from '../engine/astronomy.js';
 import { Sparkles, Moon, Compass, Sun, Shield, Feather, Flame, Award } from 'lucide-react';
 
@@ -36,24 +37,24 @@ export default function BasicDetails({ kundliData, t }) {
   ];
 
   return (
-    <div className="rounded-2xl glass-panel p-4 sm:p-6 space-y-5">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4">
-        <h2 className="text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif flex items-center gap-2">
+    <Card className="rounded-2xl glass-panel p-4 sm:p-6 space-y-5 border border-[var(--border-gold)]">
+      <Card.Header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4 p-0">
+        <Card.Title className="text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-[var(--text-gold)]" />{' '}
           {t.avakhadaChakra || 'Avakahada Chakra & Panchang Details'}
-        </h2>
-        <span className="glass-badge-gold px-3 py-1 rounded-full text-xs font-semibold">
-          Chitra Paksha (Lahiri)
-        </span>
-      </div>
+        </Card.Title>
+        <Chip className="glass-badge-gold px-3 py-1 text-xs font-semibold">
+          <Chip.Label>Chitra Paksha (Lahiri)</Chip.Label>
+        </Chip>
+      </Card.Header>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {detailsList.map((item, idx) => {
           const IconComponent = item.icon || Sparkles;
           return (
-            <div
+            <Card
               key={idx}
-              className="flex items-center justify-between rounded-xl glass-card p-3.5 transition hover:border-[var(--border-gold)]"
+              className="flex flex-row items-center justify-between rounded-xl glass-card p-3.5 transition hover:border-[var(--border-gold)] border border-[var(--border-subtle)]"
             >
               <div className="flex items-center space-x-2.5">
                 <div className="p-2 rounded-lg glass-pill text-[var(--text-gold)]">
@@ -66,10 +67,10 @@ export default function BasicDetails({ kundliData, t }) {
               >
                 {item.value}
               </span>
-            </div>
+            </Card>
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 }

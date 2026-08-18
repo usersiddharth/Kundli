@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Button, Card, Chip } from '@heroui/react';
 import { cityData } from '../engine/cityData.js';
 import {
   Compass,
@@ -8,25 +9,18 @@ import {
   CalendarDays,
   Hash,
   Heart,
-  Award,
   ShieldCheck,
   Layers,
   Globe,
-  Activity,
   Printer,
   ChevronRight,
   ArrowRight,
   BookOpen,
-  Gem,
   MapPin,
   User,
-  TrendingUp,
   CheckCircle2,
   HeartPulse,
   Crown,
-  Key,
-  ShieldAlert,
-  Flame,
   X,
   RotateCcw,
   Orbit,
@@ -37,7 +31,7 @@ export default function LandingPage({
   setFormData,
   generateKundli,
   setMainSection,
-  t,
+  _t,
   lang = 'gu',
 }) {
   const [activeFeatureTab, setActiveFeatureTab] = useState('dasha');
@@ -454,11 +448,11 @@ export default function LandingPage({
   ];
 
   return (
-    <div className="space-y-16 sm:space-y-24 animate-fade-in-up pb-12">
+    <div className="space-y-12 sm:space-y-20 animate-fade-in-up pb-12">
       {/* =========================================================================
           1. HERO SECTION: VALUE PROPOSITION & EMBEDDED INSTANT CALCULATOR
           ========================================================================= */}
-      <section className="relative overflow-hidden rounded-3xl border border-[var(--border-gold)] bg-[var(--bg-panel)] p-6 sm:p-10 lg:p-14 shadow-2xl backdrop-blur-2xl">
+      <Card className="relative overflow-hidden rounded-3xl border border-[var(--border-gold)] glass-panel p-6 sm:p-10 lg:p-14 shadow-2xl backdrop-blur-2xl">
         {/* Subtle Decorative Astrological Rings Backdrop */}
         <div
           aria-hidden="true"
@@ -470,88 +464,145 @@ export default function LandingPage({
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-amber-500/5 blur-3xl"
+          className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 bg-amber-500/5 blur-3xl"
         />
 
         <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
-          {/* Left Column: Headlines & Pillars */}
-          <div className="space-y-6 lg:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border-gold)] bg-[var(--bg-pill)] px-3.5 py-1 text-xs font-semibold text-[var(--text-gold)]">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>ચિત્રા પક્ષીય લાહિડી અયનાંશ આધારિત (Chitra Paksha Lahiri)</span>
-            </div>
+          {/* Left Column: Headlines & Value Prop */}
+          <div className="space-y-5 lg:col-span-7">
+            <Chip className="bg-amber-500/10 border border-[var(--border-gold)] text-[var(--text-gold)] px-3 py-1 font-semibold text-xs inline-flex">
+              <Chip.Label className="flex items-center gap-1.5 font-mono">
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>
+                  {lang === 'gu'
+                    ? 'ચિત્રા પક્ષીય લાહિડી અયનાંશ'
+                    : lang === 'hi'
+                      ? 'चित्रा पक्षीय लाहिड़ी अयनांश'
+                      : 'Chitra Paksha Lahiri Ayanamsha'}
+                </span>
+              </Chip.Label>
+            </Chip>
 
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.15]">
-              શાસ્ત્રીય વૈદિક જ્યોતિષ & <br />
-              <span className="text-[var(--text-gold)]">સંપૂર્ણ પંચાંગ સ્યુટ</span>
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.12]">
+              {lang === 'gu' ? (
+                <>
+                  શાસ્ત્રીય વૈદિક જ્યોતિષ & <br />
+                  <span className="text-[var(--text-gold)]">સંપૂર્ણ પંચાંગ સ્યુટ</span>
+                </>
+              ) : lang === 'hi' ? (
+                <>
+                  शास्त्रीय वैदिक ज्योतिष एवं <br />
+                  <span className="text-[var(--text-gold)]">सम्पूर्ण पंचांग प्रणाली</span>
+                </>
+              ) : (
+                <>
+                  Classical Vedic Astrology & <br />
+                  <span className="text-[var(--text-gold)]">Panchang Calculation Suite</span>
+                </>
+              )}
             </h1>
 
-            <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl font-sans">
-              સ્વિસ-ગ્રેડ ખગોળીય ચોક્કસાઈ, ઉત્તર & દક્ષિણ ભારતીય કુંડળી, ૫-સ્તરીય સૂક્ષ્મ વિંશોત્તરી
-              દશા, ૧૨૦-વર્ષ જીવન આલેખ, ષોડશવર્ગ અને જીવંત ગુજરાતી પંચાંગ — સંપૂર્ણપણે ઑફલાઇન સક્ષમ.
+            <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
+              {lang === 'gu'
+                ? 'સ્વિસ-ગ્રેડ ચોક્કસાઈ, D1-D60 વર્ગ ચાર્ટ, ૫-સ્તરીય વિંશોત્તરી દશા અને લાઈવ ચોઘડિયા — ૧૦૦% ઑફલાઇન સક્ષમ.'
+                : lang === 'hi'
+                  ? 'स्विस-ग्रेड सटीकता, D1-D60 वर्ग चक्र, ५-स्तरीय विंशोत्तरी दशा व लाइव चौघड़िया — शत-प्रतिशत ऑफलाइन।'
+                  : 'High-precision ephemeris, D1-D60 divisional charts, 5-tier Vimshottari dasha, and real-time panchang.'}
             </p>
 
-            {/* Quick Action Badges */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                onClick={() => {
+            {/* Quick Action CTAs (No wrap, high contrast) */}
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <Button
+                type="button"
+                onPress={() => {
                   setMainSection('kundli');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="flex items-center gap-2 rounded-xl glass-button-primary px-6 py-3 text-sm font-bold shadow-lg transition transform hover:-translate-y-0.5"
+                className="flex items-center gap-2 rounded-xl glass-button-primary px-5 py-2.5 text-xs sm:text-sm font-semibold shadow-md transition transform hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
               >
-                <Compass className="h-4 w-4" />
-                <span>કુંડળી સોફ્ટવેર શરૂ કરો (Launch App)</span>
-                <ArrowRight className="h-4 w-4 ml-1" />
-              </button>
+                <Compass className="h-4 w-4 shrink-0" />
+                <span>
+                  {lang === 'gu'
+                    ? 'કુંડળી સોફ્ટવેર શરૂ કરો'
+                    : lang === 'hi'
+                      ? 'कुंडली सॉफ्टवेयर शुरू करें'
+                      : 'Launch Kundli App'}
+                </span>
+                <ArrowRight className="h-4 w-4 ml-0.5 shrink-0" />
+              </Button>
 
-              <button
-                onClick={() => {
+              <Button
+                type="button"
+                onPress={() => {
                   setMainSection('panchang');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="flex items-center gap-2 rounded-xl glass-card px-5 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:bg-[var(--bg-card-hover)]"
+                className="flex items-center gap-2 rounded-xl glass-card px-4 py-2.5 text-xs sm:text-sm font-medium text-[var(--text-primary)] transition hover:bg-[var(--bg-card-hover)] cursor-pointer whitespace-nowrap"
               >
-                <Calendar className="h-4 w-4 text-[var(--text-gold)]" />
-                <span>આજનું પંચાંગ & ચોઘડિયા</span>
-              </button>
+                <Calendar className="h-4 w-4 text-[var(--text-gold)] shrink-0" />
+                <span>
+                  {lang === 'gu'
+                    ? 'આજનું પંચાંગ'
+                    : lang === 'hi'
+                      ? 'आज का पंचांग'
+                      : 'Live Panchang'}
+                </span>
+              </Button>
             </div>
 
             {/* Technical Trust Pillars */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)]">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-3 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)]">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
-                <span>૧૦૦% ખાનગી & ઑફલાઇન</span>
+                <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                <span>
+                  {lang === 'gu'
+                    ? '૧૦૦% ખાનગી & ઑફલાઇન'
+                    : lang === 'hi'
+                      ? 'शत-प्रतिशत सुरक्षित व ऑफलाइन'
+                      : '100% Private & Offline'}
+                </span>
               </div>
               <div className="flex items-center gap-2">
-                <Globe className="h-4 w-4 text-blue-500 shrink-0" />
-                <span>૩ ભાષાઓ (ગુજરાતી, હિન્દી, En)</span>
+                <Globe className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                <span>
+                  {lang === 'gu'
+                    ? 'ગુજરાતી, हिन्दी, English'
+                    : lang === 'hi'
+                      ? 'हिन्दी, ગુજરાતી, English'
+                      : '3 Languages Supported'}
+                </span>
               </div>
               <div className="flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-amber-500 shrink-0" />
-                <span>પારાશરી શાસ્ત્ર આધારિત</span>
+                <BookOpen className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                <span>
+                  {lang === 'gu'
+                    ? 'પારાશરી શાસ્ત્ર આધારિત'
+                    : lang === 'hi'
+                      ? 'पाराशरी सिद्धांत आधारित'
+                      : 'Parashari Principles'}
+                </span>
               </div>
             </div>
           </div>
 
           {/* Right Column: Embedded Quick-Birth Chart Calculator Card */}
           <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-6 sm:p-7 shadow-xl backdrop-blur-xl space-y-4">
-              <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
+            <Card className="rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-6 sm:p-7 shadow-xl backdrop-blur-xl space-y-4">
+              <Card.Header className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 p-0">
                 <div className="flex items-center gap-2">
                   <div className="p-2 rounded-lg glass-button-primary">
                     <User className="h-4 w-4 text-stone-900" />
                   </div>
                   <div>
-                    <h2 className="font-serif text-base font-bold text-[var(--text-primary)]">
+                    <Card.Title className="font-serif text-base font-bold text-[var(--text-primary)]">
                       ત્વરિત કુંડળી ગણતરી (Quick Birth Input)
-                    </h2>
-                    <p className="text-[11px] text-[var(--text-muted)]">
+                    </Card.Title>
+                    <Card.Description className="text-[11px] text-[var(--text-muted)]">
                       જન્મ વિગત દાખલ કરી ૧-ક્લિકમાં કુંડળી જુઓ
-                    </p>
+                    </Card.Description>
                   </div>
                 </div>
-              </div>
+              </Card.Header>
 
               <form onSubmit={handleQuickSubmit} className="space-y-3.5 text-xs">
                 <div>
@@ -763,39 +814,40 @@ export default function LandingPage({
                 </div>
 
                 <div className="flex items-center gap-2 pt-2">
-                  <button
+                  <Button
                     type="submit"
                     className="flex-1 flex items-center justify-center gap-2 rounded-xl glass-button-primary py-2.5 text-xs font-bold shadow-md transition transform hover:-translate-y-0.5 cursor-pointer"
                   >
                     <Sparkles className="h-4 w-4" />
                     <span>સંપૂર્ણ કુંડળી ગણતરી કરો (Calculate)</span>
-                  </button>
+                  </Button>
 
-                  <button
+                  <Button
                     type="button"
-                    onClick={handleClearBirthForm}
-                    title="ફોર્મ સાફ કરો (Clear Form)"
+                    onPress={handleClearBirthForm}
                     className="flex items-center justify-center gap-1.5 rounded-xl glass-card px-3.5 py-2.5 text-xs font-medium text-[var(--text-secondary)] hover:text-[#802020] hover:bg-rose-50/50 dark:hover:bg-rose-950/30 transition shadow-xs cursor-pointer"
                   >
                     <RotateCcw className="h-3.5 w-3.5" />
-                    <span>સાફ કરો (Clear)</span>
-                  </button>
+                    <span>સાફ કરો</span>
+                  </Button>
                 </div>
               </form>
-            </div>
+            </Card>
           </div>
         </div>
-      </section>
+      </Card>
 
       {/* =========================================================================
           2. THE 6 DEDICATED ASTROLOGICAL PORTALS SHOWCASE
           ========================================================================= */}
       <section className="space-y-8">
         <div className="text-center space-y-3 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border-gold)] bg-[var(--bg-pill)] px-3.5 py-1 text-xs font-semibold text-[var(--text-gold)]">
-            <Layers className="h-3.5 w-3.5" />
-            <span>૬ સમર્પિત પોર્ટલ (6 Master Portals)</span>
-          </div>
+          <Chip className="bg-amber-500/10 border border-[var(--border-gold)] text-[var(--text-gold)] px-3 py-1 font-semibold text-xs">
+            <Chip.Label className="flex items-center gap-1.5">
+              <Layers className="h-3.5 w-3.5" />
+              <span>૬ સમર્પિત પોર્ટલ (6 Master Portals)</span>
+            </Chip.Label>
+          </Chip>
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[var(--text-primary)]">
             વૈદિક ગણતરી અને પંચાંગનું સંપૂર્ણ વિશ્વ
           </h2>
@@ -809,7 +861,7 @@ export default function LandingPage({
           {portalsList.map((portal) => {
             const Icon = portal.icon;
             return (
-              <div
+              <Card
                 key={portal.id}
                 className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-6 shadow-sm hover:border-[var(--border-gold)] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
@@ -818,9 +870,9 @@ export default function LandingPage({
                     <div className="p-3 rounded-xl glass-button-dark group-hover:scale-105 transition-transform">
                       <Icon className="h-6 w-6 text-[var(--text-gold)]" />
                     </div>
-                    <span className="glass-badge-gold text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                      {portal.badge[lang] || portal.badge.gu}
-                    </span>
+                    <Chip className="glass-badge-gold text-[10px] font-bold px-2 py-0.5">
+                      <Chip.Label>{portal.badge[lang] || portal.badge.gu}</Chip.Label>
+                    </Chip>
                   </div>
 
                   <div>
@@ -843,18 +895,19 @@ export default function LandingPage({
                 </div>
 
                 <div className="pt-6">
-                  <button
-                    onClick={() => {
+                  <Button
+                    type="button"
+                    onPress={() => {
                       setMainSection(portal.id);
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl glass-card py-2.5 text-xs font-bold text-[var(--text-primary)] group-hover:glass-button-primary transition-all"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl glass-card py-2.5 text-xs font-bold text-[var(--text-primary)] group-hover:glass-button-primary transition-all cursor-pointer"
                   >
                     <span>{portal.cta[lang] || portal.cta.gu}</span>
                     <ChevronRight className="h-3.5 w-3.5" />
-                  </button>
+                  </Button>
                 </div>
-              </div>
+              </Card>
             );
           })}
         </div>
@@ -863,13 +916,15 @@ export default function LandingPage({
       {/* =========================================================================
           3. DEEP-DIVE ADVANCED ASTROLOGICAL CAPABILITIES
           ========================================================================= */}
-      <section className="rounded-3xl border border-[var(--border-gold)] bg-[var(--bg-panel)] p-6 sm:p-10 shadow-xl backdrop-blur-xl space-y-8">
+      <Card className="rounded-3xl border border-[var(--border-gold)] glass-panel p-6 sm:p-10 shadow-xl backdrop-blur-xl space-y-8">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full glass-pill px-3 py-0.5 text-xs font-semibold text-[var(--text-gold)] mb-2">
-              <Crown className="h-3.5 w-3.5" />
-              <span>વિશેષ શાસ્ત્રીય સુવિધાઓ (Advanced Capabilities)</span>
-            </div>
+            <Chip className="bg-amber-500/10 border border-[var(--border-gold)] text-[var(--text-gold)] px-3 py-1 font-semibold text-xs mb-2">
+              <Chip.Label className="flex items-center gap-1.5">
+                <Crown className="h-3.5 w-3.5" />
+                <span>વિશેષ શાસ્ત્રીય સુવિધાઓ (Advanced Capabilities)</span>
+              </Chip.Label>
+            </Chip>
             <h2 className="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
               ઉચ્ચ સ્તરનું જ્યોતિષ વિશ્લેષણ & દસ્તાવેજીકરણ
             </h2>
@@ -886,18 +941,19 @@ export default function LandingPage({
               const Icon = tab.icon;
               const isSelected = activeFeatureTab === tab.id;
               return (
-                <button
+                <Button
                   key={tab.id}
-                  onClick={() => setActiveFeatureTab(tab.id)}
-                  className={`flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-bold transition ${
+                  type="button"
+                  onPress={() => setActiveFeatureTab(tab.id)}
+                  className={`flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-bold transition cursor-pointer ${
                     isSelected
                       ? 'glass-button-primary shadow-xs'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-transparent'
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
                   <span>{tab.label}</span>
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -908,9 +964,9 @@ export default function LandingPage({
           {activeFeatureTab === 'dasha' && (
             <>
               <div className="lg:col-span-7 space-y-4">
-                <span className="glass-badge-gold text-xs font-bold px-3 py-1 rounded-full">
-                  વિંશોત્તરી ૧૨૦ વર્ષ ચક્ર
-                </span>
+                <Chip className="glass-badge-gold text-xs font-bold px-3 py-1">
+                  <Chip.Label>વિંશોત્તરી ૧૨૦ વર્ષ ચક્ર</Chip.Label>
+                </Chip>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
                   મહાદશાથી લઈને પ્રાણદશા સુધીનું ૫-સ્તરીય માઇક્રો-ટાઇમિંગ
                 </h3>
@@ -936,7 +992,7 @@ export default function LandingPage({
                   </div>
                 </div>
               </div>
-              <div className="lg:col-span-5 rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-5 text-center space-y-3">
+              <Card className="lg:col-span-5 rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-5 text-center space-y-3">
                 <Clock className="h-12 w-12 text-[var(--text-gold)] mx-auto animate-pulse" />
                 <p className="font-serif text-sm font-bold text-[var(--text-primary)]">
                   સૂક્ષ્મ દશા પરિભ્રમણ ચાર્ટ
@@ -944,16 +1000,16 @@ export default function LandingPage({
                 <p className="text-xs text-[var(--text-muted)]">
                   ચંદ્ર નક્ષત્રના ભોગ્યાંશ આધારે ૧૨૦ વર્ષના નક્ષત્ર સ્વામીઓની ચોક્કસ ગણતરી.
                 </p>
-              </div>
+              </Card>
             </>
           )}
 
           {activeFeatureTab === 'astrocarto' && (
             <>
               <div className="lg:col-span-7 space-y-4">
-                <span className="glass-badge-gold text-xs font-bold px-3 py-1 rounded-full">
-                  વિશ્વ નકશો & ભૌગોલિક રેખાઓ
-                </span>
+                <Chip className="glass-badge-gold text-xs font-bold px-3 py-1">
+                  <Chip.Label>વિશ્વ નકશો & ભૌગોલિક રેખાઓ</Chip.Label>
+                </Chip>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
                   એસ્ટ્રોકાર્ટોગ્રાફી (AstroCartography Global Angularity)
                 </h3>
@@ -981,7 +1037,7 @@ export default function LandingPage({
                   </div>
                 </div>
               </div>
-              <div className="lg:col-span-5 rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-5 text-center space-y-3">
+              <Card className="lg:col-span-5 rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-5 text-center space-y-3">
                 <Globe className="h-12 w-12 text-blue-500 mx-auto" />
                 <p className="font-serif text-sm font-bold text-[var(--text-primary)]">
                   વૈશ્વિક ગ્રહ પ્રભાવ નકશો
@@ -989,16 +1045,16 @@ export default function LandingPage({
                 <p className="text-xs text-[var(--text-muted)]">
                   વિશ્વના ૨૦+ મુખ્ય શહેરોમાં તમારી કુંડળીના ગ્રહ પ્રભાવનું તુલનાત્મક વિશ્લેષણ.
                 </p>
-              </div>
+              </Card>
             </>
           )}
 
           {activeFeatureTab === 'medical' && (
             <>
               <div className="lg:col-span-7 space-y-4">
-                <span className="glass-badge-gold text-xs font-bold px-3 py-1 rounded-full">
-                  આયુર્વેદિક ત્રિદોષ & સ્વાસ્થ્ય
-                </span>
+                <Chip className="glass-badge-gold text-xs font-bold px-3 py-1">
+                  <Chip.Label>આયુર્વેદિક ત્રિદોષ & સ્વાસ્થ્ય</Chip.Label>
+                </Chip>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
                   આયુર્વેદિક મેડિકલ એસ્ટ્રોલોજી & શારીરિક સંરચના
                 </h3>
@@ -1025,7 +1081,7 @@ export default function LandingPage({
                   </div>
                 </div>
               </div>
-              <div className="lg:col-span-5 rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-5 text-center space-y-3">
+              <Card className="lg:col-span-5 rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-5 text-center space-y-3">
                 <HeartPulse className="h-12 w-12 text-rose-500 mx-auto" />
                 <p className="font-serif text-sm font-bold text-[var(--text-primary)]">
                   શારીરિક પ્રકૃતિ અને અંગ રક્ષા
@@ -1033,16 +1089,16 @@ export default function LandingPage({
                 <p className="text-xs text-[var(--text-muted)]">
                   ૬ઠ્ઠા અને ૮મા ભાવના ગ્રહો તથા રાશિ તત્વ મુજબ સ્વાસ્થ્ય સંભાળ.
                 </p>
-              </div>
+              </Card>
             </>
           )}
 
           {activeFeatureTab === 'pdf' && (
             <>
               <div className="lg:col-span-7 space-y-4">
-                <span className="glass-badge-gold text-xs font-bold px-3 py-1 rounded-full">
-                  સંપૂર્ણ મુદ્રણ & A4 આર્કાઇવ
-                </span>
+                <Chip className="glass-badge-gold text-xs font-bold px-3 py-1">
+                  <Chip.Label>સંપૂર્ણ મુદ્રણ & A4 આર્કાઇવ</Chip.Label>
+                </Chip>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
                   પ્રકાશન-સ્તરનું વૈદિક જન્મ કુંડળી PDF ડોસિયર
                 </h3>
@@ -1070,7 +1126,7 @@ export default function LandingPage({
                   </div>
                 </div>
               </div>
-              <div className="lg:col-span-5 rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-5 text-center space-y-3">
+              <Card className="lg:col-span-5 rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-5 text-center space-y-3">
                 <Printer className="h-12 w-12 text-[var(--text-gold)] mx-auto" />
                 <p className="font-serif text-sm font-bold text-[var(--text-primary)]">
                   સંપૂર્ણ પારિવારિક જ્યોતિષ પુસ્તિકા
@@ -1078,16 +1134,16 @@ export default function LandingPage({
                 <p className="text-xs text-[var(--text-muted)]">
                   વ્યાવસાયિક જ્યોતિષીઓ અને પારિવારિક સંદર્ભ માટે ઉચ્ચ-ગુણવત્તાનું દસ્તાવેજીકરણ.
                 </p>
-              </div>
+              </Card>
             </>
           )}
         </div>
-      </section>
+      </Card>
 
       {/* =========================================================================
           4. FOOTER CALL TO ACTION & TRADITIONAL VEDIC BLESSING
           ========================================================================= */}
-      <section className="text-center space-y-8 rounded-3xl border border-[var(--border-gold)] bg-gradient-to-b from-[var(--bg-card)] to-[var(--bg-panel)] p-8 sm:p-12 shadow-2xl backdrop-blur-2xl">
+      <Card className="text-center space-y-8 rounded-3xl border border-[var(--border-gold)] bg-gradient-to-b from-[var(--bg-card)] to-[var(--bg-panel)] p-8 sm:p-12 shadow-2xl backdrop-blur-2xl">
         <div className="space-y-3 max-w-2xl mx-auto">
           <div className="inline-flex items-center justify-center p-3 rounded-2xl glass-button-dark shadow-md">
             <Compass className="h-8 w-8 text-[var(--text-gold)] animate-spin-slow" />
@@ -1101,17 +1157,18 @@ export default function LandingPage({
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <button
-            onClick={() => {
+          <Button
+            type="button"
+            onPress={() => {
               setMainSection('kundli');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="flex items-center gap-2 rounded-xl glass-button-primary px-8 py-3.5 text-sm font-bold shadow-xl transition transform hover:-translate-y-0.5"
+            className="flex items-center gap-2 rounded-xl glass-button-primary px-8 py-3.5 text-sm font-bold shadow-xl transition transform hover:-translate-y-0.5 cursor-pointer"
           >
             <Sparkles className="h-4 w-4" />
             <span>કુંડળી સોફ્ટવેર શરૂ કરો (Open Workspace)</span>
             <ArrowRight className="h-4 w-4" />
-          </button>
+          </Button>
         </div>
 
         {/* Traditional Vedic Sanskrit Inscription */}
@@ -1124,7 +1181,7 @@ export default function LandingPage({
             ચિત્રા પક્ષીય લાહિડી અયનાંશ આધારિત ઉચ્ચ-ચોક્કસાઈ વૈદિક જ્યોતિષ ગણતરી સોફ્ટવેર
           </p>
         </div>
-      </section>
+      </Card>
     </div>
   );
 }

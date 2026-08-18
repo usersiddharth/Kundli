@@ -89,7 +89,11 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
                 <span className="text-[10px] text-[#736a60] block font-sans">
                   જન્મ તારીખ (DOB):
                 </span>
-                <strong className="text-[#2c2825]">{formData.dob}</strong>
+                <strong className="text-[#2c2825]">
+                  {formData?.dob?.includes('-') && formData.dob.split('-')[0].length === 4
+                    ? `${formData.dob.split('-')[2]}-${formData.dob.split('-')[1]}-${formData.dob.split('-')[0]}`
+                    : formData?.dob}
+                </strong>
               </div>
               <div>
                 <span className="text-[10px] text-[#736a60] block font-sans">જન્મ સમય (TOB):</span>
