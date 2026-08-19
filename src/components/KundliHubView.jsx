@@ -99,22 +99,29 @@ export default function KundliHubView({
   const CORE_TABS = [
     {
       id: 'chart',
-      label: lang === 'gu' ? 'ચાર્ટ & જન્મ વિગત' : lang === 'hi' ? 'चक्र एवं विवरण' : 'Chart & Details',
+      label:
+        lang === 'gu' ? 'ચાર્ટ & જન્મ વિગત' : lang === 'hi' ? 'चक्र एवं विवरण' : 'Chart & details',
       icon: Compass,
     },
     {
       id: 'planets',
-      label: lang === 'gu' ? 'ગ્રહ સ્પષ્ટ સ્થિતિ' : lang === 'hi' ? 'ग्रह स्पष्ट' : 'Planetary Positions',
+      label:
+        lang === 'gu'
+          ? 'ગ્રહ સ્પષ્ટ સ્થિતિ'
+          : lang === 'hi'
+            ? 'ग्रह स्पष्ट'
+            : 'Planetary positions',
       icon: Table,
     },
     {
       id: 'dasha',
-      label: lang === 'gu' ? 'વિંશોત્તરી દશા' : lang === 'hi' ? 'विंशोत्तरी दशा' : 'Dasha Periods',
+      label:
+        lang === 'gu' ? 'વિંશોત્તરી દશા' : lang === 'hi' ? 'विंशोत्तरी दशा' : 'Vimshottari dasha',
       icon: Clock,
     },
     {
       id: 'doshas',
-      label: lang === 'gu' ? 'દોષ & ઉપાય' : lang === 'hi' ? 'दोष एवं उपाय' : 'Doshas & Remedies',
+      label: lang === 'gu' ? 'દોષ & ઉપાય' : lang === 'hi' ? 'दोष एवं उपाय' : 'Doshas & remedies',
       icon: ShieldCheck,
     },
   ];
@@ -124,174 +131,440 @@ export default function KundliHubView({
     () => [
       {
         id: 'divisional',
-        title: lang === 'gu' ? 'વર્ગ ચાર્ટ્સ' : lang === 'hi' ? 'वर्ग कुण्डली' : 'Divisional Charts',
+        title:
+          lang === 'gu' ? 'વર્ગ ચાર્ટ્સ' : lang === 'hi' ? 'वर्ग कुण्डली' : 'Divisional Charts',
         tools: [
           {
             id: 'vargas',
-            label: lang === 'gu' ? 'D1 થી D60 ષોડશવર્ગ ચાર્ટ્સ' : lang === 'hi' ? 'षोडशवर्ग (D1 - D60)' : 'Divisional Charts (D1-D60)',
-            desc: lang === 'gu' ? 'નવાંશ, દશમાંશ, ષોડશાંશ સહિત ૧૬ ચાર્ટ્સ' : lang === 'hi' ? 'समस्त वर्ग चक्र' : 'Complete 16 varga charts',
+            label:
+              lang === 'gu'
+                ? 'D1 થી D60 ષોડશવર્ગ ચાર્ટ્સ'
+                : lang === 'hi'
+                  ? 'षोडशवर्ग (D1 - D60)'
+                  : 'Divisional Charts (D1-D60)',
+            desc:
+              lang === 'gu'
+                ? 'નવાંશ, દશમાંશ, ષોડશાંશ સહિત ૧૬ ચાર્ટ્સ'
+                : lang === 'hi'
+                  ? 'समस्त वर्ग चक्र'
+                  : 'Complete 16 varga charts',
             icon: Layers,
           },
           {
             id: 'careerD10',
-            label: lang === 'gu' ? 'D10 દશમાંશ કારકિર્દી ચાર્ટ' : lang === 'hi' ? 'D10 दशमांश करियर' : 'D10 Career Blueprint',
-            desc: lang === 'gu' ? 'વ્યવસાય, નોકરી અને પ્રતિષ્ઠા વિશ્લેષણ' : lang === 'hi' ? 'आजीविका एवं यश' : 'Profession & Status Analysis',
+            label:
+              lang === 'gu'
+                ? 'D10 દશમાંશ કારકિર્દી ચાર્ટ'
+                : lang === 'hi'
+                  ? 'D10 दशमांश करियर'
+                  : 'D10 Career Blueprint',
+            desc:
+              lang === 'gu'
+                ? 'વ્યવસાય, નોકરી અને પ્રતિષ્ઠા વિશ્લેષણ'
+                : lang === 'hi'
+                  ? 'आजीविका एवं यश'
+                  : 'Profession & Status Analysis',
             icon: Briefcase,
           },
           {
             id: 'wheel',
-            label: lang === 'gu' ? '૩૬૦° રાશિ ચક્ર વ્હીલ' : lang === 'hi' ? '३६०° राशि चक्र' : '360° Zodiac Wheel',
-            desc: lang === 'gu' ? 'ગોળાકાર રાશિ અને નક્ષત્ર વ્હીલ' : lang === 'hi' ? 'वृत्ताकार चक्र' : 'Circular Western & Vedic wheel',
+            label:
+              lang === 'gu'
+                ? '૩૬૦° રાશિ ચક્ર વ્હીલ'
+                : lang === 'hi'
+                  ? '३६०° राशि चक्र'
+                  : '360° Zodiac Wheel',
+            desc:
+              lang === 'gu'
+                ? 'ગોળાકાર રાશિ અને નક્ષત્ર વ્હીલ'
+                : lang === 'hi'
+                  ? 'वृत्ताकार चक्र'
+                  : 'Circular Western & Vedic wheel',
             icon: Orbit,
           },
         ],
       },
       {
         id: 'systems',
-        title: lang === 'gu' ? 'વિશેષ જ્યોતિષ પદ્ધતિ' : lang === 'hi' ? 'विशेष ज्योतिष पद्धति' : 'Special Astrological Systems',
+        title:
+          lang === 'gu'
+            ? 'વિશેષ જ્યોતિષ પદ્ધતિ'
+            : lang === 'hi'
+              ? 'विशेष ज्योतिष पद्धति'
+              : 'Special Astrological Systems',
         tools: [
           {
             id: 'kp',
-            label: lang === 'gu' ? 'કૃષ્ણમૂર્તિ પદ્ધતિ (KP સિસ્ટમ)' : lang === 'hi' ? 'केपी नक्षत्र ज्योतिष' : 'KP Astrology System',
-            desc: lang === 'gu' ? 'નક્ષત્ર લોર્ડ, સબ-લોર્ડ અને કસ્પ્સ' : lang === 'hi' ? 'कस्प व सब-लॉर्ड' : 'Star lords, Sub-lords & Cusps',
+            label:
+              lang === 'gu'
+                ? 'કૃષ્ણમૂર્તિ પદ્ધતિ (KP સિસ્ટમ)'
+                : lang === 'hi'
+                  ? 'केपी नक्षत्र ज्योतिष'
+                  : 'KP Astrology System',
+            desc:
+              lang === 'gu'
+                ? 'નક્ષત્ર લોર્ડ, સબ-લોર્ડ અને કસ્પ્સ'
+                : lang === 'hi'
+                  ? 'कस्प व सब-लॉर्ड'
+                  : 'Star lords, Sub-lords & Cusps',
             icon: Key,
           },
           {
             id: 'kpSignificators',
-            label: lang === 'gu' ? 'KP ૪-સ્તરીય કારકતા કોષ્ટક' : lang === 'hi' ? 'KP ४-स्तरीय तालिका' : 'KP 4-Step Significators',
-            desc: lang === 'gu' ? 'ભાવ અને ગ્રહ કારકત્વ વિશ્લેષણ' : lang === 'hi' ? 'कारक विश्लेषण' : 'House & Planet Significators',
+            label:
+              lang === 'gu'
+                ? 'KP ૪-સ્તરીય કારકતા કોષ્ટક'
+                : lang === 'hi'
+                  ? 'KP ४-स्तरीय तालिका'
+                  : 'KP 4-Step Significators',
+            desc:
+              lang === 'gu'
+                ? 'ભાવ અને ગ્રહ કારકત્વ વિશ્લેષણ'
+                : lang === 'hi'
+                  ? 'कारक विश्लेषण'
+                  : 'House & Planet Significators',
             icon: Key,
           },
           {
             id: 'jaimini',
-            label: lang === 'gu' ? 'જૈમિની જ્યોતિષ & ચર દશા' : lang === 'hi' ? 'जैमिनी ज्योतिष' : 'Jaimini & Chara Dasha',
-            desc: lang === 'gu' ? 'આત્મકારક, અમાત્યકારક અને પદ લગ્ન' : lang === 'hi' ? 'कारकांश एवं चर दशा' : 'Karakas & Sign-based Dasha',
+            label:
+              lang === 'gu'
+                ? 'જૈમિની જ્યોતિષ & ચર દશા'
+                : lang === 'hi'
+                  ? 'जैमिनी ज्योतिष'
+                  : 'Jaimini & Chara Dasha',
+            desc:
+              lang === 'gu'
+                ? 'આત્મકારક, અમાત્યકારક અને પદ લગ્ન'
+                : lang === 'hi'
+                  ? 'कारकांश एवं चर दशा'
+                  : 'Karakas & Sign-based Dasha',
             icon: Crown,
           },
           {
             id: 'varshphal',
-            label: lang === 'gu' ? 'તાજિક વર્ષફળ & મુન્થા' : lang === 'hi' ? 'ताजिक वर्षफल' : 'Tajik Varshphal (Annual)',
-            desc: lang === 'gu' ? 'વાર્ષિક કુંડળી, મુન્થા અને ત્રિભાગી દશા' : lang === 'hi' ? 'वार्षिक कुंडली' : 'Annual Solar Return Chart',
+            label:
+              lang === 'gu'
+                ? 'તાજિક વર્ષફળ & મુન્થા'
+                : lang === 'hi'
+                  ? 'ताजिक वर्षफल'
+                  : 'Tajik Varshphal (Annual)',
+            desc:
+              lang === 'gu'
+                ? 'વાર્ષિક કુંડળી, મુન્થા અને ત્રિભાગી દશા'
+                : lang === 'hi'
+                  ? 'वार्षिक कुंडली'
+                  : 'Annual Solar Return Chart',
             icon: Sun,
           },
           {
             id: 'lalkitab',
-            label: lang === 'gu' ? 'લાલ કિતાબ ઉપાય & ઋણ' : lang === 'hi' ? 'लाल किताब उपाय' : 'Lal Kitab Remedies',
-            desc: lang === 'gu' ? 'પિતૃ ઋણ, અંધા તેવા અને સચોટ ટોટકા' : lang === 'hi' ? 'ऋण एवं सरल उपाय' : 'Karmic Debts & Easy Remedies',
+            label:
+              lang === 'gu'
+                ? 'લાલ કિતાબ ઉપાય & ઋણ'
+                : lang === 'hi'
+                  ? 'लाल किताब उपाय'
+                  : 'Lal Kitab Remedies',
+            desc:
+              lang === 'gu'
+                ? 'પિતૃ ઋણ, અંધા તેવા અને સચોટ ટોટકા'
+                : lang === 'hi'
+                  ? 'ऋण एवं सरल उपाय'
+                  : 'Karmic Debts & Easy Remedies',
             icon: BookOpen,
           },
         ],
       },
       {
         id: 'analytics',
-        title: lang === 'gu' ? 'ગ્રહ બળ & ઊંડાણપૂર્વક વિશ્લેષણ' : lang === 'hi' ? 'ग्रह बल एवं विश्लेषण' : 'Planetary Strengths & Analytics',
+        title:
+          lang === 'gu'
+            ? 'ગ્રહ બળ & ઊંડાણપૂર્વક વિશ્લેષણ'
+            : lang === 'hi'
+              ? 'ग्रह बल एवं विश्लेषण'
+              : 'Planetary Strengths & Analytics',
         tools: [
           {
             id: 'shadbala',
-            label: lang === 'gu' ? 'ષડ્બળ ૬-સ્તરીય તાકાત' : lang === 'hi' ? 'षड्बल सामर्थ्य' : 'Shadbala 6-Fold Strength',
-            desc: lang === 'gu' ? 'સ્થાન, દિગ્, કાલ, ચેષ્ટા, નૈસર્ગિક અને દૃગ્ બળ' : lang === 'hi' ? 'षड्बल गणना' : 'Complete 6-fold planetary strength',
+            label:
+              lang === 'gu'
+                ? 'ષડ્બળ ૬-સ્તરીય તાકાત'
+                : lang === 'hi'
+                  ? 'षड्बल सामर्थ्य'
+                  : 'Shadbala 6-Fold Strength',
+            desc:
+              lang === 'gu'
+                ? 'સ્થાન, દિગ્, કાલ, ચેષ્ટા, નૈસર્ગિક અને દૃગ્ બળ'
+                : lang === 'hi'
+                  ? 'षड्बल गणना'
+                  : 'Complete 6-fold planetary strength',
             icon: ShieldCheck,
           },
           {
             id: 'ashtakvarga',
-            label: lang === 'gu' ? 'સર્વાષ્ટકવર્ગ બિંદુ' : lang === 'hi' ? 'सर्वाष्टकवर्ग चक्र' : 'Sarvashtakvarga Points',
-            desc: lang === 'gu' ? '૩૩૭ બિંદુ ચક્ર અને કક્ષા ગોચર' : lang === 'hi' ? 'बिंदु तालिका' : 'Bhinna & Sarvashtakvarga Tables',
+            label:
+              lang === 'gu'
+                ? 'સર્વાષ્ટકવર્ગ બિંદુ'
+                : lang === 'hi'
+                  ? 'सर्वाष्टकवर्ग चक्र'
+                  : 'Sarvashtakvarga Points',
+            desc:
+              lang === 'gu'
+                ? '૩૩૭ બિંદુ ચક્ર અને કક્ષા ગોચર'
+                : lang === 'hi'
+                  ? 'बिंदु तालिका'
+                  : 'Bhinna & Sarvashtakvarga Tables',
             icon: Grid,
           },
           {
             id: 'aspects',
-            label: lang === 'gu' ? 'ગ્રહ દૃષ્ટિ સંબંધ' : lang === 'hi' ? 'ग्रह दृष्टि' : 'Planetary Aspects & Drishti',
-            desc: lang === 'gu' ? 'વિશેષ દૃષ્ટિ (મંગળ, ગુરુ, શનિ) અને સંયોગ' : lang === 'hi' ? 'दृष्टि संबंध' : 'Mutual aspects and conjunctions',
+            label:
+              lang === 'gu'
+                ? 'ગ્રહ દૃષ્ટિ સંબંધ'
+                : lang === 'hi'
+                  ? 'ग्रह दृष्टि'
+                  : 'Planetary Aspects & Drishti',
+            desc:
+              lang === 'gu'
+                ? 'વિશેષ દૃષ્ટિ (મંગળ, ગુરુ, શનિ) અને સંયોગ'
+                : lang === 'hi'
+                  ? 'दृष्टि संबंध'
+                  : 'Mutual aspects and conjunctions',
             icon: Eye,
           },
           {
             id: 'parivartan',
-            label: lang === 'gu' ? 'પરિવર્તન યોગ (ગૃહ વિનિમય)' : lang === 'hi' ? 'परिवर्तन योग' : 'Parivartan Yogas',
-            desc: lang === 'gu' ? 'મહા, દૈન્ય અને ખલ યોગ વિશ્લેષણ' : lang === 'hi' ? 'गृह विनिमय' : 'Mutual house exchange yogas',
+            label:
+              lang === 'gu'
+                ? 'પરિવર્તન યોગ (ગૃહ વિનિમય)'
+                : lang === 'hi'
+                  ? 'परिवर्तन योग'
+                  : 'Parivartan Yogas',
+            desc:
+              lang === 'gu'
+                ? 'મહા, દૈન્ય અને ખલ યોગ વિશ્લેષણ'
+                : lang === 'hi'
+                  ? 'गृह विनिमय'
+                  : 'Mutual house exchange yogas',
             icon: Repeat,
           },
           {
             id: 'lifeGraph',
-            label: lang === 'gu' ? '૧૨૦ વર્ષનું જીવન આલેખ' : lang === 'hi' ? '१२०-वर्षीय जीवन आलेख' : '120-Year Life Graph',
-            desc: lang === 'gu' ? 'સમય અનુસાર જીવનની શુભ-અશુભ ગતિ' : lang === 'hi' ? 'जीवन का उतार-चढ़ाव' : 'Ups & downs score across lifetime',
+            label:
+              lang === 'gu'
+                ? '૧૨૦ વર્ષનું જીવન આલેખ'
+                : lang === 'hi'
+                  ? '१२०-वर्षीय जीवन आलेख'
+                  : '120-Year Life Graph',
+            desc:
+              lang === 'gu'
+                ? 'સમય અનુસાર જીવનની શુભ-અશુભ ગતિ'
+                : lang === 'hi'
+                  ? 'जीवन का उतार-चढ़ाव'
+                  : 'Ups & downs score across lifetime',
             icon: TrendingUp,
           },
           {
             id: 'kalsarpaDeep',
-            label: lang === 'gu' ? '૧૨ કાલસર્પ યોગ વિશેષ વિશ્લેષણ' : lang === 'hi' ? 'कालसर्प विश्लेषण' : '12 Kalsarpa Deep Analysis',
-            desc: lang === 'gu' ? 'અનંતથી શેષનાગ સુધીના ૧૨ પ્રકાર અને શાંતિ' : lang === 'hi' ? '१२ प्रकार व उपाय' : '12 types of Kalsarpa & remedies',
+            label:
+              lang === 'gu'
+                ? '૧૨ કાલસર્પ યોગ વિશેષ વિશ્લેષણ'
+                : lang === 'hi'
+                  ? 'कालसर्प विश्लेषण'
+                  : '12 Kalsarpa Deep Analysis',
+            desc:
+              lang === 'gu'
+                ? 'અનંતથી શેષનાગ સુધીના ૧૨ પ્રકાર અને શાંતિ'
+                : lang === 'hi'
+                  ? '१२ प्रकार व उपाय'
+                  : '12 types of Kalsarpa & remedies',
             icon: ShieldAlert,
           },
           {
             id: 'medical',
-            label: lang === 'gu' ? 'આયુર્વેદિક મેડિકલ એસ્ટ્રોલોજી' : lang === 'hi' ? 'आयुर्वेदिक चिकित्सा' : 'Ayurvedic Medical Astro',
-            desc: lang === 'gu' ? 'વાત-પિત્ત-કફ પ્રકૃતિ અને શારીરિક અંગ બળ' : lang === 'hi' ? 'त्रिदोष एवं स्वास्थ्य' : 'Dosha constitution & health',
+            label:
+              lang === 'gu'
+                ? 'આયુર્વેદિક મેડિકલ એસ્ટ્રોલોજી'
+                : lang === 'hi'
+                  ? 'आयुर्वेदिक चिकित्सा'
+                  : 'Ayurvedic Medical Astro',
+            desc:
+              lang === 'gu'
+                ? 'વાત-પિત્ત-કફ પ્રકૃતિ અને શારીરિક અંગ બળ'
+                : lang === 'hi'
+                  ? 'त्रिदोष एवं स्वास्थ्य'
+                  : 'Dosha constitution & health',
             icon: HeartPulse,
           },
         ],
       },
       {
         id: 'utilities',
-        title: lang === 'gu' ? 'સાધનો, મુહૂર્ત & સેવાઓ' : lang === 'hi' ? 'मुहूर्त एवं अन्य सेवाएं' : 'Utilities, Muhurta & Consultation',
+        title:
+          lang === 'gu'
+            ? 'સાધનો, મુહૂર્ત & સેવાઓ'
+            : lang === 'hi'
+              ? 'मुहूर्त एवं अन्य सेवाएं'
+              : 'Utilities, Muhurta & Consultation',
         tools: [
           {
             id: 'prashna',
-            label: lang === 'gu' ? 'તાત્કાલિક પ્રશ્ન કુંડળી' : lang === 'hi' ? 'तत्काल प्रश्न कुंडली' : 'Instant Prashna Horary',
-            desc: lang === 'gu' ? 'વર્તમાન ક્ષણના પ્રશ્નનો સચોટ ઉત્તર' : lang === 'hi' ? 'प्रश्न ज्योतिष' : 'Current moment horary chart',
+            label:
+              lang === 'gu'
+                ? 'તાત્કાલિક પ્રશ્ન કુંડળી'
+                : lang === 'hi'
+                  ? 'तत्काल प्रश्न कुंडली'
+                  : 'Instant Prashna Horary',
+            desc:
+              lang === 'gu'
+                ? 'વર્તમાન ક્ષણના પ્રશ્નનો સચોટ ઉત્તર'
+                : lang === 'hi'
+                  ? 'प्रश्न ज्योतिष'
+                  : 'Current moment horary chart',
             icon: HelpCircle,
           },
           {
             id: 'eventMuhurta',
-            label: lang === 'gu' ? 'વ્યક્તિગત શ્રેષ્ઠ મુહૂર્ત શોધો' : lang === 'hi' ? 'शुभ मुहूर्त खोज' : 'Event Muhurta Finder',
-            desc: lang === 'gu' ? 'લગ્ન, ગૃહ પ્રવેશ, વાહન, વેપાર મુહૂર્ત' : lang === 'hi' ? 'कार्य सिद्धि मुहूर्त' : 'Find auspicious timings for events',
+            label:
+              lang === 'gu'
+                ? 'વ્યક્તિગત શ્રેષ્ઠ મુહૂર્ત શોધો'
+                : lang === 'hi'
+                  ? 'शुभ मुहूर्त खोज'
+                  : 'Event Muhurta Finder',
+            desc:
+              lang === 'gu'
+                ? 'લગ્ન, ગૃહ પ્રવેશ, વાહન, વેપાર મુહૂર્ત'
+                : lang === 'hi'
+                  ? 'कार्य सिद्धि मुहूर्त'
+                  : 'Find auspicious timings for events',
             icon: Calendar,
           },
           {
             id: 'gemstoneMuhurta',
-            label: lang === 'gu' ? 'રત્ન ધારણ મુહૂર્ત & પ્રાણ પ્રતિષ્ઠા' : lang === 'hi' ? 'रत्न धारण विधि' : 'Gemstone Rituals & Muhurta',
-            desc: lang === 'gu' ? 'શુભ વાર, નક્ષત્ર અને મંત્ર જાપ વિધિ' : lang === 'hi' ? 'रत्न प्रतिष्ठा' : 'Rituals and timings to wear gems',
+            label:
+              lang === 'gu'
+                ? 'રત્ન ધારણ મુહૂર્ત & પ્રાણ પ્રતિષ્ઠા'
+                : lang === 'hi'
+                  ? 'रत्न धारण विधि'
+                  : 'Gemstone Rituals & Muhurta',
+            desc:
+              lang === 'gu'
+                ? 'શુભ વાર, નક્ષત્ર અને મંત્ર જાપ વિધિ'
+                : lang === 'hi'
+                  ? 'रत्न प्रतिष्ठा'
+                  : 'Rituals and timings to wear gems',
             icon: Gem,
           },
           {
             id: 'japaMala',
-            label: lang === 'gu' ? '૧૦૮ મંત્ર જાપ માળા કૌન્ટર' : lang === 'hi' ? '१०८ मंत्र जाप माला' : '108 Japa Mala Counter',
-            desc: lang === 'gu' ? 'નવગ્રહ બીજ મંત્ર અને જાપ સાધના' : lang === 'hi' ? 'मंत्र जप' : 'Interactive digital 108 japa counter',
+            label:
+              lang === 'gu'
+                ? '૧૦૮ મંત્ર જાપ માળા કૌન્ટર'
+                : lang === 'hi'
+                  ? '१०८ मंत्र जाप माला'
+                  : '108 Japa Mala Counter',
+            desc:
+              lang === 'gu'
+                ? 'નવગ્રહ બીજ મંત્ર અને જાપ સાધના'
+                : lang === 'hi'
+                  ? 'मंत्र जप'
+                  : 'Interactive digital 108 japa counter',
             icon: Sparkles,
           },
           {
             id: 'astrocartography',
-            label: lang === 'gu' ? 'એસ્ટ્રોકાર્ટોગ્રાફી વિશ્વ નકશો' : lang === 'hi' ? 'एस्ट्रोकार्टोग्राफी' : 'AstroCartography World Map',
-            desc: lang === 'gu' ? 'વિશ્વભરમાં આપના અનુકૂળ શહેરો અને રેખાઓ' : lang === 'hi' ? 'विश्व मानचित्र' : 'Planetary power lines across the globe',
+            label:
+              lang === 'gu'
+                ? 'એસ્ટ્રોકાર્ટોગ્રાફી વિશ્વ નકશો'
+                : lang === 'hi'
+                  ? 'एस्ट्रोकार्टोग्राफी'
+                  : 'AstroCartography World Map',
+            desc:
+              lang === 'gu'
+                ? 'વિશ્વભરમાં આપના અનુકૂળ શહેરો અને રેખાઓ'
+                : lang === 'hi'
+                  ? 'विश्व मानचित्र'
+                  : 'Planetary power lines across the globe',
             icon: Globe,
           },
           {
             id: 'familyComparison',
-            label: lang === 'gu' ? 'કુટુંબ કુંડળી સરખામણી' : lang === 'hi' ? 'पारिवारिक तुलना' : 'Family Chart Comparison',
-            desc: lang === 'gu' ? 'પરિવારના સભ્યોની કુંડળી સરખામણી' : lang === 'hi' ? 'कुंडली मिलान' : 'Side-by-side family horoscopes',
+            label:
+              lang === 'gu'
+                ? 'કુટુંબ કુંડળી સરખામણી'
+                : lang === 'hi'
+                  ? 'पारिवारिक तुलना'
+                  : 'Family Chart Comparison',
+            desc:
+              lang === 'gu'
+                ? 'પરિવારના સભ્યોની કુંડળી સરખામણી'
+                : lang === 'hi'
+                  ? 'कुंडली मिलान'
+                  : 'Side-by-side family horoscopes',
             icon: Users,
           },
           {
             id: 'socialStory',
-            label: lang === 'gu' ? 'સોશિયલ મીડિયા સ્ટોરી ગ્રાફિક' : lang === 'hi' ? 'सोशल स्टोरी कार्ड' : 'Social Story Card Generator',
-            desc: lang === 'gu' ? 'ઇન્સ્ટાગ્રામ અને વ્હોટ્સએપ સ્ટોરી શેર' : lang === 'hi' ? 'कार्ड शेयर' : 'Export beautiful shareable image',
+            label:
+              lang === 'gu'
+                ? 'સોશિયલ મીડિયા સ્ટોરી ગ્રાફિક'
+                : lang === 'hi'
+                  ? 'सोशल स्टोरी कार्ड'
+                  : 'Social Story Card Generator',
+            desc:
+              lang === 'gu'
+                ? 'ઇન્સ્ટાગ્રામ અને વ્હોટ્સએપ સ્ટોરી શેર'
+                : lang === 'hi'
+                  ? 'कार्ड शेयर'
+                  : 'Export beautiful shareable image',
             icon: Share2,
           },
           {
             id: 'consultation',
-            label: lang === 'gu' ? 'AI સંદર્ભિત જ્યોતિષ પરામર્શ' : lang === 'hi' ? 'AI ज्योतिष परामर्श' : 'AI Vedic Consultation',
-            desc: lang === 'gu' ? 'કુંડળી આધારિત પ્રશ્નોત્તરી અને માર્ગદર્શન' : lang === 'hi' ? 'परामर्श' : 'Interactive AI birth chart insights',
+            label:
+              lang === 'gu'
+                ? 'AI સંદર્ભિત જ્યોતિષ પરામર્શ'
+                : lang === 'hi'
+                  ? 'AI ज्योतिष परामर्श'
+                  : 'AI Vedic Consultation',
+            desc:
+              lang === 'gu'
+                ? 'કુંડળી આધારિત પ્રશ્નોત્તરી અને માર્ગદર્શન'
+                : lang === 'hi'
+                  ? 'परामर्श'
+                  : 'Interactive AI birth chart insights',
             icon: Sparkles,
           },
           {
             id: 'profile',
-            label: lang === 'gu' ? 'જાતક જન્મ વિગત ફેરફાર' : lang === 'hi' ? 'जन्म विवरण संपादन' : 'Edit Birth Details',
-            desc: lang === 'gu' ? 'તારીખ, સમય અને શહેર બદલો' : lang === 'hi' ? 'विवरण बदलें' : 'Change date, time, or location',
+            label:
+              lang === 'gu'
+                ? 'જાતક જન્મ વિગત ફેરફાર'
+                : lang === 'hi'
+                  ? 'जन्म विवरण संपादन'
+                  : 'Edit Birth Details',
+            desc:
+              lang === 'gu'
+                ? 'તારીખ, સમય અને શહેર બદલો'
+                : lang === 'hi'
+                  ? 'विवरण बदलें'
+                  : 'Change date, time, or location',
             icon: User,
           },
           {
             id: 'print',
-            label: lang === 'gu' ? 'સંપૂર્ણ કુંડળી PDF પ્રિન્ટ (A4)' : lang === 'hi' ? 'सम्पूर्ण कुण्डली प्रिंट' : 'Save Full Dossier PDF',
-            desc: lang === 'gu' ? 'છપાઈ યોગ્ય વિગતવાર દસ્તાવેજ' : lang === 'hi' ? 'पीडीएफ प्रिंट' : 'High quality printable PDF format',
+            label:
+              lang === 'gu'
+                ? 'સંપૂર્ણ કુંડળી PDF પ્રિન્ટ (A4)'
+                : lang === 'hi'
+                  ? 'सम्पूर्ण कुण्डली प्रिंट'
+                  : 'Save Full Dossier PDF',
+            desc:
+              lang === 'gu'
+                ? 'છપાઈ યોગ્ય વિગતવાર દસ્તાવેજ'
+                : lang === 'hi'
+                  ? 'पीडीएफ प्रिंट'
+                  : 'High quality printable PDF format',
             icon: Printer,
           },
         ],
@@ -351,7 +624,9 @@ export default function KundliHubView({
               className="flex items-center gap-1.5 glass-button-primary px-3 py-1.5 text-xs font-bold rounded-xl cursor-pointer"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span>{lang === 'gu' ? 'મુખ્ય કુંડળી' : lang === 'hi' ? 'मुख्य कुण्डली' : 'Core Kundli'}</span>
+              <span>
+                {lang === 'gu' ? 'મુખ્ય કુંડળી' : lang === 'hi' ? 'मुख्य कुण्डली' : 'Core Kundli'}
+              </span>
             </Button>
             <div className="flex items-center gap-1.5 text-xs font-semibold text-[var(--text-primary)]">
               <span className="text-[var(--text-muted)]">/</span>
@@ -494,7 +769,11 @@ export default function KundliHubView({
                 <div>
                   <div className="text-xs font-semibold text-[var(--text-muted)] mb-3">
                     {filteredTools.length}{' '}
-                    {lang === 'gu' ? 'પરિણામો મળ્યા' : lang === 'hi' ? 'परिणाम मिले' : 'results found'}
+                    {lang === 'gu'
+                      ? 'પરિણામો મળ્યા'
+                      : lang === 'hi'
+                        ? 'परिणाम मिले'
+                        : 'results found'}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {filteredTools.map((tool) => {
@@ -588,9 +867,7 @@ export default function KundliHubView({
             {advancedTool === 'careerD10' && (
               <CareerD10View kundliData={kundliData} t={t} lang={lang} />
             )}
-            {advancedTool === 'wheel' && (
-              <ZodiacWheel kundliData={kundliData} t={t} lang={lang} />
-            )}
+            {advancedTool === 'wheel' && <ZodiacWheel kundliData={kundliData} t={t} lang={lang} />}
             {advancedTool === 'kp' && <KpView kundliData={kundliData} t={t} />}
             {advancedTool === 'kpSignificators' && (
               <KpSignificatorsView kundliData={kundliData} t={t} lang={lang} />

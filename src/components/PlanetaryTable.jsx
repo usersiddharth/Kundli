@@ -135,28 +135,28 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
   };
 
   return (
-    <Card className="glass-panel space-y-5 rounded-2xl p-4 sm:p-6 border border-[var(--border-gold)]">
+    <Card className="glass-panel space-y-5 rounded-2xl p-4 sm:p-6 border border-[var(--border-subtle)]">
       <Card.Header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4 p-0">
         <div>
-          <Card.Title className="flex items-center gap-2 font-serif text-xl font-medium tracking-tight text-[var(--text-primary)]">
+          <Card.Title className="flex items-center gap-2 font-serif text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
             <Table className="h-5 w-5 text-[var(--text-gold)]" />{' '}
-            {t.tabPlanets || 'Planetary Positions & Coordinates'}
+            {t.tabPlanets || 'Planetary positions & coordinates'}
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             Exact sidereal degrees, nakshatra padas, house placements & planetary dignities
           </Card.Description>
         </div>
         <Chip className="glass-badge-gold px-3 py-1 text-xs font-semibold">
-          <Chip.Label>Lahiri Ayanamsha (Chitra Paksha)</Chip.Label>
+          <Chip.Label>Lahiri ayanamsha (Chitra paksha)</Chip.Label>
         </Chip>
       </Card.Header>
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs text-[var(--text-primary)] sm:text-sm">
-          <thead className="border-b border-[var(--border-subtle)] bg-[var(--bg-pill)] text-xs font-semibold text-[var(--text-secondary)]">
+          <thead className="border-b border-[var(--border-subtle)] bg-[var(--bg-pill)] text-xs font-medium text-[var(--text-secondary)]">
             <tr>
               <th className="p-3">{t.planet || 'Planet'}</th>
-              <th className="p-3">{t.rashi || 'Rashi (Sign)'}</th>
+              <th className="p-3">{t.rashi || 'Rashi (sign)'}</th>
               <th className="p-3">{t.degree || 'Degree'}</th>
               <th className="p-3">{t.house || 'House'}</th>
               <th className="p-3">{t.nakshatra || 'Nakshatra'}</th>

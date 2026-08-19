@@ -182,16 +182,16 @@ export default function ChartSVG({ kundliData, t, lang }) {
 
       {/* Guide Legend Banner */}
       {showLegend && (
-        <div className="rounded-xl glass-panel-accent p-4 text-xs text-[var(--text-secondary)] space-y-1.5">
+        <div className="rounded-xl glass-panel-accent p-4 text-xs text-[var(--text-secondary)] space-y-1.5 border border-[var(--border-gold)]">
           <div className="font-semibold text-[var(--text-gold)] flex items-center gap-1.5">
-            <Info className="h-4 w-4" /> North Indian Chart Geometry:
+            <Info className="h-4 w-4" /> North Indian chart geometry:
           </div>
           <p>
-            • In the North Indian chart layout, <strong>House positions remain fixed</strong>. The{' '}
-            <strong>Top Center Diamond is always House 1 (Lagna)</strong>.
+            • In the North Indian chart layout, <strong>house positions remain fixed</strong>. The{' '}
+            <strong>top center diamond is always House 1 (Lagna)</strong>.
           </p>
           <p>
-            • Numbers inside each house (1 to 12) represent the <strong>Rashi (Zodiac Sign)</strong>
+            • Numbers inside each house (1 to 12) represent the <strong>Rashi (zodiac sign)</strong>
             , where 1=Aries, 2=Taurus, 3=Gemini, ..., 12=Pisces.
           </p>
         </div>

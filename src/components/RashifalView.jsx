@@ -238,7 +238,7 @@ export default function RashifalView({ kundliData, t, lang = 'gu' }) {
               onChange={(e) => setSelectedYear(Number(e.target.value))}
               className="rounded-xl glass-input px-2.5 py-1 text-xs font-mono font-bold text-[var(--text-primary)] focus:outline-none"
             >
-              {[2024, 2025, 2026, 2027, 2028, 2029, 2030].map((y) => (
+              {Array.from({ length: 51 }, (_, i) => 2000 + i).map((y) => (
                 <option key={y} value={y}>
                   {y}
                 </option>

@@ -216,7 +216,7 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
               className="flex-1 rounded-xl glass-input px-2.5 py-1.5 text-xs font-mono text-[var(--text-primary)] focus:outline-none"
             >
               <option value="all">તમામ વર્ષ (All Years)</option>
-              {[2024, 2025, 2026, 2027, 2028, 2029, 2030].map((y) => (
+              {Array.from({ length: 31 }, (_, i) => 2020 + i).map((y) => (
                 <option key={y} value={y}>
                   {y}
                 </option>

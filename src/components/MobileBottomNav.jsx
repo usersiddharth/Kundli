@@ -56,14 +56,14 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
             <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-3">
               <div className="flex items-center gap-2">
                 <LayoutGrid className="h-5 w-5 text-[var(--text-gold)]" />
-                <h3 className="font-serif font-bold text-base text-[var(--text-primary)]">
+                <h3 className="font-serif font-medium text-base text-[var(--text-primary)]">
                   વૈદિક સાધનો અને સેવાઓ
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsDrawerOpen(false)}
-                className="p-1 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+                className="p-1.5 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
                 aria-label="Close tools menu"
               >
                 <X className="h-5 w-5" />
@@ -79,23 +79,23 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                     key={tool.id}
                     type="button"
                     onClick={() => handleSelectTab(tool.id)}
-                    className={`flex items-center gap-3 p-3 rounded-xl text-left transition cursor-pointer ${
+                    className={`flex items-center gap-3 p-3 rounded-2xl text-left transition cursor-pointer ${
                       isSelected
                         ? 'glass-button-primary shadow-xs'
                         : 'glass-card hover:border-[var(--border-gold)]'
                     }`}
                   >
                     <div
-                      className={`p-2 rounded-lg ${
+                      className={`p-2 rounded-xl ${
                         isSelected
-                          ? 'bg-amber-500/30 text-stone-900'
+                          ? 'bg-amber-500/30 text-white'
                           : 'glass-pill text-[var(--text-gold)]'
                       }`}
                     >
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="text-sm font-bold text-[var(--text-primary)] leading-tight">
+                      <div className="text-sm font-semibold text-[var(--text-primary)] leading-tight">
                         {tool.label}
                       </div>
                       <div className="text-xs text-[var(--text-muted)] mt-0.5 leading-tight">

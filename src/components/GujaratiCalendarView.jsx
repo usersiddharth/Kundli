@@ -42,6 +42,8 @@ const WEEKDAYS_GU = [
   { short: 'શનિ', full: 'શનિવાર (Sat)' },
 ];
 
+const CALENDAR_YEARS = Array.from({ length: 201 }, (_, i) => 1900 + i);
+
 export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) {
   const now = new Date();
   const [currentYear, setCurrentYear] = useState(now.getFullYear());
@@ -121,7 +123,7 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
   };
 
   return (
-    <Card className="rounded-2xl glass-panel p-3 sm:p-5 md:p-6 shadow-sm space-y-4 sm:space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-gold)]">
+    <Card className="rounded-2xl glass-panel p-3 sm:p-5 md:p-6 shadow-sm space-y-4 sm:space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
@@ -141,9 +143,9 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
       {/* Main Header & Controls (Hidden in Print) */}
       <Card.Header className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 p-0 print:hidden">
         <div>
-          <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <CalendarIcon className="h-5 w-5 text-[var(--text-gold)]" /> વિગતવાર ગુજરાતી કૅલેન્ડર
-            (Detailed Gujarati Calendar)
+            (Detailed Gujarati calendar)
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             કોઈપણ તારીખ પર ક્લિક કરીને તે દિવસનું સંપૂર્ણ વિગતવાર પંચાંગ, ચોઘડિયા અને મુહૂર્ત જુઓ
@@ -156,32 +158,32 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
             <Button
               type="button"
               onPress={() => setActiveTab('month')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition cursor-pointer ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 activeTab === 'month'
                   ? 'glass-button-primary shadow-xs'
                   : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
               }`}
             >
-              માસિક કૅલેન્ડર (Monthly Grid)
+              માસિક કૅલેન્ડર (Monthly grid)
             </Button>
             <Button
               type="button"
               onPress={() => setActiveTab('festivals')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition cursor-pointer ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 activeTab === 'festivals'
                   ? 'glass-button-primary shadow-xs'
                   : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
               }`}
             >
-              વાર્ષિક તહેવારો (All Festivals)
+              વાર્ષિક તહેવારો (All festivals)
             </Button>
           </div>
 
           <Button
             type="button"
             onPress={handlePrint}
-            title="Save Calendar as PDF"
-            className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
+            title="Save calendar as PDF"
+            className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
           >
             <Printer className="h-3.5 w-3.5 text-[var(--text-gold)]" />
             <span>Save as PDF</span>
@@ -231,9 +233,9 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
               <select
                 value={currentYear}
                 onChange={(e) => setCurrentYear(Number(e.target.value))}
-                className="rounded-xl glass-input px-2.5 py-1.5 text-xs font-mono text-[var(--text-primary)] focus:outline-none"
+                className="rounded-xl glass-input px-2.5 py-1.5 text-xs font-mono font-medium text-[var(--text-primary)] focus:outline-none cursor-pointer"
               >
-                {[2024, 2025, 2026, 2027, 2028, 2029, 2030].map((y) => (
+                {CALENDAR_YEARS.map((y) => (
                   <option key={y} value={y}>
                     {y}
                   </option>

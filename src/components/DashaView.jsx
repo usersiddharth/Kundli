@@ -50,61 +50,61 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
   };
 
   return (
-    <div className="rounded-xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white">
+    <div className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
       {/* Top Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6dfd3]/80 pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
-          <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
-            <Clock className="h-5 w-5 text-[#b85d19]" aria-hidden="true" />
-            <span>વિંશોત્તરી ૫-સ્તરીય દશા પ્રણાલી (Vimshottari 5-Tier Dasha)</span>
+          <h2 className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+            <Clock className="h-5 w-5 text-[var(--text-gold)]" aria-hidden="true" />
+            <span>વિંશોત્તરી ૫-સ્તરીય દશા પ્રણાલી (Vimshottari 5-tier dasha)</span>
           </h2>
-          <p className="text-xs text-[#736a60] mt-0.5">
+          <p className="text-xs text-[var(--text-muted)] mt-0.5">
             મહાદશા, અંતર્દશા, પ્રત્યંતર્દશા, સૂક્ષ્મ દશા અને પ્રાણ દશા
           </p>
         </div>
 
         {/* Tab Switcher */}
-        <div role="tablist" aria-label="Dasha Views" className="flex rounded-lg glass-pill p-1">
+        <div role="tablist" aria-label="Dasha views" className="flex rounded-xl glass-pill p-1">
           <button
             role="tab"
             aria-selected={activeTab === 'current'}
             onClick={() => setActiveTab('current')}
-            className={`flex items-center gap-1.5 rounded-md px-3.5 py-1.5 text-xs font-medium transition focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] ${
+            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-hidden cursor-pointer ${
               activeTab === 'current'
-                ? 'glass-button-dark text-[#f4ebd9] shadow-xs'
-                : 'text-[#544d44] hover:bg-white/60'
+                ? 'glass-button-primary shadow-xs'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
-            <Activity className="h-3.5 w-3.5 text-[#e6a86c]" aria-hidden="true" />
-            <span>લાઈવ સૂક્ષ્મ અને પ્રાણ દશા (Live Micro)</span>
+            <Activity className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>લાઈવ સૂક્ષ્મ અને પ્રાણ દશા (Live micro)</span>
           </button>
 
           <button
             role="tab"
             aria-selected={activeTab === 'all'}
             onClick={() => setActiveTab('all')}
-            className={`flex items-center gap-1.5 rounded-md px-3.5 py-1.5 text-xs font-medium transition focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] ${
+            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-hidden cursor-pointer ${
               activeTab === 'all'
-                ? 'glass-button-dark text-[#f4ebd9] shadow-xs'
-                : 'text-[#544d44] hover:bg-white/60'
+                ? 'glass-button-primary shadow-xs'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
-            <Clock className="h-3.5 w-3.5 text-[#e6a86c]" aria-hidden="true" />
-            <span>સંપૂર્ણ ૧૨૦ વર્ષ ટાઈમલાઈન (All Dashas)</span>
+            <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>સંપૂર્ણ ૧૨૦ વર્ષ ટાઈમલાઈન (All dashas)</span>
           </button>
 
           <button
             role="tab"
             aria-selected={activeTab === 'guide'}
             onClick={() => setActiveTab('guide')}
-            className={`flex items-center gap-1.5 rounded-md px-3.5 py-1.5 text-xs font-medium transition focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] ${
+            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-hidden cursor-pointer ${
               activeTab === 'guide'
-                ? 'glass-button-dark text-[#f4ebd9] shadow-xs'
-                : 'text-[#544d44] hover:bg-white/60'
+                ? 'glass-button-primary shadow-xs'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
-            <Info className="h-3.5 w-3.5 text-[#e6a86c]" aria-hidden="true" />
-            <span>શાસ્ત્રીય માર્ગદર્શન (Vedic Guide)</span>
+            <Info className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>શાસ્ત્રીય માર્ગદર્શન (Vedic guide)</span>
           </button>
         </div>
       </div>

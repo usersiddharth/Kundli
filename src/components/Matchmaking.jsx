@@ -229,7 +229,7 @@ export default function Matchmaking({ t }) {
   };
 
   return (
-    <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-gold)]">
+    <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
@@ -246,9 +246,9 @@ export default function Matchmaking({ t }) {
       {/* Screen Header & Action */}
       <Card.Header className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 p-0 print:hidden">
         <div>
-          <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <Heart className="h-5 w-5 text-[var(--text-gold)]" /> {t.matchmakingTitle} (Ashtakoot
-            36-Gun Milan)
+            36-gun milan)
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             ૩૬ ગુણ મિલન, માંગલિક દોષ સંરેખણ અને સુમેળતા વિશ્લેષણ
@@ -259,19 +259,19 @@ export default function Matchmaking({ t }) {
           <Button
             type="button"
             onPress={handleClearBoth}
-            title={t.clearForm || 'Clear Forms'}
-            className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-rose-500 transition shadow-xs cursor-pointer"
+            title={t.clearForm || 'Clear forms'}
+            className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-semibold text-[var(--text-muted)] hover:text-rose-500 transition shadow-xs cursor-pointer"
           >
             <RotateCcw className="h-3.5 w-3.5" />
-            <span>{t.clearForm || 'Clear Both'}</span>
+            <span>{t.clearForm || 'Clear both'}</span>
           </Button>
 
           {milanResult && (
             <Button
               type="button"
               onPress={handlePrint}
-              title="Save Matchmaking as PDF"
-              className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
+              title="Save matchmaking as PDF"
+              className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
             >
               <Printer className="h-3.5 w-3.5 text-[var(--text-gold)]" />
               <span>Save as PDF</span>

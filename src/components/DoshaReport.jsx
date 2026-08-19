@@ -12,9 +12,9 @@ export default function DoshaReport({ kundliData, t, lang }) {
   return (
     <div className="space-y-6">
       {/* Mangal Dosha Card */}
-      <Card className="rounded-2xl border border-[var(--border-gold)] glass-panel p-6 shadow-sm">
+      <Card className="rounded-2xl border border-[var(--border-subtle)] glass-panel p-6 shadow-sm">
         <Card.Header className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)] pb-4 p-0">
-          <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <Flame className="h-5 w-5 text-[var(--text-gold)]" /> {t.mangalDosha}
           </Card.Title>
 
@@ -39,7 +39,7 @@ export default function DoshaReport({ kundliData, t, lang }) {
 
         {mangalDosha.isCancelled && (
           <p className="mt-3 text-sm text-emerald-800 dark:text-emerald-300 glass-badge-success p-3 rounded-xl border">
-            <strong>Cancellation Note:</strong> {mangalDosha.reason}
+            <strong>Cancellation note:</strong> {mangalDosha.reason}
           </p>
         )}
 
@@ -56,9 +56,9 @@ export default function DoshaReport({ kundliData, t, lang }) {
       </Card>
 
       {/* Kalsarpa Dosha Card */}
-      <Card className="rounded-2xl border border-[var(--border-gold)] glass-panel p-6 shadow-sm">
+      <Card className="rounded-2xl border border-[var(--border-subtle)] glass-panel p-6 shadow-sm">
         <Card.Header className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)] pb-4 p-0">
-          <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <AlertTriangle className="h-5 w-5 text-[var(--text-gold)]" /> {t.kalsarpaDosha}
           </Card.Title>
 
@@ -86,14 +86,14 @@ export default function DoshaReport({ kundliData, t, lang }) {
       </Card>
 
       {/* Sade Sati Card */}
-      <Card className="rounded-2xl border border-[var(--border-gold)] glass-panel p-6 shadow-sm">
+      <Card className="rounded-2xl border border-[var(--border-subtle)] glass-panel p-6 shadow-sm">
         <Card.Header className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)] pb-4 p-0">
-          <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <ShieldAlert className="h-5 w-5 text-[var(--text-gold)]" /> {t.sadeSati}
           </Card.Title>
 
           <Chip className="glass-pill px-3 py-1 text-xs font-semibold text-[var(--text-secondary)]">
-            <Chip.Label>Current Status: {sadeSati.phase}</Chip.Label>
+            <Chip.Label>Current status: {sadeSati.phase}</Chip.Label>
           </Chip>
         </Card.Header>
 

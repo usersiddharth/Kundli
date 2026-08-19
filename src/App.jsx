@@ -26,7 +26,6 @@ const RashifalView = lazy(() => import('./components/RashifalView.jsx'));
 export default function App() {
   const [lang, setLang] = useState('gu'); // Default Gujarati
   const [mainSection, setMainSection] = useState('landing'); // 'landing' | 'kundli' | 'panchang' | 'vedicClock' | 'calendar' | 'numerology' | 'matchmaking' | 'upcomingEvents' | 'rashifal'
-  const [isDark, setIsDark] = useState(true); // Default to Majestic Dark Royal Cosmic Sky
   const [externalPanchangDate, setExternalPanchangDate] = useState(null);
 
   const locales = { en, hi, gu };
@@ -67,36 +66,22 @@ export default function App() {
 
   useEffect(() => {
     generateKundli();
+    document.documentElement.classList.remove('dark');
   }, []);
 
-  // Update body dark class
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
-
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300 ${
-        isDark ? 'dark bg-[#0c0e17] text-[#f5efe6]' : 'bg-[#faf8f4] text-[#2c2825]'
-      } font-sans antialiased selection:bg-[#f1c40f]/30 selection:text-[#f39c12]`}
-    >
-      {/* 1. Global Navigation Header with 6 Dedicated Portals & Theme Switcher */}
+    <div className="min-h-screen bg-[#faf8f5] text-[#1c1917] font-sans antialiased selection:bg-amber-500/20 selection:text-amber-900">
+      {/* 1. Global Navigation Header with Dedicated Portals */}
       <Header
         lang={lang}
         setLang={setLang}
         t={t}
         mainSection={mainSection}
         setMainSection={setMainSection}
-        isDark={isDark}
-        setIsDark={setIsDark}
       />
 
       {/* 2. Main Responsive Content Canvas */}
-      <main className="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-6 lg:px-8 pb-24 sm:pb-8 space-y-5 sm:space-y-6">
+      <main className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-24 sm:pb-12 space-y-6 sm:space-y-8">
         {/* Sticky Cosmic Quick Summary Ribbon (Active in Kundli Portal) */}
         {mainSection === 'kundli' && (
           <QuickToolbar

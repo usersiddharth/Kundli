@@ -11,7 +11,9 @@ export default function QuickToolbar({ kundliData, formData, birthDateObj, t, la
     ? calculateCurrentMicroDasha(kundliData, birthDateObj, new Date())
     : null;
 
-  const displayName = formData?.name?.trim() || (lang === 'gu' ? 'જાતક (Native)' : lang === 'hi' ? 'जातक (Native)' : 'Native');
+  const displayName =
+    formData?.name?.trim() ||
+    (lang === 'gu' ? 'જાતક (Native)' : lang === 'hi' ? 'जातक (Native)' : 'Native');
   const avatarLetter = formData?.name?.trim() ? formData.name.trim().charAt(0).toUpperCase() : null;
 
   const cityPart = formData?.city?.trim() ? formData.city.split(',')[0].trim() : '';
@@ -42,12 +44,12 @@ export default function QuickToolbar({ kundliData, formData, birthDateObj, t, la
   const dashaLabel = lang === 'gu' ? 'દશા:' : lang === 'hi' ? 'दशा:' : 'Dasha:';
 
   return (
-    <Card className="rounded-2xl glass-panel px-3.5 py-2.5 sm:px-5 sm:py-3 text-xs text-[var(--text-primary)] print:hidden border border-[var(--border-gold)]">
+    <Card className="rounded-2xl glass-panel px-3.5 py-2.5 sm:px-5 sm:py-3 text-xs text-[var(--text-primary)] print:hidden border border-[var(--border-subtle)]">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
         {/* Native Identity */}
         <div className="flex items-center gap-2.5 font-medium shrink-0">
-          <span className="flex h-8 w-8 items-center justify-center rounded-xl glass-button-primary font-serif font-bold text-xs shadow-xs text-[#0c0e17]">
-            {avatarLetter ? avatarLetter : <User className="h-4 w-4 text-stone-900" />}
+          <span className="flex h-8 w-8 items-center justify-center rounded-xl glass-button-primary font-serif font-bold text-xs shadow-xs text-white">
+            {avatarLetter ? avatarLetter : <User className="h-4 w-4 text-white" />}
           </span>
           <div>
             <span className="font-serif font-bold text-sm text-[var(--text-primary)] block leading-tight">

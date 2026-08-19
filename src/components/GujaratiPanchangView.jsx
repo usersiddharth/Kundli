@@ -61,7 +61,7 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
   const activeDateFormatted = `${String(activeDay).padStart(2, '0')}-${String(activeMonth).padStart(2, '0')}-${activeYear}`;
 
   return (
-    <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-gold)]">
+    <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
       {/* Dedicated Printable PDF Top Banner (Visible Only in Print/PDF) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
@@ -78,7 +78,7 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
       {/* Header & Date Controls (Hidden in Print) */}
       <Card.Header className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 p-0 print:hidden">
         <div>
-          <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <Sun className="h-5 w-5 text-[var(--text-gold)]" /> વિગતવાર ગુજરાતી પંચાંગ (Detailed
             Gujarati Panchang)
           </Card.Title>
@@ -93,7 +93,7 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
             <Button
               type="button"
               onPress={() => setSelectedDateMode('birth')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition cursor-pointer ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 selectedDateMode === 'birth'
                   ? 'glass-button-primary shadow-xs'
                   : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
@@ -105,7 +105,7 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
             <Button
               type="button"
               onPress={() => setSelectedDateMode('today')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition cursor-pointer ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 selectedDateMode === 'today'
                   ? 'glass-button-primary shadow-xs'
                   : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
@@ -129,8 +129,8 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
           <Button
             type="button"
             onPress={handlePrint}
-            title="Save Panchang as PDF / Print"
-            className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
+            title="Save panchang as PDF / print"
+            className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
           >
             <Printer className="h-3.5 w-3.5 text-[var(--text-gold)]" />
             <span>Save as PDF</span>

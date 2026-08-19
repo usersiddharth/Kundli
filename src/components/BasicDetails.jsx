@@ -37,14 +37,14 @@ export default function BasicDetails({ kundliData, t }) {
   ];
 
   return (
-    <Card className="rounded-2xl glass-panel p-4 sm:p-6 space-y-5 border border-[var(--border-gold)]">
+    <Card className="rounded-2xl glass-panel p-4 sm:p-6 space-y-5 border border-[var(--border-subtle)]">
       <Card.Header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4 p-0">
-        <Card.Title className="text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif flex items-center gap-2">
+        <Card.Title className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-[var(--text-gold)]" />{' '}
-          {t.avakhadaChakra || 'Avakahada Chakra & Panchang Details'}
+          {t.avakhadaChakra || 'Avakahada chakra & panchang details'}
         </Card.Title>
         <Chip className="glass-badge-gold px-3 py-1 text-xs font-semibold">
-          <Chip.Label>Chitra Paksha (Lahiri)</Chip.Label>
+          <Chip.Label>Chitra paksha (Lahiri)</Chip.Label>
         </Chip>
       </Card.Header>
 
@@ -57,7 +57,7 @@ export default function BasicDetails({ kundliData, t }) {
               className="flex flex-row items-center justify-between rounded-xl glass-card p-3.5 transition hover:border-[var(--border-gold)] border border-[var(--border-subtle)]"
             >
               <div className="flex items-center space-x-2.5">
-                <div className="p-2 rounded-lg glass-pill text-[var(--text-gold)]">
+                <div className="p-2 rounded-xl glass-pill text-[var(--text-gold)]">
                   <IconComponent className="h-4 w-4" />
                 </div>
                 <span className="text-xs font-medium text-[var(--text-muted)]">{item.label}</span>

@@ -29,11 +29,11 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
   };
 
   return (
-    <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-gold)]">
+    <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
       {/* Header */}
       <Card.Header className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 p-0">
         <div>
-          <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <Clock className="h-5 w-5 text-[var(--text-gold)]" aria-hidden="true" />
             <span>દૈનિક ચોઘડિયા અને શુભ મુહૂર્ત (Daily Choghadiya)</span>
           </Card.Title>
@@ -45,7 +45,7 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
         {/* Day / Night Switcher */}
         <div
           role="tablist"
-          aria-label="Choghadiya Time Mode"
+          aria-label="Choghadiya time mode"
           className="flex rounded-xl glass-pill p-1 gap-1"
         >
           <Button
@@ -53,7 +53,7 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
             role="tab"
             aria-selected={activeMode === 'day'}
             onPress={() => setActiveMode('day')}
-            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-medium transition cursor-pointer ${
+            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition cursor-pointer ${
               activeMode === 'day'
                 ? 'glass-button-primary shadow-xs'
                 : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
@@ -68,7 +68,7 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
             role="tab"
             aria-selected={activeMode === 'night'}
             onPress={() => setActiveMode('night')}
-            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-medium transition cursor-pointer ${
+            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition cursor-pointer ${
               activeMode === 'night'
                 ? 'glass-button-primary shadow-xs'
                 : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
