@@ -19,16 +19,16 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
   return (
     <div className="space-y-6 animate-fade-in-up">
       {/* 1. Header Banner */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-2">
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[#e6a86c]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
             <Globe className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#2c2825] tracking-tight">
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
               એસ્ટ્રોકાર્ટોગ્રાફી વિશ્વ નકશો (AstroCartography World Map)
             </h2>
-            <p className="text-xs sm:text-sm text-[#736a60]">
+            <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               વિશ્વના વિવિધ દેશોમાં તમારી કારકિર્દી, ધન, પ્રેમ અને શાંતિ આપતી ગ્રહ રેખાઓ
             </p>
           </div>
@@ -36,8 +36,8 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
       </div>
 
       {/* 2. Interactive Planet Line Filter Ribbon */}
-      <div className="glass-card p-3 rounded-2xl border border-[#e6dfd3] space-y-2">
-        <span className="text-[11px] font-serif font-bold text-[#b85d19] uppercase tracking-wider block px-1">
+      <div className="glass-card p-3 rounded-2xl border border-[var(--border-subtle)] space-y-2">
+        <span className="text-[11px] font-serif font-bold text-[var(--text-gold)] uppercase tracking-wider block px-1">
           ગ્રહ રેખા ફિલ્ટર (Filter Planet Lines)
         </span>
         <div className="flex flex-wrap items-center gap-2">
@@ -46,7 +46,7 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
             className={`px-3 py-1 rounded-full text-xs font-bold transition ${
               selectedPlanetFilter === 'ALL'
                 ? 'bg-[#b85d19] text-white shadow-xs'
-                : 'glass-pill text-[#544d44] hover:bg-white'
+                : 'glass-pill text-[var(--text-secondary)] hover:bg-white/10'
             }`}
           >
             સર્વ ગ્રહો (All Lines)
@@ -62,7 +62,7 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition border ${
                   isSelected
                     ? 'glass-button-dark text-white border-transparent'
-                    : 'glass-pill text-[#2c2825] border-[#e6dfd3] hover:bg-white'
+                    : 'glass-pill text-[var(--text-primary)] border-[var(--border-subtle)] hover:bg-white/10'
                 }`}
               >
                 <span
@@ -77,13 +77,13 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
       </div>
 
       {/* 3. SVG World Map Projection Canvas */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-4 overflow-hidden">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#e6dfd3] pb-3">
-          <h3 className="font-serif text-base font-bold text-[#2c2825] flex items-center gap-2">
-            <Compass className="h-4 w-4 text-[#b85d19]" />
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4 overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)] pb-3">
+          <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
+            <Compass className="h-4 w-4 text-[var(--text-gold)]" />
             વૈશ્વિક ગ્રહ મિડહેવન (MC) અને એસેન્ડન્ટ (ASC) રેખાઓ
           </h3>
-          <span className="text-xs font-mono text-[#736a60]">રેખાંશ ક્ષેત્ર: -180° થી +180°</span>
+          <span className="text-xs font-mono text-[var(--text-muted)]">રેખાંશ ક્ષેત્ર: -180° થી +180°</span>
         </div>
 
         <div className="overflow-x-auto rounded-2xl border border-[#334155] shadow-2xl">
@@ -240,27 +240,27 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
       </div>
 
       {/* 4. Global City Proximity & Astrological Alignment Cards */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-4">
-        <h3 className="font-serif text-base font-bold text-[#2c2825] flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-[#b85d19]" />
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
+        <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <Sparkles className="h-4 w-4 text-[var(--text-gold)]" />
           શહેરોનું ગ્રહ લાઇન સાથે અનુકૂળતા વિશ્લેષણ (City Planetary Alignments)
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {cities.map((city, idx) => (
-            <div key={idx} className="glass-card p-4 rounded-2xl border border-[#e6dfd3] space-y-2">
+            <div key={idx} className="glass-card p-4 rounded-2xl border border-[var(--border-subtle)] space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-serif text-sm font-bold text-[#2c2825] flex items-center gap-1.5">
-                  <MapPin className="h-4 w-4 text-[#b85d19]" />
+                <span className="font-serif text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
+                  <MapPin className="h-4 w-4 text-[var(--text-gold)]" />
                   {city.name}
                 </span>
-                <span className="text-[10px] font-mono text-[#736a60] bg-[#f3ece0] px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-mono text-[var(--text-muted)] bg-white/5 px-2 py-0.5 rounded-full">
                   {city.region}
                 </span>
               </div>
 
               <div className="flex items-center justify-between pt-1">
-                <span className="text-xs text-[#736a60]">સૌથી નજીકની ગ્રહ લાઇન:</span>
+                <span className="text-xs text-[var(--text-muted)]">સૌથી નજીકની ગ્રહ લાઇન:</span>
                 <span
                   className="text-xs font-bold font-serif px-2.5 py-0.5 rounded-full text-white"
                   style={{ backgroundColor: city.alignedColor }}
@@ -269,7 +269,7 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
                 </span>
               </div>
 
-              <p className="text-xs text-[#544d44] pt-1">
+              <p className="text-xs text-[var(--text-secondary)] pt-1">
                 {city.alignedLabel[lang] || city.alignedLabel.gu}
               </p>
             </div>

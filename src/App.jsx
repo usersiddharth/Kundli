@@ -66,11 +66,11 @@ export default function App() {
 
   useEffect(() => {
     generateKundli();
-    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('dark');
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] text-[#1c1917] font-sans antialiased selection:bg-amber-500/20 selection:text-amber-900">
+    <div className="min-h-screen font-body antialiased selection:bg-amber-500/20 selection:text-amber-100" style={{ backgroundColor: 'var(--depth-0)', color: 'var(--text-primary)' }}>
       {/* 1. Global Navigation Header with Dedicated Portals */}
       <Header
         lang={lang}

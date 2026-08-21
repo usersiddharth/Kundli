@@ -35,11 +35,11 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
       {/* On-Screen Action Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl glass-panel p-5 shadow-sm print:hidden">
         <div>
-          <h3 className="font-serif text-lg font-bold text-[#2c2825] flex items-center gap-2">
-            <Printer className="h-5 w-5 text-[#b85d19]" /> {t.tabPrint} (Publication-Grade Vedic
+          <h3 className="font-serif text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
+            <Printer className="h-5 w-5 text-[var(--text-gold)]" /> {t.tabPrint} (Publication-Grade Vedic
             Horoscope Dossier)
           </h3>
-          <p className="text-xs text-[#736a60] mt-0.5">
+          <p className="text-xs text-[var(--text-muted)] mt-0.5">
             સંપૂર્ણ કુંડળી, નવમાંશ ચાર્ટ, ગ્રહ સ્પષ્ટ, ષડ્બળ, દશા, દોષ અને રત્ન ઉપાયો સાથે A4
             સાઇઝમાં પ્રિન્ટ અથવા PDF સેવ કરો
           </p>
@@ -63,50 +63,50 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
         <div className="avoid-page-break space-y-5">
           {/* Traditional Vedic Letterhead */}
           <div className="print-letterhead text-center border-b-2 border-[#8c7456] pb-3">
-            <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456] block">
+            <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)] block">
               || ૐ શ્રી ગણેશાય નમઃ || ૐ નમો ભગવતે વાસુદેવાય ||
             </span>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#2c2825] mt-1">
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mt-1">
               સંપૂર્ણ વૈદિક જન્મ કુંડળી (Vedic Horoscope Dossier)
             </h1>
-            <span className="text-[11px] text-[#736a60] font-medium block mt-0.5">
+            <span className="text-[11px] text-[var(--text-muted)] font-medium block mt-0.5">
               ચિત્રા પક્ષીય લાહિડી અયનાંશ આધારિત ઉચ્ચ-ચોક્કસાઈ ખગોળીય ગણતરી
             </span>
           </div>
 
           {/* Native Biodata High-Density Grid */}
-          <div className="rounded-xl border border-[#d4c8b8] bg-[#fcfbf7] p-4 text-xs">
+          <div className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-4 text-xs">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 font-mono">
               <div>
-                <span className="text-[10px] text-[#736a60] block font-sans">
+                <span className="text-[10px] text-[var(--text-muted)] block font-sans">
                   જાતકનું નામ (Name):
                 </span>
-                <strong className="text-[#2c2825] text-sm font-sans">
+                <strong className="text-[var(--text-primary)] text-sm font-sans">
                   {formData?.name || 'જાતક (Native)'}
                 </strong>
               </div>
               <div>
-                <span className="text-[10px] text-[#736a60] block font-sans">
+                <span className="text-[10px] text-[var(--text-muted)] block font-sans">
                   જન્મ તારીખ (DOB):
                 </span>
-                <strong className="text-[#2c2825]">
+                <strong className="text-[var(--text-primary)]">
                   {formData?.dob?.includes('-') && formData.dob.split('-')[0].length === 4
                     ? `${formData.dob.split('-')[2]}-${formData.dob.split('-')[1]}-${formData.dob.split('-')[0]}`
                     : formData?.dob}
                 </strong>
               </div>
               <div>
-                <span className="text-[10px] text-[#736a60] block font-sans">જન્મ સમય (TOB):</span>
-                <strong className="text-[#2c2825]">{formData.tob} (IST)</strong>
+                <span className="text-[10px] text-[var(--text-muted)] block font-sans">જન્મ સમય (TOB):</span>
+                <strong className="text-[var(--text-primary)]">{formData.tob} (IST)</strong>
               </div>
               <div>
-                <span className="text-[10px] text-[#736a60] block font-sans">
+                <span className="text-[10px] text-[var(--text-muted)] block font-sans">
                   જન્મ સ્થળ (Place):
                 </span>
-                <strong className="text-[#2c2825] font-sans truncate block">{formData.city}</strong>
+                <strong className="text-[var(--text-primary)] font-sans truncate block">{formData.city}</strong>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 font-mono mt-2 pt-2 border-t border-[#e6dfd3] text-[11px] text-[#544d44]">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 font-mono mt-2 pt-2 border-t border-[var(--border-subtle)] text-[11px] text-[var(--text-secondary)]">
               <div>
                 અક્ષાંશ (Lat): <strong>{formData.lat}° N</strong>
               </div>
@@ -124,8 +124,8 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
 
           {/* Side-by-Side: Lagna Chart (D1) & Navamsha Chart (D9) */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="rounded-xl border border-[#d4c8b8] bg-white p-4 shadow-2xs">
-              <h4 className="font-serif text-sm font-bold text-[#b85d19] text-center border-b border-[#e6dfd3] pb-2 mb-3">
+            <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--depth-2)] p-4 shadow-2xs">
+              <h4 className="font-serif text-sm font-bold text-[var(--text-gold)] text-center border-b border-[var(--border-subtle)] pb-2 mb-3">
                 ૧. જન્મ લગ્ન કુંડળી (Lagna Chart - D1)
               </h4>
               <ChartSVG kundliData={kundliData} t={t} lang={lang} />
@@ -138,8 +138,8 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
 
           {/* Full Planetary Ephemeris Table */}
           <div className="avoid-page-break pt-2">
-            <h4 className="font-serif text-sm font-bold text-[#2c2825] mb-2 flex items-center gap-1.5">
-              <Compass className="h-4 w-4 text-[#b85d19]" /> ગ્રહ સ્પષ્ટ અને નક્ષત્ર સ્થિતિ
+            <h4 className="font-serif text-sm font-bold text-[var(--text-primary)] mb-2 flex items-center gap-1.5">
+              <Compass className="h-4 w-4 text-[var(--text-gold)]" /> ગ્રહ સ્પષ્ટ અને નક્ષત્ર સ્થિતિ
               (Planetary Positions & Nakshatra)
             </h4>
             <PlanetaryTable kundliData={kundliData} t={t} />
@@ -151,24 +151,24 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
             ----------------------------------------------------------------------- */}
         <div className="page-break-before space-y-6 pt-4">
           <div className="avoid-page-break">
-            <h3 className="font-serif text-base font-bold text-[#b85d19] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Award className="h-4 w-4 text-[#b85d19]" /> ષડ્બળ અને ગ્રહ બળ તાકાત (Shadbala
+            <h3 className="font-serif text-base font-bold text-[var(--text-gold)] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
+              <Award className="h-4 w-4 text-[var(--text-gold)]" /> ષડ્બળ અને ગ્રહ બળ તાકાત (Shadbala
               Strength Analysis)
             </h3>
             <ShadbalaView kundliData={kundliData} t={t} />
           </div>
 
           <div className="avoid-page-break">
-            <h3 className="font-serif text-base font-bold text-[#2c2825] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[#b85d19]" /> સર્વાષ્ટકવર્ગ બિંદુ ચક્ર
+            <h3 className="font-serif text-base font-bold text-[var(--text-primary)] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> સર્વાષ્ટકવર્ગ બિંદુ ચક્ર
               (Sarvashtakvarga Matrix)
             </h3>
             <AshtakvargaView kundliData={kundliData} t={t} />
           </div>
 
           <div className="avoid-page-break">
-            <h3 className="font-serif text-base font-bold text-[#2c2825] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[#b85d19]" /> મુખ્ય સક્રિય રાજયોગ અને ગ્રહ યુતિ
+            <h3 className="font-serif text-base font-bold text-[var(--text-primary)] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> મુખ્ય સક્રિય રાજયોગ અને ગ્રહ યુતિ
               (Major Rajayogas & Conjunctions)
             </h3>
             <YogasView kundliData={kundliData} t={t} lang={lang} />
@@ -180,8 +180,8 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
             ----------------------------------------------------------------------- */}
         <div className="page-break-before space-y-6 pt-4">
           <div className="avoid-page-break">
-            <h3 className="font-serif text-base font-bold text-[#b85d19] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Clock className="h-4 w-4 text-[#b85d19]" /> વિંશોત્તરી મહાદશા અને અંતર્દશા
+            <h3 className="font-serif text-base font-bold text-[var(--text-gold)] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
+              <Clock className="h-4 w-4 text-[var(--text-gold)]" /> વિંશોત્તરી મહાદશા અને અંતર્દશા
               (Vimshottari Dasha Timeline)
             </h3>
             <DashaView kundliData={kundliData} t={t} lang={lang} />
@@ -204,13 +204,13 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
           </div>
 
           {/* Certified Astrologer Signature Box & Blessings Footer */}
-          <div className="print-footer-signature avoid-page-break rounded-xl border border-[#d4c8b8] bg-[#fcfbf7] p-4 text-xs mt-6">
+          <div className="print-footer-signature avoid-page-break rounded-xl border border-[var(--border-subtle)] bg-white/5 p-4 text-xs mt-6">
             <div className="flex justify-between items-end">
               <div>
-                <span className="font-serif text-xs font-bold text-[#8c7456] block">
+                <span className="font-serif text-xs font-bold text-[var(--text-gold)] block">
                   || શુભમ્ ભવતુ • કલ્યાણમ્ અસ્તુ ||
                 </span>
-                <p className="text-[10px] text-[#736a60] mt-1">
+                <p className="text-[10px] text-[var(--text-muted)] mt-1">
                   આ કુંડળી વૈદિક પરાશરી પદ્ધતિ અને ચિત્રા પક્ષીય લાહિડી અયનાંશ ગણતરી મુજબ તૈયાર
                   કરવામાં આવેલ છે.
                 </p>
@@ -218,7 +218,7 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
 
               <div className="text-right">
                 <div className="w-36 border-b border-dashed border-[#736a60] pb-1 mb-1"></div>
-                <span className="text-[10px] font-bold text-[#2c2825] uppercase">
+                <span className="text-[10px] font-bold text-[var(--text-primary)] uppercase">
                   જ્યોતિષી હસ્તાક્ષર / મહોર
                 </span>
               </div>

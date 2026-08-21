@@ -462,10 +462,10 @@ export default function AiConsultationView({ kundliData, birthDateObj, t, lang }
                 onChange={(e) => handleProviderChange(e.target.value)}
                 className="w-full rounded-xl glass-input px-3 py-2 text-xs text-[var(--text-primary)] focus:outline-none"
               >
-                <option value="gemini" className="dark:bg-[#151928] bg-white">
+                <option value="gemini" className="dark:bg-[#151928] bg-[var(--depth-2)]">
                   Google Gemini (Recommended Free)
                 </option>
-                <option value="openai" className="dark:bg-[#151928] bg-white">
+                <option value="openai" className="dark:bg-[#151928] bg-[var(--depth-2)]">
                   OpenAI / OpenRouter Compatible
                 </option>
               </select>
@@ -482,7 +482,7 @@ export default function AiConsultationView({ kundliData, birthDateObj, t, lang }
                 className="w-full rounded-xl glass-input px-3 py-2 text-xs text-[var(--text-primary)] focus:outline-none"
               >
                 {(AVAILABLE_MODELS[tempProvider] || AVAILABLE_MODELS.gemini).map((m) => (
-                  <option key={m.id} value={m.id} className="dark:bg-[#151928] bg-white">
+                  <option key={m.id} value={m.id} className="dark:bg-[#151928] bg-[var(--depth-2)]">
                     {m.name}
                   </option>
                 ))}

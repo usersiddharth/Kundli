@@ -1,20 +1,70 @@
 import React from 'react';
 
-export default function CosmicLoader({ message = 'નક્ષત્ર ગણતરી લોડ થઈ રહી છે...' }) {
+/**
+ * CosmicLoader — Spatial UI edition
+ * Concentric orbital rings in saffron + indigo, floating on the void.
+ */
+export default function CosmicLoader({ message }) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-4 space-y-4 rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] backdrop-blur-md animate-fade-in-up">
-      <div className="relative flex items-center justify-center">
-        <div className="w-12 h-12 rounded-full border-2 border-[var(--border-subtle)] border-t-[var(--text-gold)] animate-spin" />
-        <div className="absolute w-6 h-6 rounded-full bg-[var(--gold-primary)]/10 animate-ping" />
+    <div className="flex flex-col items-center justify-center min-h-[40vh] gap-8 py-16">
+      {/* Orbital ring system */}
+      <div className="relative flex items-center justify-center" style={{ width: 96, height: 96 }}>
+        {/* Outermost ring — slow, wide orbit */}
+        <div
+          className="absolute rounded-full border border-transparent animate-spin-slow"
+          style={{
+            width: 96,
+            height: 96,
+            borderTopColor: 'rgba(245,158,11,0.35)',
+            borderRightColor: 'rgba(99,102,241,0.15)',
+          }}
+        />
+        {/* Mid ring — medium speed, reverse */}
+        <div
+          className="absolute rounded-full border border-transparent animate-spin-reverse"
+          style={{
+            width: 68,
+            height: 68,
+            borderTopColor: 'rgba(245,158,11,0.55)',
+            borderLeftColor: 'rgba(139,92,246,0.2)',
+            animationDuration: '18s',
+          }}
+        />
+        {/* Inner ring — faster, pure gold */}
+        <div
+          className="absolute rounded-full border border-transparent"
+          style={{
+            width: 44,
+            height: 44,
+            borderTopColor: 'rgba(245,158,11,0.85)',
+            borderRightColor: 'rgba(245,158,11,0.3)',
+            animation: 'spinSlow 8s linear infinite',
+          }}
+        />
+        {/* Core glow dot */}
+        <div
+          className="absolute rounded-full animate-cosmic-pulse"
+          style={{
+            width: 12,
+            height: 12,
+            background: 'radial-gradient(circle, #fbbf24 0%, rgba(245,158,11,0.4) 60%, transparent 100%)',
+          }}
+        />
       </div>
-      <div className="text-center space-y-1">
-        <p className="text-xs font-serif font-bold text-[var(--text-primary)] tracking-wide">
+
+      {/* Message */}
+      {message && (
+        <p
+          className="text-sm tracking-wide animate-fade-in-up"
+          style={{
+            color: 'var(--text-tertiary)',
+            fontFamily: 'Inter, sans-serif',
+            animationDelay: '0.15s',
+          }}
+        >
           {message}
         </p>
-        <p className="text-[10px] text-[var(--text-muted)] tracking-wider uppercase font-mono">
-          Loading Astrological Calculation
-        </p>
-      </div>
+      )}
     </div>
   );
 }

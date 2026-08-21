@@ -12,16 +12,16 @@ export default function CareerD10View({ kundliData, t, lang = 'gu' }) {
   return (
     <div className="space-y-6 animate-fade-in-up">
       {/* Header */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-2">
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[#e6a86c]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
             <Briefcase className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#2c2825] tracking-tight">
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
               D10 દશમાંશ કારકિર્દી બ્લુપ્રિન્ટ (D10 Dashamsha Career Blueprint)
             </h2>
-            <p className="text-xs sm:text-sm text-[#736a60]">
+            <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               દશમાંશ વર્ગ ચાર્ટ આધારિત વ્યવસાયિક ક્ષેત્ર, પ્રોફેશન અને કારકિર્દી ક્ષમતા
             </p>
           </div>
@@ -29,9 +29,9 @@ export default function CareerD10View({ kundliData, t, lang = 'gu' }) {
       </div>
 
       {/* Recommended Career Domains */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-4">
-        <h3 className="font-serif text-base font-bold text-[#2c2825] flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-[#b85d19]" />
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
+        <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <Sparkles className="h-4 w-4 text-[var(--text-gold)]" />
           તમારા માટે સર્વોત્તમ ૩ કારકિર્દી ક્ષેત્રો (Top 3 Career Domains)
         </h3>
 
@@ -44,10 +44,10 @@ export default function CareerD10View({ kundliData, t, lang = 'gu' }) {
               <span className="glass-badge-gold text-[10px] font-bold px-2 py-0.5 rounded-full">
                 રેન્ક #{idx + 1}
               </span>
-              <h4 className="font-serif text-base font-bold text-[#2c2825]">
+              <h4 className="font-serif text-base font-bold text-[var(--text-primary)]">
                 {domain.name[lang] || domain.name.gu}
               </h4>
-              <p className="text-xs text-[#736a60]">{domain.desc[lang] || domain.desc.gu}</p>
+              <p className="text-xs text-[var(--text-muted)]">{domain.desc[lang] || domain.desc.gu}</p>
             </div>
           ))}
         </div>

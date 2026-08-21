@@ -471,7 +471,7 @@ export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
           <Button
             type="button"
             onPress={handleClearForm}
-            className="flex items-center gap-1.5 rounded-xl glass-card px-4 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-[#802020] hover:bg-rose-50/50 dark:hover:bg-rose-950/30 transition shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 rounded-xl glass-card px-4 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-rose-400 hover:bg-rose-500/10 hover:border-rose-500/30 transition shadow-xs cursor-pointer"
           >
             <RotateCcw className="h-4 w-4 text-[var(--text-muted)]" aria-hidden="true" />
             <span>{t.clearForm || 'Clear Form'}</span>

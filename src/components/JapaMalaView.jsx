@@ -80,16 +80,16 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
   return (
     <div className="space-y-6 animate-fade-in-up">
       {/* Header */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-2">
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[#e6a86c]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
             <Sparkles className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#2c2825] tracking-tight">
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
               ૧૦૮ મંત્ર જાપ માળા કૌન્ટર (Interactive 108 Japa Mala)
             </h2>
-            <p className="text-xs sm:text-sm text-[#736a60]">
+            <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               નવગ્રહ બીજ મંત્ર જાપ ટ્રેકર અને ૧૦૮ મણકા સાધના કૌન્ટર
             </p>
           </div>
@@ -97,8 +97,8 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
       </div>
 
       {/* Mantra Selector */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-4">
-        <label className="text-xs font-serif font-bold text-[#b85d19] uppercase tracking-wider block">
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
+        <label className="text-xs font-serif font-bold text-[var(--text-gold)] uppercase tracking-wider block">
           જાપ માટે મંત્ર પસંદ કરો (Select Mantra)
         </label>
 
@@ -109,8 +109,8 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
               onClick={() => setSelectedMantra(m.id)}
               className={`p-2.5 rounded-xl border text-xs font-bold transition ${
                 selectedMantra === m.id
-                  ? 'glass-panel-accent border-[#b85d19] text-[#b85d19] ring-2 ring-[#b85d19]/40'
-                  : 'glass-card text-[#2c2825] hover:bg-white/90'
+                  ? 'glass-panel-accent border-[#b85d19] text-[var(--text-gold)] ring-2 ring-[#b85d19]/40'
+                  : 'glass-card text-[var(--text-primary)] hover:bg-white/10'
               }`}
             >
               {m.name[lang] || m.name.gu}
@@ -119,11 +119,11 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
         </div>
 
         {/* Selected Mantra Text Display */}
-        <div className="glass-card p-4 rounded-xl text-center space-y-1 border border-[#e6dfd3]">
-          <span className="text-xs font-serif text-[#736a60] uppercase block">
+        <div className="glass-card p-4 rounded-xl text-center space-y-1 border border-[var(--border-subtle)]">
+          <span className="text-xs font-serif text-[var(--text-muted)] uppercase block">
             સક્રિય મંત્ર (Active Sacred Text)
           </span>
-          <h3 className="font-serif text-xl font-bold text-[#b85d19]">{activeMantraObj.text}</h3>
+          <h3 className="font-serif text-xl font-bold text-[var(--text-gold)]">{activeMantraObj.text}</h3>
         </div>
       </div>
 
@@ -131,19 +131,19 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
       <div className="glass-panel-accent rounded-2xl p-8 shadow-sm border border-[#b85d19]/40 flex flex-col items-center justify-center text-center space-y-4">
         <div className="flex items-center space-x-6">
           <div>
-            <span className="text-xs text-[#736a60] font-serif uppercase block">વર્તમાન મણકો</span>
-            <span className="font-mono text-5xl font-bold text-[#b85d19]">{beadCount}</span>
-            <span className="text-xs font-mono text-[#736a60]"> / 108</span>
+            <span className="text-xs text-[var(--text-muted)] font-serif uppercase block">વર્તમાન મણકો</span>
+            <span className="font-mono text-5xl font-bold text-[var(--text-gold)]">{beadCount}</span>
+            <span className="text-xs font-mono text-[var(--text-muted)]"> / 108</span>
           </div>
 
           <div className="h-12 w-px bg-[#e6dfd3]" />
 
           <div>
-            <span className="text-xs text-[#736a60] font-serif uppercase block">
+            <span className="text-xs text-[var(--text-muted)] font-serif uppercase block">
               પૂર્ણ થયેલ માળા
             </span>
             <span className="font-mono text-5xl font-bold text-[#285e20]">{completedMalas}</span>
-            <span className="text-xs font-mono text-[#736a60]"> માળા</span>
+            <span className="text-xs font-mono text-[var(--text-muted)]"> માળા</span>
           </div>
         </div>
 
@@ -160,7 +160,7 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
         {/* Reset Button */}
         <button
           onClick={handleReset}
-          className="flex items-center gap-1.5 text-xs text-[#736a60] hover:text-[#b85d19] transition"
+          className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-[var(--text-gold)] transition"
         >
           <RotateCcw className="h-3.5 w-3.5" />
           <span>કૌન્ટર રીસેટ કરો (Reset Counter)</span>

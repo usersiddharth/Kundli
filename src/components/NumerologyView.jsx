@@ -53,13 +53,13 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
     <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-gold)]">
       {/* Dedicated Printable PDF Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
-        <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
+        <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
           || ૐ શ્રી ગણેશાય નમઃ ||
         </span>
-        <h1 className="font-serif text-2xl font-bold text-[#2c2825] mt-1">
+        <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
           વિગતવાર અંકશાસ્ત્ર રિપોર્ટ (Numerology Report)
         </h1>
-        <p className="text-xs text-[#544d44]">
+        <p className="text-xs text-[var(--text-secondary)]">
           નામ: {nameInput} • જન્મ તારીખ: {numData.birthDateFormatted} • પર્સનલ વર્ષ: {selectedYear}
         </p>
       </div>
@@ -615,11 +615,11 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
       </Card>
 
       {/* Printable Footer (Visible Only in Print) */}
-      <div className="hidden print:block print-footer-signature rounded-xl border border-[#d4c8b8] bg-[#fcfbf7] p-3 text-xs text-center">
-        <span className="font-serif font-bold text-[#8c7456]">
+      <div className="hidden print:block print-footer-signature rounded-xl border border-[var(--border-subtle)] bg-white/5 p-3 text-xs text-center">
+        <span className="font-serif font-bold text-[var(--text-gold)]">
           || વૈદિક અને કાલ્ડિયન અંકશાસ્ત્ર વિશ્લેષણ રિપોર્ટ ||
         </span>
-        <p className="text-[10px] text-[#736a60] mt-0.5">
+        <p className="text-[10px] text-[var(--text-muted)] mt-0.5">
           નામ વાઇબ્રેશન, લો-શૂ મેજિક સ્ક્વેર અને ભાગ્ય અંક પદ્ધતિ આધારિત પ્રમાણિત અંકશાસ્ત્ર
         </p>
       </div>

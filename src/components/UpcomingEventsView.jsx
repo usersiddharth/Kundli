@@ -75,7 +75,7 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
         return 'glass-badge-success font-bold text-emerald-800 dark:text-emerald-300 border border-emerald-500/30';
       case 'auspicious':
       case 'favorable':
-        return 'glass-badge-warning text-[#b85d19] dark:text-[#e6a86c] border border-amber-500/30';
+        return 'glass-badge-warning text-[var(--text-gold)] dark:text-[var(--text-gold)] border border-amber-500/30';
       case 'caution':
         return 'glass-badge-danger text-rose-800 dark:text-rose-300 border border-rose-500/30';
       default:
@@ -104,13 +104,13 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
     <Card className="rounded-2xl glass-panel p-3 sm:p-6 shadow-sm space-y-5 sm:space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-gold)]">
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
-        <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
+        <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
           || ૐ શ્રી ગણેશાય નમઃ ||
         </span>
-        <h1 className="font-serif text-2xl font-bold text-[#2c2825] mt-1">
+        <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
           આગામી ગ્રહીય ઘટનાઓ & ગોચર પંચાંગ (Upcoming Planetary Events Dossier)
         </h1>
-        <p className="text-xs text-[#544d44] mt-0.5">
+        <p className="text-xs text-[var(--text-secondary)] mt-0.5">
           ખગોળીય રાશિ પરિવર્તન, આરંભ-સમાપ્તિ તારીખ, વક્રી-માર્ગી ગ્રહો, સૂર્ય-ચંદ્ર ગ્રહણ અને
           વ્યક્તિગત પ્રભાવ
         </p>

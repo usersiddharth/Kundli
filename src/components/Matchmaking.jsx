@@ -232,13 +232,13 @@ export default function Matchmaking({ t }) {
     <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
-        <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
+        <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
           || ૐ શ્રી ગણેશાય નમઃ || શુભ વિવાહ ||
         </span>
-        <h1 className="font-serif text-2xl font-bold text-[#2c2825] mt-1">
+        <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
           અષ્ટકૂટ ગુણ મિલન રિપોર્ટ (Kundli Matchmaking Dossier)
         </h1>
-        <p className="text-xs text-[#544d44]">
+        <p className="text-xs text-[var(--text-secondary)]">
           કન્યા: {brideForm.name} ({brideForm.dob}) • વર: {groomForm.name} ({groomForm.dob})
         </p>
       </div>
@@ -423,8 +423,8 @@ export default function Matchmaking({ t }) {
         <Card className="rounded-2xl glass-panel-accent p-6 shadow-sm space-y-6 border border-[var(--border-gold)]">
           {/* Printable Native Summary (Visible in Print) */}
           <div className="hidden print:grid grid-cols-2 gap-4 border-b border-[#8c7456]/40 pb-4 text-xs">
-            <div className="rounded border border-[#d4c8b8] p-3">
-              <strong className="text-[#b85d19] block mb-1">કન્યા પક્ષ (Bride Details):</strong>
+            <div className="rounded border border-[var(--border-subtle)] p-3">
+              <strong className="text-[var(--text-gold)] block mb-1">કન્યા પક્ષ (Bride Details):</strong>
               <div>
                 નામ: <strong>{brideForm.name}</strong>
               </div>
@@ -432,8 +432,8 @@ export default function Matchmaking({ t }) {
                 જન્મ: {brideForm.dob} {brideForm.tob} ({brideForm.city})
               </div>
             </div>
-            <div className="rounded border border-[#d4c8b8] p-3">
-              <strong className="text-[#2c2825] block mb-1">વર પક્ષ (Groom Details):</strong>
+            <div className="rounded border border-[var(--border-subtle)] p-3">
+              <strong className="text-[var(--text-primary)] block mb-1">વર પક્ષ (Groom Details):</strong>
               <div>
                 નામ: <strong>{groomForm.name}</strong>
               </div>
@@ -592,20 +592,20 @@ export default function Matchmaking({ t }) {
           </Card>
 
           {/* Astrologer Printable Signature Footer */}
-          <div className="hidden print:block print-footer-signature rounded-xl border border-[#d4c8b8] bg-[#fcfbf7] p-4 text-xs mt-6">
+          <div className="hidden print:block print-footer-signature rounded-xl border border-[var(--border-subtle)] bg-white/5 p-4 text-xs mt-6">
             <div className="flex justify-between items-end">
               <div>
-                <span className="font-serif font-bold text-[#8c7456] block">
+                <span className="font-serif font-bold text-[var(--text-gold)] block">
                   || શુભ વિવાહ મસ્તુ • સદા સુખી ભવ ||
                 </span>
-                <p className="text-[10px] text-[#736a60] mt-0.5">
+                <p className="text-[10px] text-[var(--text-muted)] mt-0.5">
                   અષ્ટકૂટ ગુણ મિલન પદ્ધતિ આધારિત અધિકૃત જ્યોતિષીય પરામર્શ
                 </p>
               </div>
 
               <div className="text-right">
                 <div className="w-36 border-b border-dashed border-[#736a60] pb-1 mb-1"></div>
-                <span className="text-[10px] font-bold text-[#2c2825] uppercase">
+                <span className="text-[10px] font-bold text-[var(--text-primary)] uppercase">
                   જ્યોતિષી હસ્તાક્ષર
                 </span>
               </div>

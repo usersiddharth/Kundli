@@ -51,27 +51,27 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
   ];
 
   return (
-    <div className="rounded-xl border border-[#e6dfd3] bg-[#fcfbf7] p-6 shadow-sm space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6dfd3] pb-4">
+    <div className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-6 shadow-sm space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
-          <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
-            <Layers className="h-5 w-5 text-[#b85d19]" /> Shodashvarga (ષોડશવર્ગ - Divisional
+          <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+            <Layers className="h-5 w-5 text-[var(--text-gold)]" /> Shodashvarga (ષોડશવર્ગ - Divisional
             Charts)
           </h2>
-          <p className="text-xs text-[#736a60]">
+          <p className="text-xs text-[var(--text-muted)]">
             Explore 13 classical Vedic varga charts for specialized life domains (Career, Assets,
             Lineage, Spirit)
           </p>
         </div>
 
         {/* Chart Style Toggle */}
-        <div className="flex rounded-lg border border-[#e6dfd3] bg-[#f5efe6] p-1">
+        <div className="flex rounded-lg border border-[var(--border-subtle)] bg-white/5 p-1">
           <button
             onClick={() => setChartStyle('north')}
             className={`rounded px-2.5 py-1 text-xs font-medium transition ${
               chartStyle === 'north'
                 ? 'bg-[#2c2825] text-[#f4ebd9] shadow-xs'
-                : 'text-[#544d44] hover:bg-[#eae3d5]'
+                : 'text-[var(--text-secondary)] hover:bg-[#eae3d5]'
             }`}
           >
             {t.northIndian}
@@ -81,7 +81,7 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
             className={`rounded px-2.5 py-1 text-xs font-medium transition ${
               chartStyle === 'south'
                 ? 'bg-[#2c2825] text-[#f4ebd9] shadow-xs'
-                : 'text-[#544d44] hover:bg-[#eae3d5]'
+                : 'text-[var(--text-secondary)] hover:bg-[#eae3d5]'
             }`}
           >
             {t.southIndian}
@@ -98,7 +98,7 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
             className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${
               selectedVarga === v.id
                 ? 'bg-[#2c2825] text-[#f4ebd9] shadow-xs'
-                : 'border border-[#e6dfd3] bg-[#fffdfa] text-[#544d44] hover:bg-[#f5efe6]'
+                : 'border border-[var(--border-subtle)] bg-white/5 text-[var(--text-secondary)] hover:bg-white/5'
             }`}
           >
             {v.name}
@@ -107,11 +107,11 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
       </div>
 
       {/* Domain Purpose Banner */}
-      <div className="rounded-lg border border-[#e6dfd3] bg-[#f5efe6]/60 p-3.5 text-xs text-[#2c2825]">
-        <span className="font-serif font-bold text-sm text-[#2c2825] block mb-1">
+      <div className="rounded-lg border border-[var(--border-subtle)] bg-white/5 p-3.5 text-xs text-[var(--text-primary)]">
+        <span className="font-serif font-bold text-sm text-[var(--text-primary)] block mb-1">
           {currentVargaDef.name} — Domain of Analysis:
         </span>
-        <p className="text-[#544d44] leading-relaxed">
+        <p className="text-[var(--text-secondary)] leading-relaxed">
           {currentVargaDef.purpose[lang] || currentVargaDef.purpose.en}
         </p>
       </div>
@@ -121,7 +121,7 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
         {chartStyle === 'north' ? (
           <svg
             viewBox="0 0 400 400"
-            className="h-84 w-84 max-w-full rounded-xl border-2 border-[#8c7456] bg-[#fffdfa] shadow-sm"
+            className="h-84 w-84 max-w-full rounded-xl border-2 border-[#8c7456] bg-white/5 shadow-sm"
           >
             <rect
               x="0"
@@ -176,7 +176,7 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
             })}
           </svg>
         ) : (
-          <div className="grid h-84 w-84 max-w-full grid-cols-4 grid-rows-4 border-2 border-[#8c7456] bg-[#fffdfa] text-xs shadow-sm rounded-xl overflow-hidden">
+          <div className="grid h-84 w-84 max-w-full grid-cols-4 grid-rows-4 border-2 border-[#8c7456] bg-white/5 text-xs shadow-sm rounded-xl overflow-hidden">
             {[
               { sign: 11, label: 'Pisces' },
               { sign: 0, label: 'Aries' },
@@ -200,12 +200,12 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
                   return (
                     <div
                       key={idx}
-                      className="col-span-2 row-span-2 flex flex-col items-center justify-center border border-[#e6dfd3] bg-[#fcfbf7] p-2 text-center"
+                      className="col-span-2 row-span-2 flex flex-col items-center justify-center border border-[var(--border-subtle)] bg-white/5 p-2 text-center"
                     >
-                      <span className="font-serif text-sm font-semibold text-[#8c7456]">
+                      <span className="font-serif text-sm font-semibold text-[var(--text-gold)]">
                         {currentVargaDef.name}
                       </span>
-                      <span className="text-[10px] text-[#736a60]">{t.southIndian}</span>
+                      <span className="text-[10px] text-[var(--text-muted)]">{t.southIndian}</span>
                     </div>
                   );
                 }
@@ -218,12 +218,12 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
               return (
                 <div
                   key={idx}
-                  className="flex flex-col justify-between border border-[#8c7456] p-1.5 bg-[#fffdfa]"
+                  className="flex flex-col justify-between border border-[#8c7456] p-1.5 bg-white/5"
                 >
-                  <span className="font-mono text-[11px] font-bold text-[#b85d19]">
+                  <span className="font-mono text-[11px] font-bold text-[var(--text-gold)]">
                     {box.sign + 1}
                   </span>
-                  <span className="text-[10px] font-semibold text-[#2c2825] leading-tight text-center">
+                  <span className="text-[10px] font-semibold text-[var(--text-primary)] leading-tight text-center">
                     {pNames}
                   </span>
                 </div>

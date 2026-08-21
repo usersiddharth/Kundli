@@ -8,17 +8,17 @@ export default function AspectsView({ kundliData, t }) {
   const aspects = calculatePlanetaryAspects(kundliData);
 
   return (
-    <div className="rounded-xl border border-[#e6dfd3] bg-[#fcfbf7] p-6 shadow-sm">
-      <div className="mb-6 border-b border-[#e6dfd3] pb-4">
-        <h2 className="text-xl font-medium text-[#2c2825] font-serif flex items-center gap-2">
-          <Eye className="h-5 w-5 text-[#b85d19]" /> {t.aspectsTitle}
+    <div className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-6 shadow-sm">
+      <div className="mb-6 border-b border-[var(--border-subtle)] pb-4">
+        <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
+          <Eye className="h-5 w-5 text-[var(--text-gold)]" /> {t.aspectsTitle}
         </h2>
-        <p className="text-xs text-[#736a60]">{t.aspectsDesc}</p>
+        <p className="text-xs text-[var(--text-muted)]">{t.aspectsDesc}</p>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm text-[#2c2825]">
-          <thead className="border-b border-[#e6dfd3] bg-[#f5efe6] text-xs font-semibold text-[#544d44]">
+        <table className="w-full text-left text-sm text-[var(--text-primary)]">
+          <thead className="border-b border-[var(--border-subtle)] bg-white/5 text-xs font-semibold text-[var(--text-secondary)]">
             <tr>
               <th className="p-3">{t.aspectingPlanet}</th>
               <th className="p-3">Source House</th>
@@ -27,14 +27,14 @@ export default function AspectsView({ kundliData, t }) {
               <th className="p-3">Target Planets</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e6dfd3]">
+          <tbody className="divide-y divide-[var(--border-subtle)]">
             {aspects.map((a, idx) => (
-              <tr key={idx} className="hover:bg-[#f5efe6]/50 transition">
-                <td className="p-3 font-medium text-[#2c2825]">
+              <tr key={idx} className="hover:bg-white/10 transition">
+                <td className="p-3 font-medium text-[var(--text-primary)]">
                   {t[a.aspectingPlanet] || a.aspectingPlanet}
                 </td>
                 <td className="p-3 font-mono font-semibold">House {a.sourceHouse}</td>
-                <td className="p-3 font-mono text-xs font-medium text-[#b85d19]">
+                <td className="p-3 font-mono text-xs font-medium text-[var(--text-gold)]">
                   {a.aspectDistance}th Aspect
                 </td>
                 <td className="p-3 font-mono font-semibold">
@@ -46,7 +46,7 @@ export default function AspectsView({ kundliData, t }) {
                       {a.targetPlanets.map((p) => t[p] || p).join(', ')}
                     </span>
                   ) : (
-                    <span className="text-xs text-[#736a60]">Aspecting Empty House</span>
+                    <span className="text-xs text-[var(--text-muted)]">Aspecting Empty House</span>
                   )}
                 </td>
               </tr>

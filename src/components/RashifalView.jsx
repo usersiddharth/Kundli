@@ -76,14 +76,14 @@ export default function RashifalView({ kundliData, t, lang = 'gu' }) {
     <Card className="rounded-2xl glass-panel p-3 sm:p-6 shadow-sm space-y-5 sm:space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-gold)]">
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
-        <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
+        <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
           || ૐ શ્રી ગણેશાય નમઃ ||
         </span>
-        <h1 className="font-serif text-2xl font-bold text-[#2c2825] mt-1">
+        <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
           {selectedSign.names[lang] || selectedSign.names.gu} - સંપૂર્ણ રાશિ ભવિષ્ય (Vedic Horoscope
           Dossier)
         </h1>
-        <p className="text-xs text-[#544d44] mt-0.5">
+        <p className="text-xs text-[var(--text-secondary)] mt-0.5">
           દૈનિક, સાપ્તાહિક, માસિક અને વાર્ષિક જ્યોતિષ ફળાદેશ
         </p>
       </div>

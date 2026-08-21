@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Card, Chip } from '@heroui/react';
-import { getGujaratiMonthCalendar, GUJARATI_FESTIVALS } from '../engine/gujaratiCalendar.js';
+import {
+  getGujaratiMonthCalendar,
+  calculateDayPanchang,
+  GUJARATI_FESTIVALS,
+  SOLAR_FIXED_FESTIVALS,
+} from '../engine/gujaratiCalendar.js';
 import { calculateDetailedGujaratiPanchang } from '../engine/gujaratiPanchang.js';
 import {
   Calendar as CalendarIcon,
@@ -9,12 +13,9 @@ import {
   Sun,
   Moon,
   Sparkles,
-  Award,
   Printer,
-  Compass,
-  ShieldCheck,
-  AlertTriangle,
   ArrowRight,
+  Clock,
 } from 'lucide-react';
 
 const MONTH_NAMES_GU = [
@@ -33,45 +34,52 @@ const MONTH_NAMES_GU = [
 ];
 
 const WEEKDAYS_GU = [
-  { short: 'રવિ', full: 'રવિવાર (Sun)' },
-  { short: 'સોમ', full: 'સોમવાર (Mon)' },
-  { short: 'મંગળ', full: 'મંગળવાર (Tue)' },
-  { short: 'બુધ', full: 'બુધવાર (Wed)' },
-  { short: 'ગુરુ', full: 'ગુરુવાર (Thu)' },
-  { short: 'શુક્ર', full: 'શુક્રવાર (Fri)' },
-  { short: 'શનિ', full: 'શનિવાર (Sat)' },
+  { full: 'રવિવાર (Sun)', short: 'રવિ' },
+  { full: 'સોમવાર (Mon)', short: 'સોમ' },
+  { full: 'મંગળવાર (Tue)', short: 'મંગળ' },
+  { full: 'બુધવાર (Wed)', short: 'બુધ' },
+  { full: 'ગુરુવાર (Thu)', short: 'ગુરુ' },
+  { full: 'શુક્રવાર (Fri)', short: 'શુક્ર' },
+  { full: 'શનિવાર (Sat)', short: 'શનિ' },
 ];
 
-const CALENDAR_YEARS = Array.from({ length: 201 }, (_, i) => 1900 + i);
+const CALENDAR_YEARS = [2024, 2025, 2026, 2027, 2028, 2029, 2030];
 
-export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) {
+export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu' }) {
   const now = new Date();
   const [currentYear, setCurrentYear] = useState(now.getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(now.getMonth() + 1); // 1 to 12
+  const [currentMonth, setCurrentMonth] = useState(now.getMonth() + 1); // 1-indexed
+
+  // Selected Day in Month for Detailed Panchang Sheet
   const [selectedDayInfo, setSelectedDayInfo] = useState(null);
   const [activeTab, setActiveTab] = useState('month'); // 'month' | 'festivals'
 
+  // Generate 42-cell calendar grid for active month
   const calendarGrid = getGujaratiMonthCalendar(currentYear, currentMonth);
 
-  // Auto-select today if not selected yet
-  const todayCell = calendarGrid.find(
-    (c) =>
-      c.isCurrentMonth &&
-      c.day === now.getDate() &&
-      c.month === now.getMonth() + 1 &&
-      c.year === now.getFullYear()
-  );
-
+  // Fallback to today if none clicked
   const activeSelected =
     selectedDayInfo ||
-    (currentMonth === now.getMonth() + 1 && currentYear === now.getFullYear() ? todayCell : null);
+    calendarGrid.find(
+      (c) =>
+        c.day === now.getDate() &&
+        c.month === now.getMonth() + 1 &&
+        c.year === now.getFullYear()
+    ) ||
+    calendarGrid[15];
+
+  // Calculate detailed panchang for the selected day
+  const selYear = activeSelected ? activeSelected.year : now.getFullYear();
+  const selMonth = activeSelected ? activeSelected.month : now.getMonth() + 1;
+  const selDay = activeSelected ? activeSelected.day : now.getDate();
+  const detailedPanchang = calculateDetailedGujaratiPanchang(selYear, selMonth, selDay);
 
   const handlePrevMonth = () => {
     if (currentMonth === 1) {
       setCurrentMonth(12);
-      setCurrentYear(currentYear - 1);
+      setCurrentYear((prev) => prev - 1);
     } else {
-      setCurrentMonth(currentMonth - 1);
+      setCurrentMonth((prev) => prev - 1);
     }
     setSelectedDayInfo(null);
   };
@@ -79,9 +87,9 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
   const handleNextMonth = () => {
     if (currentMonth === 12) {
       setCurrentMonth(1);
-      setCurrentYear(currentYear + 1);
+      setCurrentYear((prev) => prev + 1);
     } else {
-      setCurrentMonth(currentMonth + 1);
+      setCurrentMonth((prev) => prev + 1);
     }
     setSelectedDayInfo(null);
   };
@@ -89,33 +97,26 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
   const handleToday = () => {
     setCurrentYear(now.getFullYear());
     setCurrentMonth(now.getMonth() + 1);
-    setSelectedDayInfo(todayCell || null);
+    const todayCell = calendarGrid.find(
+      (c) =>
+        c.day === now.getDate() &&
+        c.month === now.getMonth() + 1 &&
+        c.year === now.getFullYear()
+    );
+    if (todayCell) setSelectedDayInfo(todayCell);
   };
 
   const handlePrint = () => {
     window.print();
   };
 
-  // Find active day's detailed panchang if selected
-  const detailedPanchang = activeSelected
-    ? calculateDetailedGujaratiPanchang(
-        activeSelected.year,
-        activeSelected.month,
-        activeSelected.day
-      )
-    : null;
-
-  const getFestivalName = (f) => {
-    if (!f) return '';
-    if (typeof f === 'string') return f;
-    if (f.name) {
-      if (typeof f.name === 'string') return f.name;
-      return f.name[lang] || f.name.gu || f.name.en || '';
-    }
-    return f[lang] || f.gu || f.en || '';
+  const getFestivalName = (fest) => {
+    if (!fest) return '';
+    if (typeof fest === 'string') return fest;
+    return fest.name?.[lang] || fest.name?.gu || fest.name || '';
   };
 
-  const handleJumpToPanchangPortal = () => {
+  const handleJumpToPanchang = () => {
     if (onOpenPanchangPortal && activeSelected) {
       const dateStr = `${activeSelected.year}-${String(activeSelected.month).padStart(2, '0')}-${String(activeSelected.day).padStart(2, '0')}`;
       onOpenPanchangPortal(dateStr);
@@ -123,137 +124,163 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
   };
 
   return (
-    <Card className="rounded-2xl glass-panel p-3 sm:p-5 md:p-6 shadow-sm space-y-4 sm:space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
-      {/* Printable Header (Visible Only in Print) */}
+    <div className="rounded-2xl spatial-panel p-3 sm:p-5 md:p-6 shadow-sm space-y-4 sm:space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
+      {/* ── Printable Header ── */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
-        <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
+        <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
           || ૐ શ્રી ગણેશાય નમઃ ||
         </span>
-        <h1 className="font-serif text-2xl font-bold text-[#2c2825] mt-1">
+        <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
           ગુજરાતી પંચાંગ કૅલેન્ડર — {MONTH_NAMES_GU[currentMonth - 1]} {currentYear}
         </h1>
         {activeSelected && (
-          <p className="text-xs text-[#544d44] mt-1">
+          <p className="text-xs text-[var(--text-secondary)] mt-1">
             પસંદ કરેલ તારીખ: {activeSelected.day}-{activeSelected.month}-{activeSelected.year} •
             વિક્રમ સંવત {detailedPanchang?.vikramSamvat}
           </p>
         )}
       </div>
 
-      {/* Main Header & Controls (Hidden in Print) */}
-      <Card.Header className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 p-0 print:hidden">
+      {/* ── Main Header & Controls ── */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 print:hidden">
         <div>
-          <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <CalendarIcon className="h-5 w-5 text-[var(--text-gold)]" /> વિગતવાર ગુજરાતી કૅલેન્ડર
-            (Detailed Gujarati calendar)
-          </Card.Title>
-          <Card.Description className="text-xs text-[var(--text-muted)]">
+          <div className="flex items-center gap-2">
+            <CalendarIcon className="h-5 w-5 text-[var(--text-gold)] shrink-0" />
+            <h2
+              className="text-lg sm:text-xl font-medium text-[var(--text-primary)] tracking-tight"
+              style={{ fontFamily: 'Syne, sans-serif' }}
+            >
+              વિગતવાર ગુજરાતી કૅલેન્ડર (Detailed Gujarati Calendar)
+            </h2>
+          </div>
+          <p className="text-xs text-[var(--text-muted)] mt-0.5" style={{ fontFamily: 'Inter, sans-serif' }}>
             કોઈપણ તારીખ પર ક્લિક કરીને તે દિવસનું સંપૂર્ણ વિગતવાર પંચાંગ, ચોઘડિયા અને મુહૂર્ત જુઓ
-          </Card.Description>
+          </p>
         </div>
 
         {/* Tab & Action Controls */}
         <div className="flex flex-wrap items-center gap-2.5">
-          <div className="flex rounded-xl glass-pill p-1 gap-1">
-            <Button
+          <div className="flex items-center rounded-xl p-1 gap-1 spatial-pill">
+            <button
               type="button"
-              onPress={() => setActiveTab('month')}
+              onClick={() => setActiveTab('month')}
               className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
-                activeTab === 'month'
-                  ? 'glass-button-primary shadow-xs'
-                  : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
+                activeTab === 'month' ? 'spatial-btn-primary' : 'spatial-btn-ghost'
               }`}
             >
               માસિક કૅલેન્ડર (Monthly grid)
-            </Button>
-            <Button
+            </button>
+            <button
               type="button"
-              onPress={() => setActiveTab('festivals')}
+              onClick={() => setActiveTab('festivals')}
               className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
-                activeTab === 'festivals'
-                  ? 'glass-button-primary shadow-xs'
-                  : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
+                activeTab === 'festivals' ? 'spatial-btn-primary' : 'spatial-btn-ghost'
               }`}
             >
               વાર્ષિક તહેવારો (All festivals)
-            </Button>
+            </button>
           </div>
 
-          <Button
+          <button
             type="button"
-            onPress={handlePrint}
+            onClick={handlePrint}
             title="Save calendar as PDF"
-            className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-medium transition cursor-pointer spatial-btn-ghost"
+            style={{ border: '1px solid var(--border-subtle)' }}
           >
             <Printer className="h-3.5 w-3.5 text-[var(--text-gold)]" />
-            <span>Save as PDF</span>
-          </Button>
+            <span style={{ color: 'var(--text-secondary)' }}>Save as PDF</span>
+          </button>
         </div>
-      </Card.Header>
+      </div>
 
-      {/* MONTHLY CALENDAR GRID VIEW */}
+      {/* ── MONTHLY CALENDAR GRID VIEW ── */}
       {activeTab === 'month' && (
         <div className="space-y-6">
           {/* Month Navigation Banner */}
-          <Card className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl glass-panel-accent p-3 sm:p-4 shadow-xs border border-[var(--border-gold)]">
-            <div className="flex items-center justify-between w-full sm:w-auto gap-1 sm:gap-2">
-              <Button
+          <div
+            className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl p-3 sm:p-4 border transition"
+            style={{
+              background: 'rgba(20, 20, 42, 0.75)',
+              borderColor: 'var(--border-gold)',
+              boxShadow: 'var(--shadow-gold)',
+            }}
+          >
+            <div className="flex items-center justify-between w-full sm:w-auto gap-2">
+              <button
                 type="button"
-                onPress={handlePrevMonth}
+                onClick={handlePrevMonth}
                 aria-label="Previous Month"
-                className="rounded-xl glass-card p-1.5 sm:p-2 text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-2xs cursor-pointer min-w-0"
+                className="rounded-xl p-2 text-[var(--text-primary)] transition cursor-pointer spatial-btn-ghost"
+                style={{ border: '1px solid var(--border-subtle)' }}
               >
                 <ChevronLeft className="h-4 w-4" />
-              </Button>
+              </button>
 
-              <h3 className="font-serif text-base sm:text-xl font-bold text-[var(--text-gold)] px-2 text-center">
+              <h3
+                className="text-base sm:text-xl font-bold px-3 text-center tracking-tight text-[var(--text-gold)]"
+                style={{ fontFamily: 'Syne, sans-serif' }}
+              >
                 {MONTH_NAMES_GU[currentMonth - 1]} {currentYear}
               </h3>
 
-              <Button
+              <button
                 type="button"
-                onPress={handleNextMonth}
+                onClick={handleNextMonth}
                 aria-label="Next Month"
-                className="rounded-xl glass-card p-1.5 sm:p-2 text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-2xs cursor-pointer min-w-0"
+                className="rounded-xl p-2 text-[var(--text-primary)] transition cursor-pointer spatial-btn-ghost"
+                style={{ border: '1px solid var(--border-subtle)' }}
               >
                 <ChevronRight className="h-4 w-4" />
-              </Button>
+              </button>
             </div>
 
             <div className="flex items-center justify-between w-full sm:w-auto gap-2">
-              <Button
+              <button
                 type="button"
-                onPress={handleToday}
-                className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 rounded-xl glass-button-primary px-3 py-1.5 text-xs font-bold shadow-2xs transition cursor-pointer"
+                onClick={handleToday}
+                className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-bold transition cursor-pointer spatial-btn-primary"
               >
-                <Sparkles className="h-3.5 w-3.5 text-[#0c0e17]" />
+                <Sparkles className="h-3.5 w-3.5" />
                 <span>આજ (Today)</span>
-              </Button>
+              </button>
 
               <select
                 value={currentYear}
                 onChange={(e) => setCurrentYear(Number(e.target.value))}
-                className="rounded-xl glass-input px-2.5 py-1.5 text-xs font-mono font-medium text-[var(--text-primary)] focus:outline-none cursor-pointer"
+                className="rounded-xl px-3 py-1.5 text-xs font-mono font-medium focus:outline-none cursor-pointer spatial-input"
+                style={{ border: '1px solid var(--border-default)' }}
               >
                 {CALENDAR_YEARS.map((y) => (
-                  <option key={y} value={y}>
+                  <option key={y} value={y} style={{ background: '#10101e', color: '#fff' }}>
                     {y}
                   </option>
                 ))}
               </select>
             </div>
-          </Card>
+          </div>
 
           {/* 7-Column Wall Calendar Grid */}
-          <div className="rounded-2xl border border-[var(--border-gold)] glass-panel shadow-sm overflow-hidden">
+          <div
+            className="rounded-2xl border overflow-hidden spatial-panel shadow-xl"
+            style={{ borderColor: 'rgba(245, 158, 11, 0.2)' }}
+          >
             {/* Weekday Header */}
-            <div className="grid grid-cols-7 border-b border-[var(--border-subtle)] glass-pill text-center text-[11px] sm:text-xs font-bold text-[var(--text-secondary)]">
+            <div
+              className="grid grid-cols-7 border-b text-center text-[11px] sm:text-xs font-bold"
+              style={{
+                background: 'rgba(16, 16, 30, 0.85)',
+                borderColor: 'var(--border-subtle)',
+                color: 'var(--text-secondary)',
+              }}
+            >
               {WEEKDAYS_GU.map((day, idx) => (
                 <div
                   key={idx}
-                  className={`py-2 sm:py-2.5 border-r border-[var(--border-subtle)] last:border-r-0 ${
-                    idx === 0 ? 'text-rose-600 dark:text-rose-400 font-bold' : ''
+                  className={`py-2.5 sm:py-3 border-r last:border-r-0 ${
+                    idx === 0 ? 'text-rose-400 font-bold' : ''
                   }`}
+                  style={{ borderColor: 'var(--border-subtle)' }}
                 >
                   <span className="hidden sm:inline">{day.full}</span>
                   <span className="sm:hidden">{day.short}</span>
@@ -262,7 +289,7 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
             </div>
 
             {/* Calendar Days Grid */}
-            <div className="grid grid-cols-7 bg-[var(--border-subtle)] gap-[1px]">
+            <div className="grid grid-cols-7 gap-[1px]" style={{ background: 'var(--border-void)' }}>
               {calendarGrid.map((cell, idx) => {
                 const isSelected =
                   activeSelected &&
@@ -283,53 +310,88 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
                     onClick={() => setSelectedDayInfo(cell)}
                     aria-label={`Date ${cell.day} ${MONTH_NAMES_GU[cell.month - 1]} ${cell.year}, ${cell.fullTithiTitle}${festLabel ? ', ' + festLabel : ''}`}
                     aria-pressed={isSelected}
-                    className={`min-h-[76px] sm:min-h-[106px] p-1 sm:p-2 flex flex-col justify-start text-left cursor-pointer transition select-none relative focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#b85d19] focus-visible:z-30 ${
+                    className={`min-h-[82px] sm:min-h-[112px] p-1.5 sm:p-2 flex flex-col justify-start text-left cursor-pointer transition-all select-none relative focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[var(--gold-500)] ${
                       cell.isCurrentMonth
                         ? isToday
                           ? isSelected
-                            ? 'bg-amber-100/90 dark:bg-amber-950/70 ring-2 ring-[var(--text-gold)] shadow-sm z-20'
-                            : 'bg-amber-50/70 dark:bg-amber-950/40 ring-1.5 sm:ring-2 ring-[var(--text-gold)]/80 shadow-2xs z-10'
+                            ? 'ring-2 ring-[var(--gold-400)] shadow-lg z-20'
+                            : 'ring-1 sm:ring-2 ring-[var(--gold-500)]/70 shadow-sm z-10'
                           : isSelected
-                            ? 'bg-stone-200/90 dark:bg-stone-800/80 ring-2 ring-[var(--border-gold)] z-10'
-                            : 'bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)]'
-                        : 'bg-[var(--bg-pill)]/40 opacity-45'
+                            ? 'ring-2 ring-[var(--border-gold)] z-10'
+                            : 'hover:bg-white/10'
+                        : 'opacity-40 hover:opacity-75'
                     }`}
+                    style={{
+                      background: isToday
+                        ? isSelected
+                          ? 'rgba(245, 158, 11, 0.22)'
+                          : 'rgba(245, 158, 11, 0.12)'
+                        : isSelected
+                          ? 'rgba(99, 102, 241, 0.18)'
+                          : cell.isCurrentMonth
+                            ? 'rgba(20, 20, 42, 0.75)'
+                            : 'rgba(12, 12, 23, 0.5)',
+                      boxShadow: isSelected ? '0 0 20px rgba(245, 158, 11, 0.15)' : 'none',
+                    }}
                   >
                     {/* Top Row: Date Number & Moon Phase */}
-                    <div className="flex justify-between items-center h-5 sm:h-6 mb-0.5 w-full">
+                    <div className="flex justify-between items-center h-5 sm:h-6 mb-1 w-full">
                       <div className="flex items-center gap-1">
                         <span
                           className={`font-mono font-bold leading-none ${
                             isToday
-                              ? 'flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-[var(--text-amber)] text-white text-xs sm:text-sm shadow-xs animate-pulse-glow'
+                              ? 'flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full text-xs sm:text-sm font-black shadow-xs'
                               : isSunday
-                                ? 'text-xs sm:text-base text-rose-600 dark:text-rose-400'
+                                ? 'text-xs sm:text-base text-rose-400 font-bold'
                                 : 'text-xs sm:text-base text-[var(--text-primary)]'
                           }`}
+                          style={
+                            isToday
+                              ? {
+                                  background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                                  color: '#07070d',
+                                  boxShadow: '0 0 10px rgba(245, 158, 11, 0.4)',
+                                }
+                              : {}
+                          }
                         >
                           {cell.day}
                         </span>
 
                         {isToday && (
-                          <Chip className="glass-badge-gold px-1 py-0 text-[8px] sm:text-[9px] font-bold hidden sm:inline-block">
-                            <Chip.Label>આજ</Chip.Label>
-                          </Chip>
+                          <span
+                            className="px-1.5 py-0.2 rounded text-[8px] sm:text-[9px] font-bold hidden sm:inline-block"
+                            style={{
+                              background: 'rgba(245, 158, 11, 0.2)',
+                              color: '#fbbf24',
+                              border: '1px solid rgba(245, 158, 11, 0.3)',
+                            }}
+                          >
+                            આજ
+                          </span>
                         )}
                       </div>
 
+                      {/* Moon Phase Badges */}
                       <div className="flex items-center gap-0.5">
                         {cell.isPurnima && (
                           <span
-                            className="text-[10px] sm:text-xs leading-none"
+                            className="flex items-center justify-center rounded-full p-0.5 text-[10px] sm:text-xs leading-none"
                             title="પૂનમ (Full Moon)"
+                            style={{
+                              filter: 'drop-shadow(0 0 6px rgba(251, 191, 36, 0.7))',
+                            }}
                           >
                             🌕
                           </span>
                         )}
                         {cell.isAmavasya && (
                           <span
-                            className="text-[10px] sm:text-xs leading-none"
+                            className="flex items-center justify-center rounded-full p-0.5 text-[10px] sm:text-xs leading-none"
                             title="અમાસ (New Moon)"
+                            style={{
+                              filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.6))',
+                            }}
                           >
                             🌑
                           </span>
@@ -338,37 +400,51 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
                     </div>
 
                     {/* Middle: Gujarati Tithi */}
-                    <div className="min-h-[22px] sm:min-h-[28px] flex flex-col justify-start w-full">
+                    <div className="min-h-[24px] sm:min-h-[30px] flex flex-col justify-start w-full">
                       <span
-                        className={`text-[8.5px] sm:text-[10.5px] font-semibold leading-tight line-clamp-2 block ${
-                          isToday
-                            ? 'text-[var(--text-gold)] font-bold'
+                        className="text-[9px] sm:text-[11px] font-semibold leading-tight line-clamp-2 block tracking-tight"
+                        style={{
+                          color: isToday
+                            ? '#fbbf24'
                             : cell.pakshaKey === 'sud'
-                              ? 'text-[var(--text-gold)]'
-                              : 'text-[var(--text-secondary)]'
-                        }`}
+                              ? '#fcd34d'
+                              : '#93c5fd', // Crisp sky blue for Vad paksha
+                          textShadow: cell.pakshaKey === 'sud' ? '0 0 8px rgba(245, 158, 11, 0.2)' : 'none',
+                        }}
                       >
                         {cell.fullTithiTitle}
                       </span>
-                      <span className="text-[8.5px] text-[var(--text-muted)] hidden sm:block truncate mt-0.5">
+                      <span
+                        className="text-[9px] sm:text-[10px] hidden sm:block truncate mt-0.5 font-mono"
+                        style={{ color: 'rgba(255, 255, 255, 0.65)' }}
+                      >
                         {cell.nakshatraName}
                       </span>
                     </div>
 
                     {/* Bottom: Festival Pills */}
-                    <div className="mt-auto pt-0.5 space-y-0.5 min-h-[14px] sm:min-h-[20px] overflow-hidden w-full">
-                      {cell.festivals.slice(0, 2).map((f, fIdx) => (
-                        <span
-                          key={fIdx}
-                          className={`text-[8px] px-1 py-0.2 rounded block truncate font-medium ${
-                            f.type === 'major'
-                              ? 'glass-badge-danger font-bold'
-                              : 'glass-badge-success'
-                          }`}
-                        >
-                          {getFestivalName(f)}
-                        </span>
-                      ))}
+                    <div className="mt-auto pt-1 space-y-1 min-h-[16px] sm:min-h-[22px] overflow-hidden w-full">
+                      {cell.festivals.slice(0, 2).map((f, fIdx) => {
+                        const isMajor = f.type === 'major';
+                        return (
+                          <span
+                            key={fIdx}
+                            className="text-[8.5px] sm:text-[9.5px] px-1.5 py-0.5 rounded-md block truncate font-medium border leading-tight"
+                            style={{
+                              background: isMajor
+                                ? 'rgba(239, 68, 68, 0.2)'
+                                : 'rgba(16, 185, 129, 0.18)',
+                              borderColor: isMajor
+                                ? 'rgba(239, 68, 68, 0.4)'
+                                : 'rgba(16, 185, 129, 0.35)',
+                              color: isMajor ? '#fecaca' : '#a7f3d0',
+                              textShadow: '0 1px 2px rgba(0,0,0,0.5)',
+                            }}
+                          >
+                            {getFestivalName(f)}
+                          </span>
+                        );
+                      })}
                     </div>
                   </button>
                 );
@@ -376,396 +452,270 @@ export default function GujaratiCalendarView({ t, lang, onOpenPanchangPortal }) 
             </div>
           </div>
 
-          {/* COMPREHENSIVE DETAILED PANCHANG FOR CLICKED DATE */}
+          {/* ── COMPREHENSIVE DETAILED PANCHANG FOR CLICKED DATE ── */}
           {activeSelected && detailedPanchang && (
-            <Card className="rounded-2xl glass-panel-accent p-6 shadow-sm space-y-6 animate-fade-in-up border border-[var(--border-gold)]">
+            <div
+              className="rounded-2xl p-5 sm:p-6 shadow-xl space-y-6 animate-fade-in-up border"
+              style={{
+                background: 'rgba(16, 16, 30, 0.85)',
+                borderColor: 'var(--border-gold)',
+                boxShadow: 'var(--shadow-gold-glow)',
+              }}
+            >
               {/* Selected Day Panchang Title & Action Toolbar */}
               <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <Chip className="glass-button-primary px-2.5 py-0.5 text-[10px] font-bold text-[#0c0e17]">
-                      <Chip.Label>પસંદ કરેલ તારીખનું પંચાંગ</Chip.Label>
-                    </Chip>
-                    <span className="text-xs text-[var(--text-muted)]">
+                    <span className="spatial-badge-gold px-2.5 py-0.5 rounded-full text-[10px] font-bold">
+                      પસંદ કરેલ તારીખનું પંચાંગ
+                    </span>
+                    <span className="text-xs text-[var(--text-muted)] font-mono">
                       વિક્રમ સંવત {detailedPanchang.vikramSamvat} • શક સંવત{' '}
                       {detailedPanchang.shakaSamvat}
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-2xl font-bold text-[var(--text-gold)] mt-1">
+                  <h3
+                    className="text-xl sm:text-2xl font-bold text-[var(--text-gold)] mt-1.5"
+                    style={{ fontFamily: 'Syne, sans-serif' }}
+                  >
                     તારીખ {activeSelected.day}-{activeSelected.month}-{activeSelected.year} •{' '}
                     {detailedPanchang.vaar}
                   </h3>
-                  <p className="text-xs text-[var(--text-secondary)]">
+                  <p className="text-xs text-[var(--text-secondary)] mt-0.5">
                     {detailedPanchang.gujMonthName} • {detailedPanchang.pakshaName} •{' '}
-                    {detailedPanchang.ritu} • {detailedPanchang.ayanaName}
+                    {detailedPanchang.ritu}
                   </p>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <Button
-                    type="button"
-                    onPress={handleJumpToPanchangPortal}
-                    className="flex items-center gap-1.5 rounded-xl glass-button-primary px-3.5 py-2 text-xs font-semibold text-[#0c0e17] transition shadow-xs cursor-pointer"
-                  >
-                    <span>પંચાંગ પોર્ટલમાં જુઓ</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
+                <button
+                  type="button"
+                  onClick={handleJumpToPanchang}
+                  className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl transition cursor-pointer spatial-btn-primary"
+                >
+                  <span>સંપૂર્ણ પંચાંગ પોર્ટલ ખોલો</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </div>
 
-                  <Button
-                    type="button"
-                    onPress={handlePrint}
-                    className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-2 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
+              {/* 5 Core Limbs Cards for Selected Date */}
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+                {/* 1. Tithi */}
+                <div className="rounded-xl p-3.5 text-xs space-y-1.5 spatial-card border border-[var(--border-subtle)]">
+                  <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
+                    ૧. તિથિ
+                  </span>
+                  <h4 className="text-sm font-bold text-[var(--text-primary)]" style={{ fontFamily: 'Syne, sans-serif' }}>
+                    {detailedPanchang.tithi.name}
+                  </h4>
+                  <span className="text-[11px] text-[var(--text-secondary)] block">
+                    {detailedPanchang.pakshaName}
+                  </span>
+                  <span className="spatial-badge-gold text-[9px] font-bold px-1.5 py-0.5 rounded inline-block">
+                    {detailedPanchang.tithi.nature}
+                  </span>
+                </div>
+
+                {/* 2. Vaar */}
+                <div className="rounded-xl p-3.5 text-xs space-y-1.5 spatial-card border border-[var(--border-subtle)]">
+                  <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
+                    ૨. વાર
+                  </span>
+                  <h4 className="text-sm font-bold text-[var(--text-primary)]" style={{ fontFamily: 'Syne, sans-serif' }}>
+                    {detailedPanchang.vaar}
+                  </h4>
+                  <span className="text-[11px] text-[var(--text-secondary)] block">
+                    દિશા શૂળ: {detailedPanchang.dishaShool.badDir}
+                  </span>
+                  <span className="text-[10px] text-[var(--text-muted)] block">
+                    પરિહાર: {detailedPanchang.dishaShool.remedy}
+                  </span>
+                </div>
+
+                {/* 3. Nakshatra */}
+                <div className="rounded-xl p-3.5 text-xs space-y-1.5 spatial-card border border-[var(--border-subtle)]">
+                  <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
+                    ૩. નક્ષત્ર
+                  </span>
+                  <h4 className="text-sm font-bold text-[var(--text-primary)]" style={{ fontFamily: 'Syne, sans-serif' }}>
+                    {detailedPanchang.nakshatra.name}
+                  </h4>
+                  <span className="text-[11px] text-[var(--text-secondary)] block">
+                    સ્વામી: {detailedPanchang.nakshatra.lord}
+                  </span>
+                  <span className="spatial-badge-gold text-[9px] font-bold px-1.5 py-0.5 rounded inline-block">
+                    પદ {detailedPanchang.nakshatra.pada}
+                  </span>
+                </div>
+
+                {/* 4. Yoga */}
+                <div className="rounded-xl p-3.5 text-xs space-y-1.5 spatial-card border border-[var(--border-subtle)]">
+                  <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
+                    ૪. યોગ
+                  </span>
+                  <h4 className="text-sm font-bold text-[var(--text-primary)]" style={{ fontFamily: 'Syne, sans-serif' }}>
+                    {detailedPanchang.yoga.name}
+                  </h4>
+                  <span className="text-[11px] text-[var(--text-secondary)] block">
+                    પ્રકૃતિ: {detailedPanchang.yoga.nature === 'Auspicious' ? 'શુભ' : 'અશુભ'}
+                  </span>
+                  <span
+                    className={`text-[9px] font-bold px-1.5 py-0.5 rounded inline-block ${
+                      detailedPanchang.yoga.nature === 'Auspicious'
+                        ? 'spatial-badge-success'
+                        : 'spatial-badge-danger'
+                    }`}
                   >
-                    <Printer className="h-3.5 w-3.5 text-[var(--text-gold)]" />
-                    <span>Print Panchang</span>
-                  </Button>
+                    {detailedPanchang.yoga.nature}
+                  </span>
+                </div>
+
+                {/* 5. Karana */}
+                <div className="rounded-xl p-3.5 text-xs space-y-1.5 spatial-card border border-[var(--border-subtle)]">
+                  <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
+                    ૫. કરણ
+                  </span>
+                  <h4 className="text-sm font-bold text-[var(--text-primary)]" style={{ fontFamily: 'Syne, sans-serif' }}>
+                    {detailedPanchang.karana.name}
+                  </h4>
+                  <span className="text-[11px] text-[var(--text-secondary)] block">
+                    દેવતા: {detailedPanchang.karana.deity}
+                  </span>
+                  <span className="spatial-badge-gold text-[9px] font-bold px-1.5 py-0.5 rounded inline-block">
+                    {detailedPanchang.karana.type}
+                  </span>
                 </div>
               </div>
 
-              {/* Sun & Moon Highlights */}
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 text-xs">
-                <Card className="rounded-xl glass-card p-3 flex flex-row items-center gap-2.5 border border-[var(--border-subtle)]">
-                  <Sun className="h-4 w-4 text-[var(--text-gold)]" />
+              {/* Sun/Moon Coordinates & Day Muhurtas Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs">
+                <div className="flex items-center gap-2.5 p-3 rounded-xl spatial-card border border-[var(--border-subtle)]">
+                  <Sun className="h-4 w-4 text-[var(--text-gold)] shrink-0" />
                   <div>
-                    <span className="text-[10px] text-[var(--text-muted)] block">
-                      સૂર્યોદય / સૂર્યાસ્ત
-                    </span>
-                    <strong className="font-mono text-[var(--text-primary)]">
+                    <span className="text-[10px] text-[var(--text-muted)] block">સૂર્યોદય - સૂર્યાસ્ત</span>
+                    <strong className="font-mono text-xs text-[var(--text-primary)]">
                       {detailedPanchang.sun.sunrise} - {detailedPanchang.sun.sunset}
                     </strong>
                   </div>
-                </Card>
+                </div>
 
-                <Card className="rounded-xl glass-card p-3 flex flex-row items-center gap-2.5 border border-[var(--border-subtle)]">
-                  <Compass className="h-4 w-4 text-[var(--text-muted)]" />
-                  <div>
-                    <span className="text-[10px] text-[var(--text-muted)] block">સૂર્ય રાશિ</span>
-                    <strong className="text-[var(--text-primary)]">
-                      {t[detailedPanchang.sun.rashi] || detailedPanchang.sun.rashi} (
-                      {detailedPanchang.sun.deg}°)
-                    </strong>
-                  </div>
-                </Card>
-
-                <Card className="rounded-xl glass-card p-3 flex flex-row items-center gap-2.5 border border-[var(--border-subtle)]">
-                  <Moon className="h-4 w-4 text-[var(--text-secondary)]" />
+                <div className="flex items-center gap-2.5 p-3 rounded-xl spatial-card border border-[var(--border-subtle)]">
+                  <Moon className="h-4 w-4 text-sky-400 shrink-0" />
                   <div>
                     <span className="text-[10px] text-[var(--text-muted)] block">ચંદ્ર રાશિ</span>
-                    <strong className="text-[var(--text-primary)]">
-                      {t[detailedPanchang.moon.rashi] || detailedPanchang.moon.rashi} (
-                      {detailedPanchang.moon.deg}°)
+                    <strong className="text-xs text-[var(--text-primary)]">
+                      {detailedPanchang.moon.rashi} ({detailedPanchang.moon.deg}°)
                     </strong>
                   </div>
-                </Card>
+                </div>
 
-                <Card className="rounded-xl glass-card p-3 flex flex-row items-center gap-2.5 border border-[var(--border-subtle)]">
-                  <Sparkles className="h-4 w-4 text-[var(--text-gold)]" />
+                <div className="flex items-center gap-2.5 p-3 rounded-xl spatial-card border border-[var(--border-subtle)]">
+                  <Clock className="h-4 w-4 text-rose-400 shrink-0" />
                   <div>
-                    <span className="text-[10px] text-[var(--text-muted)] block">અયનાંશ</span>
-                    <strong className="text-[var(--text-primary)]">લાહિડી (ચિત્રા પક્ષ)</strong>
+                    <span className="text-[10px] text-[var(--text-muted)] block">રાહુ કાળ</span>
+                    <strong className="font-mono text-xs text-rose-300">
+                      {detailedPanchang.muhurats.rahuKaal}
+                    </strong>
                   </div>
-                </Card>
-              </div>
+                </div>
 
-              {/* 5 Core Limbs Breakdown */}
-              <div className="space-y-3">
-                <h4 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                  <Award className="h-4 w-4 text-[var(--text-gold)]" /> પંચાંગના ૫ મુખ્ય અંગો (5
-                  Core Limbs of the Day)
-                </h4>
-
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
-                  {/* 1. Tithi */}
-                  <Card className="rounded-xl glass-card p-4 text-xs space-y-2 shadow-2xs border border-[var(--border-subtle)]">
-                    <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-1.5">
-                      <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px]">
-                        ૧. તિથિ
-                      </span>
-                      <Chip className="glass-badge-gold text-[10px] font-bold px-1.5 py-0.5">
-                        <Chip.Label>{detailedPanchang.tithi.nature}</Chip.Label>
-                      </Chip>
-                    </div>
-                    <h5 className="font-serif text-base font-bold text-[var(--text-primary)]">
-                      {detailedPanchang.tithi.name}
-                    </h5>
-                    <span className="text-[var(--text-secondary)] block text-[11px]">
-                      {detailedPanchang.pakshaName}
-                    </span>
-                    <div className="text-[10px] text-[var(--text-muted)]">
-                      દેવતા: <strong>{detailedPanchang.tithi.deity}</strong>
-                    </div>
-                  </Card>
-
-                  {/* 2. Vaar */}
-                  <Card className="rounded-xl glass-card p-4 text-xs space-y-2 shadow-2xs border border-[var(--border-subtle)]">
-                    <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-1.5">
-                      <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px]">
-                        ૨. વાર
-                      </span>
-                      <Chip className="glass-pill text-[10px] font-bold px-1.5 py-0.5 text-[var(--text-primary)]">
-                        <Chip.Label>દિવસ</Chip.Label>
-                      </Chip>
-                    </div>
-                    <h5 className="font-serif text-base font-bold text-[var(--text-primary)]">
-                      {detailedPanchang.vaar}
-                    </h5>
-                    <span className="text-[var(--text-secondary)] block text-[11px]">
-                      દિશા શૂળ: {detailedPanchang.dishaShool.badDir}
-                    </span>
-                    <div className="text-[10px] text-[var(--text-muted)]">
-                      સ્વામી: <strong>{detailedPanchang.vaar.split(' ')[0]}</strong>
-                    </div>
-                  </Card>
-
-                  {/* 3. Nakshatra */}
-                  <Card className="rounded-xl glass-card p-4 text-xs space-y-2 shadow-2xs border border-[var(--border-subtle)]">
-                    <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-1.5">
-                      <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px]">
-                        ૩. નક્ષત્ર
-                      </span>
-                      <Chip className="glass-badge-gold text-[10px] font-bold px-1.5 py-0.5">
-                        <Chip.Label>પદ {detailedPanchang.nakshatra.pada}</Chip.Label>
-                      </Chip>
-                    </div>
-                    <h5 className="font-serif text-base font-bold text-[var(--text-primary)]">
-                      {detailedPanchang.nakshatra.name}
-                    </h5>
-                    <span className="text-[var(--text-secondary)] block text-[11px]">
-                      સ્વામી:{' '}
-                      {t[detailedPanchang.nakshatra.lord] || detailedPanchang.nakshatra.lord}
-                    </span>
-                    <div className="text-[10px] text-[var(--text-muted)]">
-                      ગણ: <strong>{detailedPanchang.nakshatra.gana}</strong>
-                    </div>
-                  </Card>
-
-                  {/* 4. Yoga */}
-                  <Card className="rounded-xl glass-card p-4 text-xs space-y-2 shadow-2xs border border-[var(--border-subtle)]">
-                    <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-1.5">
-                      <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px]">
-                        ૪. નિત્ય યોગ
-                      </span>
-                      <Chip
-                        className={`text-[10px] font-bold px-1.5 py-0.5 ${
-                          detailedPanchang.yoga.nature === 'Auspicious'
-                            ? 'glass-badge-success'
-                            : 'glass-badge-danger'
-                        }`}
-                      >
-                        <Chip.Label>
-                          {detailedPanchang.yoga.nature === 'Auspicious' ? 'શુભ' : 'અશુભ'}
-                        </Chip.Label>
-                      </Chip>
-                    </div>
-                    <h5 className="font-serif text-base font-bold text-[var(--text-primary)]">
-                      {detailedPanchang.yoga.name}
-                    </h5>
-                    <span className="text-[var(--text-secondary)] block text-[11px]">
-                      દેવતા: {detailedPanchang.yoga.deity}
-                    </span>
-                    <div className="text-[10px] text-[var(--text-muted)]">૨૭ નિત્ય યોગ</div>
-                  </Card>
-
-                  {/* 5. Karana */}
-                  <Card className="rounded-xl glass-card p-4 text-xs space-y-2 shadow-2xs border border-[var(--border-subtle)]">
-                    <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-1.5">
-                      <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px]">
-                        ૫. કરણ
-                      </span>
-                      <Chip className="glass-pill text-[10px] font-bold px-1.5 py-0.5 text-[var(--text-secondary)]">
-                        <Chip.Label>{detailedPanchang.karana.type.split(' ')[0]}</Chip.Label>
-                      </Chip>
-                    </div>
-                    <h5 className="font-serif text-base font-bold text-[var(--text-primary)]">
-                      {detailedPanchang.karana.name}
-                    </h5>
-                    <span className="text-[var(--text-secondary)] block text-[11px]">
-                      સ્વામી: {detailedPanchang.karana.lord}
-                    </span>
-                    <div className="text-[10px] text-[var(--text-muted)]">
-                      {detailedPanchang.isBhadraActive ? '⚠️ ભદ્રા કાળ' : '✅ નિર્દોષ'}
-                    </div>
-                  </Card>
+                <div className="flex items-center gap-2.5 p-3 rounded-xl spatial-card border border-[var(--border-subtle)]">
+                  <Sparkles className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-[var(--text-muted)] block">અભિજિત મુહૂર્ત</span>
+                    <strong className="font-mono text-xs text-emerald-300">
+                      {detailedPanchang.muhurats.abhijit}
+                    </strong>
+                  </div>
                 </div>
               </div>
-
-              {/* Shubh & Ashubh Muhurat Timings */}
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                {/* Auspicious Muhurats */}
-                <Card className="rounded-2xl glass-badge-success p-5 space-y-3 border">
-                  <h4 className="font-serif text-base font-bold text-[#1e8449] dark:text-[#7bed9f] flex items-center gap-2 border-b border-emerald-300/40 pb-2">
-                    <ShieldCheck className="h-5 w-5 text-[#1e8449] dark:text-[#7bed9f]" /> આજના શુભ
-                    મુહૂર્ત કાળ (Auspicious Timings)
-                  </h4>
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-                      <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block">
-                        અભિજિત મુહૂર્ત (સર્વશ્રેષ્ઠ)
-                      </span>
-                      <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
-                        {detailedPanchang.muhurats.abhijit}
-                      </span>
-                    </Card>
-                    <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-                      <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block">
-                        બ્રહ્મ મુહૂર્ત (સાધના કાળ)
-                      </span>
-                      <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
-                        {detailedPanchang.muhurats.brahma}
-                      </span>
-                    </Card>
-                    <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-                      <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block">
-                        વિજય મુહૂર્ત (વિજય કાળ)
-                      </span>
-                      <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
-                        {detailedPanchang.muhurats.vijay}
-                      </span>
-                    </Card>
-                    <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-                      <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block">
-                        ગોધૂલિ મુહૂર્ત (સંધ્યા કાળ)
-                      </span>
-                      <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
-                        {detailedPanchang.muhurats.godhuli}
-                      </span>
-                    </Card>
-                  </div>
-                </Card>
-
-                {/* Inauspicious Periods */}
-                <Card className="rounded-2xl glass-badge-danger p-5 space-y-3 border">
-                  <h4 className="font-serif text-base font-bold text-[#b03a2e] dark:text-[#ff7675] flex items-center gap-2 border-b border-rose-300/40 pb-2">
-                    <AlertTriangle className="h-5 w-5 text-[#b03a2e] dark:text-[#ff7675]" /> વર્જ્ય
-                    / અશુભ કાળ (Inauspicious Periods)
-                  </h4>
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-                      <span className="font-semibold text-[#b03a2e] dark:text-[#ff7675] block">
-                        રાહુ કાળ (ત્યાજ્ય સમય)
-                      </span>
-                      <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
-                        {detailedPanchang.muhurats.rahuKaal}
-                      </span>
-                    </Card>
-                    <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-                      <span className="font-semibold text-[#b03a2e] dark:text-[#ff7675] block">
-                        યમગંડ કાળ
-                      </span>
-                      <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
-                        {detailedPanchang.muhurats.yamaghanta}
-                      </span>
-                    </Card>
-                    <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-                      <span className="font-semibold text-[#b03a2e] dark:text-[#ff7675] block">
-                        ગુલિક કાળ
-                      </span>
-                      <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
-                        {detailedPanchang.muhurats.gulikaKaal}
-                      </span>
-                    </Card>
-                    <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-                      <span className="font-semibold text-[#b03a2e] dark:text-[#ff7675] block">
-                        ભદ્રા / વિષ્ટિ સ્થિતિ
-                      </span>
-                      <span className="font-semibold text-[var(--text-primary)] text-xs">
-                        {detailedPanchang.isBhadraActive
-                          ? '⚠️ ભદ્રા સક્રિય (અશુભ)'
-                          : '✅ ભદ્રા મુક્ત'}
-                      </span>
-                    </Card>
-                  </div>
-                </Card>
-              </div>
-
-              {/* Day Festivals */}
-              {activeSelected.festivals && activeSelected.festivals.length > 0 && (
-                <Card className="rounded-xl glass-badge-success p-4 text-xs space-y-2 border">
-                  <span className="font-bold text-[#1e8449] dark:text-[#7bed9f] block">
-                    આજના તહેવારો, ઉત્સવો અને વ્રત:
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {activeSelected.festivals.map((f, i) => (
-                      <Chip
-                        key={i}
-                        className="glass-button-primary px-3 py-1 text-xs font-bold text-[#0c0e17]"
-                      >
-                        <Chip.Label>{getFestivalName(f)}</Chip.Label>
-                      </Chip>
-                    ))}
-                  </div>
-                </Card>
-              )}
-            </Card>
+            </div>
           )}
         </div>
       )}
 
-      {/* ANNUAL FESTIVALS DIRECTORY VIEW */}
+      {/* ── ANNUAL FESTIVALS LIST TAB ── */}
       {activeTab === 'festivals' && (
-        <div className="space-y-4">
-          <Card className="rounded-2xl glass-panel-accent p-5 shadow-xs border border-[var(--border-gold)]">
-            <h3 className="font-serif text-lg font-bold text-[var(--text-gold)] flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-[var(--text-gold)]" /> વર્ષના તમામ પ્રમુખ ગુજરાતી
-              તહેવારો અને વ્રતોની સૂચિ
-            </h3>
-            <p className="text-xs text-[var(--text-muted)] mt-0.5">
-              વિક્રમ સંવત અને ગુજરાતી માસ (કાર્તક થી આસો) મુજબ તમામ પર્વો
-            </p>
-          </Card>
+        <div className="space-y-6">
+          <div
+            className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl p-4 border"
+            style={{
+              background: 'rgba(20, 20, 42, 0.75)',
+              borderColor: 'var(--border-gold)',
+            }}
+          >
+            <div>
+              <h3
+                className="text-lg sm:text-xl font-bold text-[var(--text-gold)]"
+                style={{ fontFamily: 'Syne, sans-serif' }}
+              >
+                વિક્રમ સંવત વર્ષ {currentYear} ના તમામ મુખ્ય હિન્દુ તહેવારો
+              </h3>
+              <p className="text-xs text-[var(--text-muted)]">
+                એકાદશી, પૂનમ, અમાસ, વ્રત, નવરાત્રિ, દિવાળી અને ગુજરાતી સાંસ્કૃતિક પર્વો
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <select
+              value={currentYear}
+              onChange={(e) => setCurrentYear(Number(e.target.value))}
+              className="rounded-xl px-3 py-1.5 text-xs font-mono font-medium focus:outline-none cursor-pointer spatial-input"
+              style={{ border: '1px solid var(--border-default)' }}
+            >
+              {CALENDAR_YEARS.map((y) => (
+                <option key={y} value={y} style={{ background: '#10101e', color: '#fff' }}>
+                  {y}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {GUJARATI_FESTIVALS.map((fest, idx) => (
-              <Card
+              <div
                 key={idx}
-                className="rounded-2xl glass-card p-4 text-xs space-y-2 shadow-2xs transition border border-[var(--border-subtle)]"
+                className="p-4 rounded-2xl space-y-2 border transition spatial-card hover:border-[var(--border-gold)]"
+                style={{ borderColor: 'var(--border-subtle)' }}
               >
                 <div className="flex justify-between items-start">
-                  <Chip
-                    className={`px-2 py-0.5 text-[10px] font-bold ${
-                      fest.type === 'major' ? 'glass-badge-danger' : 'glass-badge-success'
-                    }`}
+                  <span
+                    className="font-mono text-xs font-bold px-2 py-0.5 rounded-lg border"
+                    style={{
+                      background: 'rgba(245, 158, 11, 0.15)',
+                      borderColor: 'rgba(245, 158, 11, 0.3)',
+                      color: '#fbbf24',
+                    }}
                   >
-                    <Chip.Label>
-                      {fest.type === 'major' ? 'મુખ્ય તહેવાર' : 'વ્રત / ઉપવાસ'}
-                    </Chip.Label>
-                  </Chip>
-                  <span className="font-mono text-[11px] font-semibold text-[var(--text-muted)]">
                     {fest.paksha === 'sud' ? 'સુદ' : 'વદ'} {fest.tithi}
+                  </span>
+                  <span
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-full border"
+                    style={{
+                      background: fest.type === 'major' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.18)',
+                      borderColor: fest.type === 'major' ? 'rgba(239, 68, 68, 0.4)' : 'rgba(16, 185, 129, 0.35)',
+                      color: fest.type === 'major' ? '#fecaca' : '#a7f3d0',
+                    }}
+                  >
+                    {fest.type === 'major' ? 'મુખ્ય પર્વ' : 'વ્રત / ઉત્સવ'}
                   </span>
                 </div>
 
-                <h4 className="font-serif text-sm font-bold text-[var(--text-primary)]">
+                <h4
+                  className="text-sm font-bold text-[var(--text-primary)] pt-1"
+                  style={{ fontFamily: 'Syne, sans-serif' }}
+                >
                   {getFestivalName(fest)}
                 </h4>
 
-                <div className="border-t border-[var(--border-subtle)] pt-2 text-[11px] text-[var(--text-secondary)]">
-                  ગુજરાતી માસ:{' '}
-                  <strong>
-                    {
-                      [
-                        'કારતક',
-                        'માગશર',
-                        'પોષ',
-                        'મહા',
-                        'ફાગણ',
-                        'ચૈત્ર',
-                        'વૈશાખ',
-                        'જેઠ',
-                        'અષાઢ',
-                        'શ્રાવણ',
-                        'ભાદરવો',
-                        'આસો',
-                      ][fest.monthIdx]
-                    }
-                  </strong>
+                <div className="pt-2 border-t border-[var(--border-subtle)] text-[10.5px] text-[var(--text-muted)] font-mono flex items-center justify-between">
+                  <span>માસિક તિથિ પત્રિકા</span>
+                  <span>{fest.paksha === 'sud' ? 'શુક્લ પક્ષ' : 'કૃષ્ણ પક્ષ'}</span>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
       )}
-    </Card>
+    </div>
   );
 }

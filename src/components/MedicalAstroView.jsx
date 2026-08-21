@@ -12,16 +12,16 @@ export default function MedicalAstroView({ kundliData, t, lang = 'gu' }) {
   return (
     <div className="space-y-6 animate-fade-in-up">
       {/* Header */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-2">
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[#e6a86c]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
             <HeartPulse className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#2c2825] tracking-tight">
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
               આયુર્વેદિક મેડિકલ એસ્ટ્રોલોજી & ત્રિદોષ (Ayurvedic Body Map)
             </h2>
-            <p className="text-xs sm:text-sm text-[#736a60]">
+            <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               વાત, પિત્ત, કફ શારીરિક પ્રકૃતિ અને ૧૨ ભાવ આધારિત અંગ સુરક્ષા વિશ્લેષણ
             </p>
           </div>
@@ -31,7 +31,7 @@ export default function MedicalAstroView({ kundliData, t, lang = 'gu' }) {
       {/* Tridosha Balance Percentage Card */}
       <div className="glass-panel-accent rounded-2xl p-5 shadow-sm border border-[#b85d19]/40 space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-serif font-bold text-[#b85d19] uppercase tracking-wider">
+          <span className="text-xs font-serif font-bold text-[var(--text-gold)] uppercase tracking-wider">
             તમારી મુખ્ય શારીરિક પ્રકૃતિ: {dominantDef.name[lang] || dominantDef.name.gu}
           </span>
           <span className="glass-badge-gold px-2.5 py-0.5 rounded-full text-[10px] font-bold">
@@ -60,7 +60,7 @@ export default function MedicalAstroView({ kundliData, t, lang = 'gu' }) {
           {/* Pitta */}
           <div>
             <div className="flex justify-between text-xs font-bold mb-1">
-              <span className="flex items-center gap-1 text-[#b85d19]">
+              <span className="flex items-center gap-1 text-[var(--text-gold)]">
                 <Flame className="h-3.5 w-3.5" /> પિત્ત (Pitta)
               </span>
               <span>{pittaPct}%</span>
@@ -92,9 +92,9 @@ export default function MedicalAstroView({ kundliData, t, lang = 'gu' }) {
       </div>
 
       {/* 12 House Body Organ Map */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-4">
-        <h3 className="font-serif text-base font-bold text-[#2c2825] flex items-center gap-2">
-          <Activity className="h-4 w-4 text-[#b85d19]" />
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
+        <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <Activity className="h-4 w-4 text-[var(--text-gold)]" />
           ૧૨ ભાવ અને સંબંધિત શારીરિક અંગો (12 House Anatomical Map)
         </h3>
 
@@ -102,12 +102,12 @@ export default function MedicalAstroView({ kundliData, t, lang = 'gu' }) {
           {HOUSE_BODY_MAP.map((item) => (
             <div
               key={item.house}
-              className="glass-card p-3 rounded-xl space-y-1 border border-[#e6dfd3]"
+              className="glass-card p-3 rounded-xl space-y-1 border border-[var(--border-subtle)]"
             >
-              <span className="font-serif text-xs font-bold text-[#b85d19] block">
+              <span className="font-serif text-xs font-bold text-[var(--text-gold)] block">
                 {item.house} મો ભાવ (House #{item.house})
               </span>
-              <p className="text-xs text-[#2c2825] font-medium">
+              <p className="text-xs text-[var(--text-primary)] font-medium">
                 {item.organ[lang] || item.organ.gu}
               </p>
             </div>

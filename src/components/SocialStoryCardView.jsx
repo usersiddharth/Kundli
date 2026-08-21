@@ -14,16 +14,16 @@ export default function SocialStoryCardView({ kundliData, formData, t, lang = 'g
   return (
     <div className="space-y-6 animate-fade-in-up">
       {/* Header */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-2">
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[#e6a86c]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
             <Share2 className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#2c2825] tracking-tight">
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
               સોશિયલ મીડિયા સ્ટોરી ગ્રાફિક (WhatsApp / Insta Story Generator)
             </h2>
-            <p className="text-xs sm:text-sm text-[#736a60]">
+            <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               વોટ્સએપ સ્ટેટસ અને ઇન્સ્ટાગ્રામ સ્ટોરી માટે સુંદર કુંડળી કાર્ડ જનરેટર
             </p>
           </div>
@@ -31,13 +31,13 @@ export default function SocialStoryCardView({ kundliData, formData, t, lang = 'g
       </div>
 
       {/* Controls & Preview */}
-      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[#e6dfd3] space-y-4">
+      <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setRatio('9:16')}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition ${
-                ratio === '9:16' ? 'glass-button-dark text-[#f4ebd9]' : 'glass-card text-[#2c2825]'
+                ratio === '9:16' ? 'glass-button-dark text-[#f4ebd9]' : 'glass-card text-[var(--text-primary)]'
               }`}
             >
               ૯:૧૬ (Story Status)
@@ -46,7 +46,7 @@ export default function SocialStoryCardView({ kundliData, formData, t, lang = 'g
             <button
               onClick={() => setRatio('1:1')}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition ${
-                ratio === '1:1' ? 'glass-button-dark text-[#f4ebd9]' : 'glass-card text-[#2c2825]'
+                ratio === '1:1' ? 'glass-button-dark text-[#f4ebd9]' : 'glass-card text-[var(--text-primary)]'
               }`}
             >
               ૧:૧ (Square Post)
@@ -55,7 +55,7 @@ export default function SocialStoryCardView({ kundliData, formData, t, lang = 'g
 
           <button
             onClick={() => alert('Story Graphic card saved to downloads!')}
-            className="glass-panel-accent px-4 py-2 rounded-xl text-xs font-bold text-[#b85d19] flex items-center gap-1.5 shadow-xs"
+            className="glass-panel-accent px-4 py-2 rounded-xl text-xs font-bold text-[var(--text-gold)] flex items-center gap-1.5 shadow-xs"
           >
             <Download className="h-3.5 w-3.5" />
             <span>ડાઉનલોડ ગ્રાફિક (Download Card)</span>
@@ -78,7 +78,7 @@ export default function SocialStoryCardView({ kundliData, formData, t, lang = 'g
             </div>
 
             <div className="text-center py-4 border-y border-[#382d24]">
-              <span className="text-[10px] font-serif text-[#e6a86c] block">
+              <span className="text-[10px] font-serif text-[var(--text-gold)] block">
                 દૈનિક ભાગ્યોદય મંત્ર
               </span>
               <h4 className="font-serif text-sm font-bold text-[#4ade80] mt-1">ॐ नमः शिवाय</h4>

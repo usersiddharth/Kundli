@@ -64,13 +64,13 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
     <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
       {/* Dedicated Printable PDF Top Banner (Visible Only in Print/PDF) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
-        <span className="font-serif text-xs font-bold tracking-widest text-[#8c7456]">
+        <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
           || ૐ શ્રી ગણેશાય નમઃ ||
         </span>
-        <h1 className="font-serif text-2xl font-bold text-[#2c2825] mt-1">
+        <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
           વિગતવાર ગુજરાતી પંચાંગ (Gujarati Panchang)
         </h1>
-        <p className="text-xs text-[#544d44]">
+        <p className="text-xs text-[var(--text-secondary)]">
           તારીખ: {activeDateFormatted} • વિક્રમ સંવત {pData.vikramSamvat} • {pData.gujMonthName}
         </p>
       </div>
@@ -447,11 +447,11 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
       </Card>
 
       {/* Printable Astrological Footer & Shloka (Visible Only in Print) */}
-      <div className="hidden print:block print-footer-signature rounded-xl border border-[#d4c8b8] bg-[#fcfbf7] p-3 text-xs text-center">
-        <span className="font-serif font-bold text-[#8c7456]">
+      <div className="hidden print:block print-footer-signature rounded-xl border border-[var(--border-subtle)] bg-white/5 p-3 text-xs text-center">
+        <span className="font-serif font-bold text-[var(--text-gold)]">
           || ૐ સર્વે ભવન્તુ સુખિનઃ સર્વે સન્તુ નિરામયાઃ ||
         </span>
-        <p className="text-[10px] text-[#736a60] mt-0.5">
+        <p className="text-[10px] text-[var(--text-muted)] mt-0.5">
           શ્રી ગુજરાતી પંચાંગ ગણતરી • અમાનત માસ પદ્ધતિ • સ્થાનિક પ્રમાણભૂત સમય (IST)
         </p>
       </div>
