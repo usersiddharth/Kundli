@@ -1,66 +1,23 @@
 import React from 'react';
+import { Compass } from 'lucide-react';
 
-/**
- * CosmicLoader — Spatial UI edition
- * Concentric orbital rings in saffron + indigo, floating on the void.
- */
 export default function CosmicLoader({ message }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[40vh] gap-8 py-16">
-      {/* Orbital ring system */}
-      <div className="relative flex items-center justify-center" style={{ width: 96, height: 96 }}>
-        {/* Outermost ring — slow, wide orbit */}
+    <div className="flex flex-col items-center justify-center min-h-[35vh] gap-4 py-12">
+      {/* Refined Astronomical Emblem Loader */}
+      <div className="relative flex items-center justify-center w-12 h-12">
         <div
-          className="absolute rounded-full border border-transparent animate-spin-slow"
-          style={{
-            width: 96,
-            height: 96,
-            borderTopColor: 'rgba(245,158,11,0.35)',
-            borderRightColor: 'rgba(99,102,241,0.15)',
-          }}
+          className="absolute inset-0 rounded-full border-2 border-[#e8b992]/40 border-t-[#b85d19] animate-spin"
+          style={{ animationDuration: '1.2s' }}
         />
-        {/* Mid ring — medium speed, reverse */}
-        <div
-          className="absolute rounded-full border border-transparent animate-spin-reverse"
-          style={{
-            width: 68,
-            height: 68,
-            borderTopColor: 'rgba(245,158,11,0.55)',
-            borderLeftColor: 'rgba(139,92,246,0.2)',
-            animationDuration: '18s',
-          }}
-        />
-        {/* Inner ring — faster, pure gold */}
-        <div
-          className="absolute rounded-full border border-transparent"
-          style={{
-            width: 44,
-            height: 44,
-            borderTopColor: 'rgba(245,158,11,0.85)',
-            borderRightColor: 'rgba(245,158,11,0.3)',
-            animation: 'spinSlow 8s linear infinite',
-          }}
-        />
-        {/* Core glow dot */}
-        <div
-          className="absolute rounded-full animate-cosmic-pulse"
-          style={{
-            width: 12,
-            height: 12,
-            background: 'radial-gradient(circle, #fbbf24 0%, rgba(245,158,11,0.4) 60%, transparent 100%)',
-          }}
-        />
+        <Compass className="w-5 h-5 text-[#b85d19]" />
       </div>
 
       {/* Message */}
       {message && (
         <p
-          className="text-sm tracking-wide animate-fade-in-up"
-          style={{
-            color: 'var(--text-tertiary)',
-            fontFamily: 'Inter, sans-serif',
-            animationDelay: '0.15s',
-          }}
+          className="text-xs text-[var(--text-secondary)] font-medium animate-fade-in-up"
+          style={{ fontFamily: 'Outfit, sans-serif' }}
         >
           {message}
         </p>

@@ -424,7 +424,9 @@ export default function Matchmaking({ t }) {
           {/* Printable Native Summary (Visible in Print) */}
           <div className="hidden print:grid grid-cols-2 gap-4 border-b border-[#8c7456]/40 pb-4 text-xs">
             <div className="rounded border border-[var(--border-subtle)] p-3">
-              <strong className="text-[var(--text-gold)] block mb-1">કન્યા પક્ષ (Bride Details):</strong>
+              <strong className="text-[var(--text-gold)] block mb-1">
+                કન્યા પક્ષ (Bride Details):
+              </strong>
               <div>
                 નામ: <strong>{brideForm.name}</strong>
               </div>
@@ -433,7 +435,9 @@ export default function Matchmaking({ t }) {
               </div>
             </div>
             <div className="rounded border border-[var(--border-subtle)] p-3">
-              <strong className="text-[var(--text-primary)] block mb-1">વર પક્ષ (Groom Details):</strong>
+              <strong className="text-[var(--text-primary)] block mb-1">
+                વર પક્ષ (Groom Details):
+              </strong>
               <div>
                 નામ: <strong>{groomForm.name}</strong>
               </div>

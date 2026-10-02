@@ -16,18 +16,18 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const primaryTabs = [
-    { id: 'landing',     label: 'મુખ્ય',   icon: Home },
-    { id: 'kundli',      label: 'કુંડળી',  icon: Sparkles },
-    { id: 'panchang',    label: 'પંચાંગ',  icon: Calendar },
-    { id: 'matchmaking', label: 'મિલન',    icon: Heart },
+    { id: 'landing', label: 'મુખ્ય', icon: Home },
+    { id: 'kundli', label: 'કુંડળી', icon: Sparkles },
+    { id: 'panchang', label: 'પંચાંગ', icon: Calendar },
+    { id: 'matchmaking', label: 'મિલન', icon: Heart },
   ];
 
   const moreTools = [
-    { id: 'vedicClock',     label: 'વૈદિક ઘડિયાળ', desc: 'કાળ ચક્ર અને ઘટી-પળ',     icon: Clock },
-    { id: 'calendar',       label: 'કૅલેન્ડર',      desc: 'ગુજ. માસિક પત્રિકા',      icon: CalendarDays },
-    { id: 'numerology',     label: 'અંકશાસ્ત્ર',    desc: 'મૂળાંક અને ભાગ્યાંક',     icon: Hash },
-    { id: 'upcomingEvents', label: 'ગ્રહ ઘટનાઓ',   desc: 'ગ્રહ ગોચર અને ગ્રહણ',     icon: Orbit },
-    { id: 'rashifal',       label: 'રાશિફળ',        desc: 'દૈનિક/સાપ્તાહિક ભવિષ્ય', icon: Sparkles },
+    { id: 'vedicClock', label: 'વૈદિક ઘડિયાળ', desc: 'કાળ ચક્ર અને ઘટી-પળ', icon: Clock },
+    { id: 'calendar', label: 'કૅલેન્ડર', desc: 'ગુજ. માસિક પત્રિકા', icon: CalendarDays },
+    { id: 'numerology', label: 'અંકશાસ્ત્ર', desc: 'મૂળાંક અને ભાગ્યાંક', icon: Hash },
+    { id: 'upcomingEvents', label: 'ગ્રહ ઘટનાઓ', desc: 'ગ્રહ ગોચર અને ગ્રહણ', icon: Orbit },
+    { id: 'rashifal', label: 'રાશિફળ', desc: 'દૈનિક/સાપ્તાહિક ભવિષ્ય', icon: Sparkles },
   ];
 
   const isMoreActive = moreTools.some((t) => t.id === mainSection);
@@ -42,28 +42,33 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
     <>
       {/* ── Drawer Backdrop + Sheet ── */}
       {isDrawerOpen && (
-        <div className="fixed inset-0 z-50 sm:hidden" role="dialog" aria-modal="true" aria-label="More tools">
+        <div
+          className="fixed inset-0 z-50 sm:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="More tools"
+        >
           {/* Backdrop */}
           <div
             className="fixed inset-0 transition-opacity"
-            style={{ background: 'rgba(7,7,13,0.75)', backdropFilter: 'blur(8px)' }}
+            style={{ background: 'rgba(35, 31, 28, 0.45)', backdropFilter: 'blur(4px)' }}
             onClick={() => setIsDrawerOpen(false)}
             aria-hidden="true"
           />
 
           {/* Bottom sheet */}
           <div
-            className="fixed bottom-0 left-0 right-0 overflow-y-auto rounded-t-3xl p-5 z-50 animate-fade-in-up spatial-raised"
+            className="fixed bottom-0 left-0 right-0 overflow-y-auto rounded-t-3xl p-5 z-50 animate-fade-in-up bg-white"
             style={{
               maxHeight: '80vh',
-              borderTop: '1px solid var(--border-gold)',
-              boxShadow: '0 -8px 40px rgba(7,7,13,0.8), 0 0 0 0.5px var(--border-gold)',
+              borderTop: '1px solid var(--border-default)',
+              boxShadow: '0 -8px 30px rgba(35, 31, 28, 0.1)',
             }}
           >
             {/* Sheet handle */}
             <div
               className="mx-auto mb-4 rounded-full"
-              style={{ width: 40, height: 3, background: 'var(--border-default)' }}
+              style={{ width: 40, height: 4, background: 'var(--border-default)' }}
             />
 
             {/* Header */}
@@ -75,7 +80,7 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                 <LayoutGrid style={{ width: 18, height: 18, color: 'var(--gold-500)' }} />
                 <h3
                   className="font-medium text-base"
-                  style={{ fontFamily: 'Syne, sans-serif', color: 'var(--text-primary)' }}
+                  style={{ fontFamily: 'Outfit, sans-serif', color: 'var(--text-primary)' }}
                 >
                   વૈદિક સાધનો
                 </h3>
@@ -102,9 +107,9 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                     onClick={() => handleSelectTab(tool.id)}
                     className="flex items-center gap-3 p-3 rounded-2xl text-left transition-all cursor-pointer"
                     style={{
-                      background: isSelected ? 'rgba(245,158,11,0.08)' : 'rgba(255,255,255,0.03)',
+                      background: isSelected ? 'var(--gold-100)' : '#ffffff',
                       border: `1px solid ${isSelected ? 'var(--border-gold)' : 'var(--border-subtle)'}`,
-                      boxShadow: isSelected ? 'var(--shadow-gold)' : 'none',
+                      boxShadow: isSelected ? 'var(--shadow-sm)' : 'none',
                     }}
                   >
                     <div
@@ -112,9 +117,9 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                       style={{
                         width: 40,
                         height: 40,
-                        background: isSelected ? 'rgba(245,158,11,0.15)' : 'rgba(255,255,255,0.04)',
-                        color: isSelected ? 'var(--gold-400)' : 'var(--text-tertiary)',
-                        border: `1px solid ${isSelected ? 'rgba(245,158,11,0.25)' : 'var(--border-void)'}`,
+                        background: isSelected ? 'var(--gold-200)' : 'var(--depth-2)',
+                        color: isSelected ? 'var(--gold-600)' : 'var(--text-secondary)',
+                        border: `1px solid ${isSelected ? 'var(--border-gold)' : 'var(--border-subtle)'}`,
                       }}
                     >
                       <Icon style={{ width: 18, height: 18 }} />
@@ -122,18 +127,25 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                     <div>
                       <div
                         className="text-sm font-medium leading-tight"
-                        style={{ color: isSelected ? 'var(--gold-300)' : 'var(--text-primary)' }}
+                        style={{ color: isSelected ? 'var(--gold-600)' : 'var(--text-primary)' }}
                       >
                         {tool.label}
                       </div>
-                      <div className="text-xs mt-0.5 leading-tight" style={{ color: 'var(--text-muted)' }}>
+                      <div
+                        className="text-xs mt-0.5 leading-tight"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
                         {tool.desc}
                       </div>
                     </div>
                     {isSelected && (
                       <div
                         className="ml-auto rounded-full shrink-0"
-                        style={{ width: 6, height: 6, background: 'var(--gold-500)', boxShadow: '0 0 8px var(--gold-500)' }}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          background: 'var(--gold-500)',
+                        }}
                       />
                     )}
                   </button>
@@ -149,11 +161,11 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
         aria-label="Mobile portal navigation"
         className="fixed bottom-0 left-0 right-0 z-40 sm:hidden print:hidden"
         style={{
-          background: 'rgba(7,7,13,0.92)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          background: 'rgba(251, 249, 245, 0.95)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
           borderTop: '1px solid var(--border-default)',
-          boxShadow: '0 -4px 24px rgba(7,7,13,0.7)',
+          boxShadow: '0 -2px 12px rgba(35, 31, 28, 0.05)',
           paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
       >
@@ -174,15 +186,15 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                 onClick={() => handleSelectTab(tab.id)}
                 className="flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-xl transition-all min-h-[44px] cursor-pointer"
                 style={{
-                  background: isActive ? 'rgba(245,158,11,0.12)' : 'transparent',
-                  border: isActive ? '1px solid rgba(245,158,11,0.2)' : '1px solid transparent',
-                  color: isActive ? 'var(--gold-400)' : 'var(--text-muted)',
+                  background: isActive ? 'var(--gold-100)' : 'transparent',
+                  border: isActive ? '1px solid var(--border-gold)' : '1px solid transparent',
+                  color: isActive ? 'var(--gold-600)' : 'var(--text-muted)',
                 }}
               >
                 <Icon style={{ width: 18, height: 18 }} />
                 <span
                   className="text-[10px] font-medium tracking-tight leading-none"
-                  style={{ fontFamily: 'Inter, sans-serif' }}
+                  style={{ fontFamily: 'Outfit, sans-serif' }}
                 >
                   {tab.label}
                 </span>
@@ -194,7 +206,6 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                       width: 3,
                       height: 3,
                       background: 'var(--gold-500)',
-                      boxShadow: '0 0 6px var(--gold-500)',
                       marginTop: 1,
                     }}
                   />
@@ -211,15 +222,13 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
             onClick={() => setIsDrawerOpen(true)}
             className="flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-xl transition-all min-h-[44px] cursor-pointer"
             style={{
-              background: isMoreActive ? 'rgba(245,158,11,0.12)' : 'transparent',
-              border: isMoreActive ? '1px solid rgba(245,158,11,0.2)' : '1px solid transparent',
-              color: isMoreActive ? 'var(--gold-400)' : 'var(--text-muted)',
+              background: isMoreActive ? 'var(--gold-100)' : 'transparent',
+              border: isMoreActive ? '1px solid var(--border-gold)' : '1px solid transparent',
+              color: isMoreActive ? 'var(--gold-600)' : 'var(--text-muted)',
             }}
           >
             <LayoutGrid style={{ width: 18, height: 18 }} />
-            <span className="text-[10px] font-medium tracking-tight leading-none">
-              સાધનો
-            </span>
+            <span className="text-[10px] font-medium tracking-tight leading-none">સાધનો</span>
             {isMoreActive && (
               <div
                 className="rounded-full"
@@ -227,7 +236,6 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                   width: 3,
                   height: 3,
                   background: 'var(--gold-500)',
-                  boxShadow: '0 0 6px var(--gold-500)',
                   marginTop: 1,
                 }}
               />

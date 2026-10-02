@@ -16,8 +16,8 @@ export default function VarshphalView({ kundliData, birthDate, t, lang }) {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Sun className="h-5 w-5 text-[var(--text-gold)]" /> Tajik Varshphal (વાર્ષિક વર્ષફળ - Solar
-            Return Annual Horoscope)
+            <Sun className="h-5 w-5 text-[var(--text-gold)]" /> Tajik Varshphal (વાર્ષિક વર્ષફળ -
+            Solar Return Annual Horoscope)
           </h2>
           <p className="text-xs text-[var(--text-muted)]">
             Annual progressed horoscope based on solar return, Muntha rashi, and Year Lord
@@ -88,7 +88,8 @@ export default function VarshphalView({ kundliData, birthDate, t, lang }) {
       >
         <div className="flex justify-between items-center">
           <span className="font-serif font-bold text-sm text-[var(--text-primary)] flex items-center gap-1.5">
-            <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> Muntha Analysis for Year {targetYear}
+            <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> Muntha Analysis for Year{' '}
+            {targetYear}
           </span>
           <span className="font-semibold text-xs text-[var(--text-primary)]">
             {vData.munthaEvaluation.nature}

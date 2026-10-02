@@ -28,7 +28,7 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
   const microReading = generateSookshmaPranaReading(currentMicro, lang);
 
   const now = new Date();
-  const nowStr = now.toISOString().split('T')[0];
+  const nowMs = now.getTime();
 
   const filteredDashaList = dashaList.filter(
     (d) =>
@@ -186,7 +186,10 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
           <div className="rounded-xl glass-panel-accent p-5 shadow-xs space-y-4 border border-[#b85d19]/30">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)]/80 pb-3">
               <div className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-[var(--text-gold)] animate-pulse" aria-hidden="true" />
+                <Sparkles
+                  className="h-5 w-5 text-[var(--text-gold)] animate-pulse"
+                  aria-hidden="true"
+                />
                 <h3 className="font-serif text-base font-bold text-[var(--text-primary)]">
                   આ ક્ષણે સક્રિય ૫-સ્તરીય દશા શૃંખલા (Active 5-Tier Dasha Hierarchy)
                 </h3>
@@ -303,12 +306,15 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                   </span>
                 </div>
                 <h4 className="font-serif text-base font-bold text-[#802020] flex items-center gap-1">
-                  <Zap className="h-3.5 w-3.5 text-[var(--text-gold)] animate-pulse" aria-hidden="true" />
+                  <Zap
+                    className="h-3.5 w-3.5 text-[var(--text-gold)] animate-pulse"
+                    aria-hidden="true"
+                  />
                   {t[currentMicro.pranaDasha.lord] || currentMicro.pranaDasha.lord}
                 </h4>
                 <div className="text-[9px] font-mono text-[var(--text-secondary)] truncate">
-                  {currentMicro.pranaDasha.startDateFormatted.split(' ')[1]} ➔{' '}
-                  {currentMicro.pranaDasha.endDateFormatted.split(' ')[1]}
+                  {currentMicro.pranaDasha.startDateFormatted.split(' ').slice(1).join(' ')} ➔{' '}
+                  {currentMicro.pranaDasha.endDateFormatted.split(' ').slice(1).join(' ')}
                 </div>
                 <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden mt-2">
                   <div
@@ -348,7 +354,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] text-[var(--text-muted)]">#{sIdx + 1}</span>
+                        <span className="font-mono text-[10px] text-[var(--text-muted)]">
+                          #{sIdx + 1}
+                        </span>
                         <span className="font-medium">{t[sd.lord] || sd.lord}</span>
                         {isCurrent && (
                           <span className="rounded-full glass-badge-warning px-1.5 py-0.2 text-[8px] font-bold">
@@ -361,7 +369,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                         <span className="text-[var(--text-secondary)]">
                           {sd.startDateFormatted} ➔ {sd.endDateFormatted}
                         </span>
-                        <span className="ml-2 text-[var(--text-muted)]">({sd.durationDays} દિવસ)</span>
+                        <span className="ml-2 text-[var(--text-muted)]">
+                          ({sd.durationDays} દિવસ)
+                        </span>
                       </div>
                     </div>
                   );
@@ -392,7 +402,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] text-[var(--text-muted)]">#{pIdx + 1}</span>
+                        <span className="font-mono text-[10px] text-[var(--text-muted)]">
+                          #{pIdx + 1}
+                        </span>
                         <span className="font-medium">{t[pr.lord] || pr.lord}</span>
                         {isCurrent && (
                           <span className="rounded-full bg-[#802020] text-white px-1.5 py-0.2 text-[8px] font-bold animate-pulse">
@@ -455,7 +467,7 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
 
           <div className="space-y-3">
             {filteredDashaList.map((d, idx) => {
-              const isActive = nowStr >= d.startDate && nowStr <= d.endDate;
+              const isActive = nowMs >= d.startMs && nowMs <= d.endMs;
               const isExpanded = expandedIndex === idx;
 
               return (
@@ -491,7 +503,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                       <span>
                         {d.startDate} ➔ {d.endDate}
                       </span>
-                      <span className="font-semibold text-[var(--text-primary)]">{d.years} Yrs</span>
+                      <span className="font-semibold text-[var(--text-primary)]">
+                        {d.years} Yrs
+                      </span>
                     </div>
                   </button>
 
@@ -503,7 +517,7 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
                       </h4>
                       <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
                         {d.antardashas.map((sub, sIdx) => {
-                          const isSubActive = nowStr >= sub.startDate && nowStr <= sub.endDate;
+                          const isSubActive = nowMs >= sub.startMs && nowMs <= sub.endMs;
                           return (
                             <div
                               key={sIdx}
@@ -550,7 +564,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 text-xs text-[var(--text-primary)] leading-relaxed">
             <div className="rounded-xl glass-card p-4 space-y-2 border-l-4 border-l-[#b85d19]">
-              <h4 className="font-bold text-sm text-[var(--text-gold)]">સૂક્ષ્મ દશા (Sookshma Dasa)</h4>
+              <h4 className="font-bold text-sm text-[var(--text-gold)]">
+                સૂક્ષ્મ દશા (Sookshma Dasa)
+              </h4>
               <p className="text-[var(--text-secondary)]">
                 સૂક્ષ્મ દશાનો સમયગાળો <strong>૬.૫ કલાકથી લઈને ૩૩ દિવસ</strong> સુધીનો હોય છે.
                 પ્રત્યંતર્દશાના સમયગાળાને સંબંધિત ગ્રહના દશા વર્ષ વડે ગુણીને ૧૨૦ વડે ભાગવાથી સૂક્ષ્મ
@@ -608,7 +624,9 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
               <div className="grid grid-cols-4 p-2 font-sans bg-white/5">
                 <span className="font-bold font-mono text-[var(--text-gold)]">Level 4</span>
                 <span className="text-[var(--text-gold)] font-bold">સૂક્ષ્મ દશા (Sookshma)</span>
-                <span className="font-mono font-bold text-[var(--text-gold)]">૬.૫ કલાક થી ૩૩ દિવસ</span>
+                <span className="font-mono font-bold text-[var(--text-gold)]">
+                  ૬.૫ કલાક થી ૩૩ દિવસ
+                </span>
                 <span className="font-sans">થોડા દિવસોની મહત્વની ઘટનાઓ</span>
               </div>
               <div className="grid grid-cols-4 p-2 font-sans bg-[#fcf3f3]">

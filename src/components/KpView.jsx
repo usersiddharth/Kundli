@@ -14,8 +14,8 @@ export default function KpView({ kundliData, t }) {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Key className="h-5 w-5 text-[var(--text-gold)]" /> Krishnamurti Paddhati (KP System / કેપી
-            જ્યોતિષ)
+            <Key className="h-5 w-5 text-[var(--text-gold)]" /> Krishnamurti Paddhati (KP System /
+            કેપી જ્યોતિષ)
           </h2>
           <p className="text-xs text-[var(--text-muted)]">
             Exact Cuspal Sub-Lords, Placidus House Divisions, and 4-Level Planetary Significators
@@ -47,7 +47,9 @@ export default function KpView({ kundliData, t }) {
                   <tr key={c.houseNum} className="hover:bg-white/10 transition">
                     <td className="p-3 font-bold text-[var(--text-primary)]">Cusp {c.houseNum}</td>
                     <td className="p-3 font-mono font-medium">{dms.formatted}</td>
-                    <td className="p-3 font-medium text-[var(--text-gold)]">{t[c.sign] || c.sign}</td>
+                    <td className="p-3 font-medium text-[var(--text-gold)]">
+                      {t[c.sign] || c.sign}
+                    </td>
                     <td className="p-3 font-semibold">{t[c.signLord] || c.signLord}</td>
                     <td className="p-3">{t[c.starLord] || c.starLord}</td>
                     <td className="p-3">
@@ -84,10 +86,14 @@ export default function KpView({ kundliData, t }) {
             <tbody className="divide-y divide-[var(--border-subtle)]">
               {Object.values(planetKp).map((pk) => (
                 <tr key={pk.name} className="hover:bg-white/10 transition">
-                  <td className="p-3 font-semibold text-[var(--text-primary)]">{t[pk.name] || pk.name}</td>
+                  <td className="p-3 font-semibold text-[var(--text-primary)]">
+                    {t[pk.name] || pk.name}
+                  </td>
                   <td className="p-3 font-mono font-bold">H{pk.houseNum}</td>
                   <td className="p-3">{t[pk.starLord] || pk.starLord}</td>
-                  <td className="p-3 font-bold text-[var(--text-gold)]">{t[pk.subLord] || pk.subLord}</td>
+                  <td className="p-3 font-bold text-[var(--text-gold)]">
+                    {t[pk.subLord] || pk.subLord}
+                  </td>
                   <td className="p-3 text-[var(--text-secondary)]">{pk.significations.levelA}</td>
                   <td className="p-3 text-[var(--text-secondary)]">{pk.significations.levelB}</td>
                   <td className="p-3 text-[var(--text-secondary)]">{pk.significations.levelC}</td>

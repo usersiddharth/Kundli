@@ -14,25 +14,28 @@ import {
   CheckCircle2,
   X,
   RotateCcw,
+  FolderHeart,
 } from 'lucide-react';
+import {
+  getSavedProfiles,
+  saveProfile,
+  deleteProfile,
+  VAULT_CHANGE_EVENT,
+} from '../engine/profileVault.js';
 
-export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
+export default function ProfileForm({ formData, setFormData, onSubmit, t, onOpenVault }) {
   const [searchQuery, setSearchQuery] = useState(formData.city || '');
   const [isOpen, setIsOpen] = useState(false);
   const [savedProfiles, setSavedProfiles] = useState([]);
   const [savedMsg, setSavedMsg] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Load saved profiles from localStorage
+  // Load saved profiles from vault
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem('kundli_saved_profiles');
-      if (stored) {
-        setSavedProfiles(JSON.parse(stored));
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    const sync = () => setSavedProfiles(getSavedProfiles());
+    sync();
+    window.addEventListener(VAULT_CHANGE_EVENT, sync);
+    return () => window.removeEventListener(VAULT_CHANGE_EVENT, sync);
   }, []);
 
   // Sync searchQuery when formData.city changes
@@ -101,19 +104,14 @@ export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
 
   const handleSaveProfile = () => {
     if (!formData.name) return;
-    const newProfile = { ...formData, id: Date.now() };
-    const updated = [newProfile, ...savedProfiles.filter((p) => p.name !== formData.name)];
-    setSavedProfiles(updated);
-    localStorage.setItem('kundli_saved_profiles', JSON.stringify(updated));
+    saveProfile(formData);
     setSavedMsg(true);
     setTimeout(() => setSavedMsg(false), 3000);
   };
 
   const handleDeleteProfile = (id, e) => {
     e.stopPropagation();
-    const updated = savedProfiles.filter((p) => p.id !== id);
-    setSavedProfiles(updated);
-    localStorage.setItem('kundli_saved_profiles', JSON.stringify(updated));
+    deleteProfile(id);
   };
 
   const handleClearForm = () => {
@@ -467,6 +465,22 @@ export default function ProfileForm({ formData, setFormData, onSubmit, t }) {
             <Bookmark className="h-4 w-4 text-[var(--text-gold)]" aria-hidden="true" />
             <span>{t.saveProfile}</span>
           </Button>
+
+          {onOpenVault && (
+            <Button
+              type="button"
+              onPress={onOpenVault}
+              className="flex items-center gap-1.5 rounded-xl glass-card px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
+            >
+              <FolderHeart className="h-4 w-4 text-[var(--text-gold)]" aria-hidden="true" />
+              <span>{t.vault || 'Vault'}</span>
+              {savedProfiles.length > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-500/20 text-amber-300 font-mono font-semibold">
+                  {savedProfiles.length}
+                </span>
+              )}
+            </Button>
+          )}
 
           <Button
             type="button"

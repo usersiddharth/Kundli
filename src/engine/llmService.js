@@ -49,10 +49,44 @@ export function saveStoredConfig(config) {
     localStorage.setItem(STORAGE_KEYS.OPENAI_BASE_URL, config.openAiBaseUrl.trim());
 }
 
+let cachedServerStatus = null;
+let lastServerCheck = 0;
+
+export async function checkServerProxy(force = false) {
+  const now = Date.now();
+  if (!force && cachedServerStatus && now - lastServerCheck < 30000) {
+    return cachedServerStatus;
+  }
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 1500);
+    const res = await fetch('/api/health', { signal: controller.signal });
+    clearTimeout(timer);
+    if (res.ok) {
+      const data = await res.json();
+      cachedServerStatus = {
+        available: true,
+        providers: data.providers || {},
+      };
+      lastServerCheck = now;
+      return cachedServerStatus;
+    }
+  } catch {
+    // Server proxy is not running or unreachable
+  }
+  cachedServerStatus = { available: false, providers: { gemini: false, openai: false } };
+  lastServerCheck = now;
+  return cachedServerStatus;
+}
+
 export function isAiConfigured() {
   const cfg = getStoredConfig();
-  if (cfg.provider === 'gemini') return Boolean(cfg.geminiKey);
-  if (cfg.provider === 'openai') return Boolean(cfg.openAiKey);
+  if (cfg.provider === 'gemini' && cfg.geminiKey) return true;
+  if (cfg.provider === 'openai' && cfg.openAiKey) return true;
+  if (cachedServerStatus?.available) {
+    if (cfg.provider === 'gemini' && cachedServerStatus.providers?.gemini) return true;
+    if (cfg.provider === 'openai' && cachedServerStatus.providers?.openai) return true;
+  }
   return false;
 }
 
@@ -308,7 +342,73 @@ async function streamOpenAIChat({
 }
 
 /**
- * Universal Stream Caller
+ * Stream consultation response through the local secure AI proxy server
+ */
+async function streamServerChat({
+  provider,
+  model,
+  systemPrompt,
+  chartContext,
+  history = [],
+  userMessage,
+  onChunk,
+  signal,
+}) {
+  const res = await fetch('/api/chat/stream', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      provider,
+      model,
+      systemPrompt,
+      chartContext,
+      history,
+      userMessage,
+    }),
+    signal,
+  });
+
+  if (!res.ok) {
+    const errData = await res.json().catch(() => ({}));
+    throw new Error(errData.error || `Server proxy error (HTTP ${res.status})`);
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let accumulatedText = '';
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() || '';
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed.startsWith('data:')) continue;
+      const jsonStr = trimmed.replace(/^data:\s*/, '');
+      if (!jsonStr || jsonStr === '[DONE]') continue;
+
+      try {
+        const payload = JSON.parse(jsonStr);
+        if (payload.text) {
+          accumulatedText += payload.text;
+          onChunk(accumulatedText);
+        }
+      } catch {
+        // Ignore partial chunk parsing errors
+      }
+    }
+  }
+
+  return accumulatedText;
+}
+
+/**
+ * Universal Stream Caller with Server Proxy & Client Fallback
  */
 export async function streamAstrologyConsultation({
   systemPrompt,
@@ -319,11 +419,31 @@ export async function streamAstrologyConsultation({
   signal,
 }) {
   const config = getStoredConfig();
+  const serverStatus = await checkServerProxy();
+
+  // Try server proxy first if configured with keys on backend
+  if (serverStatus.available && serverStatus.providers?.[config.provider]) {
+    try {
+      return await streamServerChat({
+        provider: config.provider,
+        model: config.provider === 'gemini' ? config.geminiModel : config.openAiModel,
+        systemPrompt,
+        chartContext,
+        history,
+        userMessage,
+        onChunk,
+        signal,
+      });
+    } catch (err) {
+      console.warn('Server proxy streaming failed, attempting client fallback:', err.message);
+      // Fall through to client-side fallback
+    }
+  }
 
   if (config.provider === 'gemini') {
     if (!config.geminiKey) {
       throw new Error(
-        'Google Gemini API key is not configured. Please add your key in AI Settings.'
+        'Google Gemini API key is not configured on server or client. Please configure .env or add your key in AI Settings.'
       );
     }
     return streamGeminiChat({
@@ -340,7 +460,9 @@ export async function streamAstrologyConsultation({
 
   if (config.provider === 'openai') {
     if (!config.openAiKey) {
-      throw new Error('OpenAI API key is not configured. Please add your key in AI Settings.');
+      throw new Error(
+        'OpenAI API key is not configured on server or client. Please configure .env or add your key in AI Settings.'
+      );
     }
     return streamOpenAIChat({
       apiKey: config.openAiKey,

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Tooltip } from '@heroui/react';
 import {
-  Compass,
+  Sun,
   Home,
   Sparkles,
   Calendar,
@@ -14,10 +14,18 @@ import {
   LayoutGrid,
   Globe,
   Printer,
-  X,
+  Bookmark,
 } from 'lucide-react';
 
-export default function Header({ lang, setLang, t, mainSection, setMainSection }) {
+export default function Header({
+  lang,
+  setLang,
+  t,
+  mainSection,
+  setMainSection,
+  onOpenVault,
+  savedProfilesCount = 0,
+}) {
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const toolsMenuRef = useRef(null);
 
@@ -58,31 +66,56 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
     {
       id: 'vedicClock',
       label: lang === 'gu' ? 'વૈદિક ઘડિયાળ' : lang === 'hi' ? 'वैदिक घड़ी' : 'Vedic clock',
-      desc: lang === 'gu' ? 'કાળ ચક્ર અને ઘટી-પળ' : lang === 'hi' ? 'काल चक्र व घटी-पल' : 'Kaal chakra & real-time ghatis',
+      desc:
+        lang === 'gu'
+          ? 'કાળ ચક્ર અને ઘટી-પળ'
+          : lang === 'hi'
+            ? 'काल चक्र व घटी-पल'
+            : 'Kaal chakra & real-time ghatis',
       icon: Clock,
     },
     {
       id: 'calendar',
       label: lang === 'gu' ? 'ગુજ. કૅલેન્ડર' : lang === 'hi' ? 'कैलेंडर' : 'Gujarati calendar',
-      desc: lang === 'gu' ? 'તહેવારો અને તિથિ પત્રિકા' : lang === 'hi' ? 'त्योहार एवं तिथि पत्रिका' : 'Vikram Samvat monthly view',
+      desc:
+        lang === 'gu'
+          ? 'તહેવારો અને તિથિ પત્રિકા'
+          : lang === 'hi'
+            ? 'त्योहार एवं तिथि पत्रिका'
+            : 'Vikram Samvat monthly view',
       icon: CalendarDays,
     },
     {
       id: 'numerology',
       label: lang === 'gu' ? 'અંકશાસ્ત્ર' : lang === 'hi' ? 'अंकशास्त्र' : 'Numerology',
-      desc: lang === 'gu' ? 'મૂળાંક, ભાગ્યાંક અને નામ બળ' : lang === 'hi' ? 'मूलांक व भाग्यांक' : 'Life path, destiny & name grid',
+      desc:
+        lang === 'gu'
+          ? 'મૂળાંક, ભાગ્યાંક અને નામ બળ'
+          : lang === 'hi'
+            ? 'मूलांक व भाग्यांक'
+            : 'Life path, destiny & name grid',
       icon: Hash,
     },
     {
       id: 'upcomingEvents',
       label: lang === 'gu' ? 'ગ્રહ ઘટનાઓ' : lang === 'hi' ? 'ग्रह घटनाएं' : 'Transits',
-      desc: lang === 'gu' ? 'ગ્રહ ગોચર અને ગ્રહણ' : lang === 'hi' ? 'ग्रह गोचर एवं ग्रहण' : 'Upcoming gochar & eclipses',
+      desc:
+        lang === 'gu'
+          ? 'ગ્રહ ગોચર અને ગ્રહણ'
+          : lang === 'hi'
+            ? 'ग्रह गोचर एवं ग्रहण'
+            : 'Upcoming gochar & eclipses',
       icon: Orbit,
     },
     {
       id: 'rashifal',
       label: lang === 'gu' ? 'રાશિફળ' : lang === 'hi' ? 'राशिफल' : 'Rashifal',
-      desc: lang === 'gu' ? 'દૈનિક, સાપ્તાહિક રાશિફળ' : lang === 'hi' ? 'दैनिक राशिफल' : 'Daily, weekly & annual forecast',
+      desc:
+        lang === 'gu'
+          ? 'દૈનિક, સાપ્તાહિક રાશિફળ'
+          : lang === 'hi'
+            ? 'दैनिक राशिफल'
+            : 'Daily, weekly & annual forecast',
       icon: Sparkles,
     },
   ];
@@ -92,38 +125,20 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
 
   return (
     <header className="sticky top-3 z-50 px-3 sm:px-6 pointer-events-none print:hidden">
-      <div
-        className="pointer-events-auto mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-2xl px-3.5 py-2.5 sm:px-5 transition-all spatial-header"
-        style={{ boxShadow: '0 8px 32px oklch(0 0 0 / 0.6), inset 0 1px 0 oklch(1 0 0 / 0.06)' }}
-      >
-
+      <div className="pointer-events-auto mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-2xl px-3.5 py-2.5 sm:px-5 transition-all spatial-header">
         {/* ── Brand Mark ── */}
         <button
           type="button"
-          onClick={() => { setMainSection('landing'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          onClick={() => {
+            setMainSection('landing');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
           className="flex items-center gap-3 text-left focus-visible:outline-hidden group cursor-pointer shrink-0"
           aria-label="Return to home"
         >
-          {/* Logo ring */}
-          <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center shrink-0">
-            {/* Outer glow ring */}
-            <div
-              className="absolute inset-0 rounded-xl animate-cosmic-pulse"
-              style={{
-                background: 'transparent',
-                border: '1px solid rgba(245,158,11,0.3)',
-                boxShadow: '0 0 16px rgba(245,158,11,0.15)',
-              }}
-            />
-            {/* Inner fill */}
-            <div
-              className="absolute inset-0.5 rounded-[10px]"
-              style={{ background: 'linear-gradient(135deg, #1a1a34 0%, #10101e 100%)' }}
-            />
-            <Compass
-              className="relative h-4.5 w-4.5 animate-spin-slow"
-              style={{ color: '#fbbf24', width: 18, height: 18 }}
-            />
+          {/* Logo emblem */}
+          <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center shrink-0 rounded-xl bg-[#faeee2] border border-[#e8b992]/70 text-[#b85d19] shadow-xs transition-colors group-hover:bg-[#f3d7bf]/80">
+            <Compass className="h-5 w-5" />
           </div>
 
           {/* Title text */}
@@ -131,17 +146,22 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
             <div className="flex items-center gap-2">
               <h1
                 className="text-sm font-medium tracking-tight leading-tight transition-colors"
-                style={{ fontFamily: 'Syne, sans-serif', color: 'var(--text-primary)', letterSpacing: '-0.025em' }}
+                style={{
+                  fontFamily: 'Outfit, sans-serif',
+                  color: 'var(--text-primary)',
+                  letterSpacing: '-0.02em',
+                }}
               >
                 {t.appTitle}
               </h1>
-              <span
-                className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-mono spatial-badge-gold"
-              >
+              <span className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-mono spatial-badge-gold">
                 Vedic
               </span>
             </div>
-            <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: 'var(--text-muted)' }}>
+            <p
+              className="text-[10.5px] leading-tight mt-0.5"
+              style={{ color: 'var(--text-muted)' }}
+            >
               {t.appSubtitle}
             </p>
           </div>
@@ -163,7 +183,11 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
                   type="button"
                   role="tab"
                   aria-selected={isActive}
-                  onClick={() => { setMainSection(item.id); setIsToolsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  onClick={() => {
+                    setMainSection(item.id);
+                    setIsToolsOpen(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                   className={`relative flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all focus-visible:outline-hidden cursor-pointer ${
                     isActive ? 'spatial-btn-primary' : 'spatial-btn-ghost'
                   }`}
@@ -190,7 +214,11 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
                 <span>
                   {isSecondaryActive
                     ? activeSecondaryItem?.label
-                    : lang === 'gu' ? 'સાધનો' : lang === 'hi' ? 'साधन' : 'Tools'}
+                    : lang === 'gu'
+                      ? 'સાધનો'
+                      : lang === 'hi'
+                        ? 'साधन'
+                        : 'Tools'}
                 </span>
                 <ChevronDown
                   style={{ width: 11, height: 11 }}
@@ -202,14 +230,16 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
               {isToolsOpen && (
                 <div
                   className="absolute right-0 mt-2 w-72 rounded-2xl p-2 z-50 animate-scale-in spatial-raised"
-                  style={{ border: '1px solid var(--border-gold)', boxShadow: 'var(--shadow-gold)' }}
+                  style={{
+                    border: '1px solid var(--border-gold)',
+                    boxShadow: 'var(--shadow-gold)',
+                  }}
                 >
                   <div
-                    className="text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1.5 mb-1 pb-2"
+                    className="text-[11px] font-medium px-2.5 py-1.5 mb-1 pb-2"
                     style={{
                       color: 'var(--text-muted)',
                       borderBottom: '1px solid var(--border-subtle)',
-                      fontFamily: 'JetBrains Mono, monospace',
                     }}
                   >
                     {lang === 'gu' ? 'વૈદિક સાધનો' : lang === 'hi' ? 'वैदिक साधन' : 'Vedic tools'}
@@ -221,9 +251,13 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
                       <button
                         key={tool.id}
                         type="button"
-                        onClick={() => { setMainSection(tool.id); setIsToolsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => {
+                          setMainSection(tool.id);
+                          setIsToolsOpen(false);
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         className={`w-full flex items-start gap-3 px-2.5 py-2.5 rounded-xl text-left transition-all cursor-pointer ${
-                          isSelected ? 'spatial-card-gold' : 'spatial-btn-ghost hover:spatial-btn-ghost'
+                          isSelected ? 'spatial-card-gold' : 'spatial-btn-ghost hover:bg-[#f5f0e6]'
                         }`}
                         style={isSelected ? { border: '1px solid var(--border-gold)' } : {}}
                       >
@@ -232,11 +266,9 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
                           style={{
                             width: 30,
                             height: 30,
-                            background: isSelected
-                              ? 'rgba(245,158,11,0.15)'
-                              : 'rgba(255,255,255,0.04)',
-                            color: isSelected ? 'var(--gold-400)' : 'var(--text-tertiary)',
-                            border: `1px solid ${isSelected ? 'rgba(245,158,11,0.25)' : 'var(--border-void)'}`,
+                            background: isSelected ? 'var(--gold-100)' : 'var(--depth-2)',
+                            color: isSelected ? 'var(--gold-600)' : 'var(--text-tertiary)',
+                            border: `1px solid ${isSelected ? 'var(--border-gold)' : 'var(--border-subtle)'}`,
                           }}
                         >
                           <ToolIcon style={{ width: 15, height: 15 }} />
@@ -244,11 +276,16 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
                         <div>
                           <div
                             className="text-xs font-medium leading-tight"
-                            style={{ color: isSelected ? 'var(--gold-300)' : 'var(--text-primary)' }}
+                            style={{
+                              color: isSelected ? 'var(--gold-600)' : 'var(--text-primary)',
+                            }}
                           >
                             {tool.label}
                           </div>
-                          <div className="text-[10.5px] leading-tight mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                          <div
+                            className="text-[10.5px] leading-tight mt-0.5"
+                            style={{ color: 'var(--text-muted)' }}
+                          >
                             {tool.desc}
                           </div>
                         </div>
@@ -261,8 +298,54 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
           </div>
         </nav>
 
-        {/* ── Right: Language switcher + Print ── */}
+        {/* ── Right: Vault + Print + Language switcher ── */}
         <div className="flex items-center gap-2 shrink-0">
+          {/* Kundli Vault */}
+          <Tooltip>
+            <Tooltip.Trigger>
+              <button
+                type="button"
+                onClick={onOpenVault}
+                aria-label={
+                  lang === 'gu'
+                    ? 'કુંડળી વોલ્ટ'
+                    : lang === 'hi'
+                      ? 'कुंडली वॉल्ट'
+                      : 'Saved charts vault'
+                }
+                className="flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-medium transition-all print:hidden cursor-pointer spatial-btn-ghost"
+                style={{ border: '1px solid var(--border-subtle)' }}
+              >
+                <Bookmark style={{ width: 14, height: 14, color: 'var(--gold-500)' }} />
+                <span className="hidden sm:inline" style={{ color: 'var(--text-secondary)' }}>
+                  {lang === 'gu' ? 'વોલ્ટ' : lang === 'hi' ? 'वॉल्ट' : 'Vault'}
+                </span>
+                {savedProfilesCount > 0 && (
+                  <span
+                    className="px-1.5 py-0.5 text-[10px] rounded-full font-mono font-semibold leading-none"
+                    style={{
+                      backgroundColor: 'rgba(212,160,23,0.18)',
+                      color: 'var(--gold-400)',
+                      border: '1px solid rgba(212,160,23,0.3)',
+                    }}
+                  >
+                    {savedProfilesCount}
+                  </span>
+                )}
+              </button>
+            </Tooltip.Trigger>
+            <Tooltip.Content
+              className="rounded-lg text-xs px-2 py-1 shadow-lg"
+              style={{
+                background: 'var(--depth-4)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--border-default)',
+              }}
+            >
+              Open saved birth charts & profiles
+            </Tooltip.Content>
+          </Tooltip>
+
           {/* Print */}
           <Tooltip>
             <Tooltip.Trigger>
@@ -279,7 +362,14 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
                 </span>
               </button>
             </Tooltip.Trigger>
-            <Tooltip.Content className="rounded-lg text-xs px-2 py-1 shadow-lg" style={{ background: 'var(--depth-4)', color: 'var(--text-primary)', border: '1px solid var(--border-default)' }}>
+            <Tooltip.Content
+              className="rounded-lg text-xs px-2 py-1 shadow-lg"
+              style={{
+                background: 'var(--depth-4)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--border-default)',
+              }}
+            >
               Print or export PDF report
             </Tooltip.Content>
           </Tooltip>
@@ -290,7 +380,16 @@ export default function Header({ lang, setLang, t, mainSection, setMainSection }
             aria-label="Language selection"
             className="flex items-center rounded-xl p-1 gap-0.5 spatial-pill"
           >
-            <Globe style={{ width: 12, height: 12, color: 'var(--text-muted)', marginLeft: 4, marginRight: 2 }} aria-hidden="true" />
+            <Globe
+              style={{
+                width: 12,
+                height: 12,
+                color: 'var(--text-muted)',
+                marginLeft: 4,
+                marginRight: 2,
+              }}
+              aria-hidden="true"
+            />
             {[
               { code: 'gu', label: 'ગુ' },
               { code: 'hi', label: 'हि' },

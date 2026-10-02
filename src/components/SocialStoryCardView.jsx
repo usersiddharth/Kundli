@@ -37,7 +37,9 @@ export default function SocialStoryCardView({ kundliData, formData, t, lang = 'g
             <button
               onClick={() => setRatio('9:16')}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition ${
-                ratio === '9:16' ? 'glass-button-dark text-[#f4ebd9]' : 'glass-card text-[var(--text-primary)]'
+                ratio === '9:16'
+                  ? 'glass-button-dark text-[#f4ebd9]'
+                  : 'glass-card text-[var(--text-primary)]'
               }`}
             >
               ૯:૧૬ (Story Status)
@@ -46,7 +48,9 @@ export default function SocialStoryCardView({ kundliData, formData, t, lang = 'g
             <button
               onClick={() => setRatio('1:1')}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition ${
-                ratio === '1:1' ? 'glass-button-dark text-[#f4ebd9]' : 'glass-card text-[var(--text-primary)]'
+                ratio === '1:1'
+                  ? 'glass-button-dark text-[#f4ebd9]'
+                  : 'glass-card text-[var(--text-primary)]'
               }`}
             >
               ૧:૧ (Square Post)

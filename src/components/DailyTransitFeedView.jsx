@@ -42,7 +42,9 @@ export default function DailyTransitFeedView({ kundliData, t, lang = 'gu' }) {
               </span>
             </div>
 
-            <p className="text-xs text-[var(--text-secondary)]">{item.advice[lang] || item.advice.gu}</p>
+            <p className="text-xs text-[var(--text-secondary)]">
+              {item.advice[lang] || item.advice.gu}
+            </p>
           </div>
         ))}
       </div>

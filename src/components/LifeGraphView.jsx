@@ -89,7 +89,10 @@ export default function LifeGraphView({ kundliData, birthDate = new Date(), t, l
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {milestones.map((m, idx) => (
-            <div key={idx} className="glass-card p-4 rounded-xl space-y-2 border border-[var(--border-subtle)]">
+            <div
+              key={idx}
+              className="glass-card p-4 rounded-xl space-y-2 border border-[var(--border-subtle)]"
+            >
               <span className="font-mono text-xs font-bold text-[var(--text-gold)]">
                 ઉંમર {m.age} વર્ષ ({m.year})
               </span>

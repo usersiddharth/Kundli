@@ -85,7 +85,7 @@ export default function ChartSVG({ kundliData, t, lang }) {
       <div className="flex items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-3.5">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <Compass className="h-5 w-5 text-[var(--text-gold)] shrink-0 animate-spin-slow" />
+            <Compass className="h-5 w-5 text-[var(--text-gold)] shrink-0" />
             <h2 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif truncate">
               {chartTitle}
             </h2>
@@ -203,7 +203,7 @@ export default function ChartSVG({ kundliData, t, lang }) {
           <svg
             ref={svgRef}
             viewBox="0 0 400 400"
-            className="h-88 w-88 max-w-full rounded-2xl border-2 border-[var(--border-gold)] bg-[var(--bg-chart)] shadow-xl select-none"
+            className="h-88 w-88 max-w-full rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-chart)] shadow-sm select-none"
           >
             {/* Background Sacred Geometric Accents */}
             <circle

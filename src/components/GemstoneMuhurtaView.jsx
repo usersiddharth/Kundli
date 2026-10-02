@@ -49,7 +49,9 @@ export default function GemstoneMuhurtaView({ kundliData, t, lang = 'gu' }) {
           </div>
           <div>
             <span className="text-[var(--text-muted)] block">મંત્ર:</span>
-            <strong className="font-serif text-[var(--text-gold)] text-[11px]">{details.mantra}</strong>
+            <strong className="font-serif text-[var(--text-gold)] text-[11px]">
+              {details.mantra}
+            </strong>
           </div>
         </div>
       </div>

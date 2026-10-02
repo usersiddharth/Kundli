@@ -43,7 +43,9 @@ export default function KalsarpaDeepView({ kundliData, t, lang = 'gu' }) {
           {activeType.name[lang] || activeType.name.gu}
         </h3>
 
-        <p className="text-xs text-[var(--text-secondary)]">{activeType.desc[lang] || activeType.desc.gu}</p>
+        <p className="text-xs text-[var(--text-secondary)]">
+          {activeType.desc[lang] || activeType.desc.gu}
+        </p>
       </div>
     </div>
   );

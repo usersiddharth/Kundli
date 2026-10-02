@@ -123,7 +123,9 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
           <span className="text-xs font-serif text-[var(--text-muted)] uppercase block">
             સક્રિય મંત્ર (Active Sacred Text)
           </span>
-          <h3 className="font-serif text-xl font-bold text-[var(--text-gold)]">{activeMantraObj.text}</h3>
+          <h3 className="font-serif text-xl font-bold text-[var(--text-gold)]">
+            {activeMantraObj.text}
+          </h3>
         </div>
       </div>
 
@@ -131,8 +133,12 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
       <div className="glass-panel-accent rounded-2xl p-8 shadow-sm border border-[#b85d19]/40 flex flex-col items-center justify-center text-center space-y-4">
         <div className="flex items-center space-x-6">
           <div>
-            <span className="text-xs text-[var(--text-muted)] font-serif uppercase block">વર્તમાન મણકો</span>
-            <span className="font-mono text-5xl font-bold text-[var(--text-gold)]">{beadCount}</span>
+            <span className="text-xs text-[var(--text-muted)] font-serif uppercase block">
+              વર્તમાન મણકો
+            </span>
+            <span className="font-mono text-5xl font-bold text-[var(--text-gold)]">
+              {beadCount}
+            </span>
             <span className="text-xs font-mono text-[var(--text-muted)]"> / 108</span>
           </div>
 

@@ -1,105 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Gujarati:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Gujarati:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Noto+Serif+Gujarati:wght@500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&display=swap');
 @import 'tailwindcss';
 @import '@heroui/styles';
 
 /* ═══════════════════════════════════════════════════════════
-   SPATIAL UI — CELESTIAL OBSERVATORY
-   Token system: Obsidian depths + Saffron gold + Indigo glow
+   AUTHENTIC VEDIC ASTROLOGY (JYOTISH) DESIGN SYSTEM
+   Palette: Sandalwood Parchment (Chandan), Kumkum Vermilion (Sindoor),
+            Kesari Saffron, Temple Brass Gold, Deep Kajal Ink.
    ═══════════════════════════════════════════════════════════ */
 
 @layer base {
   :root {
-    /* ── Surface Depths (obsidian with indigo tint) ── */
-    --void:          #07070d;   /* deepest canvas — near black */
-    --depth-0:       #0c0c17;   /* page background */
-    --depth-1:       #10101e;   /* base panels */
-    --depth-2:       #14142a;   /* cards */
-    --depth-3:       #1a1a34;   /* raised cards */
-    --depth-4:       #20203e;   /* overlays, dropdowns */
-    --depth-hover:   #26264a;   /* interactive hover */
+    /* ── Chandan & Sandalwood Parchment Scale ── */
+    --void: #f5eedf;
+    --depth-0: #faf6ee; /* Sacred Sandalwood Canvas */
+    --depth-1: #ffffff; /* Elevated Manuscript Card */
+    --depth-2: #f6f0e2; /* Subtle Parchment Sub-layer */
+    --depth-3: #ede3ce; /* Recessed Ledger / Pills */
+    --depth-4: #ffffff; /* Modals & Inset Windows */
+    --depth-hover: #f3e9d4; /* Traditional Hover Wash */
 
-    /* ── Saffron Gold Scale (single accent) ── */
-    --gold-50:  #fffbeb;
-    --gold-100: #fef3c7;
-    --gold-200: #fde68a;
-    --gold-300: #fcd34d;
-    --gold-400: #fbbf24;
-    --gold-500: #f59e0b;   /* primary accent */
-    --gold-600: #d97706;   /* hover accent */
-    --gold-700: #b45309;
-    --gold-800: #92400e;
-    --gold-900: #78350f;
+    /* ── Sacred Vedic Pigment Scale (Kumkum Vermilion & Saffron) ── */
+    --kumkum: #8b2500; /* Deep Sindoor Vermilion */
+    --kumkum-hover: #731e00;
+    --saffron: #b85d19; /* Kesari Saffron */
+    --gold-foil: #c59b27; /* Temple Brass & Gold Foil */
+    --gold-50: #fdfaf3;
+    --gold-100: #faeee0;
+    --gold-200: #f5dac0;
+    --gold-300: #e8b98e;
+    --gold-400: #d48c4e;
+    --gold-500: #8b2500; /* Primary Vedic Ink */
+    --gold-600: #731e00;
+    --gold-700: #5c1800;
+    --gold-800: #451200;
+    --gold-900: #2e0c00;
 
-    /* ── Indigo Glow Scale (atmospheric, not UI chrome) ── */
-    --indigo-glow:  rgba(99, 102, 241, 0.12);
-    --violet-glow:  rgba(139, 92, 246, 0.08);
-    --gold-glow:    rgba(245, 158, 11, 0.2);
-    --gold-glow-lg: rgba(245, 158, 11, 0.35);
+    /* ── Sacred Atmosphere & Haldi Glows ── */
+    --indigo-glow: rgba(139, 37, 0, 0.04);
+    --violet-glow: rgba(139, 37, 0, 0.03);
+    --gold-glow: rgba(139, 37, 0, 0.1);
+    --gold-glow-lg: rgba(139, 37, 0, 0.18);
 
-    /* ── Text Hierarchy ── */
-    --text-primary:    oklch(0.93 0.01 260);    /* near-white with cool tint */
-    --text-secondary:  oklch(0.72 0.01 260);    /* secondary labels */
-    --text-tertiary:   oklch(0.52 0.012 260);   /* metadata */
-    --text-muted:      oklch(0.38 0.01 260);    /* disabled, placeholders */
-    --text-gold:       #f59e0b;
-    --text-gold-soft:  #fcd34d;
-    --text-inverted:   #07070d;
+    /* ── Text Hierarchy (Deep Soot / Kajal Black Ink) ── */
+    --text-primary: #1f1a16; /* Calligraphic Sanskrit / Gujarati Ink */
+    --text-secondary: #4a4036; /* Scholarly Body Text */
+    --text-tertiary: #756858; /* Astrological Notation & Subtitles */
+    --text-muted: #968673; /* Faint Marginal Notes */
+    --text-gold: #8b2500; /* Sacred Vermilion Headings */
+    --text-gold-soft: #a84218;
+    --text-inverted: #faf6ee;
 
-    /* ── Borders (white-based for dark mode) ── */
-    --border-void:     oklch(1 0 0 / 0.04);   /* subtlest — background texture */
-    --border-subtle:   oklch(1 0 0 / 0.07);   /* default card border */
-    --border-default:  oklch(1 0 0 / 0.11);   /* panel edges */
-    --border-strong:   oklch(1 0 0 / 0.18);   /* focus context */
-    --border-gold:     rgba(245, 158, 11, 0.3);
-    --border-gold-glow: rgba(245, 158, 11, 0.5);
+    /* ── Traditional Hairline & Manuscript Borders ── */
+    --border-void: rgba(31, 26, 22, 0.05);
+    --border-subtle: #e5dac6; /* Light Parchment Border */
+    --border-default: #d6c6ad; /* Traditional Ledger Border */
+    --border-strong: #b59f7d; /* Double Frame / Prominent Rule */
+    --border-gold: rgba(139, 37, 0, 0.3); /* Kumkum Border Rule */
+    --border-gold-glow: rgba(139, 37, 0, 0.5);
 
-    /* ── Glassmorphism Blurs (orbital depth) ── */
-    --blur-near:   blur(8px);
-    --blur-mid:    blur(16px);
-    --blur-far:    blur(24px);
-    --blur-deep:   blur(32px);
+    /* ── Glassmorphism Blurs ── */
+    --blur-near: blur(8px);
+    --blur-mid: blur(14px);
+    --blur-far: blur(20px);
+    --blur-deep: blur(28px);
 
     /* ── Radius Scale ── */
-    --r-xs:  4px;
-    --r-sm:  8px;
-    --r-md:  12px;
-    --r-lg:  16px;
-    --r-xl:  20px;
+    --r-xs: 4px;
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 20px;
     --r-2xl: 28px;
     --r-pill: 9999px;
 
-    /* ── Spatial Shadows (multi-layer, brand-tinted) ── */
-    --shadow-sm:
-      0 1px 2px oklch(0 0 0 / 0.4),
-      0 0 0 0.5px oklch(1 0 0 / 0.04);
-
+    /* ── Warm Natural Shadows ── */
+    --shadow-sm: 0 1px 2px rgba(31, 26, 22, 0.04), 0 0 0 1px #e5dac6;
     --shadow-md:
-      0 4px 12px oklch(0 0 0 / 0.5),
-      0 1px 3px oklch(0 0 0 / 0.3),
-      0 0 0 0.5px oklch(1 0 0 / 0.06);
-
+      0 4px 14px rgba(31, 26, 22, 0.06), 0 1px 3px rgba(31, 26, 22, 0.03),
+      0 0 0 1px #e5dac6;
     --shadow-lg:
-      0 8px 24px oklch(0 0 0 / 0.6),
-      0 2px 8px oklch(0 0 0 / 0.35),
-      0 0 0 0.5px oklch(1 0 0 / 0.08);
-
+      0 10px 26px rgba(31, 26, 22, 0.07), 0 2px 8px rgba(31, 26, 22, 0.03),
+      0 0 0 1px #ded1bc;
     --shadow-xl:
-      0 16px 48px oklch(0 0 0 / 0.7),
-      0 4px 16px oklch(0 0 0 / 0.4),
-      0 0 0 0.5px oklch(1 0 0 / 0.1);
-
+      0 20px 44px rgba(31, 26, 22, 0.1), 0 4px 14px rgba(31, 26, 22, 0.05),
+      0 0 0 1px #ded1bc;
     --shadow-gold:
-      0 0 0 1px var(--border-gold),
-      0 4px 20px rgba(245, 158, 11, 0.15),
-      0 8px 32px oklch(0 0 0 / 0.5);
-
+      0 2px 10px rgba(139, 37, 0, 0.1), 0 0 0 1px rgba(139, 37, 0, 0.3);
     --shadow-gold-glow:
-      0 0 0 1px var(--border-gold-glow),
-      0 4px 24px rgba(245, 158, 11, 0.3),
-      0 0 48px rgba(245, 158, 11, 0.1),
-      0 8px 32px oklch(0 0 0 / 0.5);
+      0 4px 18px rgba(139, 37, 0, 0.16), 0 0 0 1px rgba(139, 37, 0, 0.45);
 
-    /* ── Spacing Scale (4px base) ── */
+    /* ── Spacing Scale ── */
     --space-1: 4px;
     --space-2: 8px;
     --space-3: 12px;
@@ -111,31 +101,30 @@
     --space-12: 48px;
     --space-16: 64px;
 
-    /* ── Legacy compat (prevent regressions in view components) ── */
-    --bg-page:               var(--depth-0);
-    --bg-panel:              rgba(20, 20, 42, 0.85);
-    --bg-card:               rgba(26, 26, 52, 0.8);
-    --bg-card-hover:         rgba(38, 38, 74, 0.9);
-    --bg-pill:               rgba(16, 16, 30, 0.7);
-    --bg-chart:              rgba(20, 20, 42, 0.9);
-    --bg-chart-poly:         rgba(16, 16, 30, 0.8);
-    --bg-chart-poly-selected: rgba(245, 158, 11, 0.15);
-    --text-amber:            var(--gold-500);
-    --border-gold:           rgba(245, 158, 11, 0.3);
-    --chart-line:            var(--gold-500);
-    --chart-line-selected:   var(--gold-600);
-    --text-chart:            var(--text-primary);
-    --text-chart-num:        var(--gold-400);
+    /* ── Real Vedic Kundli Chart Colors ── */
+    --bg-page: var(--depth-0);
+    --bg-panel: rgba(255, 255, 255, 0.92);
+    --bg-card: #ffffff;
+    --bg-card-hover: #faf5eb;
+    --bg-pill: #ede3ce;
+    --bg-chart: #fcf9f2; /* Authentic Janam Patrika Paper */
+    --bg-chart-poly: #fdfbf7;
+    --bg-chart-poly-selected: rgba(139, 37, 0, 0.09);
+    --text-amber: var(--gold-500);
+    --chart-line: #a33a1b; /* Traditional Sacred Red Lines */
+    --chart-line-selected: #731e00;
+    --text-chart: var(--text-primary);
+    --text-chart-num: var(--gold-500);
   }
 
   /* ── Base Styles ── */
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
     font-family:
-      'Inter',
+      'Outfit',
       'Noto Sans Gujarati',
       'Noto Sans Devanagari',
       -apple-system,
@@ -145,69 +134,97 @@
     background-color: var(--depth-0);
     color: var(--text-primary);
     min-height: 100dvh;
-    letter-spacing: -0.014em;
+    letter-spacing: -0.012em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 
-    /* Cosmic void background — fixed mandala-dot grid + nebula glows */
+    /* Traditional Indian handmade rag paper / sandalwood grain */
     background-image:
-      /* Orbital dot-grid (mandala geometry) */
-      radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px),
-      /* Nebula glows — atmospheric depth */
-      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 5%, rgba(139, 92, 246, 0.06) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 60% at 50% 90%, rgba(245, 158, 11, 0.04) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 40% at 90% 80%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+      radial-gradient(circle, rgba(31, 26, 22, 0.035) 1px, transparent 1px),
+      radial-gradient(ellipse 90% 50% at 50% -5%, rgba(139, 37, 0, 0.035) 0%, transparent 65%);
     background-size:
-      24px 24px,
-      100% 100%,
-      100% 100%,
-      100% 100%,
+      28px 28px,
       100% 100%;
     background-attachment: fixed;
   }
 
-  /* ── Typography Roles ── */
+  /* ── Traditional Vedic Typography Roles ── */
+  .font-vedic {
+    font-family:
+      'Cinzel',
+      'Noto Serif Gujarati',
+      'Noto Serif Devanagari',
+      Georgia,
+      serif;
+    letter-spacing: -0.015em;
+  }
+
   .font-display {
-    font-family: 'Syne', 'Noto Sans Gujarati', 'Noto Sans Devanagari', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-  }
-
-  .font-body {
-    font-family: 'Inter', 'Noto Sans Gujarati', 'Noto Sans Devanagari', sans-serif;
-  }
-
-  .font-mono {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family:
+      'Cinzel',
+      'Noto Serif Gujarati',
+      'Noto Serif Devanagari',
+      Georgia,
+      serif;
+    font-weight: 600;
     letter-spacing: -0.02em;
   }
 
-  .font-serif {
-    font-family: 'Syne', 'Noto Sans Gujarati', 'Noto Sans Devanagari', Georgia, serif;
+  .font-body {
+    font-family:
+      'Outfit',
+      'Noto Sans Gujarati',
+      'Noto Sans Devanagari',
+      sans-serif;
   }
 
-  /* ── Tactile Press States ── */
+  .font-serif {
+    font-family:
+      'Noto Serif Gujarati',
+      'Noto Serif Devanagari',
+      'Cinzel',
+      Georgia,
+      serif;
+  }
+
+  .font-mono {
+    font-family:
+      'JetBrains Mono',
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Tactile Press Feedback ── */
   button:active:not(:disabled),
   [role='button']:active:not(:disabled),
   a:active {
-    transform: scale(0.975);
-    transition: transform 0.08s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(0.985);
+    transition: transform 0.08s ease-out;
   }
 
-  /* ── Spatial Scrollbar ── */
-  ::-webkit-scrollbar { width: 4px; height: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
+  /* ── Clean Sandalwood Scrollbar ── */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
   ::-webkit-scrollbar-thumb {
-    background: rgba(245, 158, 11, 0.25);
+    background: #d8cbbc;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(245, 158, 11, 0.5);
+    background: #b59f7d;
   }
 
-  /* ── Focus Visible ── */
+  /* ── Accessible Focus Rings in Sacred Kumkum ── */
   :focus-visible {
     outline: 2px solid var(--gold-500);
     outline-offset: 2px;
@@ -216,169 +233,136 @@
 }
 
 /* ══════════════════════════════════════════════════
-   KEYFRAME ANIMATIONS
+   REFINED MOTION & MICRO-ANIMATIONS
    ══════════════════════════════════════════════════ */
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes depthRise {
-  from { opacity: 0; transform: translateY(20px) scale(0.97); filter: blur(4px); }
-  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-
-@keyframes orbitFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  33%       { transform: translateY(-4px) rotate(0.5deg); }
-  66%       { transform: translateY(2px) rotate(-0.3deg); }
-}
-
-@keyframes cosmicPulse {
-  0%, 100% { box-shadow: 0 0 16px rgba(245, 158, 11, 0.15), 0 0 0 1px rgba(245, 158, 11, 0.2); }
-  50%       { box-shadow: 0 0 32px rgba(245, 158, 11, 0.35), 0 0 0 1px rgba(245, 158, 11, 0.45); }
-}
-
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-@keyframes spinReverse {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
-}
-
-@keyframes starTwinkle {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50%       { opacity: 0.9; transform: scale(1.2); }
-}
-
-@keyframes ringExpand {
-  from { transform: scale(0.8); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes shimmer {
-  from { background-position: -200% 0; }
-  to   { background-position: 200% 0; }
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
 }
 
-@keyframes goldGlowPulse {
-  0%, 100% { text-shadow: 0 0 12px rgba(245,158,11,0.3); }
-  50%       { text-shadow: 0 0 28px rgba(245,158,11,0.7), 0 0 48px rgba(245,158,11,0.2); }
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-scale-in {
+  animation: scaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-depth-rise {
+  animation: depthRise 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ══════════════════════════════════════════════════
-   ANIMATION UTILITY CLASSES
+   VEDIC MANUSCRIPT SURFACES & PATRIKA CONTAINERS
    ══════════════════════════════════════════════════ */
 
-.animate-fade-in-up  { animation: fadeInUp  0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.animate-scale-in    { animation: scaleIn   0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.animate-depth-rise  { animation: depthRise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.animate-orbit-float { animation: orbitFloat 5s ease-in-out infinite; }
-.animate-cosmic-pulse{ animation: cosmicPulse 3s ease-in-out infinite; }
-.animate-spin-slow   { animation: spinSlow  40s linear infinite; }
-.animate-spin-reverse{ animation: spinReverse 28s linear infinite; }
-.animate-star-twinkle{ animation: starTwinkle 2.5s ease-in-out infinite; }
-.animate-ring-expand { animation: ringExpand 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.animate-gold-glow   { animation: goldGlowPulse 2s ease-in-out infinite; }
-
-/* ══════════════════════════════════════════════════
-   SPATIAL GLASS SURFACES
-   The depth hierarchy:
-     void → depth-0 (body) → spatial-panel → spatial-card → spatial-raised
-   ══════════════════════════════════════════════════ */
-
-/* Base glass panel — mid-depth layer */
+/* Base manuscript panel */
 .spatial-panel {
-  background: rgba(16, 16, 30, 0.75);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: var(--blur-mid);
   -webkit-backdrop-filter: var(--blur-mid);
   border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-md);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease-out;
 }
 
-/* Header glass — highest layer, deepest blur */
+/* Header bar */
 .spatial-header {
-  background: rgba(10, 10, 22, 0.88);
+  background: rgba(250, 246, 238, 0.96);
   backdrop-filter: var(--blur-far);
   -webkit-backdrop-filter: var(--blur-far);
   border: 1px solid var(--border-default);
-  box-shadow:
-    var(--shadow-lg),
-    inset 0 1px 0 oklch(1 0 0 / 0.06);
+  box-shadow: var(--shadow-md);
 }
 
-/* Card surface — standard orbital layer */
+/* Standard patrika card */
 .spatial-card {
-  background: rgba(20, 20, 42, 0.7);
-  backdrop-filter: var(--blur-near);
-  -webkit-backdrop-filter: var(--blur-near);
+  background: #ffffff;
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-sm);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .spatial-card:hover {
-  background: rgba(26, 26, 52, 0.85);
+  background: #faf5eb;
   border-color: var(--border-default);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-/* Gold accent card — for featured/active items */
+/* Gold / Kumkum accent card */
 .spatial-card-gold {
-  background: rgba(20, 20, 42, 0.8);
-  backdrop-filter: var(--blur-near);
-  -webkit-backdrop-filter: var(--blur-near);
+  background: #ffffff;
   border: 1px solid var(--border-gold);
   box-shadow: var(--shadow-gold);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .spatial-card-gold:hover {
+  border-color: var(--gold-500);
   box-shadow: var(--shadow-gold-glow);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-/* Raised card — sits above spatial-card */
+/* Raised card */
 .spatial-raised {
-  background: rgba(26, 26, 52, 0.9);
-  backdrop-filter: var(--blur-mid);
-  -webkit-backdrop-filter: var(--blur-mid);
+  background: #ffffff;
   border: 1px solid var(--border-default);
   box-shadow: var(--shadow-xl);
 }
 
-/* Pill / badge container */
+/* Pill container */
 .spatial-pill {
-  background: rgba(16, 16, 30, 0.65);
-  backdrop-filter: var(--blur-near);
-  -webkit-backdrop-filter: var(--blur-near);
+  background: var(--depth-3);
   border: 1px solid var(--border-subtle);
 }
 
-/* Input field — "inset" feel */
+/* Input field */
 .spatial-input {
-  background: rgba(7, 7, 13, 0.6);
-  backdrop-filter: var(--blur-near);
-  -webkit-backdrop-filter: var(--blur-near);
+  background: #ffffff;
   border: 1px solid var(--border-default);
   color: var(--text-primary);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .spatial-input:focus {
   border-color: var(--gold-500);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12), var(--shadow-sm);
+  box-shadow: 0 0 0 3px rgba(139, 37, 0, 0.12);
   outline: none;
 }
 
@@ -386,26 +370,20 @@
   color: var(--text-muted);
 }
 
-/* ── Buttons ── */
+/* ── Traditional Vedic Buttons ── */
 
 .spatial-btn-primary {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #b45309 100%);
-  color: #07070d;
-  font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0 4px 16px rgba(245, 158, 11, 0.3),
-    0 1px 3px oklch(0 0 0 / 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: var(--gold-500);
+  color: #ffffff;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(139, 37, 0, 0.25);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .spatial-btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #d97706 100%);
-  box-shadow:
-    0 6px 24px rgba(245, 158, 11, 0.45),
-    0 2px 8px oklch(0 0 0 / 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background-color: var(--gold-600);
+  box-shadow: 0 4px 14px rgba(139, 37, 0, 0.3);
   transform: translateY(-1px);
 }
 
@@ -413,92 +391,188 @@
   background: transparent;
   color: var(--text-secondary);
   border: 1px solid transparent;
-  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.15s ease-out;
 }
 
 .spatial-btn-ghost:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--depth-hover);
   color: var(--text-primary);
   border-color: var(--border-subtle);
 }
 
 .spatial-btn-outline {
   background: transparent;
-  color: var(--gold-400);
-  border: 1px solid var(--border-gold);
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.05);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--gold-500);
+  border: 1px solid var(--border-default);
+  transition: all 0.18s ease-out;
 }
 
 .spatial-btn-outline:hover:not(:disabled) {
-  background: rgba(245, 158, 11, 0.07);
-  border-color: var(--border-gold-glow);
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
-  color: var(--gold-300);
+  background: rgba(139, 37, 0, 0.06);
+  border-color: var(--gold-500);
+  color: var(--gold-600);
 }
 
 /* ── Badges / Chips ── */
 
 .spatial-badge-gold {
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  color: var(--gold-300);
+  background: rgba(139, 37, 0, 0.08);
+  border: 1px solid rgba(139, 37, 0, 0.22);
+  color: var(--gold-600);
 }
 
 .spatial-badge-success {
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.2);
-  color: #86efac;
+  background: rgba(22, 101, 52, 0.08);
+  border: 1px solid rgba(22, 101, 52, 0.22);
+  color: #15803d;
 }
 
 .spatial-badge-warning {
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  color: #fcd34d;
+  background: rgba(180, 83, 9, 0.08);
+  border: 1px solid rgba(180, 83, 9, 0.22);
+  color: #b45309;
 }
 
 .spatial-badge-danger {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #fca5a5;
+  background: rgba(185, 28, 28, 0.08);
+  border: 1px solid rgba(185, 28, 28, 0.22);
+  color: #b91c1c;
 }
 
 .spatial-badge-info {
-  background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.22);
-  color: #a5b4fc;
+  background: rgba(3, 105, 161, 0.08);
+  border: 1px solid rgba(3, 105, 161, 0.22);
+  color: #0369a1;
 }
 
-/* ── Legacy class mapping (for existing components) ── */
-.glass-panel           { background: var(--bg-panel); backdrop-filter: var(--blur-mid); -webkit-backdrop-filter: var(--blur-mid); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-md); }
-.glass-panel-accent    { background: var(--bg-card); backdrop-filter: var(--blur-mid); -webkit-backdrop-filter: var(--blur-mid); border: 1px solid var(--border-gold); box-shadow: var(--shadow-gold); }
-.glass-header          { background: rgba(10, 10, 22, 0.88); backdrop-filter: var(--blur-far); -webkit-backdrop-filter: var(--blur-far); border-bottom: 1px solid var(--border-default); box-shadow: var(--shadow-lg); }
-.glass-card            { background: var(--bg-card); backdrop-filter: var(--blur-near); -webkit-backdrop-filter: var(--blur-near); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.glass-card:hover      { background: var(--bg-card-hover); border-color: var(--border-gold); box-shadow: var(--shadow-gold); transform: translateY(-2px); }
-.glass-pill            { background: var(--bg-pill); backdrop-filter: var(--blur-near); -webkit-backdrop-filter: var(--blur-near); border: 1px solid var(--border-subtle); }
-.glass-input           { background: rgba(7, 7, 13, 0.6); backdrop-filter: var(--blur-near); -webkit-backdrop-filter: var(--blur-near); border: 1px solid var(--border-default); color: var(--text-primary); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.glass-input:focus     { border-color: var(--gold-500); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12); }
-.glass-button-dark     { background: linear-gradient(180deg, #1a1a34 0%, #10101e 100%); color: var(--text-primary); border: 1px solid var(--border-gold); box-shadow: var(--shadow-md); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.glass-button-dark:hover { background: linear-gradient(180deg, #20203e 0%, #14142a 100%); box-shadow: var(--shadow-lg); transform: translateY(-1px); }
-.glass-button-primary  { background: linear-gradient(135deg, #f59e0b, #b45309); color: #07070d; font-weight: 600; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 4px 16px rgba(245,158,11,0.3); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.glass-button-primary:hover { background: linear-gradient(135deg, #fbbf24, #d97706); box-shadow: 0 6px 24px rgba(245,158,11,0.45); transform: translateY(-1px); }
-.glass-badge-gold      { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25); color: var(--gold-300); }
-.glass-badge-success   { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #86efac; }
-.glass-badge-warning   { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: #fcd34d; }
-.glass-badge-danger    { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #fca5a5; }
-.glass-badge-info      { background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.22); color: #a5b4fc; }
+/* ── Legacy Mappings for Compatibility ── */
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: var(--blur-mid);
+  -webkit-backdrop-filter: var(--blur-mid);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.glass-panel-accent {
+  background: #fbf6ec;
+  border: 1px solid var(--border-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.glass-header {
+  background: rgba(250, 246, 238, 0.96);
+  backdrop-filter: var(--blur-far);
+  -webkit-backdrop-filter: var(--blur-far);
+  border-bottom: 1px solid var(--border-default);
+  box-shadow: var(--shadow-sm);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.glass-pill {
+  background: var(--bg-pill);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-input {
+  background: #ffffff;
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  transition: all 0.2s ease-out;
+}
+
+.glass-input:focus {
+  border-color: var(--gold-500);
+  box-shadow: 0 0 0 3px rgba(139, 37, 0, 0.12);
+}
+
+.glass-button-dark {
+  background: #1f1a16;
+  color: #ffffff;
+  border: 1px solid #38312b;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.18s ease-out;
+}
+
+.glass-button-dark:hover {
+  background: #38312b;
+  transform: translateY(-1px);
+}
+
+.glass-button-primary {
+  background-color: var(--gold-500);
+  color: #ffffff;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(139, 37, 0, 0.22);
+  transition: all 0.18s ease-out;
+}
+
+.glass-button-primary:hover {
+  background-color: var(--gold-600);
+  box-shadow: 0 4px 14px rgba(139, 37, 0, 0.28);
+  transform: translateY(-1px);
+}
+
+.glass-badge-gold {
+  background: rgba(139, 37, 0, 0.08);
+  border: 1px solid rgba(139, 37, 0, 0.22);
+  color: var(--gold-600);
+}
+
+.glass-badge-success {
+  background: rgba(22, 101, 52, 0.08);
+  border: 1px solid rgba(22, 101, 52, 0.22);
+  color: #15803d;
+}
+
+.glass-badge-warning {
+  background: rgba(180, 83, 9, 0.08);
+  border: 1px solid rgba(180, 83, 9, 0.22);
+  color: #b45309;
+}
+
+.glass-badge-danger {
+  background: rgba(185, 28, 28, 0.08);
+  border: 1px solid rgba(185, 28, 28, 0.22);
+  color: #b91c1c;
+}
+
+.glass-badge-info {
+  background: rgba(3, 105, 161, 0.08);
+  border: 1px solid rgba(3, 105, 161, 0.22);
+  color: #0369a1;
+}
 
 /* ── Scrollbar hide ── */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* ── Shimmer skeleton ── */
 .skeleton {
   background: linear-gradient(
     90deg,
-    rgba(255,255,255,0.03) 0%,
-    rgba(255,255,255,0.07) 50%,
-    rgba(255,255,255,0.03) 100%
+    rgba(31, 26, 22, 0.04) 0%,
+    rgba(31, 26, 22, 0.08) 50%,
+    rgba(31, 26, 22, 0.04) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.8s infinite;
@@ -507,7 +581,9 @@
 
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -516,14 +592,17 @@
 }
 
 /* ══════════════════════════════════════════════════
-   PRINT STYLESHEET
+   PRINT STYLESHEET (AUTHENTIC JATAK PATRIKA)
    ══════════════════════════════════════════════════ */
 @media print {
-  @page { size: A4 portrait; margin: 10mm 12mm 12mm 12mm; }
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 12mm 12mm;
+  }
 
   body {
     background: #ffffff !important;
-    color: #1c1917 !important;
+    color: #1f1a16 !important;
     background-image: none !important;
     font-size: 10pt !important;
     line-height: 1.35 !important;
@@ -531,11 +610,28 @@
     print-color-adjust: exact !important;
   }
 
-  header, footer, nav, button, select, input, .print\:hidden { display: none !important; }
-  .print\:block { display: block !important; }
+  header,
+  footer,
+  nav,
+  button,
+  select,
+  input,
+  .print\:hidden {
+    display: none !important;
+  }
+  .print\:block {
+    display: block !important;
+  }
 
-  .glass-panel, .glass-panel-accent, .glass-card, .glass-header, .glass-pill,
-  .spatial-panel, .spatial-card, .spatial-raised, .spatial-header {
+  .glass-panel,
+  .glass-panel-accent,
+  .glass-card,
+  .glass-header,
+  .glass-pill,
+  .spatial-panel,
+  .spatial-card,
+  .spatial-raised,
+  .spatial-header {
     background: #ffffff !important;
     box-shadow: none !important;
     border: 1px solid #d4c8b8 !important;
@@ -543,7 +639,19 @@
     backdrop-filter: none !important;
   }
 
-  table { width: 100% !important; border-collapse: collapse !important; }
-  th { background-color: #f3ece0 !important; color: #1c1917 !important; font-weight: 700 !important; border: 1px solid #c8beaf !important; padding: 4px 6px !important; }
-  td { border: 1px solid #e0d8cc !important; padding: 4px 6px !important; }
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  th {
+    background-color: #f6eedf !important;
+    color: #1f1a16 !important;
+    font-weight: 700 !important;
+    border: 1px solid #cbbda7 !important;
+    padding: 4px 6px !important;
+  }
+  td {
+    border: 1px solid #ded3c1 !important;
+    padding: 4px 6px !important;
+  }
 }

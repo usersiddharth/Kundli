@@ -11,6 +11,8 @@ import QuickToolbar from './components/QuickToolbar.jsx';
 import KundliHubView from './components/KundliHubView.jsx';
 import MobileBottomNav from './components/MobileBottomNav.jsx';
 import CosmicLoader from './components/CosmicLoader.jsx';
+import ProfileVaultModal from './components/ProfileVaultModal.jsx';
+import { getSavedProfiles, VAULT_CHANGE_EVENT } from './engine/profileVault.js';
 
 // Code-Split Dynamic Portal Views
 const LandingPage = lazy(() => import('./components/LandingPage.jsx'));
@@ -45,6 +47,18 @@ export default function App() {
 
   const [kundliData, setKundliData] = useState(null);
   const [birthDateObj, setBirthDateObj] = useState(new Date('1995-08-15T08:30:00'));
+  const [isVaultOpen, setIsVaultOpen] = useState(false);
+  const [savedProfilesCount, setSavedProfilesCount] = useState(0);
+
+  // Sync profile vault count
+  useEffect(() => {
+    const updateCount = () => {
+      setSavedProfilesCount(getSavedProfiles().length);
+    };
+    updateCount();
+    window.addEventListener(VAULT_CHANGE_EVENT, updateCount);
+    return () => window.removeEventListener(VAULT_CHANGE_EVENT, updateCount);
+  }, []);
 
   const generateKundli = (customData = null) => {
     const data = customData || formData;
@@ -64,13 +78,32 @@ export default function App() {
     setKundliData(fullKundli);
   };
 
+  const handleSelectVaultProfile = (profile) => {
+    const newForm = {
+      name: profile.name,
+      gender: profile.gender || 'male',
+      dob: profile.dob,
+      tob: profile.tob,
+      city: profile.city,
+      lat: profile.lat,
+      lng: profile.lng,
+      tz: profile.tz ?? 5.5,
+    };
+    setFormData(newForm);
+    generateKundli(newForm);
+    setMainSection('kundli');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   useEffect(() => {
     generateKundli();
-    document.documentElement.classList.add('dark');
   }, []);
 
   return (
-    <div className="min-h-screen font-body antialiased selection:bg-amber-500/20 selection:text-amber-100" style={{ backgroundColor: 'var(--depth-0)', color: 'var(--text-primary)' }}>
+    <div
+      className="min-h-screen font-body antialiased selection:bg-[#fae8d4] selection:text-[#9c4b0f]"
+      style={{ backgroundColor: 'var(--depth-0)', color: 'var(--text-primary)' }}
+    >
       {/* 1. Global Navigation Header with Dedicated Portals */}
       <Header
         lang={lang}
@@ -78,6 +111,8 @@ export default function App() {
         t={t}
         mainSection={mainSection}
         setMainSection={setMainSection}
+        onOpenVault={() => setIsVaultOpen(true)}
+        savedProfilesCount={savedProfilesCount}
       />
 
       {/* 2. Main Responsive Content Canvas */}
@@ -125,6 +160,7 @@ export default function App() {
             birthDateObj={birthDateObj}
             t={t}
             lang={lang}
+            onOpenVault={() => setIsVaultOpen(true)}
           />
         )}
 
@@ -246,6 +282,14 @@ export default function App() {
 
       {/* 3. Sticky Mobile Bottom Navigation Bar (Screens < 640px) */}
       <MobileBottomNav mainSection={mainSection} setMainSection={setMainSection} t={t} />
+
+      {/* 4. Global Kundli Profile Vault Modal */}
+      <ProfileVaultModal
+        isOpen={isVaultOpen}
+        onClose={() => setIsVaultOpen(false)}
+        onSelectProfile={handleSelectVaultProfile}
+        lang={lang}
+      />
     </div>
   );
 }

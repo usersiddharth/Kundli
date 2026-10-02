@@ -15,19 +15,29 @@ export const DASHA_LORDS = [
 
 const TOTAL_CYCLE_YEARS = 120;
 
-// Format timestamp to localized readable string
-function formatDateTime(dateObj) {
+// Format date to dd.MM.yyyy
+export function formatDate(dateObj) {
   const d = new Date(dateObj);
   const pad = (n) => String(n).padStart(2, '0');
-  const year = d.getFullYear();
-  const month = pad(d.getMonth() + 1);
   const day = pad(d.getDate());
+  const month = pad(d.getMonth() + 1);
+  const year = d.getFullYear();
+  return `${day}.${month}.${year}`;
+}
+
+// Format timestamp to localized readable string (dd.MM.yyyy hh:mm AM/PM)
+export function formatDateTime(dateObj) {
+  const d = new Date(dateObj);
+  const pad = (n) => String(n).padStart(2, '0');
+  const day = pad(d.getDate());
+  const month = pad(d.getMonth() + 1);
+  const year = d.getFullYear();
   let hours = d.getHours();
   const mins = pad(d.getMinutes());
   const ampm = hours >= 12 ? 'PM' : 'AM';
   hours = hours % 12;
   hours = hours ? hours : 12;
-  return `${year}-${month}-${day} ${pad(hours)}:${mins} ${ampm}`;
+  return `${day}.${month}.${year} ${pad(hours)}:${mins} ${ampm}`;
 }
 
 export function calculateVimshottariDasha(kundliData, birthDate) {
@@ -92,8 +102,10 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
         pratyantardashas.push({
           lord: pdLordData.lord,
           years: (aRatio * pdFraction).toFixed(3),
-          startDate: pdStartDate.toISOString().split('T')[0],
-          endDate: pdEndDate.toISOString().split('T')[0],
+          startDate: formatDate(pdStartDate),
+          endDate: formatDate(pdEndDate),
+          isoStartDate: pdStartDate.toISOString().split('T')[0],
+          isoEndDate: pdEndDate.toISOString().split('T')[0],
           startMs: pdStartDate.getTime(),
           endMs: pdEndMs,
         });
@@ -104,8 +116,10 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
       antardashas.push({
         lord: aLordData.lord,
         years: aRatio.toFixed(2),
-        startDate: aStartDate.toISOString().split('T')[0],
-        endDate: aEndDate.toISOString().split('T')[0],
+        startDate: formatDate(aStartDate),
+        endDate: formatDate(aEndDate),
+        isoStartDate: aStartDate.toISOString().split('T')[0],
+        isoEndDate: aEndDate.toISOString().split('T')[0],
         startMs: aStartDate.getTime(),
         endMs: aEndMs,
         pratyantardashas,
@@ -117,8 +131,10 @@ export function calculateVimshottariDasha(kundliData, birthDate) {
     dashaTimeline.push({
       lord: mLordData.lord,
       years: durationYears.toFixed(2),
-      startDate: mStartDate.toISOString().split('T')[0],
-      endDate: mEndDate.toISOString().split('T')[0],
+      startDate: formatDate(mStartDate),
+      endDate: formatDate(mEndDate),
+      isoStartDate: mStartDate.toISOString().split('T')[0],
+      isoEndDate: mEndDate.toISOString().split('T')[0],
       startMs: mStartDate.getTime(),
       endMs: mEndMs,
       antardashas,

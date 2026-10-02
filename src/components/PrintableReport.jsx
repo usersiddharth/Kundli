@@ -36,8 +36,8 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl glass-panel p-5 shadow-sm print:hidden">
         <div>
           <h3 className="font-serif text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
-            <Printer className="h-5 w-5 text-[var(--text-gold)]" /> {t.tabPrint} (Publication-Grade Vedic
-            Horoscope Dossier)
+            <Printer className="h-5 w-5 text-[var(--text-gold)]" /> {t.tabPrint} (Publication-Grade
+            Vedic Horoscope Dossier)
           </h3>
           <p className="text-xs text-[var(--text-muted)] mt-0.5">
             સંપૂર્ણ કુંડળી, નવમાંશ ચાર્ટ, ગ્રહ સ્પષ્ટ, ષડ્બળ, દશા, દોષ અને રત્ન ઉપાયો સાથે A4
@@ -91,19 +91,23 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
                 </span>
                 <strong className="text-[var(--text-primary)]">
                   {formData?.dob?.includes('-') && formData.dob.split('-')[0].length === 4
-                    ? `${formData.dob.split('-')[2]}-${formData.dob.split('-')[1]}-${formData.dob.split('-')[0]}`
+                    ? `${formData.dob.split('-')[2]}.${formData.dob.split('-')[1]}.${formData.dob.split('-')[0]}`
                     : formData?.dob}
                 </strong>
               </div>
               <div>
-                <span className="text-[10px] text-[var(--text-muted)] block font-sans">જન્મ સમય (TOB):</span>
+                <span className="text-[10px] text-[var(--text-muted)] block font-sans">
+                  જન્મ સમય (TOB):
+                </span>
                 <strong className="text-[var(--text-primary)]">{formData.tob} (IST)</strong>
               </div>
               <div>
                 <span className="text-[10px] text-[var(--text-muted)] block font-sans">
                   જન્મ સ્થળ (Place):
                 </span>
-                <strong className="text-[var(--text-primary)] font-sans truncate block">{formData.city}</strong>
+                <strong className="text-[var(--text-primary)] font-sans truncate block">
+                  {formData.city}
+                </strong>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 font-mono mt-2 pt-2 border-t border-[var(--border-subtle)] text-[11px] text-[var(--text-secondary)]">
@@ -152,8 +156,8 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
         <div className="page-break-before space-y-6 pt-4">
           <div className="avoid-page-break">
             <h3 className="font-serif text-base font-bold text-[var(--text-gold)] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Award className="h-4 w-4 text-[var(--text-gold)]" /> ષડ્બળ અને ગ્રહ બળ તાકાત (Shadbala
-              Strength Analysis)
+              <Award className="h-4 w-4 text-[var(--text-gold)]" /> ષડ્બળ અને ગ્રહ બળ તાકાત
+              (Shadbala Strength Analysis)
             </h3>
             <ShadbalaView kundliData={kundliData} t={t} />
           </div>
@@ -168,8 +172,8 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
 
           <div className="avoid-page-break">
             <h3 className="font-serif text-base font-bold text-[var(--text-primary)] border-b border-[#8c7456]/50 pb-2 mb-3 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> મુખ્ય સક્રિય રાજયોગ અને ગ્રહ યુતિ
-              (Major Rajayogas & Conjunctions)
+              <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> મુખ્ય સક્રિય રાજયોગ અને ગ્રહ
+              યુતિ (Major Rajayogas & Conjunctions)
             </h3>
             <YogasView kundliData={kundliData} t={t} lang={lang} />
           </div>

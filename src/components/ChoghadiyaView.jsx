@@ -44,7 +44,10 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
               દૈનિક ચોઘડિયા અને શુભ મુહૂર્ત (Daily Choghadiya)
             </h2>
           </div>
-          <p className="text-xs text-[var(--text-muted)] mt-0.5" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p
+            className="text-xs text-[var(--text-muted)] mt-0.5"
+            style={{ fontFamily: 'Inter, sans-serif' }}
+          >
             વાસ્તવિક વૈદિક દિવસ અને રાત્રિના ચોઘડિયા સમયગાળો
           </p>
         </div>
@@ -97,9 +100,7 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
             <ShieldAlert className="h-4 w-4 shrink-0 text-rose-400" aria-hidden="true" />
             <span>
               આજનો રાહુ કાળ (Rahu Kaal):{' '}
-              <strong className="font-mono text-rose-200 ml-1 font-bold">
-                {chData.rahuKaal}
-              </strong>
+              <strong className="font-mono text-rose-200 ml-1 font-bold">{chData.rahuKaal}</strong>
               <span className="ml-2 font-bold text-[var(--text-gold)]">
                 [સ્લોટ #{chData.rahuKaalSlotNumber}]
               </span>
@@ -171,7 +172,9 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
                 </div>
 
                 <div className="flex flex-col items-end gap-1.5 shrink-0">
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${badge.className}`}>
+                  <span
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold border ${badge.className}`}
+                  >
                     {badge.icon} {badge.label}
                   </span>
                   {isRahuKaal && (
@@ -212,7 +215,10 @@ export default function ChoghadiyaView({ lang = 'gu' }) {
                     className="mt-2 pt-2 border-t text-rose-300 font-semibold text-[10.5px] flex items-start gap-1.5"
                     style={{ borderColor: 'rgba(239, 68, 68, 0.25)' }}
                   >
-                    <AlertTriangle className="h-3.5 w-3.5 shrink-0 mt-0.5 text-rose-400" aria-hidden="true" />
+                    <AlertTriangle
+                      className="h-3.5 w-3.5 shrink-0 mt-0.5 text-rose-400"
+                      aria-hidden="true"
+                    />
                     <span>
                       રાહુ કાળ પ્રભાવ: અમૃત ચોઘડિયું હોવા છતાં આ સમયગાળામાં શુભ કાર્ય વર્જિત છે.
                     </span>

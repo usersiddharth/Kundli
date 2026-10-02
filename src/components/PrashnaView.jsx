@@ -73,10 +73,14 @@ export default function PrashnaView({ t, lang = 'gu' }) {
             </span>
           </div>
 
-          <h3 className="font-serif text-2xl font-bold text-[var(--text-primary)]">{prashnaResult.verdict}</h3>
+          <h3 className="font-serif text-2xl font-bold text-[var(--text-primary)]">
+            {prashnaResult.verdict}
+          </h3>
 
           <div className="flex items-center space-x-2 pt-2">
-            <span className="text-xs font-serif text-[var(--text-muted)]">સફળતા સંભાવના સ્કોર:</span>
+            <span className="text-xs font-serif text-[var(--text-muted)]">
+              સફળતા સંભાવના સ્કોર:
+            </span>
             <span className="font-mono text-xl font-bold text-[var(--text-gold)]">
               {prashnaResult.score}%
             </span>

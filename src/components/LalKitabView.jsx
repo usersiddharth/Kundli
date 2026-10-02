@@ -37,11 +37,16 @@ export default function LalKitabView({ kundliData, t, lang = 'gu' }) {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {debts.map((d) => (
-            <div key={d.id} className="glass-card p-4 rounded-xl space-y-2 border border-[var(--border-subtle)]">
+            <div
+              key={d.id}
+              className="glass-card p-4 rounded-xl space-y-2 border border-[var(--border-subtle)]"
+            >
               <h4 className="font-serif text-sm font-bold text-[var(--text-gold)]">
                 {d.name[lang] || d.name.gu}
               </h4>
-              <p className="text-xs text-[var(--text-secondary)]">{d.remedy[lang] || d.remedy.gu}</p>
+              <p className="text-xs text-[var(--text-secondary)]">
+                {d.remedy[lang] || d.remedy.gu}
+              </p>
             </div>
           ))}
         </div>
@@ -66,9 +71,13 @@ export default function LalKitabView({ kundliData, t, lang = 'gu' }) {
             <tbody className="divide-y divide-[var(--border-subtle)] bg-white/5">
               {remediesList.map((r, idx) => (
                 <tr key={idx} className="hover:bg-white/10">
-                  <td className="p-3 font-serif font-bold text-[var(--text-gold)]">{r.planetKey}</td>
+                  <td className="p-3 font-serif font-bold text-[var(--text-gold)]">
+                    {r.planetKey}
+                  </td>
                   <td className="p-3 font-mono">#{r.house} મો ભાવ</td>
-                  <td className="p-3 text-[var(--text-primary)]">{r.remedy[lang] || r.remedy.gu}</td>
+                  <td className="p-3 text-[var(--text-primary)]">
+                    {r.remedy[lang] || r.remedy.gu}
+                  </td>
                 </tr>
               ))}
             </tbody>

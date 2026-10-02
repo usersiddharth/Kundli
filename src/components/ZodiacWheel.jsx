@@ -19,12 +19,12 @@ export default function ZodiacWheel({ kundliData, t }) {
   const innerR = 120;
   const centerR = 60;
 
-  // Dark & Light compatible Element colors
+  // Authentic parchment mineral element colors
   const elementColors = {
-    Fire: { bg: 'rgba(230, 80, 50, 0.2)', stroke: '#e74c3c', text: '#ff7675' },
-    Earth: { bg: 'rgba(212, 175, 55, 0.18)', stroke: '#d4ac0d', text: '#f1c40f' },
-    Air: { bg: 'rgba(52, 152, 219, 0.2)', stroke: '#3498db', text: '#74b9ff' },
-    Water: { bg: 'rgba(38, 166, 154, 0.2)', stroke: '#1abc9c', text: '#55efc4' },
+    Fire: { bg: 'rgba(185, 28, 28, 0.08)', stroke: '#b91c1c', text: '#b91c1c' },
+    Earth: { bg: 'rgba(180, 83, 9, 0.08)', stroke: '#b45309', text: '#b45309' },
+    Air: { bg: 'rgba(3, 105, 161, 0.08)', stroke: '#0369a1', text: '#0369a1' },
+    Water: { bg: 'rgba(22, 101, 52, 0.08)', stroke: '#15803d', text: '#15803d' },
   };
 
   // Convert degrees to polar coordinate (0° = Top / North)

@@ -47,7 +47,9 @@ export default function KpSignificatorsView({ kundliData, t, lang = 'gu' }) {
             <tbody className="divide-y divide-[var(--border-subtle)] bg-white/5">
               {significators.map((s) => (
                 <tr key={s.houseNum} className="hover:bg-white/10 font-mono">
-                  <td className="p-3 font-serif font-bold text-[var(--text-gold)]">#{s.houseNum} મો ભાવ</td>
+                  <td className="p-3 font-serif font-bold text-[var(--text-gold)]">
+                    #{s.houseNum} મો ભાવ
+                  </td>
                   <td className="p-3 text-[var(--text-primary)]">{s.level1.join(', ')}</td>
                   <td className="p-3 text-[var(--text-primary)]">{s.level2.join(', ')}</td>
                   <td className="p-3 text-[var(--text-primary)]">{s.level3.join(', ')}</td>

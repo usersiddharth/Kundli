@@ -24,7 +24,8 @@ export default function AshtakvargaView({ kundliData, t }) {
       {/* Sarvashtakavarga (SAV) Summary Grid */}
       <div>
         <h3 className="font-serif text-base font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-1.5">
-          <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> Sarvashtakavarga (SAV) House Totals
+          <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> Sarvashtakavarga (SAV) House
+          Totals
         </h3>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {avData.houseEvaluations.map((h, i) => (
@@ -39,7 +40,9 @@ export default function AshtakvargaView({ kundliData, t }) {
               }`}
             >
               <div className="flex justify-between items-center">
-                <span className="font-semibold text-xs text-[var(--text-primary)]">House {h.houseNum}</span>
+                <span className="font-semibold text-xs text-[var(--text-primary)]">
+                  House {h.houseNum}
+                </span>
                 <span className="font-mono text-base font-bold">{h.bindus}</span>
               </div>
               <span className="text-[11px] font-medium mt-1">{t[h.rashi] || h.rashi}</span>
@@ -71,7 +74,9 @@ export default function AshtakvargaView({ kundliData, t }) {
                 const row = avData.bav[pName];
                 return (
                   <tr key={pName} className="hover:bg-white/10 transition">
-                    <td className="p-2.5 font-semibold text-[var(--text-primary)]">{t[pName] || pName}</td>
+                    <td className="p-2.5 font-semibold text-[var(--text-primary)]">
+                      {t[pName] || pName}
+                    </td>
                     {row.map((val, idx) => (
                       <td key={idx} className="p-2.5 text-center font-mono font-medium">
                         <span
@@ -93,7 +98,10 @@ export default function AshtakvargaView({ kundliData, t }) {
               <tr className="bg-white/5 font-bold text-[var(--text-primary)]">
                 <td className="p-2.5">Total (SAV)</td>
                 {avData.savTotals.map((tot, idx) => (
-                  <td key={idx} className="p-2.5 text-center font-mono text-xs text-[var(--text-gold)]">
+                  <td
+                    key={idx}
+                    className="p-2.5 text-center font-mono text-xs text-[var(--text-gold)]"
+                  >
                     {tot}
                   </td>
                 ))}

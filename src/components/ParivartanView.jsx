@@ -49,7 +49,9 @@ export default function ParivartanView({ kundliData, t, lang }) {
                   </p>
                 </div>
                 <div className="rounded-lg bg-white/5 p-3">
-                  <span className="text-xs font-medium text-[var(--text-muted)]">{t.exchangedHouses}:</span>
+                  <span className="text-xs font-medium text-[var(--text-muted)]">
+                    {t.exchangedHouses}:
+                  </span>
                   <p className="font-semibold text-[var(--text-primary)]">
                     House {p.house1} ({t[p.sign1] || p.sign1}) ⇄ House {p.house2} (
                     {t[p.sign2] || p.sign2})
@@ -58,7 +60,9 @@ export default function ParivartanView({ kundliData, t, lang }) {
               </div>
 
               <div className="mt-4 rounded-lg border border-[var(--border-subtle)] bg-white/5 p-4 text-sm text-[var(--text-primary)] leading-relaxed">
-                <span className="font-semibold text-[var(--text-gold)] block mb-1">{t.impactAnalysis}:</span>
+                <span className="font-semibold text-[var(--text-gold)] block mb-1">
+                  {t.impactAnalysis}:
+                </span>
                 {p.details[lang] || p.details.en}
               </div>
             </div>

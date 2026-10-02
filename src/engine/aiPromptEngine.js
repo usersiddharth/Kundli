@@ -119,17 +119,18 @@ export function buildAstrologicalContext(kundliData, birthDateObj = null, lang =
     const bDate = birthDateObj || new Date('1995-08-15');
     const dashaTree = calculateVimshottariDasha(kundliData, bDate);
     if (dashaTree && dashaTree.length > 0) {
-      const now = new Date();
+      const nowMs = Date.now();
       const currentMD =
-        dashaTree.find((md) => new Date(md.startDate) <= now && new Date(md.endDate) >= now) ||
-        dashaTree[0];
+        dashaTree.find((md) =>
+          md.startMs != null ? md.startMs <= nowMs && md.endMs >= nowMs : true
+        ) || dashaTree[0];
       if (currentMD) {
-        const currentAD = currentMD.antardashas?.find(
-          (ad) => new Date(ad.startDate) <= now && new Date(ad.endDate) >= now
+        const currentAD = currentMD.antardashas?.find((ad) =>
+          ad.startMs != null ? ad.startMs <= nowMs && ad.endMs >= nowMs : false
         );
-        dashaSummary = `Active Mahadasha: ${currentMD.lord} (${new Date(currentMD.startDate).toLocaleDateString()} to ${new Date(currentMD.endDate).toLocaleDateString()})`;
+        dashaSummary = `Active Mahadasha: ${currentMD.lord} (${currentMD.startDate} to ${currentMD.endDate})`;
         if (currentAD) {
-          dashaSummary += ` | Running Antardasha: ${currentAD.lord} (${new Date(currentAD.startDate).toLocaleDateString()} to ${new Date(currentAD.endDate).toLocaleDateString()})`;
+          dashaSummary += ` | Running Antardasha: ${currentAD.lord} (${currentAD.startDate} to ${currentAD.endDate})`;
         }
       }
     }

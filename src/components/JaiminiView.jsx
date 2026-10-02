@@ -91,7 +91,8 @@ export default function JaiminiView({ kundliData, birthDateObj = new Date(), t, 
       {/* 3. 7 Jaimini Karakas Table */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
         <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
-          <Table className="h-4 w-4 text-[var(--text-gold)]" />૭ જૈમિની ચર કારક કોષ્ટક (7 Jaimini Karakas)
+          <Table className="h-4 w-4 text-[var(--text-gold)]" />૭ જૈમિની ચર કારક કોષ્ટક (7 Jaimini
+          Karakas)
         </h3>
 
         <div className="overflow-x-auto rounded-xl border border-[var(--border-subtle)]">
@@ -109,7 +110,9 @@ export default function JaiminiView({ kundliData, birthDateObj = new Date(), t, 
                 <tr
                   key={idx}
                   className={
-                    k.key === 'AK' ? 'bg-amber-500/10 font-bold text-[var(--text-gold)]' : 'hover:bg-white/10'
+                    k.key === 'AK'
+                      ? 'bg-amber-500/10 font-bold text-[var(--text-gold)]'
+                      : 'hover:bg-white/10'
                   }
                 >
                   <td className="p-3 font-serif font-bold">{k.name[lang] || k.name.gu}</td>
@@ -132,7 +135,10 @@ export default function JaiminiView({ kundliData, birthDateObj = new Date(), t, 
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {charaDasha.map((d, idx) => (
-            <div key={idx} className="glass-card p-3 rounded-xl space-y-1 border border-[var(--border-subtle)]">
+            <div
+              key={idx}
+              className="glass-card p-3 rounded-xl space-y-1 border border-[var(--border-subtle)]"
+            >
               <span className="text-[10px] font-mono text-[var(--text-muted)] block">
                 {d.startYear} - {d.endYear} ({d.durationYears} વર્ષ)
               </span>

@@ -55,8 +55,8 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Layers className="h-5 w-5 text-[var(--text-gold)]" /> Shodashvarga (ષોડશવર્ગ - Divisional
-            Charts)
+            <Layers className="h-5 w-5 text-[var(--text-gold)]" /> Shodashvarga (ષોડશવર્ગ -
+            Divisional Charts)
           </h2>
           <p className="text-xs text-[var(--text-muted)]">
             Explore 13 classical Vedic varga charts for specialized life domains (Career, Assets,

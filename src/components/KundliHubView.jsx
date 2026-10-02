@@ -38,8 +38,6 @@ const KpSignificatorsView = lazy(() => import('./KpSignificatorsView.jsx'));
 const DailyTransitFeedView = lazy(() => import('./DailyTransitFeedView.jsx'));
 const SocialStoryCardView = lazy(() => import('./SocialStoryCardView.jsx'));
 const PrintableReport = lazy(() => import('./PrintableReport.jsx'));
-const UpcomingEventsView = lazy(() => import('./UpcomingEventsView.jsx'));
-const RashifalView = lazy(() => import('./RashifalView.jsx'));
 
 import {
   Compass,
@@ -57,7 +55,6 @@ import {
   Gem,
   Sun,
   ShieldAlert,
-  Activity,
   Printer,
   Search,
   User,
@@ -73,7 +70,6 @@ import {
   SlidersHorizontal,
   ArrowLeft,
   X,
-  Zap,
 } from 'lucide-react';
 
 export default function KundliHubView({
@@ -84,6 +80,7 @@ export default function KundliHubView({
   birthDateObj,
   t,
   lang,
+  onOpenVault,
 }) {
   // Core Essential Tab: 'chart' | 'planets' | 'dasha' | 'doshas'
   const [coreTab, setCoreTab] = useState('chart');
@@ -653,7 +650,7 @@ export default function KundliHubView({
                   className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold whitespace-nowrap transition-all focus-visible:outline-hidden cursor-pointer ${
                     isSelected
                       ? 'glass-button-primary shadow-xs'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#f3ece0]'
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
@@ -679,7 +676,7 @@ export default function KundliHubView({
                   ? 'वैदिक विशेष टूल्स'
                   : 'Advanced Vedic Tools'}
             </span>
-            <Chip className="bg-amber-500/15 text-[var(--text-gold)] text-[10px] px-1.5 py-0.2 font-mono">
+            <Chip className="bg-[#faeee2] text-[#9c4b0f] text-[10px] px-2 py-0.5 font-mono border border-[#e8b992]/60">
               <Chip.Label>KP • D60 • ષડ્બળ</Chip.Label>
             </Chip>
           </Button>
@@ -693,17 +690,17 @@ export default function KundliHubView({
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+            className="fixed inset-0 bg-stone-900/40 backdrop-blur-xs transition-opacity"
             onClick={() => setIsToolsModalOpen(false)}
             aria-hidden="true"
           />
 
           {/* Modal Container */}
-          <div className="relative w-full max-w-4xl max-h-[88vh] rounded-3xl glass-panel border border-[var(--border-gold)] shadow-2xl overflow-hidden flex flex-col z-50 animate-scale-in">
+          <div className="relative w-full max-w-4xl max-h-[88vh] rounded-3xl bg-white border border-[#dcd2c2] shadow-2xl overflow-hidden flex flex-col z-50 animate-scale-in">
             {/* Modal Header */}
             <div className="p-4 sm:p-5 border-b border-[var(--border-subtle)] flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl glass-button-primary text-stone-900">
+                <div className="p-2 rounded-xl bg-[#faeee2] border border-[#e8b992]/60 text-[#b85d19]">
                   <SlidersHorizontal className="h-5 w-5" />
                 </div>
                 <div>
@@ -735,7 +732,7 @@ export default function KundliHubView({
             </div>
 
             {/* Quick Search */}
-            <div className="p-4 sm:px-5 border-b border-[var(--border-subtle)] bg-black/5 dark:bg-white/5">
+            <div className="p-4 sm:px-5 border-b border-[var(--border-subtle)] bg-[#fbf9f5]">
               <div className="relative">
                 <Search className="absolute left-3.5 top-3 h-4 w-4 text-[var(--text-muted)]" />
                 <input
@@ -785,7 +782,7 @@ export default function KundliHubView({
                           onClick={() => handleSelectAdvancedTool(tool.id)}
                           className="flex items-start gap-3 p-3 rounded-2xl glass-card hover:border-[var(--border-gold)] text-left transition cursor-pointer"
                         >
-                          <div className="p-2.5 rounded-xl glass-pill text-[var(--text-gold)] shrink-0 mt-0.5">
+                          <div className="p-2.5 rounded-xl bg-[#faeee2] text-[#b85d19] border border-[#e8b992]/60 shrink-0 mt-0.5">
                             <ToolIcon className="h-4 w-4" />
                           </div>
                           <div>
@@ -804,8 +801,8 @@ export default function KundliHubView({
               ) : (
                 ADVANCED_CATEGORIES.map((category) => (
                   <div key={category.id} className="space-y-3">
-                    <h4 className="font-serif font-bold text-xs uppercase tracking-wider text-[var(--text-gold)] flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--text-gold)]" />
+                    <h4 className="font-serif font-bold text-xs uppercase tracking-wider text-[var(--gold-600)] flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold-500)]" />
                       {category.title}
                     </h4>
 
@@ -828,8 +825,8 @@ export default function KundliHubView({
                             <div
                               className={`p-2.5 rounded-xl shrink-0 mt-0.5 ${
                                 isCurrent
-                                  ? 'bg-amber-500/30 text-stone-900'
-                                  : 'glass-pill text-[var(--text-gold)]'
+                                  ? 'bg-white text-[#b85d19]'
+                                  : 'bg-[#faeee2] text-[#b85d19] border border-[#e8b992]/60'
                               }`}
                             >
                               <ToolIcon className="h-4 w-4" />
@@ -930,6 +927,7 @@ export default function KundliHubView({
                 onSubmit={generateKundli}
                 t={t}
                 lang={lang}
+                onOpenVault={onOpenVault}
               />
             )}
             {advancedTool === 'print' && (

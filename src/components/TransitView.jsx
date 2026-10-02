@@ -19,14 +19,19 @@ export default function TransitView({ kundliData, t, lang }) {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {transits.map((tr, idx) => (
-          <div key={idx} className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-4 shadow-xs">
+          <div
+            key={idx}
+            className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-4 shadow-xs"
+          >
             <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2">
               <span className="font-serif text-base font-semibold text-[var(--text-primary)]">
                 {t[tr.planet] || tr.planet}
               </span>
               <span
                 className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                  tr.isFavorable ? 'bg-[#e0edd8] text-[#285e20]' : 'bg-white/5 text-[var(--text-secondary)]'
+                  tr.isFavorable
+                    ? 'bg-[#e0edd8] text-[#285e20]'
+                    : 'bg-white/5 text-[var(--text-secondary)]'
                 }`}
               >
                 House {tr.houseFromMoon} Transit

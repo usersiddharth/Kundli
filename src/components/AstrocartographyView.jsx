@@ -83,7 +83,9 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
             <Compass className="h-4 w-4 text-[var(--text-gold)]" />
             વૈશ્વિક ગ્રહ મિડહેવન (MC) અને એસેન્ડન્ટ (ASC) રેખાઓ
           </h3>
-          <span className="text-xs font-mono text-[var(--text-muted)]">રેખાંશ ક્ષેત્ર: -180° થી +180°</span>
+          <span className="text-xs font-mono text-[var(--text-muted)]">
+            રેખાંશ ક્ષેત્ર: -180° થી +180°
+          </span>
         </div>
 
         <div className="overflow-x-auto rounded-2xl border border-[#334155] shadow-2xl">
@@ -248,7 +250,10 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {cities.map((city, idx) => (
-            <div key={idx} className="glass-card p-4 rounded-2xl border border-[var(--border-subtle)] space-y-2">
+            <div
+              key={idx}
+              className="glass-card p-4 rounded-2xl border border-[var(--border-subtle)] space-y-2"
+            >
               <div className="flex items-center justify-between">
                 <span className="font-serif text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
                   <MapPin className="h-4 w-4 text-[var(--text-gold)]" />

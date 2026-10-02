@@ -47,7 +47,9 @@ export default function CareerD10View({ kundliData, t, lang = 'gu' }) {
               <h4 className="font-serif text-base font-bold text-[var(--text-primary)]">
                 {domain.name[lang] || domain.name.gu}
               </h4>
-              <p className="text-xs text-[var(--text-muted)]">{domain.desc[lang] || domain.desc.gu}</p>
+              <p className="text-xs text-[var(--text-muted)]">
+                {domain.desc[lang] || domain.desc.gu}
+              </p>
             </div>
           ))}
         </div>

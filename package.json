@@ -8,6 +8,7 @@
     "start": "vite --open",
     "build": "vite build",
     "lint": "oxlint",
+    "server": "node server/index.js",
     "format": "prettier --write \"src/**/*.{js,jsx,css,json}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,css,json}\"",
     "check": "oxlint && prettier --check \"src/**/*.{js,jsx,css,json}\"",
