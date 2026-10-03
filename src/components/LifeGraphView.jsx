@@ -16,12 +16,12 @@ export default function LifeGraphView({ kundliData, birthDate = new Date(), t, l
       {/* Header */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faeee2] border border-[#e8b992]/60 text-[#b85d19]">
             <TrendingUp className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-              ૧૨૦ વર્ષનું જીવન આલેખ & મહત્વના તબક્કા (120-Year Life Graph)
+              ॥ ૧૨૦ વર્ષનું જીવન આલેખ & મહત્વના તબક્કા (120-Year Life Graph) ॥
             </h2>
             <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               વિંશોત્તરી દશા અને અષ્ટકવર્ગ સંયોજન આધારિત સફળતા અને ભાગ્યોદય આલેખ
@@ -33,7 +33,7 @@ export default function LifeGraphView({ kundliData, birthDate = new Date(), t, l
       {/* SVG Interactive Life Curve */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
         <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-[var(--text-gold)]" />
+          <Sparkles className="h-4 w-4 text-[#b85d19]" />
           ઉંમર (૦ થી ૧૨૦ વર્ષ) વિરુદ્ધ સફળતા રેટિંગ આલેખ
         </h3>
 
@@ -83,7 +83,7 @@ export default function LifeGraphView({ kundliData, birthDate = new Date(), t, l
       {/* Major Milestones Cards */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
         <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
-          <Award className="h-4 w-4 text-[var(--text-gold)]" />
+          <Award className="h-4 w-4 text-[#b85d19]" />
           જીવનના ૪ પ્રમુખ ભાગ્યોદય તબક્કા (Major Lifetime Milestones)
         </h3>
 
@@ -91,9 +91,9 @@ export default function LifeGraphView({ kundliData, birthDate = new Date(), t, l
           {milestones.map((m, idx) => (
             <div
               key={idx}
-              className="glass-card p-4 rounded-xl space-y-2 border border-[var(--border-subtle)]"
+              className="bg-[#fbf9f5] p-4 rounded-xl space-y-2 border border-[#e8b992]/60 shadow-xs"
             >
-              <span className="font-mono text-xs font-bold text-[var(--text-gold)]">
+              <span className="font-mono text-xs font-bold text-[#8b2500]">
                 ઉંમર {m.age} વર્ષ ({m.year})
               </span>
               <h4 className="font-serif text-sm font-bold text-[var(--text-primary)]">

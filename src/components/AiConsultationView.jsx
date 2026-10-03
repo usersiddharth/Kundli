@@ -462,10 +462,10 @@ export default function AiConsultationView({ kundliData, birthDateObj, t, lang }
                 onChange={(e) => handleProviderChange(e.target.value)}
                 className="w-full rounded-xl glass-input px-3 py-2 text-xs text-[var(--text-primary)] focus:outline-none"
               >
-                <option value="gemini" className="dark:bg-[#151928] bg-[var(--depth-2)]">
+                <option value="gemini" className="bg-white text-[var(--text-primary)]">
                   Google Gemini (Recommended Free)
                 </option>
-                <option value="openai" className="dark:bg-[#151928] bg-[var(--depth-2)]">
+                <option value="openai" className="bg-white text-[var(--text-primary)]">
                   OpenAI / OpenRouter Compatible
                 </option>
               </select>
@@ -482,7 +482,7 @@ export default function AiConsultationView({ kundliData, birthDateObj, t, lang }
                 className="w-full rounded-xl glass-input px-3 py-2 text-xs text-[var(--text-primary)] focus:outline-none"
               >
                 {(AVAILABLE_MODELS[tempProvider] || AVAILABLE_MODELS.gemini).map((m) => (
-                  <option key={m.id} value={m.id} className="dark:bg-[#151928] bg-[var(--depth-2)]">
+                  <option key={m.id} value={m.id} className="bg-white text-[var(--text-primary)]">
                     {m.name}
                   </option>
                 ))}
@@ -544,7 +544,7 @@ export default function AiConsultationView({ kundliData, birthDateObj, t, lang }
             <Button
               type="button"
               onPress={handleSaveSettings}
-              className="rounded-xl glass-button-primary px-4 py-1.5 text-xs font-medium text-[#0c0e17] transition shadow-xs cursor-pointer"
+              className="rounded-xl spatial-btn-primary px-4 py-1.5 text-xs font-medium transition shadow-xs cursor-pointer"
             >
               {t?.aiSaveSettings || 'Save Settings'}
             </Button>
@@ -589,12 +589,12 @@ export default function AiConsultationView({ kundliData, birthDateObj, t, lang }
                 onClick={() => setActiveCategory(cat.category)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition cursor-pointer border ${
                   isActive
-                    ? 'border-[var(--border-gold)] glass-button-primary text-[#0c0e17] shadow-xs'
-                    : 'border-[var(--border-subtle)] glass-card text-[var(--text-primary)] hover:border-[var(--border-gold)]/50'
+                    ? 'border-[var(--border-gold)] spatial-btn-primary shadow-xs'
+                    : 'border-[var(--border-subtle)] spatial-btn-ghost text-[var(--text-primary)] hover:border-[var(--border-gold)]/50'
                 }`}
               >
                 <Icon
-                  className={`h-3.5 w-3.5 ${isActive ? 'text-[#0c0e17]' : 'text-[var(--text-gold)]'}`}
+                  className={`h-3.5 w-3.5 ${isActive ? 'text-white' : 'text-[var(--text-gold)]'}`}
                 />
                 <span>{cat.title[lang] || cat.title.en}</span>
               </button>
@@ -642,9 +642,9 @@ export default function AiConsultationView({ kundliData, birthDateObj, t, lang }
               <div
                 className={`max-w-[88%] sm:max-w-[80%] rounded-2xl p-4 text-xs sm:text-sm leading-relaxed space-y-2 relative group ${
                   isUser
-                    ? 'glass-button-primary text-[#0c0e17] rounded-tr-none font-medium'
+                    ? 'bg-[#faeee0] text-[#731e00] border border-[#e8b98e] rounded-tr-none font-medium'
                     : isError
-                      ? 'bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 rounded-tl-none'
+                      ? 'bg-[#fef2f2] border border-[#fecaca] text-[#991b1b] rounded-tl-none'
                       : 'glass-panel text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-tl-none'
                 }`}
               >
@@ -780,7 +780,7 @@ export default function AiConsultationView({ kundliData, birthDateObj, t, lang }
           <Button
             type="submit"
             disabled={!inputValue.trim() || !kundliData}
-            className="flex items-center gap-1.5 rounded-xl glass-button-primary px-5 py-3 text-xs sm:text-sm font-medium text-[#0c0e17] transition shadow-xs cursor-pointer disabled:opacity-50"
+            className="flex items-center gap-1.5 rounded-xl spatial-btn-primary px-5 py-3 text-xs sm:text-sm font-medium transition shadow-xs cursor-pointer disabled:opacity-50"
           >
             <span>{t?.aiSend || 'Consult'}</span>
             <Send className="h-4 w-4" />

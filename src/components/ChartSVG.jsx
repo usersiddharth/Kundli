@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Download, Info, HelpCircle, Compass } from 'lucide-react';
+import { Download, Info, HelpCircle, Sun } from 'lucide-react';
 
 export default function ChartSVG({ kundliData, t, lang }) {
   const [chartStyle, setChartStyle] = useState('north'); // 'north' | 'south'
@@ -85,9 +85,9 @@ export default function ChartSVG({ kundliData, t, lang }) {
       <div className="flex items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-3.5">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <Compass className="h-5 w-5 text-[var(--text-gold)] shrink-0" />
+            <Sun className="h-5 w-5 text-[var(--text-gold)] shrink-0" />
             <h2 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif truncate">
-              {chartTitle}
+              ॥ {chartTitle} ॥
             </h2>
           </div>
           <p className="text-[11px] sm:text-xs text-[var(--text-muted)] font-sans mt-0.5 truncate">

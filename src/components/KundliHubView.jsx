@@ -618,7 +618,7 @@ export default function KundliHubView({
             <Button
               type="button"
               onPress={handleBackToCore}
-              className="flex items-center gap-1.5 glass-button-primary px-3 py-1.5 text-xs font-bold rounded-xl cursor-pointer"
+              className="flex items-center gap-1.5 spatial-btn-primary px-3 py-1.5 text-xs font-semibold rounded-xl cursor-pointer"
             >
               <ArrowLeft className="h-4 w-4" />
               <span>
@@ -649,8 +649,8 @@ export default function KundliHubView({
                   onClick={() => setCoreTab(tab.id)}
                   className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold whitespace-nowrap transition-all focus-visible:outline-hidden cursor-pointer ${
                     isSelected
-                      ? 'glass-button-primary shadow-xs'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#f3ece0]'
+                      ? 'spatial-btn-primary shadow-xs'
+                      : 'spatial-btn-ghost text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#f3ece0]'
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
@@ -666,7 +666,7 @@ export default function KundliHubView({
           <Button
             type="button"
             onPress={() => setIsToolsModalOpen(true)}
-            className="w-full md:w-auto flex items-center justify-center gap-2 glass-card hover:border-[var(--border-gold)] px-3.5 py-2 text-xs font-semibold text-[var(--text-primary)] rounded-xl transition cursor-pointer"
+            className="w-full md:w-auto flex items-center justify-center gap-2 spatial-btn-ghost border border-[var(--border-subtle)] hover:border-[var(--border-gold)] px-3.5 py-2 text-xs font-semibold text-[var(--text-primary)] rounded-xl transition cursor-pointer"
           >
             <SlidersHorizontal className="h-4 w-4 text-[var(--text-gold)]" />
             <span>

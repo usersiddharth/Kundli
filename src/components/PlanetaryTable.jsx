@@ -139,8 +139,8 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
       <Card.Header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4 p-0">
         <div>
           <Card.Title className="flex items-center gap-2 font-serif text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-            <Table className="h-5 w-5 text-[var(--text-gold)]" />{' '}
-            {t.tabPlanets || 'Planetary positions & coordinates'}
+            <Table className="h-5 w-5 text-[var(--text-gold)]" /> ॥{' '}
+            {t.tabPlanets || 'Planetary positions & coordinates'} ॥
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             Exact sidereal degrees, nakshatra padas, house placements & planetary dignities
@@ -153,7 +153,7 @@ export default function PlanetaryTable({ kundliData, t, lang = 'gu' }) {
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs text-[var(--text-primary)] sm:text-sm">
-          <thead className="border-b border-[var(--border-subtle)] bg-[var(--bg-pill)] text-xs font-medium text-[var(--text-secondary)]">
+          <thead className="border-b border-[#e5dac6] bg-[#f7f2e8] text-xs font-semibold text-[var(--text-secondary)] font-serif">
             <tr>
               <th className="p-3">{t.planet || 'Planet'}</th>
               <th className="p-3">{t.rashi || 'Rashi (sign)'}</th>

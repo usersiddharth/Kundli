@@ -142,12 +142,12 @@ export default function VedicClockView({ t, lang = 'gu' }) {
           {/* Title & Invocation */}
           <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-primary shadow-xs">
-                <Clock className="h-5 w-5 text-[#0c0e17] animate-spin-slow" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faeee2] border border-[#e8b992]/70 text-[#b85d19] shadow-xs">
+                <Clock className="h-5 w-5" />
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl font-medium tracking-tight text-[var(--text-primary)] font-serif">
-                  વૈદિક ઘડિયાળ & કાળ ચક્ર (Vedic Clock)
+                  ॥ વૈદિક ઘડિયાળ & કાળ ચક્ર (Vedic Clock) ॥
                 </h1>
                 <p className="text-xs text-[var(--text-muted)] font-sans">
                   પ્રથમ સૂર્યોદય આધારિત ૬૦ ઘટી, પળ, વિપળ, ૩૦ મુહૂર્ત અને ૨૪ ગ્રહ હોરા

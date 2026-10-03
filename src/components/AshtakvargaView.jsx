@@ -9,11 +9,11 @@ export default function AshtakvargaView({ kundliData, t }) {
   const majorPlanets = ['Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn'];
 
   return (
-    <div className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-6 shadow-sm space-y-6">
+    <div className="rounded-xl border border-[var(--border-subtle)] bg-white p-6 shadow-sm space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Grid className="h-5 w-5 text-[var(--text-gold)]" /> Ashtakavarga Matrix (BAV & SAV)
+            <Grid className="h-5 w-5 text-[#b85d19]" /> ॥ Ashtakavarga Matrix (BAV & SAV) ॥
           </h2>
           <p className="text-xs text-[var(--text-muted)]">
             Benefic point contributions across 12 houses (Total SAV: {avData.totalSAV} Bindus)
@@ -24,8 +24,7 @@ export default function AshtakvargaView({ kundliData, t }) {
       {/* Sarvashtakavarga (SAV) Summary Grid */}
       <div>
         <h3 className="font-serif text-base font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-1.5">
-          <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> Sarvashtakavarga (SAV) House
-          Totals
+          <Sparkles className="h-4 w-4 text-[#b85d19]" /> Sarvashtakavarga (SAV) House Totals
         </h3>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {avData.houseEvaluations.map((h, i) => (
@@ -35,7 +34,7 @@ export default function AshtakvargaView({ kundliData, t }) {
                 h.bindus >= 30
                   ? 'border-[#c1dec4] bg-[#e0edd8]/50 text-[#285e20]'
                   : h.bindus >= 28
-                    ? 'border-[#f0cca3] bg-[#fae8d4]/40 text-[var(--text-gold)]'
+                    ? 'border-[#f0cca3] bg-[#fae8d4]/40 text-[#8b2500]'
                     : 'border-[#e4b5b5] bg-[#f0d5d5]/40 text-[#802020]'
               }`}
             >
@@ -57,9 +56,9 @@ export default function AshtakvargaView({ kundliData, t }) {
         <h3 className="font-serif text-base font-semibold text-[var(--text-primary)] mb-3">
           Bhinnashtakavarga (BAV) Planet Breakdown
         </h3>
-        <div className="overflow-x-auto rounded-xl border border-[var(--border-subtle)] bg-white/5">
+        <div className="overflow-x-auto rounded-xl border border-[var(--border-subtle)] bg-white">
           <table className="w-full text-left text-xs text-[var(--text-primary)]">
-            <thead className="border-b border-[var(--border-subtle)] bg-white/5 font-semibold text-[var(--text-secondary)]">
+            <thead className="border-b border-[var(--border-subtle)] bg-[#f7f2e8] font-serif font-semibold text-[var(--text-secondary)]">
               <tr>
                 <th className="p-2.5">Planet</th>
                 {Array.from({ length: 12 }, (_, i) => (
@@ -73,7 +72,7 @@ export default function AshtakvargaView({ kundliData, t }) {
               {majorPlanets.map((pName) => {
                 const row = avData.bav[pName];
                 return (
-                  <tr key={pName} className="hover:bg-white/10 transition">
+                  <tr key={pName} className="hover:bg-[#faf5eb] transition">
                     <td className="p-2.5 font-semibold text-[var(--text-primary)]">
                       {t[pName] || pName}
                     </td>
@@ -95,13 +94,10 @@ export default function AshtakvargaView({ kundliData, t }) {
                   </tr>
                 );
               })}
-              <tr className="bg-white/5 font-bold text-[var(--text-primary)]">
+              <tr className="bg-[#fbf9f5] font-serif font-bold text-[var(--text-primary)]">
                 <td className="p-2.5">Total (SAV)</td>
                 {avData.savTotals.map((tot, idx) => (
-                  <td
-                    key={idx}
-                    className="p-2.5 text-center font-mono text-xs text-[var(--text-gold)]"
-                  >
+                  <td key={idx} className="p-2.5 text-center font-mono text-xs text-[#8b2500]">
                     {tot}
                   </td>
                 ))}

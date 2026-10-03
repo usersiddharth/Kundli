@@ -12,8 +12,8 @@ export default function ShadbalaView({ kundliData, t }) {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-[var(--text-gold)]" /> Shadbala (ષડ્બળ - 6-Fold
-            Planetary Strength)
+            <BarChart3 className="h-5 w-5 text-[#b85d19]" /> ॥ Shadbala (ષડ્બળ - 6-Fold Planetary
+            Strength) ॥
           </h2>
           <p className="text-xs text-[var(--text-muted)] mt-0.5">
             Sthana, Dig, Kaala, Chesta, Naisargika, and Drik balas measured in Rupas and Virupas (60
@@ -25,7 +25,7 @@ export default function ShadbalaView({ kundliData, t }) {
       {/* Planetary Power Rankings Cards */}
       <div>
         <h3 className="font-serif text-base font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-1.5">
-          <Award className="h-4 w-4 text-[var(--text-gold)]" /> Planetary Strength Rankings
+          <Award className="h-4 w-4 text-[#b85d19]" /> Planetary Strength Rankings
         </h3>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {rankedList.map((p) => (
@@ -35,7 +35,7 @@ export default function ShadbalaView({ kundliData, t }) {
             >
               <div className="flex justify-between items-center">
                 <span className="font-serif font-bold text-sm text-[var(--text-primary)] flex items-center gap-1.5">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full glass-button-dark text-[10px] font-bold">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#faeee2] text-[#8b2500] border border-[#e8b992]/60 text-[10px] font-bold">
                     #{p.rank}
                   </span>
                   {t[p.name] || p.name}
@@ -90,9 +90,9 @@ export default function ShadbalaView({ kundliData, t }) {
         <h3 className="font-serif text-base font-semibold text-[var(--text-primary)] mb-3">
           6-Fold Bala Breakdown Matrix (Virupas)
         </h3>
-        <div className="overflow-x-auto rounded-xl border border-[var(--border-subtle)] glass-card">
+        <div className="overflow-x-auto rounded-xl border border-[var(--border-subtle)] bg-white">
           <table className="w-full text-left text-xs text-[var(--text-primary)]">
-            <thead className="border-b border-[var(--border-subtle)] bg-[var(--bg-pill)] font-semibold text-[var(--text-secondary)]">
+            <thead className="border-b border-[var(--border-subtle)] bg-[#f7f2e8] font-serif font-semibold text-[var(--text-secondary)]">
               <tr>
                 <th className="p-3">Planet</th>
                 <th className="p-3 font-mono">Sthana (Positional)</th>
@@ -107,7 +107,7 @@ export default function ShadbalaView({ kundliData, t }) {
             </thead>
             <tbody className="divide-y divide-[var(--border-subtle)]">
               {rankedList.map((p) => (
-                <tr key={p.name} className="hover:bg-[var(--bg-card-hover)] transition">
+                <tr key={p.name} className="hover:bg-[#faf5eb] transition">
                   <td className="p-3 font-serif font-bold text-[var(--text-primary)]">
                     {t[p.name] || p.name}
                   </td>
@@ -117,9 +117,7 @@ export default function ShadbalaView({ kundliData, t }) {
                   <td className="p-3 font-mono text-[var(--text-secondary)]">{p.chestaBala}</td>
                   <td className="p-3 font-mono text-[var(--text-secondary)]">{p.naisargikaBala}</td>
                   <td className="p-3 font-mono text-[var(--text-secondary)]">{p.drikBala}</td>
-                  <td className="p-3 font-mono font-bold text-[var(--text-gold)]">
-                    {p.totalVirupas}
-                  </td>
+                  <td className="p-3 font-mono font-bold text-[#8b2500]">{p.totalVirupas}</td>
                   <td className="p-3 font-mono font-bold text-[var(--text-primary)]">
                     {p.totalRupas}
                   </td>

@@ -13,7 +13,7 @@ export default function YogasView({ kundliData, t, lang }) {
       <Card.Header className="mb-6 border-b border-[var(--border-subtle)] pb-4 p-0">
         <div>
           <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Crown className="h-5 w-5 text-[var(--text-gold)]" /> {t.yogasTitle}
+            <Crown className="h-5 w-5 text-[#b85d19]" /> ॥ {t.yogasTitle} ॥
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             {t.yogasDesc}
@@ -35,9 +35,9 @@ export default function YogasView({ kundliData, t, lang }) {
               <div>
                 <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2">
                   <h3 className="font-serif text-base font-semibold text-[var(--text-primary)] flex items-center gap-1.5">
-                    <Sparkles className="h-4 w-4 text-[var(--text-gold)]" /> {y.name}
+                    <Sparkles className="h-4 w-4 text-[#b85d19]" /> {y.name}
                   </h3>
-                  <Chip className="glass-badge-gold text-xs font-semibold">
+                  <Chip className="bg-[#faeee2] text-[#8b2500] border border-[#e8b992]/60 text-xs font-semibold">
                     <Chip.Label>{y.strength}</Chip.Label>
                   </Chip>
                 </div>

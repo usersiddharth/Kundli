@@ -1,6 +1,6 @@
 import React from 'react';
 import { calculateCurrentTransits } from '../engine/transits.js';
-import { Compass, Sparkles } from 'lucide-react';
+import { Sun, Sparkles } from 'lucide-react';
 
 export default function TransitView({ kundliData, t, lang }) {
   if (!kundliData) return null;
@@ -9,10 +9,10 @@ export default function TransitView({ kundliData, t, lang }) {
   const transits = calculateCurrentTransits(natalMoonSignIndex);
 
   return (
-    <div className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-6 shadow-sm">
+    <div className="rounded-xl border border-[var(--border-subtle)] bg-white p-6 shadow-sm">
       <div className="mb-6 border-b border-[var(--border-subtle)] pb-4">
         <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-          <Compass className="h-5 w-5 text-[var(--text-gold)]" /> {t.transitsTitle}
+          <Sun className="h-5 w-5 text-[#b85d19]" /> ॥ {t.transitsTitle} ॥
         </h2>
         <p className="text-xs text-[var(--text-muted)]">{t.transitDesc}</p>
       </div>
@@ -21,7 +21,7 @@ export default function TransitView({ kundliData, t, lang }) {
         {transits.map((tr, idx) => (
           <div
             key={idx}
-            className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-4 shadow-xs"
+            className="rounded-xl border border-[var(--border-subtle)] bg-[#fbf9f5] p-4 shadow-xs"
           >
             <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2">
               <span className="font-serif text-base font-semibold text-[var(--text-primary)]">
@@ -29,9 +29,7 @@ export default function TransitView({ kundliData, t, lang }) {
               </span>
               <span
                 className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                  tr.isFavorable
-                    ? 'bg-[#e0edd8] text-[#285e20]'
-                    : 'bg-white/5 text-[var(--text-secondary)]'
+                  tr.isFavorable ? 'bg-[#e0edd8] text-[#285e20]' : 'bg-[#faeee2] text-[#8b2500]'
                 }`}
               >
                 House {tr.houseFromMoon} Transit

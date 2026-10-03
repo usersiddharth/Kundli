@@ -30,12 +30,12 @@ export default function EventMuhurtaView({ t, lang = 'gu' }) {
       {/* Header */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faeee2] border border-[#e8b992]/60 text-[#b85d19]">
             <Calendar className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-              વ્યક્તિગત શ્રેષ્ઠ મુહૂર્ત શોધો (Event Muhurta Finder)
+              ॥ વ્યક્તિગત શ્રેષ્ઠ મુહૂર્ત પત્રિકા (Event Muhurta Finder) ॥
             </h2>
             <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               વાહન, લગ્ન, મિલકત, વ્યાપાર, ગૃહ પ્રવેશ અને ઓપરેશન માટે શ્રેષ્ઠ શુભ દિવસો
@@ -58,13 +58,15 @@ export default function EventMuhurtaView({ t, lang = 'gu' }) {
               role="tab"
               aria-selected={isSelected}
               onClick={() => setSelectedEventId(ev.id)}
-              className={`p-3.5 rounded-2xl flex flex-col items-center justify-center text-center transition border ${
+              className={`p-3.5 rounded-2xl flex flex-col items-center justify-center text-center transition border cursor-pointer ${
                 isSelected
-                  ? 'glass-panel-accent border-[#b85d19] ring-2 ring-[#b85d19]/40 shadow-sm'
-                  : 'glass-card hover:bg-white/10'
+                  ? 'bg-[#faeee2] border-[#b85d19] ring-1 ring-[#b85d19]/40 shadow-xs'
+                  : 'bg-white border-[#e5dac6] hover:bg-[#faf5eb]'
               }`}
             >
-              <h4 className="font-serif text-xs font-bold text-[var(--text-primary)] mt-1">
+              <h4
+                className={`font-serif text-xs font-medium mt-1 ${isSelected ? 'text-[#8b2500] font-semibold' : 'text-[var(--text-primary)]'}`}
+              >
                 {ev.name[lang] || ev.name.gu}
               </h4>
             </button>

@@ -117,10 +117,7 @@ export default function ProfileVaultModal({ isOpen, onClose, onSelectProfile, la
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-stone-900/40 backdrop-blur-xs animate-fade-in">
-      <div
-        className="relative w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl overflow-hidden shadow-2xl bg-white border border-[#dcd2c2] text-[#231f1c]"
-        style={{ fontFamily: 'Outfit, sans-serif' }}
-      >
+      <div className="relative w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl overflow-hidden shadow-2xl bg-white border border-[#dcd2c2] text-[#231f1c]">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#e6ded2]">
           <div className="flex items-center gap-2.5">
@@ -128,8 +125,14 @@ export default function ProfileVaultModal({ isOpen, onClose, onSelectProfile, la
               <Bookmark className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-medium tracking-tight text-[#231f1c]">
-                {lang === 'gu' ? 'કુંડળી વોલ્ટ' : lang === 'hi' ? 'कुंडली वॉल्ट' : 'Kundli vault'}
+              <h2 className="text-lg sm:text-xl font-medium tracking-tight text-[#1f1a16] font-serif">
+                ॥{' '}
+                {lang === 'gu'
+                  ? 'કુંડળી વોલ્ટ પત્રિકા સંગ્રહ'
+                  : lang === 'hi'
+                    ? 'कुंडली वॉल्ट संग्रह'
+                    : 'Kundli vault'}{' '}
+                ॥
               </h2>
               <p className="text-xs text-[#7d746a]">
                 {lang === 'gu'

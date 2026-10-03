@@ -54,10 +54,10 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
       {/* Dedicated Printable PDF Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
-          || ૐ શ્રી ગણેશાય નમઃ ||
+          ॥ ૐ શ્રી ગણેશાય નમઃ ॥ • શ્રી જગદંબા પ્રસન્ન • વિક્રમ સંવત ૨૦૮૧
         </span>
         <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
-          વિગતવાર અંકશાસ્ત્ર રિપોર્ટ (Numerology Report)
+          ॥ વિગતવાર અંકશાસ્ત્ર પત્રિકા (Numerology Report) ॥
         </h1>
         <p className="text-xs text-[var(--text-secondary)]">
           નામ: {nameInput} • જન્મ તારીખ: {numData.birthDateFormatted} • પર્સનલ વર્ષ: {selectedYear}
@@ -69,8 +69,8 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-3">
           <div>
             <h2 className="text-lg font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-              <Edit3 className="h-4 w-4 text-[var(--text-gold)]" /> મેન્યુઅલ અંકશાસ્ત્ર ડેટા એન્ટ્રી
-              (Manual Numerology Entry)
+              <Edit3 className="h-4 w-4 text-[var(--text-gold)]" /> ॥ મેન્યુઅલ અંકશાસ્ત્ર ડેટા
+              એન્ટ્રી (Manual Numerology Entry) ॥
             </h2>
             <p className="text-xs text-[var(--text-muted)]">
               અહીં તમે કોઈપણ વ્યક્તિનું નામ અને જન્મ તારીખ હાથથી દાખલ કરીને તાત્કાલિક અંકશાસ્ત્ર
@@ -83,7 +83,7 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
               type="button"
               onPress={handleLoadKundliProfile}
               title="કુંડળી પ્રોફાઇલમાંથી લોડ કરો"
-              className="flex items-center gap-1.5 rounded-xl glass-card px-3 py-1.5 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-2xs cursor-pointer"
+              className="flex items-center gap-1.5 rounded-xl bg-[#faeee2] text-[#8b2500] border border-[#e8b992]/60 px-3 py-1.5 text-xs font-medium transition shadow-2xs cursor-pointer"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               <span>કુંડળી પ્રોફાઇલ લોડ કરો</span>
@@ -93,7 +93,7 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
               type="button"
               onPress={handleClearFresh}
               title="ફોર્મ સાફ કરો (Clear Form)"
-              className="flex items-center gap-1.5 rounded-xl glass-card px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-rose-500 transition shadow-2xs cursor-pointer"
+              className="flex items-center gap-1.5 rounded-xl spatial-btn-ghost px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-rose-500 transition cursor-pointer"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               <span>ફોર્મ સાફ કરો</span>
@@ -103,9 +103,9 @@ export default function NumerologyView({ formData, birthDate, t, lang }) {
               type="button"
               onPress={handlePrint}
               title="Save Numerology as PDF"
-              className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
+              className="flex items-center gap-1.5 rounded-xl spatial-btn-primary px-3.5 py-1.5 text-xs font-medium text-white transition shadow-xs cursor-pointer"
             >
-              <Printer className="h-3.5 w-3.5 text-[var(--text-gold)]" />
+              <Printer className="h-3.5 w-3.5" />
               <span>Save as PDF</span>
             </Button>
           </div>

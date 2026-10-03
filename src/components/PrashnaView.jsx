@@ -16,12 +16,12 @@ export default function PrashnaView({ t, lang = 'gu' }) {
       {/* Header */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faeee2] border border-[#e8b992]/60 text-[#b85d19]">
             <HelpCircle className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-              તાત્કાલિક પ્રશ્ન કુંડળી (Instant Prashna Horary)
+              ॥ તાત્કાલિક પ્રશ્ન કુંડળી (Instant Prashna Horary) ॥
             </h2>
             <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               પ્રશ્ન પૂછતી સમયની તાત્કાલિક ગ્રહ સ્થિતિ આધારિત ચોક્કસ ઉત્તર અને સંભાવના
@@ -32,7 +32,7 @@ export default function PrashnaView({ t, lang = 'gu' }) {
 
       {/* Category Selector & Cast Button */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
-        <label className="text-xs font-serif font-bold text-[var(--text-gold)] uppercase tracking-wider block">
+        <label className="text-xs font-serif font-bold text-[#8b2500] uppercase tracking-wider block">
           તમારો પ્રશ્ન કઈ શ્રેણીનો છે? (Select Question Category)
         </label>
 
@@ -41,10 +41,10 @@ export default function PrashnaView({ t, lang = 'gu' }) {
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`p-3 rounded-xl border text-xs font-bold transition ${
+              className={`p-3 rounded-xl border text-xs font-medium transition cursor-pointer ${
                 selectedCategory === cat.id
-                  ? 'glass-panel-accent border-[#b85d19] text-[var(--text-gold)] ring-2 ring-[#b85d19]/40'
-                  : 'glass-card text-[var(--text-primary)] hover:bg-white/10'
+                  ? 'bg-[#faeee2] border-[#b85d19] text-[#8b2500] ring-1 ring-[#b85d19]/40 font-semibold'
+                  : 'bg-white border-[#e5dac6] text-[var(--text-primary)] hover:bg-[#faf5eb]'
               }`}
             >
               {cat.name[lang] || cat.name.gu}
@@ -54,9 +54,9 @@ export default function PrashnaView({ t, lang = 'gu' }) {
 
         <button
           onClick={handleCastPrashna}
-          className="w-full glass-button-dark py-3 rounded-xl font-serif text-sm font-bold text-[#f4ebd9] flex items-center justify-center gap-2 shadow-md transition hover:scale-[1.01]"
+          className="w-full spatial-btn-primary py-3 rounded-xl font-serif text-sm font-medium flex items-center justify-center gap-2 shadow-md transition cursor-pointer"
         >
-          <Zap className="h-4 w-4 text-amber-400" />
+          <Zap className="h-4 w-4" />
           તાત્કાલિક પ્રશ્ન કુંડળી ગણો (Cast Prashna Chart Now)
         </button>
       </div>

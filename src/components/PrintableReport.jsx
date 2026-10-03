@@ -36,8 +36,8 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl glass-panel p-5 shadow-sm print:hidden">
         <div>
           <h3 className="font-serif text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
-            <Printer className="h-5 w-5 text-[var(--text-gold)]" /> {t.tabPrint} (Publication-Grade
-            Vedic Horoscope Dossier)
+            <Printer className="h-5 w-5 text-[var(--text-gold)]" /> ॥ {t.tabPrint}{' '}
+            (Publication-Grade Vedic Horoscope Dossier) ॥
           </h3>
           <p className="text-xs text-[var(--text-muted)] mt-0.5">
             સંપૂર્ણ કુંડળી, નવમાંશ ચાર્ટ, ગ્રહ સ્પષ્ટ, ષડ્બળ, દશા, દોષ અને રત્ન ઉપાયો સાથે A4
@@ -47,7 +47,7 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
 
         <button
           onClick={handlePrint}
-          className="flex items-center gap-2 rounded-xl glass-button-primary px-6 py-2.5 text-sm font-bold shadow-md transition"
+          className="flex items-center gap-2 rounded-xl spatial-btn-primary px-6 py-2.5 text-sm font-medium shadow-md transition cursor-pointer"
         >
           <Printer className="h-4 w-4" /> Save Complete Horoscope PDF
         </button>
@@ -64,10 +64,10 @@ export default function PrintableReport({ kundliData, formData, birthDate, t, la
           {/* Traditional Vedic Letterhead */}
           <div className="print-letterhead text-center border-b-2 border-[#8c7456] pb-3">
             <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)] block">
-              || ૐ શ્રી ગણેશાય નમઃ || ૐ નમો ભગવતે વાસુદેવાય ||
+              ॥ ૐ શ્રી ગણેશાય નમઃ ॥ • શ્રી જગદંબા પ્રસન્ન • વિક્રમ સંવત ૨૦૮૧
             </span>
             <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mt-1">
-              સંપૂર્ણ વૈદિક જન્મ કુંડળી (Vedic Horoscope Dossier)
+              ॥ સંપૂર્ણ વૈદિક જન્મ કુંડળી પત્રિકા (Vedic Horoscope Dossier) ॥
             </h1>
             <span className="text-[11px] text-[var(--text-muted)] font-medium block mt-0.5">
               ચિત્રા પક્ષીય લાહિડી અયનાંશ આધારિત ઉચ્ચ-ચોક્કસાઈ ખગોળીય ગણતરી

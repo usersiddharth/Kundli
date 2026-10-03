@@ -171,12 +171,42 @@ const GUJARATI_MONTHS_LIST = [
 ];
 
 const RITUS_MAP = [
-  { nameGu: 'વસંત ઋતુ (Spring)', nameHi: 'वसंत ऋतु (Spring)', nameEn: 'Spring (Vasanta)', months: [4, 5] },
-  { nameGu: 'ગ્રીષ્મ ઋતુ (Summer)', nameHi: 'ग्रीष्म ऋतु (Summer)', nameEn: 'Summer (Grishma)', months: [6, 7] },
-  { nameGu: 'વર્ષા ઋતુ (Monsoon)', nameHi: 'वर्षा ऋतु (Monsoon)', nameEn: 'Monsoon (Varsha)', months: [8, 9] },
-  { nameGu: 'શરદ ઋતુ (Autumn)', nameHi: 'शरद ऋतु (Autumn)', nameEn: 'Autumn (Sharad)', months: [10, 11] },
-  { nameGu: 'હેમંત ઋતુ (Pre-Winter)', nameHi: 'हेमंत ऋतु (Pre-Winter)', nameEn: 'Pre-Winter (Hemanta)', months: [0, 1] },
-  { nameGu: 'શિશિર ઋતુ (Winter)', nameHi: 'शिशिर ऋतु (Winter)', nameEn: 'Winter (Shishira)', months: [2, 3] },
+  {
+    nameGu: 'વસંત ઋતુ (Spring)',
+    nameHi: 'वसंत ऋतु (Spring)',
+    nameEn: 'Spring (Vasanta)',
+    months: [4, 5],
+  },
+  {
+    nameGu: 'ગ્રીષ્મ ઋતુ (Summer)',
+    nameHi: 'ग्रीष्म ऋतु (Summer)',
+    nameEn: 'Summer (Grishma)',
+    months: [6, 7],
+  },
+  {
+    nameGu: 'વર્ષા ઋતુ (Monsoon)',
+    nameHi: 'वर्षा ऋतु (Monsoon)',
+    nameEn: 'Monsoon (Varsha)',
+    months: [8, 9],
+  },
+  {
+    nameGu: 'શરદ ઋતુ (Autumn)',
+    nameHi: 'शरद ऋतु (Autumn)',
+    nameEn: 'Autumn (Sharad)',
+    months: [10, 11],
+  },
+  {
+    nameGu: 'હેમંત ઋતુ (Pre-Winter)',
+    nameHi: 'हेमंत ऋतु (Pre-Winter)',
+    nameEn: 'Pre-Winter (Hemanta)',
+    months: [0, 1],
+  },
+  {
+    nameGu: 'શિશિર ઋતુ (Winter)',
+    nameHi: 'शिशिर ऋतु (Winter)',
+    nameEn: 'Winter (Shishira)',
+    months: [2, 3],
+  },
 ];
 
 // Multilingual lookup for Avakahada attributes
@@ -299,9 +329,17 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
 
   // Paksha string (Separate)
   const pakshaDisplay = isShuklaPaksha
-    ? (lang === 'en' ? 'Shukla Paksha (Sud)' : lang === 'hi' ? 'शुक्ल पक्ष (सुद)' : 'શુક્લ પક્ષ (સુદ)')
-    : (lang === 'en' ? 'Krishna Paksha (Vad)' : lang === 'hi' ? 'कृष्ण पक्ष (वद)' : 'કૃષ્ણ પક્ષ (વદ)');
-  const pakshaTag = isShuklaPaksha ? (lang === 'en' ? 'Sud' : 'સુદ') : (lang === 'en' ? 'Vad' : 'વદ');
+    ? lang === 'en'
+      ? 'Shukla Paksha (Sud)'
+      : lang === 'hi'
+        ? 'शुक्ल पक्ष (सुद)'
+        : 'શુક્લ પક્ષ (સુદ)'
+    : lang === 'en'
+      ? 'Krishna Paksha (Vad)'
+      : lang === 'hi'
+        ? 'कृष्ण पक्ष (वद)'
+        : 'કૃષ્ણ પક્ષ (વદ)';
+  const pakshaTag = isShuklaPaksha ? (lang === 'en' ? 'Sud' : 'સુદ') : lang === 'en' ? 'Vad' : 'વદ';
 
   // Vikram Samvat calculation (Separate)
   let birthYear = 1986;
@@ -325,12 +363,21 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
 
   // Ritu & Ayana (Separate)
   const rituObj = RITUS_MAP.find((r) => r.months.includes(gujMonthIdx)) || RITUS_MAP[0];
-  const rituDisplay = rituObj[`name${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] || rituObj.nameGu;
+  const rituDisplay =
+    rituObj[`name${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] || rituObj.nameGu;
   const sunSignIdx = Math.floor((((sunLon % 360) + 360) % 360) / 30) % 12;
   const isUttarayana = sunSignIdx >= 9 || sunSignIdx <= 2;
   const ayanaDisplay = isUttarayana
-    ? (lang === 'en' ? 'Uttarayana (Northern course)' : lang === 'hi' ? 'उत्तरायण' : 'ઉત્તરાયણ (ઉત્તર તરફ સૂર્ય ગતિ)')
-    : (lang === 'en' ? 'Dakshinayana (Southern course)' : lang === 'hi' ? 'दक्षिणायन' : 'દક્ષિણાયન (દક્ષિણ તરફ સૂર્ય ગતિ)');
+    ? lang === 'en'
+      ? 'Uttarayana (Northern course)'
+      : lang === 'hi'
+        ? 'उत्तरायण'
+        : 'ઉત્તરાયણ (ઉત્તર તરફ સૂર્ય ગતિ)'
+    : lang === 'en'
+      ? 'Dakshinayana (Southern course)'
+      : lang === 'hi'
+        ? 'दक्षिणायन'
+        : 'દક્ષિણાયન (દક્ષિણ તરફ સૂર્ય ગતિ)';
 
   // Sign helper values
   const lagnaInfo = RASHI_DATA[panchang.ascendant] || {};
@@ -341,11 +388,17 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
   const moonSignDisplay = moonSignInfo[lang] || moonSignInfo.gu || panchang.moonSign;
   const sunSignDisplay = sunSignInfo[lang] || sunSignInfo.gu || panchang.sunSign;
 
-  const lagnaLord = lagnaInfo[`lord${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] || lagnaInfo.lordGu;
-  const lagnaElement = lagnaInfo[`element${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] || lagnaInfo.elementGu;
+  const lagnaLord =
+    lagnaInfo[`lord${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] || lagnaInfo.lordGu;
+  const lagnaElement =
+    lagnaInfo[`element${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] ||
+    lagnaInfo.elementGu;
 
-  const sunLord = sunSignInfo[`lord${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] || sunSignInfo.lordGu;
-  const sunElement = sunSignInfo[`element${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] || sunSignInfo.elementGu;
+  const sunLord =
+    sunSignInfo[`lord${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] || sunSignInfo.lordGu;
+  const sunElement =
+    sunSignInfo[`element${lang === 'hi' ? 'Hi' : lang === 'en' ? 'En' : 'Gu'}`] ||
+    sunSignInfo.elementGu;
 
   // Vashya & Paya (Separate)
   const moonSignIdx = Math.floor((((moonLon % 360) + 360) % 360) / 30) % 12;
@@ -357,23 +410,31 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
 
   let payaDisplay = lang === 'en' ? 'Copper (Tambu)' : 'તાંબા પાયો (Copper)';
   if ([1, 6, 11].includes(houseFromLagna)) {
-    payaDisplay = lang === 'en' ? 'Gold (Suvarna)' : lang === 'hi' ? 'स्वर्ण पाया' : 'સુવર્ણ પાયો (Gold)';
+    payaDisplay =
+      lang === 'en' ? 'Gold (Suvarna)' : lang === 'hi' ? 'स्वर्ण पाया' : 'સુવર્ણ પાયો (Gold)';
   } else if ([2, 5, 9].includes(houseFromLagna)) {
-    payaDisplay = lang === 'en' ? 'Silver (Rupa)' : lang === 'hi' ? 'रजत पाया' : 'રૂપા પાયો (Silver)';
+    payaDisplay =
+      lang === 'en' ? 'Silver (Rupa)' : lang === 'hi' ? 'रजत पाया' : 'રૂપા પાયો (Silver)';
   } else if ([3, 7, 10].includes(houseFromLagna)) {
-    payaDisplay = lang === 'en' ? 'Copper (Tambu)' : lang === 'hi' ? 'ताम्र पाया' : 'તાંબા પાયો (Copper)';
+    payaDisplay =
+      lang === 'en' ? 'Copper (Tambu)' : lang === 'hi' ? 'ताम्र पाया' : 'તાંબા પાયો (Copper)';
   } else if ([4, 8, 12].includes(houseFromLagna)) {
     payaDisplay = lang === 'en' ? 'Iron (Loha)' : lang === 'hi' ? 'लौह पाया' : 'લોખંડ પાયો (Iron)';
   }
 
   // Localized values
-  const tithiText = TITHI_MAP[panchang.tithi]?.[lang] || TITHI_MAP[panchang.tithi]?.gu || panchang.tithi;
+  const tithiText =
+    TITHI_MAP[panchang.tithi]?.[lang] || TITHI_MAP[panchang.tithi]?.gu || panchang.tithi;
   const vaarText = VAAR_MAP[panchang.vaar]?.[lang] || VAAR_MAP[panchang.vaar]?.gu || panchang.vaar;
-  const padaText = PADA_NAMES[panchang.pada]?.[lang] || PADA_NAMES[panchang.pada]?.gu || `Quarter ${panchang.pada}`;
+  const padaText =
+    PADA_NAMES[panchang.pada]?.[lang] ||
+    PADA_NAMES[panchang.pada]?.gu ||
+    `Quarter ${panchang.pada}`;
   const ganaText = GANA_MAP[panchang.gana]?.[lang] || GANA_MAP[panchang.gana]?.gu || panchang.gana;
   const yoniText = YONI_MAP[panchang.yoni]?.[lang] || YONI_MAP[panchang.yoni]?.gu || panchang.yoni;
   const nadiText = NADI_MAP[panchang.nadi]?.[lang] || NADI_MAP[panchang.nadi]?.gu || panchang.nadi;
-  const varnaText = VARNA_MAP[panchang.varna]?.[lang] || VARNA_MAP[panchang.varna]?.gu || panchang.varna;
+  const varnaText =
+    VARNA_MAP[panchang.varna]?.[lang] || VARNA_MAP[panchang.varna]?.gu || panchang.varna;
 
   // Header quick summary text
   const birthTithiName = TITHI_MAP[panchang.tithi]?.gu?.split(' ')[0] || panchang.tithi;
@@ -386,7 +447,7 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
         <div>
           <h2 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-[var(--text-gold)] shrink-0" aria-hidden="true" />
-            <span>{t.avakhadaChakra || 'અવકહડા ચક્ર અને પંચાંગ વિગત'}</span>
+            <span>॥ {t.avakhadaChakra || 'અવકહડા ચક્ર અને પંચાંગ વિગત'} ॥</span>
           </h2>
           <p className="text-xs text-[var(--text-muted)] mt-0.5 font-sans">
             {lang === 'hi'
@@ -455,7 +516,9 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
           <div className="text-[11px] text-[var(--text-muted)] flex items-center gap-2 pt-0.5 border-t border-[var(--border-subtle)]/60 font-sans truncate">
             <span>
               {lang === 'en' ? 'Nakshatra: ' : 'નક્ષત્ર: '}
-              <strong className="text-[var(--text-secondary)] font-medium">{panchang.nakshatra}</strong>
+              <strong className="text-[var(--text-secondary)] font-medium">
+                {panchang.nakshatra}
+              </strong>
             </span>
             <span>•</span>
             <span className="truncate">{padaText}</span>
@@ -510,7 +573,9 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
             <div className="flex items-center justify-between py-2.5">
               <span className="font-medium text-[var(--text-secondary)] flex items-center gap-2">
                 <Calendar className="h-3.5 w-3.5 text-[var(--text-gold)]" />
-                <span>{lang === 'en' ? 'Gujarati month' : lang === 'hi' ? 'गुजराती मास' : 'ગુજરાતી માસ'}</span>
+                <span>
+                  {lang === 'en' ? 'Gujarati month' : lang === 'hi' ? 'गुजराती मास' : 'ગુજરાતી માસ'}
+                </span>
               </span>
               <span className="font-medium text-[var(--text-primary)] font-serif text-sm">
                 {gujMonthDisplay}
@@ -532,7 +597,9 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
             <div className="flex items-center justify-between py-2.5">
               <span className="font-medium text-[var(--text-secondary)] flex items-center gap-2">
                 <Award className="h-3.5 w-3.5 text-[var(--text-gold)]" />
-                <span>{lang === 'en' ? 'Vikram Samvat' : lang === 'hi' ? 'विक्रम संवत' : 'વિક્રમ સંવત'}</span>
+                <span>
+                  {lang === 'en' ? 'Vikram Samvat' : lang === 'hi' ? 'विक्रम संवत' : 'વિક્રમ સંવત'}
+                </span>
               </span>
               <span className="font-mono text-xs font-semibold text-[var(--text-primary)] bg-[var(--depth-2)] px-2 py-0.5 rounded-md border border-[var(--border-subtle)]">
                 {vikramSamvatDisplay}
@@ -589,9 +656,7 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
                 <Feather className="h-3.5 w-3.5 text-[var(--text-muted)]" />
                 <span>{t.pada || 'ચરણ (Pada)'}</span>
               </span>
-              <span className="font-medium text-[var(--text-primary)] font-sans">
-                {padaText}
-              </span>
+              <span className="font-medium text-[var(--text-primary)] font-sans">{padaText}</span>
             </div>
 
             {/* 9. Lahiri Ayanamsha (Separated) */}
@@ -683,7 +748,13 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
             <div className="flex items-center justify-between py-2.5">
               <span className="font-medium text-[var(--text-secondary)] flex items-center gap-2">
                 <Crown className="h-3.5 w-3.5 text-[var(--text-muted)]" />
-                <span>{lang === 'en' ? 'Paya (Metal Footing)' : lang === 'hi' ? 'पाया' : 'પાયો (Metal footing)'}</span>
+                <span>
+                  {lang === 'en'
+                    ? 'Paya (Metal Footing)'
+                    : lang === 'hi'
+                      ? 'पाया'
+                      : 'પાયો (Metal footing)'}
+                </span>
               </span>
               <span className="font-medium text-[var(--text-primary)] font-serif text-sm">
                 {payaDisplay}
@@ -694,7 +765,13 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
             <div className="flex items-center justify-between py-2.5">
               <span className="font-medium text-[var(--text-secondary)] flex items-center gap-2">
                 <Wind className="h-3.5 w-3.5 text-[var(--text-muted)]" />
-                <span>{lang === 'en' ? 'Rashi element' : lang === 'hi' ? 'राशि तत्व' : 'રાશિ તત્વ (Element)'}</span>
+                <span>
+                  {lang === 'en'
+                    ? 'Rashi element'
+                    : lang === 'hi'
+                      ? 'राशि तत्व'
+                      : 'રાશિ તત્વ (Element)'}
+                </span>
               </span>
               <span className="font-medium text-[var(--text-primary)] font-serif text-sm">
                 {moonSignInfo.elementGu || 'વાયુ તત્વ'}
@@ -705,7 +782,9 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
             <div className="flex items-center justify-between py-2.5">
               <span className="font-medium text-[var(--text-secondary)] flex items-center gap-2">
                 <CloudSun className="h-3.5 w-3.5 text-[var(--text-muted)]" />
-                <span>{lang === 'en' ? 'Season (Ritu)' : lang === 'hi' ? 'ऋतु' : 'ઋતુ (Season)'}</span>
+                <span>
+                  {lang === 'en' ? 'Season (Ritu)' : lang === 'hi' ? 'ऋतु' : 'ઋતુ (Season)'}
+                </span>
               </span>
               <span className="font-medium text-[var(--text-primary)] font-serif text-sm">
                 {rituDisplay}
@@ -716,7 +795,9 @@ export default function BasicDetails({ kundliData, formData, t = {}, lang = 'gu'
             <div className="flex items-center justify-between py-2.5">
               <span className="font-medium text-[var(--text-secondary)] flex items-center gap-2">
                 <Sun className="h-3.5 w-3.5 text-[var(--text-muted)]" />
-                <span>{lang === 'en' ? 'Ayana (Solar course)' : lang === 'hi' ? 'अयन' : 'અયન (Ayana)'}</span>
+                <span>
+                  {lang === 'en' ? 'Ayana (Solar course)' : lang === 'hi' ? 'अयन' : 'અયન (Ayana)'}
+                </span>
               </span>
               <span className="font-medium text-[var(--text-primary)] font-serif text-sm">
                 {ayanaDisplay}

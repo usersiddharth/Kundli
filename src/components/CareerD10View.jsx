@@ -14,12 +14,12 @@ export default function CareerD10View({ kundliData, t, lang = 'gu' }) {
       {/* Header */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faeee2] border border-[#e8b992]/60 text-[#b85d19]">
             <Briefcase className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-              D10 દશમાંશ કારકિર્દી બ્લુપ્રિન્ટ (D10 Dashamsha Career Blueprint)
+              ॥ D10 દશમાંશ કારકિર્દી બ્લુપ્રિન્ટ (D10 Dashamsha Career Blueprint) ॥
             </h2>
             <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               દશમાંશ વર્ગ ચાર્ટ આધારિત વ્યવસાયિક ક્ષેત્ર, પ્રોફેશન અને કારકિર્દી ક્ષમતા
@@ -39,9 +39,9 @@ export default function CareerD10View({ kundliData, t, lang = 'gu' }) {
           {recommendedDomains.map((domain, idx) => (
             <div
               key={idx}
-              className="glass-panel-accent rounded-xl p-4 border border-[#b85d19]/40 space-y-2"
+              className="bg-[#fbf9f5] rounded-xl p-4 border border-[#e8b992]/60 space-y-2"
             >
-              <span className="glass-badge-gold text-[10px] font-bold px-2 py-0.5 rounded-full">
+              <span className="bg-[#faeee2] text-[#9c4b0f] border border-[#e8b992]/60 text-[10px] font-bold px-2 py-0.5 rounded-full">
                 રેન્ક #{idx + 1}
               </span>
               <h4 className="font-serif text-base font-bold text-[var(--text-primary)]">

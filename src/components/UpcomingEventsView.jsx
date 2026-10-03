@@ -94,7 +94,7 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
       case 'combustion':
         return 'bg-orange-500/15 text-orange-800 dark:text-orange-300 border border-orange-500/20';
       case 'conjunction':
-        return 'bg-purple-500/15 text-purple-800 dark:text-purple-300 border border-purple-500/20';
+        return 'bg-[#faeee2] text-[#8b2500] border border-[#e8b992]';
       default:
         return 'bg-stone-500/15 text-stone-800 dark:text-stone-300 border border-stone-500/20';
     }
@@ -105,10 +105,10 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
-          || ૐ શ્રી ગણેશાય નમઃ ||
+          ॥ ૐ શ્રી ગણેશાય નમઃ ॥ • શ્રી જગદંબા પ્રસન્ન
         </span>
         <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
-          આગામી ગ્રહીય ઘટનાઓ & ગોચર પંચાંગ (Upcoming Planetary Events Dossier)
+          ॥ આગામી ગ્રહીય ઘટનાઓ & ગોચર પંચાંગ (Upcoming Planetary Events Dossier) ॥
         </h1>
         <p className="text-xs text-[var(--text-secondary)] mt-0.5">
           ખગોળીય રાશિ પરિવર્તન, આરંભ-સમાપ્તિ તારીખ, વક્રી-માર્ગી ગ્રહો, સૂર્ય-ચંદ્ર ગ્રહણ અને
@@ -121,7 +121,7 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
         <div>
           <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <Orbit className="h-5 w-5 text-[var(--text-gold)]" />
-            <span>આગામી ગ્રહીય ઘટનાઓ & ગોચર (Upcoming Planetary Events)</span>
+            <span>॥ આગામી ગ્રહીય ઘટનાઓ & ગોચર (Upcoming Planetary Events) ॥</span>
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             આરંભ & સમાપ્તિ તારીખ, રાશિ પરિવર્તન, વક્રી-માર્ગી ગ્રહો, સૂર્ય-ચંદ્ર ગ્રહણ અને વ્યક્તિગત
@@ -361,7 +361,7 @@ export default function UpcomingEventsView({ kundliData, t, lang = 'gu' }) {
           <Button
             type="button"
             onPress={handleClearFilters}
-            className="rounded-xl glass-button-primary px-4 py-2 text-xs font-bold text-[#0c0e17] transition cursor-pointer"
+            className="rounded-xl spatial-btn-primary px-4 py-2 text-xs font-semibold transition cursor-pointer"
           >
             ફિલ્ટર્સ સાફ કરો (Reset Filters)
           </Button>

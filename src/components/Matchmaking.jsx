@@ -230,6 +230,11 @@ export default function Matchmaking({ t }) {
 
   return (
     <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
+      {/* Traditional Auspicious Invocation Header */}
+      <div className="text-center font-serif text-xs font-semibold text-[#8b2500] tracking-widest pb-1 border-b border-[var(--border-subtle)] select-none print:hidden">
+        ॥ ૐ શ્રી ગણેશાય નમઃ ॥ • શુભ વિવાહ અષ્ટકૂટ ગુણ મિલન પત્રિકા
+      </div>
+
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
@@ -247,8 +252,8 @@ export default function Matchmaking({ t }) {
       <Card.Header className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 p-0 print:hidden">
         <div>
           <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Heart className="h-5 w-5 text-[var(--text-gold)]" /> {t.matchmakingTitle} (Ashtakoot
-            36-gun milan)
+            <Heart className="h-5 w-5 text-[var(--text-gold)]" /> ॥ {t.matchmakingTitle} (Ashtakoot
+            36-gun milan) ॥
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             ૩૬ ગુણ મિલન, માંગલિક દોષ સંરેખણ અને સુમેળતા વિશ્લેષણ

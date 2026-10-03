@@ -76,18 +76,13 @@
     /* ── Warm Natural Shadows ── */
     --shadow-sm: 0 1px 2px rgba(31, 26, 22, 0.04), 0 0 0 1px #e5dac6;
     --shadow-md:
-      0 4px 14px rgba(31, 26, 22, 0.06), 0 1px 3px rgba(31, 26, 22, 0.03),
-      0 0 0 1px #e5dac6;
+      0 4px 14px rgba(31, 26, 22, 0.06), 0 1px 3px rgba(31, 26, 22, 0.03), 0 0 0 1px #e5dac6;
     --shadow-lg:
-      0 10px 26px rgba(31, 26, 22, 0.07), 0 2px 8px rgba(31, 26, 22, 0.03),
-      0 0 0 1px #ded1bc;
+      0 10px 26px rgba(31, 26, 22, 0.07), 0 2px 8px rgba(31, 26, 22, 0.03), 0 0 0 1px #ded1bc;
     --shadow-xl:
-      0 20px 44px rgba(31, 26, 22, 0.1), 0 4px 14px rgba(31, 26, 22, 0.05),
-      0 0 0 1px #ded1bc;
-    --shadow-gold:
-      0 2px 10px rgba(139, 37, 0, 0.1), 0 0 0 1px rgba(139, 37, 0, 0.3);
-    --shadow-gold-glow:
-      0 4px 18px rgba(139, 37, 0, 0.16), 0 0 0 1px rgba(139, 37, 0, 0.45);
+      0 20px 44px rgba(31, 26, 22, 0.1), 0 4px 14px rgba(31, 26, 22, 0.05), 0 0 0 1px #ded1bc;
+    --shadow-gold: 0 2px 10px rgba(139, 37, 0, 0.1), 0 0 0 1px rgba(139, 37, 0, 0.3);
+    --shadow-gold-glow: 0 4px 18px rgba(139, 37, 0, 0.16), 0 0 0 1px rgba(139, 37, 0, 0.45);
 
     /* ── Spacing Scale ── */
     --space-1: 4px;
@@ -151,52 +146,26 @@
 
   /* ── Traditional Vedic Typography Roles ── */
   .font-vedic {
-    font-family:
-      'Cinzel',
-      'Noto Serif Gujarati',
-      'Noto Serif Devanagari',
-      Georgia,
-      serif;
+    font-family: 'Cinzel', 'Noto Serif Gujarati', 'Noto Serif Devanagari', Georgia, serif;
     letter-spacing: -0.015em;
   }
 
   .font-display {
-    font-family:
-      'Cinzel',
-      'Noto Serif Gujarati',
-      'Noto Serif Devanagari',
-      Georgia,
-      serif;
+    font-family: 'Cinzel', 'Noto Serif Gujarati', 'Noto Serif Devanagari', Georgia, serif;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
 
   .font-body {
-    font-family:
-      'Outfit',
-      'Noto Sans Gujarati',
-      'Noto Sans Devanagari',
-      sans-serif;
+    font-family: 'Outfit', 'Noto Sans Gujarati', 'Noto Sans Devanagari', sans-serif;
   }
 
   .font-serif {
-    font-family:
-      'Noto Serif Gujarati',
-      'Noto Serif Devanagari',
-      'Cinzel',
-      Georgia,
-      serif;
+    font-family: 'Noto Serif Gujarati', 'Noto Serif Devanagari', 'Cinzel', Georgia, serif;
   }
 
   .font-mono {
-    font-family:
-      'JetBrains Mono',
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      monospace;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-variant-numeric: tabular-nums;
   }
 
@@ -357,7 +326,9 @@
   background: #ffffff;
   border: 1px solid var(--border-default);
   color: var(--text-primary);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .spatial-input:focus {

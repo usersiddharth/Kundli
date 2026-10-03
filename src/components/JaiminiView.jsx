@@ -26,12 +26,12 @@ export default function JaiminiView({ kundliData, birthDateObj = new Date(), t, 
       {/* 1. Header Card */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faeee2] border border-[#e8b992]/60 text-[#b85d19]">
             <Crown className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-              જૈમિની જ્યોતિષ & ચર દશા (Jaimini Astrology Suite)
+              ॥ જૈમિની જ્યોતિષ & ચર દશા (Jaimini Astrology Suite) ॥
             </h2>
             <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               મહર્ષિ જૈમિની ચર કારક, કારકાંશ લગ્ન અને રાશિ આધારિત ચર દશા વિશ્લેષણ
@@ -43,13 +43,13 @@ export default function JaiminiView({ kundliData, birthDateObj = new Date(), t, 
       {/* 2. Atmakaraka Hero Card & Karakamsha Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Atmakaraka (AK) Hero Card */}
-        <div className="glass-panel-accent rounded-2xl p-5 shadow-sm border border-[#b85d19]/40 space-y-2">
+        <div className="bg-[#fbf9f5] rounded-2xl p-5 shadow-sm border border-[#e8b992]/60 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-serif font-bold text-[var(--text-gold)] uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-xs font-serif font-bold text-[#8b2500] uppercase tracking-wider flex items-center gap-1.5">
               <Crown className="h-4 w-4 text-amber-600" />
               તમારી કુંડળીના આત્મકારક (Atmakaraka)
             </span>
-            <span className="glass-badge-gold px-2 py-0.5 rounded-full text-[10px] font-bold">
+            <span className="bg-[#faeee2] text-[#9c4b0f] border border-[#e8b992]/60 px-2 py-0.5 rounded-full text-[10px] font-bold">
               આત્માનો રાજા
             </span>
           </div>

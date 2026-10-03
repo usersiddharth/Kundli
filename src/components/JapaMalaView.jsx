@@ -82,12 +82,12 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
       {/* Header */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faeee2] border border-[#e8b992]/60 text-[#b85d19]">
             <Sparkles className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-              ૧૦૮ મંત્ર જાપ માળા કૌન્ટર (Interactive 108 Japa Mala)
+              ॥ ૧૦૮ મંત્ર જાપ માળા કૌન્ટર (Interactive 108 Japa Mala) ॥
             </h2>
             <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               નવગ્રહ બીજ મંત્ર જાપ ટ્રેકર અને ૧૦૮ મણકા સાધના કૌન્ટર
@@ -98,39 +98,42 @@ export default function JapaMalaView({ t, lang = 'gu' }) {
 
       {/* Mantra Selector */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-4">
-        <label className="text-xs font-serif font-bold text-[var(--text-gold)] uppercase tracking-wider block">
+        <label className="text-xs font-serif font-bold text-[#8b2500] uppercase tracking-wider block">
           જાપ માટે મંત્ર પસંદ કરો (Select Mantra)
         </label>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
-          {MANTRAS.map((m) => (
-            <button
-              key={m.id}
-              onClick={() => setSelectedMantra(m.id)}
-              className={`p-2.5 rounded-xl border text-xs font-bold transition ${
-                selectedMantra === m.id
-                  ? 'glass-panel-accent border-[#b85d19] text-[var(--text-gold)] ring-2 ring-[#b85d19]/40'
-                  : 'glass-card text-[var(--text-primary)] hover:bg-white/10'
-              }`}
-            >
-              {m.name[lang] || m.name.gu}
-            </button>
-          ))}
+          {MANTRAS.map((m) => {
+            const isSelected = selectedMantra === m.id;
+            return (
+              <button
+                key={m.id}
+                onClick={() => setSelectedMantra(m.id)}
+                className={`p-2.5 rounded-xl border text-xs font-medium transition cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#faeee2] border-[#b85d19] text-[#8b2500] ring-1 ring-[#b85d19]/40 font-semibold'
+                    : 'bg-white border-[#e5dac6] text-[var(--text-primary)] hover:bg-[#faf5eb]'
+                }`}
+              >
+                {m.name[lang] || m.name.gu}
+              </button>
+            );
+          })}
         </div>
 
         {/* Selected Mantra Text Display */}
-        <div className="glass-card p-4 rounded-xl text-center space-y-1 border border-[var(--border-subtle)]">
+        <div className="bg-[#fbf9f5] p-4 rounded-xl text-center space-y-1 border border-[#e8b992]/60">
           <span className="text-xs font-serif text-[var(--text-muted)] uppercase block">
             સક્રિય મંત્ર (Active Sacred Text)
           </span>
-          <h3 className="font-serif text-xl font-bold text-[var(--text-gold)]">
-            {activeMantraObj.text}
+          <h3 className="font-serif text-xl font-bold text-[#8b2500]">
+            ॥ {activeMantraObj.text} ॥
           </h3>
         </div>
       </div>
 
       {/* Interactive 108 Bead Clicker Button */}
-      <div className="glass-panel-accent rounded-2xl p-8 shadow-sm border border-[#b85d19]/40 flex flex-col items-center justify-center text-center space-y-4">
+      <div className="bg-[#fffdf9] rounded-2xl p-8 shadow-sm border-2 border-[#e8b992]/80 flex flex-col items-center justify-center text-center space-y-4">
         <div className="flex items-center space-x-6">
           <div>
             <span className="text-xs text-[var(--text-muted)] font-serif uppercase block">

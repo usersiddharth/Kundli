@@ -8,17 +8,17 @@ export default function AspectsView({ kundliData, t }) {
   const aspects = calculatePlanetaryAspects(kundliData);
 
   return (
-    <div className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-6 shadow-sm">
+    <div className="rounded-xl border border-[var(--border-subtle)] bg-white p-6 shadow-sm">
       <div className="mb-6 border-b border-[var(--border-subtle)] pb-4">
         <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-          <Eye className="h-5 w-5 text-[var(--text-gold)]" /> {t.aspectsTitle}
+          <Eye className="h-5 w-5 text-[#b85d19]" /> ॥ {t.aspectsTitle} ॥
         </h2>
         <p className="text-xs text-[var(--text-muted)]">{t.aspectsDesc}</p>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm text-[var(--text-primary)]">
-          <thead className="border-b border-[var(--border-subtle)] bg-white/5 text-xs font-semibold text-[var(--text-secondary)]">
+          <thead className="border-b border-[var(--border-subtle)] bg-[#f7f2e8] text-xs font-serif font-semibold text-[var(--text-secondary)]">
             <tr>
               <th className="p-3">{t.aspectingPlanet}</th>
               <th className="p-3">Source House</th>
@@ -29,12 +29,12 @@ export default function AspectsView({ kundliData, t }) {
           </thead>
           <tbody className="divide-y divide-[var(--border-subtle)]">
             {aspects.map((a, idx) => (
-              <tr key={idx} className="hover:bg-white/10 transition">
+              <tr key={idx} className="hover:bg-[#faf5eb] transition">
                 <td className="p-3 font-medium text-[var(--text-primary)]">
                   {t[a.aspectingPlanet] || a.aspectingPlanet}
                 </td>
                 <td className="p-3 font-mono font-semibold">House {a.sourceHouse}</td>
-                <td className="p-3 font-mono text-xs font-medium text-[var(--text-gold)]">
+                <td className="p-3 font-mono text-xs font-medium text-[#8b2500]">
                   {a.aspectDistance}th Aspect
                 </td>
                 <td className="p-3 font-mono font-semibold">

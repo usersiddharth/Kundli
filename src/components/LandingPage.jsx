@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { cityData } from '../engine/cityData.js';
 import {
   Compass,
+  Sun,
   Calendar,
   Clock,
   CalendarDays,
@@ -267,7 +268,6 @@ export default function LandingPage({
     width: '100%',
     outline: 'none',
     transition: 'border-color 0.2s, box-shadow 0.2s',
-    fontFamily: 'Outfit, sans-serif',
   };
 
   const labelStyle = {
@@ -276,7 +276,6 @@ export default function LandingPage({
     fontWeight: 500,
     color: 'var(--text-secondary)',
     marginBottom: 6,
-    fontFamily: 'Outfit, sans-serif',
   };
 
   return (
@@ -300,17 +299,14 @@ export default function LandingPage({
 
           {/* Main Headline (Rule: text-3xl for major headings, font-medium, tracking-tight) */}
           <h1
-            className="text-3xl font-medium tracking-tight mb-3 text-[var(--text-primary)]"
-            style={{ fontFamily: 'Cinzel, Outfit, serif', letterSpacing: '-0.025em' }}
+            className="text-3xl font-medium tracking-tight mb-3 text-[var(--text-primary)] font-serif"
+            style={{ letterSpacing: '-0.025em' }}
           >
-            {l(L.heroTitle)}
+            ॥ {l(L.heroTitle)} ॥
           </h1>
 
           {/* Subtitle (Rule: text-lg for section copy) */}
-          <p
-            className="text-lg max-w-xl mx-auto mb-7 text-[var(--text-secondary)] font-normal leading-relaxed"
-            style={{ fontFamily: 'Outfit, sans-serif' }}
-          >
+          <p className="text-lg max-w-xl mx-auto mb-7 text-[var(--text-secondary)] font-normal leading-relaxed">
             {l(L.heroSub)}
           </p>
 
@@ -321,7 +317,7 @@ export default function LandingPage({
               onClick={handleQuickSubmit}
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-medium cursor-pointer spatial-btn-primary"
             >
-              <Compass className="w-4 h-4" />
+              <Sun className="w-4 h-4" />
               {l(L.heroCta)}
             </button>
             <button
@@ -597,11 +593,8 @@ export default function LandingPage({
               {lang === 'gu' ? 'જ્ઞાન-મંડળ' : lang === 'hi' ? 'ज्ञान मंडल' : 'Knowledge portals'}
             </span>
           </div>
-          <h2
-            className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]"
-            style={{ fontFamily: 'Cinzel, Outfit, serif' }}
-          >
-            {l(L.portalsTitle)}
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)] font-serif">
+            ॥ {l(L.portalsTitle)} ॥
           </h2>
           <p className="text-base mt-2 max-w-md mx-auto text-[var(--text-secondary)] font-normal">
             {l(L.portalsDesc)}
@@ -633,10 +626,7 @@ export default function LandingPage({
                 </div>
 
                 {/* Title */}
-                <h3
-                  className="font-medium text-sm mb-1.5 text-[var(--text-primary)] group-hover:text-[var(--gold-600)] transition-colors"
-                  style={{ fontFamily: 'Outfit, sans-serif' }}
-                >
+                <h3 className="font-medium text-sm mb-1.5 text-[var(--text-primary)] group-hover:text-[var(--gold-600)] transition-colors font-serif">
                   {l(portal.title)}
                 </h3>
 

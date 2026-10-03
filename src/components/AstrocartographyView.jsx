@@ -88,13 +88,13 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
           </span>
         </div>
 
-        <div className="overflow-x-auto rounded-2xl border border-[#334155] shadow-2xl">
-          <div className="min-w-[720px] h-[380px] relative bg-[#0b1329] overflow-hidden">
+        <div className="overflow-x-auto rounded-2xl border border-[var(--border-subtle)] shadow-xs">
+          <div className="min-w-[720px] h-[380px] relative bg-[#f5efe2] overflow-hidden">
             <svg viewBox="0 0 800 400" className="w-full h-full">
               <defs>
                 <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#0b1329" />
-                  <stop offset="100%" stopColor="#111c3a" />
+                  <stop offset="0%" stopColor="#f5efe2" />
+                  <stop offset="100%" stopColor="#ece3d2" />
                 </linearGradient>
               </defs>
 
@@ -107,7 +107,7 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
                 y1="200"
                 x2="800"
                 y2="200"
-                stroke="#334155"
+                stroke="#d6c8b0"
                 strokeWidth="1.5"
                 strokeDasharray="4"
               />
@@ -116,27 +116,27 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
                 y1="0"
                 x2="400"
                 y2="400"
-                stroke="#334155"
+                stroke="#d6c8b0"
                 strokeWidth="1.5"
                 strokeDasharray="4"
               />
 
               {/* Equator & Meridian Labels */}
-              <text x="405" y="15" fill="#64748b" fontSize="9" className="font-mono">
+              <text x="405" y="15" fill="#8c7e6a" fontSize="9" className="font-mono">
                 0° Meridian
               </text>
-              <text x="10" y="195" fill="#64748b" fontSize="9" className="font-mono">
+              <text x="10" y="195" fill="#8c7e6a" fontSize="9" className="font-mono">
                 0° Equator
               </text>
-              <text x="10" y="20" fill="#64748b" fontSize="9" className="font-mono">
+              <text x="10" y="20" fill="#8c7e6a" fontSize="9" className="font-mono">
                 -180° W
               </text>
-              <text x="750" y="20" fill="#64748b" fontSize="9" className="font-mono">
+              <text x="750" y="20" fill="#8c7e6a" fontSize="9" className="font-mono">
                 +180° E
               </text>
 
               {/* Simplified World Continents Vector Outlines */}
-              <g id="continents" fill="#1e293b" stroke="#334155" strokeWidth="1" opacity="0.85">
+              <g id="continents" fill="#ded2bd" stroke="#c2b399" strokeWidth="1" opacity="0.9">
                 {/* North America */}
                 <path d="M 120 70 L 220 80 L 260 140 L 200 180 L 160 170 L 100 120 Z" />
                 {/* South America */}
@@ -161,14 +161,14 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
                       cx={cx}
                       cy={cy}
                       r="4"
-                      fill="#facc15"
+                      fill="#b85d19"
                       stroke="#ffffff"
                       strokeWidth="1.5"
                     />
                     <text
                       x={cx}
                       y={cy - 7}
-                      fill="#e2e8f0"
+                      fill="#1f1a16"
                       fontSize="9"
                       fontWeight="bold"
                       textAnchor="middle"
@@ -205,13 +205,13 @@ export default function AstrocartographyView({ kundliData, t, lang = 'gu' }) {
                       width="44"
                       height="18"
                       rx="4"
-                      fill="#0f172a"
+                      fill="#faf6ee"
                       stroke={l.color}
                       strokeWidth="1.5"
                     />
                     <text
                       x={x}
-                      y="17"
+                      y={17}
                       fill={l.color}
                       fontSize="10"
                       fontWeight="bold"

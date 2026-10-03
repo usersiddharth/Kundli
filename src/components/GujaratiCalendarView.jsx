@@ -142,17 +142,11 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
         <div>
           <div className="flex items-center gap-2">
             <CalendarIcon className="h-5 w-5 text-[var(--text-gold)] shrink-0" />
-            <h2
-              className="text-lg sm:text-xl font-medium text-[var(--text-primary)] tracking-tight"
-              style={{ fontFamily: 'Syne, sans-serif' }}
-            >
+            <h2 className="text-lg sm:text-xl font-medium text-[var(--text-primary)] tracking-tight font-serif">
               વિગતવાર ગુજરાતી કૅલેન્ડર (Detailed Gujarati Calendar)
             </h2>
           </div>
-          <p
-            className="text-xs text-[var(--text-muted)] mt-0.5"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
+          <p className="text-xs text-[var(--text-muted)] mt-0.5">
             કોઈપણ તારીખ પર ક્લિક કરીને તે દિવસનું સંપૂર્ણ વિગતવાર પંચાંગ, ચોઘડિયા અને મુહૂર્ત જુઓ
           </p>
         </div>
@@ -197,14 +191,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
       {activeTab === 'month' && (
         <div className="space-y-6">
           {/* Month Navigation Banner */}
-          <div
-            className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl p-3 sm:p-4 border transition"
-            style={{
-              background: 'rgba(20, 20, 42, 0.75)',
-              borderColor: 'var(--border-gold)',
-              boxShadow: 'var(--shadow-gold)',
-            }}
-          >
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl p-3 sm:p-4 border transition bg-[var(--depth-1)] border-[var(--border-gold)] shadow-xs">
             <div className="flex items-center justify-between w-full sm:w-auto gap-2">
               <button
                 type="button"
@@ -216,10 +203,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                 <ChevronLeft className="h-4 w-4" />
               </button>
 
-              <h3
-                className="text-base sm:text-xl font-bold px-3 text-center tracking-tight text-[var(--text-gold)]"
-                style={{ fontFamily: 'Syne, sans-serif' }}
-              >
+              <h3 className="text-base sm:text-xl font-medium px-3 text-center tracking-tight text-[var(--text-gold)] font-serif">
                 {MONTH_NAMES_GU[currentMonth - 1]} {currentYear}
               </h3>
 
@@ -238,7 +222,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
               <button
                 type="button"
                 onClick={handleToday}
-                className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-bold transition cursor-pointer spatial-btn-primary"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-semibold transition cursor-pointer spatial-btn-primary"
               >
                 <Sparkles className="h-3.5 w-3.5" />
                 <span>આજ (Today)</span>
@@ -260,24 +244,14 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
           </div>
 
           {/* 7-Column Wall Calendar Grid */}
-          <div
-            className="rounded-2xl border overflow-hidden spatial-panel shadow-xl"
-            style={{ borderColor: 'rgba(245, 158, 11, 0.2)' }}
-          >
+          <div className="rounded-2xl border overflow-hidden spatial-panel shadow-sm border-[var(--border-subtle)]">
             {/* Weekday Header */}
-            <div
-              className="grid grid-cols-7 border-b text-center text-[11px] sm:text-xs font-bold"
-              style={{
-                background: 'rgba(16, 16, 30, 0.85)',
-                borderColor: 'var(--border-subtle)',
-                color: 'var(--text-secondary)',
-              }}
-            >
+            <div className="grid grid-cols-7 border-b text-center text-[11px] sm:text-xs font-semibold bg-[#f7f2e8] border-[var(--border-subtle)] text-[var(--text-secondary)]">
               {WEEKDAYS_GU.map((day, idx) => (
                 <div
                   key={idx}
                   className={`py-2.5 sm:py-3 border-r last:border-r-0 ${
-                    idx === 0 ? 'text-rose-400 font-bold' : ''
+                    idx === 0 ? 'text-[#8b2500] font-bold' : ''
                   }`}
                   style={{ borderColor: 'var(--border-subtle)' }}
                 >
@@ -326,14 +300,14 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                     style={{
                       background: isToday
                         ? isSelected
-                          ? 'rgba(245, 158, 11, 0.22)'
-                          : 'rgba(245, 158, 11, 0.12)'
+                          ? '#faeee0'
+                          : '#fcf6ec'
                         : isSelected
-                          ? 'rgba(99, 102, 241, 0.18)'
+                          ? '#f5e8d8'
                           : cell.isCurrentMonth
-                            ? 'rgba(20, 20, 42, 0.75)'
-                            : 'rgba(12, 12, 23, 0.5)',
-                      boxShadow: isSelected ? '0 0 20px rgba(245, 158, 11, 0.15)' : 'none',
+                            ? '#ffffff'
+                            : '#f9f6ef',
+                      boxShadow: isSelected ? '0 0 10px rgba(184, 93, 25, 0.2)' : 'none',
                     }}
                   >
                     {/* Top Row: Date Number & Moon Phase */}
@@ -344,7 +318,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                             isToday
                               ? 'flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full text-xs sm:text-sm font-black shadow-xs'
                               : isSunday
-                                ? 'text-xs sm:text-base text-rose-400 font-bold'
+                                ? 'text-xs sm:text-base text-[#8b2500] font-bold'
                                 : 'text-xs sm:text-base text-[var(--text-primary)]'
                           }`}
                           style={
@@ -361,14 +335,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                         </span>
 
                         {isToday && (
-                          <span
-                            className="px-1.5 py-0.2 rounded text-[8px] sm:text-[9px] font-bold hidden sm:inline-block"
-                            style={{
-                              background: 'rgba(245, 158, 11, 0.2)',
-                              color: '#fbbf24',
-                              border: '1px solid rgba(245, 158, 11, 0.3)',
-                            }}
-                          >
+                          <span className="px-1.5 py-0.2 rounded text-[8px] sm:text-[9px] font-bold hidden sm:inline-block bg-[#faeee2] text-[#8b2500] border border-[#e8b992]">
                             આજ
                           </span>
                         )}
@@ -380,9 +347,6 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                           <span
                             className="flex items-center justify-center rounded-full p-0.5 text-[10px] sm:text-xs leading-none"
                             title="પૂનમ (Full Moon)"
-                            style={{
-                              filter: 'drop-shadow(0 0 6px rgba(251, 191, 36, 0.7))',
-                            }}
                           >
                             🌕
                           </span>
@@ -391,9 +355,6 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                           <span
                             className="flex items-center justify-center rounded-full p-0.5 text-[10px] sm:text-xs leading-none"
                             title="અમાસ (New Moon)"
-                            style={{
-                              filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.6))',
-                            }}
                           >
                             🌑
                           </span>
@@ -407,20 +368,15 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                         className="text-[9px] sm:text-[11px] font-semibold leading-tight line-clamp-2 block tracking-tight"
                         style={{
                           color: isToday
-                            ? '#fbbf24'
+                            ? '#8b2500'
                             : cell.pakshaKey === 'sud'
-                              ? '#fcd34d'
-                              : '#93c5fd', // Crisp sky blue for Vad paksha
-                          textShadow:
-                            cell.pakshaKey === 'sud' ? '0 0 8px rgba(245, 158, 11, 0.2)' : 'none',
+                              ? '#b85d19'
+                              : '#57534e',
                         }}
                       >
                         {cell.fullTithiTitle}
                       </span>
-                      <span
-                        className="text-[9px] sm:text-[10px] hidden sm:block truncate mt-0.5 font-mono"
-                        style={{ color: 'rgba(255, 255, 255, 0.65)' }}
-                      >
+                      <span className="text-[9px] sm:text-[10px] hidden sm:block truncate mt-0.5 font-mono text-[var(--text-muted)]">
                         {cell.nakshatraName}
                       </span>
                     </div>
@@ -432,17 +388,11 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                         return (
                           <span
                             key={fIdx}
-                            className="text-[8.5px] sm:text-[9.5px] px-1.5 py-0.5 rounded-md block truncate font-medium border leading-tight"
-                            style={{
-                              background: isMajor
-                                ? 'rgba(239, 68, 68, 0.2)'
-                                : 'rgba(16, 185, 129, 0.18)',
-                              borderColor: isMajor
-                                ? 'rgba(239, 68, 68, 0.4)'
-                                : 'rgba(16, 185, 129, 0.35)',
-                              color: isMajor ? '#fecaca' : '#a7f3d0',
-                              textShadow: '0 1px 2px rgba(0,0,0,0.5)',
-                            }}
+                            className={`text-[8.5px] sm:text-[9.5px] px-1.5 py-0.5 rounded-md block truncate font-medium border leading-tight ${
+                              isMajor
+                                ? 'bg-[#fef2f2] border-[#fecaca] text-[#991b1b]'
+                                : 'bg-[#f0fdf4] border-[#bbf7d0] text-[#166534]'
+                            }`}
                           >
                             {getFestivalName(f)}
                           </span>
@@ -457,14 +407,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
 
           {/* ── COMPREHENSIVE DETAILED PANCHANG FOR CLICKED DATE ── */}
           {activeSelected && detailedPanchang && (
-            <div
-              className="rounded-2xl p-5 sm:p-6 shadow-xl space-y-6 animate-fade-in-up border"
-              style={{
-                background: 'rgba(16, 16, 30, 0.85)',
-                borderColor: 'var(--border-gold)',
-                boxShadow: 'var(--shadow-gold-glow)',
-              }}
-            >
+            <div className="rounded-2xl p-5 sm:p-6 shadow-sm space-y-6 animate-fade-in-up border bg-[#ffffff] border-[var(--border-gold)]">
               {/* Selected Day Panchang Title & Action Toolbar */}
               <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
                 <div>
@@ -478,10 +421,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                     </span>
                   </div>
 
-                  <h3
-                    className="text-xl sm:text-2xl font-bold text-[var(--text-gold)] mt-1.5"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
+                  <h3 className="text-xl sm:text-2xl font-medium text-[var(--text-gold)] mt-1.5 font-serif">
                     તારીખ {activeSelected.day}-{activeSelected.month}-{activeSelected.year} •{' '}
                     {detailedPanchang.vaar}
                   </h3>
@@ -508,10 +448,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                   <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
                     ૧. તિથિ
                   </span>
-                  <h4
-                    className="text-sm font-bold text-[var(--text-primary)]"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
+                  <h4 className="text-sm font-medium text-[var(--text-primary)] font-serif">
                     {detailedPanchang.tithi.name}
                   </h4>
                   <span className="text-[11px] text-[var(--text-secondary)] block">
@@ -527,10 +464,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                   <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
                     ૨. વાર
                   </span>
-                  <h4
-                    className="text-sm font-bold text-[var(--text-primary)]"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
+                  <h4 className="text-sm font-medium text-[var(--text-primary)] font-serif">
                     {detailedPanchang.vaar}
                   </h4>
                   <span className="text-[11px] text-[var(--text-secondary)] block">
@@ -546,10 +480,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                   <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
                     ૩. નક્ષત્ર
                   </span>
-                  <h4
-                    className="text-sm font-bold text-[var(--text-primary)]"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
+                  <h4 className="text-sm font-medium text-[var(--text-primary)] font-serif">
                     {detailedPanchang.nakshatra.name}
                   </h4>
                   <span className="text-[11px] text-[var(--text-secondary)] block">
@@ -565,10 +496,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                   <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
                     ૪. યોગ
                   </span>
-                  <h4
-                    className="text-sm font-bold text-[var(--text-primary)]"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
+                  <h4 className="text-sm font-medium text-[var(--text-primary)] font-serif">
                     {detailedPanchang.yoga.name}
                   </h4>
                   <span className="text-[11px] text-[var(--text-secondary)] block">
@@ -590,10 +518,7 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                   <span className="font-semibold text-[var(--text-muted)] uppercase text-[10px] block">
                     ૫. કરણ
                   </span>
-                  <h4
-                    className="text-sm font-bold text-[var(--text-primary)]"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
+                  <h4 className="text-sm font-medium text-[var(--text-primary)] font-serif">
                     {detailedPanchang.karana.name}
                   </h4>
                   <span className="text-[11px] text-[var(--text-secondary)] block">
@@ -659,18 +584,9 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
       {/* ── ANNUAL FESTIVALS LIST TAB ── */}
       {activeTab === 'festivals' && (
         <div className="space-y-6">
-          <div
-            className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl p-4 border"
-            style={{
-              background: 'rgba(20, 20, 42, 0.75)',
-              borderColor: 'var(--border-gold)',
-            }}
-          >
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl p-4 border bg-[var(--depth-1)] border-[var(--border-gold)] shadow-xs">
             <div>
-              <h3
-                className="text-lg sm:text-xl font-bold text-[var(--text-gold)]"
-                style={{ fontFamily: 'Syne, sans-serif' }}
-              >
+              <h3 className="text-lg sm:text-xl font-medium text-[var(--text-gold)] font-serif">
                 વિક્રમ સંવત વર્ષ {currentYear} ના તમામ મુખ્ય હિન્દુ તહેવારો
               </h3>
               <p className="text-xs text-[var(--text-muted)]">
@@ -700,38 +616,21 @@ export default function GujaratiCalendarView({ onOpenPanchangPortal, lang = 'gu'
                 style={{ borderColor: 'var(--border-subtle)' }}
               >
                 <div className="flex justify-between items-start">
-                  <span
-                    className="font-mono text-xs font-bold px-2 py-0.5 rounded-lg border"
-                    style={{
-                      background: 'rgba(245, 158, 11, 0.15)',
-                      borderColor: 'rgba(245, 158, 11, 0.3)',
-                      color: '#fbbf24',
-                    }}
-                  >
+                  <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-lg border bg-[#faeee2] border-[#e8b992] text-[#8b2500]">
                     {fest.paksha === 'sud' ? 'સુદ' : 'વદ'} {fest.tithi}
                   </span>
                   <span
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full border"
-                    style={{
-                      background:
-                        fest.type === 'major'
-                          ? 'rgba(239, 68, 68, 0.2)'
-                          : 'rgba(16, 185, 129, 0.18)',
-                      borderColor:
-                        fest.type === 'major'
-                          ? 'rgba(239, 68, 68, 0.4)'
-                          : 'rgba(16, 185, 129, 0.35)',
-                      color: fest.type === 'major' ? '#fecaca' : '#a7f3d0',
-                    }}
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                      fest.type === 'major'
+                        ? 'bg-[#fef2f2] border-[#fecaca] text-[#991b1b]'
+                        : 'bg-[#f0fdf4] border-[#bbf7d0] text-[#166534]'
+                    }`}
                   >
                     {fest.type === 'major' ? 'મુખ્ય પર્વ' : 'વ્રત / ઉત્સવ'}
                   </span>
                 </div>
 
-                <h4
-                  className="text-sm font-bold text-[var(--text-primary)] pt-1"
-                  style={{ fontFamily: 'Syne, sans-serif' }}
-                >
+                <h4 className="text-sm font-medium text-[var(--text-primary)] pt-1 font-serif">
                   {getFestivalName(fest)}
                 </h4>
 

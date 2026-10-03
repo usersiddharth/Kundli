@@ -14,7 +14,7 @@ export default function GemstonesView({ kundliData, t, lang }) {
       <Card.Header className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 p-0">
         <div>
           <Card.Title className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Gem className="h-5 w-5 text-[var(--text-gold)]" /> Lucky Gemstones & Jaimini Karakas
+            <Gem className="h-5 w-5 text-[#b85d19]" /> ॥ Lucky Gemstones & Jaimini Karakas ॥
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             Astrological gemstone recommendations and primary soul indicators
@@ -26,7 +26,7 @@ export default function GemstonesView({ kundliData, t, lang }) {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <Card className="rounded-xl border border-[var(--border-subtle)] glass-card p-4 text-xs space-y-1">
           <span className="text-[var(--text-muted)] font-medium">Lucky Numbers</span>
-          <p className="font-mono text-base font-bold text-[var(--text-gold)]">
+          <p className="font-mono text-base font-bold text-[#8b2500]">
             {luckyMeta.number.join(', ')}
           </p>
         </Card>

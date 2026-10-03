@@ -14,12 +14,12 @@ export default function GemstoneMuhurtaView({ kundliData, t, lang = 'gu' }) {
       {/* Header */}
       <div className="glass-panel rounded-2xl p-5 shadow-sm border border-[var(--border-subtle)] space-y-2">
         <div className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl glass-button-dark text-[var(--text-gold)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faeee2] border border-[#e8b992]/60 text-[#b85d19]">
             <Gem className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-              રત્ન ધારણ મુહૂર્ત & પ્રાણ પ્રતિષ્ઠા વિધિ (Gemstone Rituals)
+              ॥ રત્ન ધારણ મુહૂર્ત & પ્રાણ પ્રતિષ્ઠા વિધિ (Gemstone Rituals) ॥
             </h2>
             <p className="text-xs sm:text-sm text-[var(--text-muted)]">
               શુભ રત્ન ધારણ કરવાનો દિવસ, મંત્રોચ્ચાર, આંગળી અને શુદ્ધિ ક્રિયા
@@ -29,7 +29,7 @@ export default function GemstoneMuhurtaView({ kundliData, t, lang = 'gu' }) {
       </div>
 
       {/* Gemstone Specifications Card */}
-      <div className="glass-panel-accent rounded-2xl p-5 shadow-sm border border-[#b85d19]/40 space-y-3">
+      <div className="bg-[#fbf9f5] rounded-2xl p-5 shadow-sm border border-[#e8b992]/60 space-y-3">
         <h3 className="font-serif text-xl font-bold text-[var(--text-primary)]">
           {details.name[lang] || details.name.gu}
         </h3>
@@ -37,7 +37,7 @@ export default function GemstoneMuhurtaView({ kundliData, t, lang = 'gu' }) {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
           <div>
             <span className="text-[var(--text-muted)] block">ધાતુ (Metal):</span>
-            <strong className="font-serif text-[var(--text-gold)]">{details.metal}</strong>
+            <strong className="font-serif text-[#8b2500]">{details.metal}</strong>
           </div>
           <div>
             <span className="text-[var(--text-muted)] block">આંગળી (Finger):</span>

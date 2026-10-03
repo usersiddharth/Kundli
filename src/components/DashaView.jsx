@@ -56,7 +56,7 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
         <div>
           <h2 className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <Clock className="h-5 w-5 text-[var(--text-gold)]" aria-hidden="true" />
-            <span>વિંશોત્તરી ૫-સ્તરીય દશા પ્રણાલી (Vimshottari 5-tier dasha)</span>
+            <span>॥ વિંશોત્તરી ૫-સ્તરીય દશા પ્રણાલી (Vimshottari 5-tier dasha) ॥</span>
           </h2>
           <p className="text-xs text-[var(--text-muted)] mt-0.5">
             મહાદશા, અંતર્દશા, પ્રત્યંતર્દશા, સૂક્ષ્મ દશા અને પ્રાણ દશા
@@ -71,8 +71,8 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
             onClick={() => setActiveTab('current')}
             className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-hidden cursor-pointer ${
               activeTab === 'current'
-                ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                ? 'spatial-btn-primary shadow-xs'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#faf5eb]'
             }`}
           >
             <Activity className="h-3.5 w-3.5" aria-hidden="true" />
@@ -85,8 +85,8 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
             onClick={() => setActiveTab('all')}
             className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-hidden cursor-pointer ${
               activeTab === 'all'
-                ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                ? 'spatial-btn-primary shadow-xs'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#faf5eb]'
             }`}
           >
             <Clock className="h-3.5 w-3.5" aria-hidden="true" />
@@ -99,8 +99,8 @@ export default function DashaView({ kundliData, birthDate, t, lang = 'gu' }) {
             onClick={() => setActiveTab('guide')}
             className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-hidden cursor-pointer ${
               activeTab === 'guide'
-                ? 'glass-button-primary shadow-xs'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                ? 'spatial-btn-primary shadow-xs'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#faf5eb]'
             }`}
           >
             <Info className="h-3.5 w-3.5" aria-hidden="true" />

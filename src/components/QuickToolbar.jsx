@@ -67,7 +67,7 @@ export default function QuickToolbar({ kundliData, formData, birthDateObj, t, la
           {/* Lagna */}
           <Chip className="bg-[#faeee2] text-[var(--text-primary)] border border-[#e8b992]/70 px-2.5 py-1 text-xs">
             <Chip.Label className="flex items-center gap-1.5 font-medium">
-              <Compass className="h-3.5 w-3.5 text-[var(--gold-500)]" />
+              <Sun className="h-3.5 w-3.5 text-[#b85d19]" />
               <span className="text-[var(--text-muted)]">{lagnaLabel}</span>
               <strong className="text-[var(--gold-600)] font-medium">
                 {t[panchang.ascendant] || panchang.ascendant}

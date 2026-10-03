@@ -62,6 +62,11 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
 
   return (
     <Card className="rounded-2xl glass-panel p-6 shadow-sm space-y-6 print:border-none print:p-0 print:bg-white border border-[var(--border-subtle)]">
+      {/* Auspicious Vedic Invocation Ribbon (Visible in Web & Screen) */}
+      <div className="text-center font-serif text-xs font-semibold text-[#8b2500] tracking-widest pb-1 border-b border-[var(--border-subtle)] select-none print:hidden">
+        ॥ ૐ શ્રી ગણેશાય નમઃ ॥ • વિગતવાર દૈનિક પંચાંગ પત્રિકા
+      </div>
+
       {/* Dedicated Printable PDF Top Banner (Visible Only in Print/PDF) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
@@ -95,8 +100,8 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
               onPress={() => setSelectedDateMode('birth')}
               className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 selectedDateMode === 'birth'
-                  ? 'glass-button-primary shadow-xs'
-                  : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
+                  ? 'spatial-btn-primary shadow-xs'
+                  : 'text-[var(--text-secondary)] hover:bg-[#faf5eb] bg-transparent'
               }`}
             >
               જન્મ પંચાંગ ({String(birthDate.getDate()).padStart(2, '0')}-
@@ -107,8 +112,8 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
               onPress={() => setSelectedDateMode('today')}
               className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 selectedDateMode === 'today'
-                  ? 'glass-button-primary shadow-xs'
-                  : 'text-[var(--text-secondary)] hover:bg-black/5 dark:hover:bg-white/5 bg-transparent'
+                  ? 'spatial-btn-primary shadow-xs'
+                  : 'text-[var(--text-secondary)] hover:bg-[#faf5eb] bg-transparent'
               }`}
             >
               આજનું પંચાંગ (Today)
@@ -329,38 +334,33 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
       {/* Shubh & Ashubh Muhurat Timings */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 print:grid-cols-2">
         {/* Auspicious Muhurats */}
-        <Card className="rounded-2xl glass-badge-success p-5 space-y-3 print:border-gray-300 print:bg-white border">
-          <h3 className="font-serif text-base font-bold text-[#1e8449] dark:text-[#7bed9f] flex items-center gap-2 border-b border-emerald-300/40 pb-2">
-            <ShieldCheck className="h-5 w-5 text-[#1e8449] dark:text-[#7bed9f]" /> શુભ મુહૂર્ત કાળ
-            (Auspicious Timings)
+        <Card className="rounded-2xl bg-[#f4faf4] border-[#c6e7cc] p-5 space-y-3 print:border-gray-300 print:bg-white border shadow-xs">
+          <h3 className="font-serif text-base font-medium text-[#1c6432] flex items-center gap-2 border-b border-[#c6e7cc] pb-2">
+            <ShieldCheck className="h-5 w-5 text-[#1c6432]" /> શુભ મુહૂર્ત કાળ (Auspicious Timings)
           </h3>
           <div className="grid grid-cols-2 gap-3 text-xs">
-            <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-              <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block">
+            <Card className="rounded-xl bg-[#ffffff] p-3 border border-[#c6e7cc] shadow-2xs">
+              <span className="font-semibold text-[#1c6432] block">
                 અભિજિત મુહૂર્ત (સર્વશ્રેષ્ઠ)
               </span>
               <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
                 {pData.muhurats.abhijit}
               </span>
             </Card>
-            <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-              <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block">
-                બ્રહ્મ મુહૂર્ત (સાધના કાળ)
-              </span>
+            <Card className="rounded-xl bg-[#ffffff] p-3 border border-[#c6e7cc] shadow-2xs">
+              <span className="font-semibold text-[#1c6432] block">બ્રહ્મ મુહૂર્ત (સાધના કાળ)</span>
               <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
                 {pData.muhurats.brahma}
               </span>
             </Card>
-            <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-              <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block">
-                વિજય મુહૂર્ત (વિજય કાળ)
-              </span>
+            <Card className="rounded-xl bg-[#ffffff] p-3 border border-[#c6e7cc] shadow-2xs">
+              <span className="font-semibold text-[#1c6432] block">વિજય મુહૂર્ત (વિજય કાળ)</span>
               <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
                 {pData.muhurats.vijay}
               </span>
             </Card>
-            <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-              <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block">
+            <Card className="rounded-xl bg-[#ffffff] p-3 border border-[#c6e7cc] shadow-2xs">
+              <span className="font-semibold text-[#1c6432] block">
                 ગોધૂલિ મુહૂર્ત (સંધ્યા કાળ)
               </span>
               <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
@@ -371,40 +371,32 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
         </Card>
 
         {/* Inauspicious Periods */}
-        <Card className="rounded-2xl glass-badge-danger p-5 space-y-3 print:border-gray-300 print:bg-white border">
-          <h3 className="font-serif text-base font-bold text-[#b03a2e] dark:text-[#ff7675] flex items-center gap-2 border-b border-rose-300/40 pb-2">
-            <AlertTriangle className="h-5 w-5 text-[#b03a2e] dark:text-[#ff7675]" /> વર્જ્ય / અશુભ
-            કાળ (Inauspicious Periods)
+        <Card className="rounded-2xl bg-[#fdf4f2] border-[#f8b4a6] p-5 space-y-3 print:border-gray-300 print:bg-white border shadow-xs">
+          <h3 className="font-serif text-base font-medium text-[#8b2500] flex items-center gap-2 border-b border-[#f8b4a6] pb-2">
+            <AlertTriangle className="h-5 w-5 text-[#8b2500]" /> વર્જ્ય / અશુભ કાળ (Inauspicious
+            Periods)
           </h3>
           <div className="grid grid-cols-2 gap-3 text-xs">
-            <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-              <span className="font-semibold text-[#b03a2e] dark:text-[#ff7675] block">
-                રાહુ કાળ (ત્યાજ્ય સમય)
-              </span>
+            <Card className="rounded-xl bg-[#ffffff] p-3 border border-[#f8b4a6] shadow-2xs">
+              <span className="font-semibold text-[#8b2500] block">રાહુ કાળ (ત્યાજ્ય સમય)</span>
               <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
                 {pData.muhurats.rahuKaal}
               </span>
             </Card>
-            <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-              <span className="font-semibold text-[#b03a2e] dark:text-[#ff7675] block">
-                યમગંડ કાળ
-              </span>
+            <Card className="rounded-xl bg-[#ffffff] p-3 border border-[#f8b4a6] shadow-2xs">
+              <span className="font-semibold text-[#8b2500] block">યમગંડ કાળ</span>
               <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
                 {pData.muhurats.yamaghanta}
               </span>
             </Card>
-            <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-              <span className="font-semibold text-[#b03a2e] dark:text-[#ff7675] block">
-                ગુલિક કાળ
-              </span>
+            <Card className="rounded-xl bg-[#ffffff] p-3 border border-[#f8b4a6] shadow-2xs">
+              <span className="font-semibold text-[#8b2500] block">ગુલિક કાળ</span>
               <span className="font-mono text-[var(--text-primary)] font-bold text-xs">
                 {pData.muhurats.gulikaKaal}
               </span>
             </Card>
-            <Card className="rounded-xl glass-card p-3 border border-[var(--border-subtle)]">
-              <span className="font-semibold text-[#b03a2e] dark:text-[#ff7675] block">
-                ભદ્રા / વિષ્ટિ સ્થિતિ
-              </span>
+            <Card className="rounded-xl bg-[#ffffff] p-3 border border-[#f8b4a6] shadow-2xs">
+              <span className="font-semibold text-[#8b2500] block">ભદ્રા / વિષ્ટિ સ્થિતિ</span>
               <span className="font-semibold text-[var(--text-primary)] text-xs">
                 {pData.isBhadraActive ? '⚠️ ભદ્રા સક્રિય (અશુભ)' : '✅ ભદ્રા મુક્ત (નિર્દોષ)'}
               </span>
@@ -420,11 +412,9 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
           Shool & Travel Remedy)
         </h3>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 text-xs print:grid-cols-2">
-          <Card className="rounded-xl glass-card p-3.5 border border-[var(--border-subtle)]">
-            <span className="font-semibold text-[var(--text-muted)] block mb-1">
-              આજનો વાર & વર્જિત દિશા:
-            </span>
-            <p className="text-sm font-bold text-[#b03a2e] dark:text-[#ff7675]">
+          <Card className="rounded-xl bg-[#fdf4f2] p-3.5 border border-[#f8b4a6]">
+            <span className="font-semibold text-[#8b2500] block mb-1">આજનો વાર & વર્જિત દિશા:</span>
+            <p className="text-sm font-bold text-[#8b2500]">
               {pData.dishaShool.day} — {pData.dishaShool.badDir} દિશામાં દિશા શૂળ છે.
             </p>
             <span className="text-[11px] text-[var(--text-secondary)] block mt-1">
@@ -432,13 +422,11 @@ export default function GujaratiPanchangView({ birthDate, t, lang, initialCustom
             </span>
           </Card>
 
-          <Card className="rounded-xl glass-badge-success p-3.5 border">
-            <span className="font-semibold text-[#1e8449] dark:text-[#7bed9f] block mb-1">
+          <Card className="rounded-xl bg-[#f4faf4] p-3.5 border border-[#c6e7cc]">
+            <span className="font-semibold text-[#1c6432] block mb-1">
               શાસ્ત્રીય પરિહાર (ઉપાય):
             </span>
-            <p className="text-sm font-bold text-[#1e8449] dark:text-[#7bed9f]">
-              {pData.dishaShool.remedy}
-            </p>
+            <p className="text-sm font-bold text-[#1c6432]">{pData.dishaShool.remedy}</p>
             <span className="text-[11px] text-[var(--text-secondary)] block mt-1">
               આ ઉપાય કરીને પ્રસ્થાન કરવાથી યાત્રા નિર્વિઘ્ન રહે છે.
             </span>

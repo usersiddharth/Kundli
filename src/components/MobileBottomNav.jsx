@@ -79,10 +79,10 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
               <div className="flex items-center gap-2">
                 <LayoutGrid style={{ width: 18, height: 18, color: 'var(--gold-500)' }} />
                 <h3
-                  className="font-medium text-base"
-                  style={{ fontFamily: 'Outfit, sans-serif', color: 'var(--text-primary)' }}
+                  className="font-medium text-base font-serif"
+                  style={{ color: 'var(--text-primary)' }}
                 >
-                  વૈદિક સાધનો
+                  ॥ વૈદિક સાધનો ॥
                 </h3>
               </div>
               <button
@@ -192,10 +192,7 @@ export default function MobileBottomNav({ mainSection, setMainSection }) {
                 }}
               >
                 <Icon style={{ width: 18, height: 18 }} />
-                <span
-                  className="text-[10px] font-medium tracking-tight leading-none"
-                  style={{ fontFamily: 'Outfit, sans-serif' }}
-                >
+                <span className="text-[10px] font-medium tracking-tight leading-none font-serif">
                   {tab.label}
                 </span>
                 {/* Active dot */}

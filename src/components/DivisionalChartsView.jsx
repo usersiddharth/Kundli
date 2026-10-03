@@ -51,12 +51,12 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
   ];
 
   return (
-    <div className="rounded-xl border border-[var(--border-subtle)] bg-white/5 p-6 shadow-sm space-y-6">
+    <div className="rounded-xl border border-[var(--border-subtle)] bg-white p-6 shadow-sm space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
           <h2 className="text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Layers className="h-5 w-5 text-[var(--text-gold)]" /> Shodashvarga (ષોડશવર્ગ -
-            Divisional Charts)
+            <Layers className="h-5 w-5 text-[#b85d19]" /> ॥ Shodashvarga (ષોડશવર્ગ - Divisional
+            Charts) ॥
           </h2>
           <p className="text-xs text-[var(--text-muted)]">
             Explore 13 classical Vedic varga charts for specialized life domains (Career, Assets,
@@ -65,23 +65,23 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
         </div>
 
         {/* Chart Style Toggle */}
-        <div className="flex rounded-lg border border-[var(--border-subtle)] bg-white/5 p-1">
+        <div className="flex rounded-lg border border-[var(--border-subtle)] bg-[#fbf9f5] p-1">
           <button
             onClick={() => setChartStyle('north')}
-            className={`rounded px-2.5 py-1 text-xs font-medium transition ${
+            className={`rounded px-2.5 py-1 text-xs font-medium transition cursor-pointer ${
               chartStyle === 'north'
-                ? 'bg-[#2c2825] text-[#f4ebd9] shadow-xs'
-                : 'text-[var(--text-secondary)] hover:bg-[#eae3d5]'
+                ? 'bg-[#b85d19] text-white shadow-xs font-semibold'
+                : 'text-[var(--text-secondary)] hover:bg-[#faf5eb]'
             }`}
           >
             {t.northIndian}
           </button>
           <button
             onClick={() => setChartStyle('south')}
-            className={`rounded px-2.5 py-1 text-xs font-medium transition ${
+            className={`rounded px-2.5 py-1 text-xs font-medium transition cursor-pointer ${
               chartStyle === 'south'
-                ? 'bg-[#2c2825] text-[#f4ebd9] shadow-xs'
-                : 'text-[var(--text-secondary)] hover:bg-[#eae3d5]'
+                ? 'bg-[#b85d19] text-white shadow-xs font-semibold'
+                : 'text-[var(--text-secondary)] hover:bg-[#faf5eb]'
             }`}
           >
             {t.southIndian}
@@ -95,10 +95,10 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
           <button
             key={v.id}
             onClick={() => setSelectedVarga(v.id)}
-            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition cursor-pointer ${
               selectedVarga === v.id
-                ? 'bg-[#2c2825] text-[#f4ebd9] shadow-xs'
-                : 'border border-[var(--border-subtle)] bg-white/5 text-[var(--text-secondary)] hover:bg-white/5'
+                ? 'bg-[#b85d19] text-white shadow-xs font-semibold'
+                : 'border border-[var(--border-subtle)] bg-[#fbf9f5] text-[var(--text-secondary)] hover:bg-[#faf5eb]'
             }`}
           >
             {v.name}
@@ -107,7 +107,7 @@ export default function DivisionalChartsView({ kundliData, t, lang }) {
       </div>
 
       {/* Domain Purpose Banner */}
-      <div className="rounded-lg border border-[var(--border-subtle)] bg-white/5 p-3.5 text-xs text-[var(--text-primary)]">
+      <div className="rounded-lg border border-[var(--border-subtle)] bg-[#fbf9f5] p-3.5 text-xs text-[var(--text-primary)]">
         <span className="font-serif font-bold text-sm text-[var(--text-primary)] block mb-1">
           {currentVargaDef.name} — Domain of Analysis:
         </span>

@@ -54,13 +54,13 @@ export default function ZodiacWheel({ kundliData, t }) {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
         <div>
           <h2 className="text-xl font-medium tracking-tight text-[var(--text-primary)] font-serif flex items-center gap-2">
-            <Orbit className="h-5 w-5 text-[var(--text-gold)]" /> 360° Vedic Celestial Zodiac Wheel
+            <Orbit className="h-5 w-5 text-[#b85d19]" /> ॥ 360° Vedic Celestial Zodiac Wheel ॥
           </h2>
           <p className="text-xs text-[var(--text-muted)]">
             Interactive circular sky sphere mapping planetary longitudes, elements, and nakshatras
           </p>
         </div>
-        <span className="glass-badge-gold px-3 py-1 rounded-full text-xs font-semibold">
+        <span className="bg-[#faeee2] text-[#9c4b0f] border border-[#e8b992]/60 px-3 py-1 rounded-full text-xs font-semibold">
           Sidereal Natural Sky Projection
         </span>
       </div>

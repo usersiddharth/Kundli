@@ -123,9 +123,21 @@ export default function Header({
   const isSecondaryActive = secondaryTools.some((item) => item.id === mainSection);
   const activeSecondaryItem = secondaryTools.find((item) => item.id === mainSection);
 
+  const auspiciousInvocation =
+    lang === 'gu'
+      ? '॥ ૐ શ્રી ગણેશાય નમઃ ॥ • શ્રી જગદંબા પ્રસન્ન • વિક્રમ સંવત ૨૦૮૧'
+      : lang === 'hi'
+        ? '॥ ॐ श्री गणेशाय नमः ॥ • श्री जगदम्बा प्रसन्न • विक्रम संवत २०८१'
+        : '॥ Om Sri Ganeshaya Namah ॥ • Classical Vedic Jyotish';
+
   return (
-    <header className="sticky top-3 z-50 px-3 sm:px-6 pointer-events-none print:hidden">
-      <div className="pointer-events-auto mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-2xl px-3.5 py-2.5 sm:px-5 transition-all spatial-header">
+    <header className="sticky top-2 z-50 px-3 sm:px-6 pointer-events-none print:hidden flex flex-col items-center">
+      {/* ── Traditional Auspicious Invocation Masthead Ribbon ── */}
+      <div className="pointer-events-auto mb-1 hidden sm:inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-[10.5px] font-serif text-[#8b2500] bg-[#faf3e7]/90 border border-[#e5dac6]/80 backdrop-blur-xs shadow-2xs tracking-wider select-none">
+        {auspiciousInvocation}
+      </div>
+
+      <div className="pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-2xl px-3.5 py-2.5 sm:px-5 transition-all spatial-header">
         {/* ── Brand Mark ── */}
         <button
           type="button"
@@ -138,16 +150,15 @@ export default function Header({
         >
           {/* Logo emblem */}
           <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center shrink-0 rounded-xl bg-[#faeee2] border border-[#e8b992]/70 text-[#b85d19] shadow-xs transition-colors group-hover:bg-[#f3d7bf]/80">
-            <Compass className="h-5 w-5" />
+            <Sun className="h-5 w-5" />
           </div>
 
           {/* Title text */}
           <div className="hidden sm:block">
             <div className="flex items-center gap-2">
               <h1
-                className="text-sm font-medium tracking-tight leading-tight transition-colors"
+                className="text-sm font-medium tracking-tight leading-tight transition-colors font-serif"
                 style={{
-                  fontFamily: 'Outfit, sans-serif',
                   color: 'var(--text-primary)',
                   letterSpacing: '-0.02em',
                 }}
@@ -159,7 +170,7 @@ export default function Header({
               </span>
             </div>
             <p
-              className="text-[10.5px] leading-tight mt-0.5"
+              className="text-[10.5px] leading-tight mt-0.5 font-serif"
               style={{ color: 'var(--text-muted)' }}
             >
               {t.appSubtitle}

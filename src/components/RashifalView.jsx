@@ -77,11 +77,11 @@ export default function RashifalView({ kundliData, t, lang = 'gu' }) {
       {/* Printable Header (Visible Only in Print) */}
       <div className="hidden print:block text-center border-b-2 border-[#8c7456] pb-3 mb-4">
         <span className="font-serif text-xs font-bold tracking-widest text-[var(--text-gold)]">
-          || ૐ શ્રી ગણેશાય નમઃ ||
+          ॥ ૐ શ્રી ગણેશાય નમઃ ॥ • શ્રી જગદંબા પ્રસન્ન • વિક્રમ સંવત ૨૦૮૧
         </span>
         <h1 className="font-serif text-2xl font-bold text-[var(--text-primary)] mt-1">
-          {selectedSign.names[lang] || selectedSign.names.gu} - સંપૂર્ણ રાશિ ભવિષ્ય (Vedic Horoscope
-          Dossier)
+          ॥ {selectedSign.names[lang] || selectedSign.names.gu} - સંપૂર્ણ રાશિ ભવિષ્ય પત્રિકા (Vedic
+          Rashifal) ॥
         </h1>
         <p className="text-xs text-[var(--text-secondary)] mt-0.5">
           દૈનિક, સાપ્તાહિક, માસિક અને વાર્ષિક જ્યોતિષ ફળાદેશ
@@ -93,7 +93,7 @@ export default function RashifalView({ kundliData, t, lang = 'gu' }) {
         <div>
           <Card.Title className="text-lg sm:text-xl font-medium text-[var(--text-primary)] font-serif flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-[var(--text-gold)]" />
-            <span>રાશિ ભવિષ્ય (Vedic Rashifal)</span>
+            <span>॥ રાશિ ભવિષ્ય પત્રિકા (Vedic Rashifal) ॥</span>
           </Card.Title>
           <Card.Description className="text-xs text-[var(--text-muted)]">
             ૧૨ રાશિઓનું દૈનિક, સાપ્તાહિક, માસિક અને વાર્ષિક શાસ્ત્રીય ભવિષ્યફળ
@@ -106,7 +106,7 @@ export default function RashifalView({ kundliData, t, lang = 'gu' }) {
               type="button"
               onPress={handleResetToMySign}
               title="મારી જન્મ રાશિ પર જાઓ (Jump to My Sign)"
-              className="flex items-center gap-1.5 rounded-xl glass-badge-gold px-3 py-1.5 text-xs font-bold transition shadow-2xs cursor-pointer"
+              className="flex items-center gap-1.5 rounded-xl bg-[#faeee2] text-[#8b2500] border border-[#e8b992]/60 px-3 py-1.5 text-xs font-medium transition shadow-2xs cursor-pointer"
             >
               <Moon className="h-3.5 w-3.5" />
               <span>મારી રાશિ (My Sign)</span>
@@ -117,7 +117,7 @@ export default function RashifalView({ kundliData, t, lang = 'gu' }) {
             type="button"
             onPress={handleResetToMySign}
             title="રીસેટ કરો (Reset)"
-            className="flex items-center gap-1.5 rounded-xl glass-card px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-rose-500 transition shadow-2xs cursor-pointer"
+            className="flex items-center gap-1.5 rounded-xl spatial-btn-ghost px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-rose-500 transition cursor-pointer"
           >
             <RotateCcw className="h-3.5 w-3.5" />
             <span>સાફ કરો</span>
@@ -127,9 +127,9 @@ export default function RashifalView({ kundliData, t, lang = 'gu' }) {
             type="button"
             onPress={handlePrint}
             title="Save as PDF / Print"
-            className="flex items-center gap-1.5 rounded-xl glass-card px-3.5 py-1.5 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 rounded-xl spatial-btn-primary px-3.5 py-1.5 text-xs font-medium text-white transition shadow-xs cursor-pointer"
           >
-            <Printer className="h-3.5 w-3.5 text-[var(--text-gold)]" />
+            <Printer className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Save as PDF</span>
           </Button>
         </div>
